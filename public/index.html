@@ -1,359 +1,184 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://example.com/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Hexo',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-09-24 18:58:47'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
   
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
   
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
-
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
-  
-<meta name="generator" content="Hexo 6.3.0"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
         
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-test-0924" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/24/test-0924/" class="article-date">
-  <time class="dt-published" datetime="2023-09-24T06:36:27.000Z" itemprop="datePublished">2023-09-24</time>
-</a>
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/24/test-0924/">test_0924</a>
-    </h1>
-  
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Hexo"><span class="site-name">Hexo</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Hexo</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/09/24/test-0924/" title="test_0924">test_0924</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-09-24T06:36:27.000Z" title="Created 2023-09-24 14:36:27">2023-09-24</time></span></div><div class="content">工程原理A4纸整理1. 静压力分布图和阿基米德浮力定律
+应力（量纲是F&#x2F;S&#x3D;P）$\begin{cases} 法向应力：\lim\limits_{\Delta A \to 0} \frac{\Delta F_n}{\Delta A}&#x3D;\sigma_{ii},;切向应力：\lim\limits_{\Delta A \to 0} \frac{\Delta F_s}{\Delta A}&#x3D;\tau_{ij}\剪应力：\tau&#x3D;\mu\frac{\text du}{\text dy}(\mu是动力粘度&#x3D;运动黏度\nu\cdot 密度)\end{cases}$
+静压力分布图
+相当于等压线，有$\text d P &#x3D; \frac {\partial P}{\partial x}\text dx+…$；梯度$ \frac {\partial P}{\partial x}\dot e_x+…$
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="工程原理A4纸整理"><a href="#工程原理A4纸整理" class="headerlink" title="工程原理A4纸整理"></a>工程原理A4纸整理</h1><h5 id="1-静压力分布图和阿基米德浮力定律"><a href="#1-静压力分布图和阿基米德浮力定律" class="headerlink" title="1. 静压力分布图和阿基米德浮力定律"></a>1. 静压力分布图和阿基米德浮力定律</h5><ul>
-<li>应力（量纲是F&#x2F;S&#x3D;P）$\begin{cases} 法向应力：\lim\limits_{\Delta A \to 0} \frac{\Delta F_n}{\Delta A}&#x3D;\sigma_{ii},;<br>切向应力：\lim\limits_{\Delta A \to 0} \frac{\Delta F_s}{\Delta A}&#x3D;\tau_{ij}\剪应力：\tau&#x3D;\mu\frac{\text du}{\text dy}(\mu是动力粘度&#x3D;运动黏度\nu\cdot 密度)\end{cases}$</li>
-<li>静压力分布图<ul>
-<li>相当于等压线，有$\text d P &#x3D; \frac {\partial P}{\partial x}\text dx+…$；梯度$ \frac {\partial P}{\partial x}\dot e_x+…$</li>
-</ul>
-</li>
-<li>阿基米德浮力定律<ul>
-<li>$F &#x3D; \rho gV$；基本方程：$\rho g&#x3D;\nabla P$（压力方向垂直）</li>
-</ul>
-</li>
-</ul>
-<h5 id="2-流线及其计算"><a href="#2-流线及其计算" class="headerlink" title="2. 流线及其计算"></a>2. 流线及其计算</h5><ul>
-<li>流线：$\frac{v_y}{v_x}&#x3D;\frac{\text dy}{\text dx}$：eg.$u&#x3D;x+t;v&#x3D;-y-t\Rightarrow \frac{\text dx}{x+t}&#x3D;\frac{\text dy}{-y-t}$</li>
-</ul>
-<h5 id="3-伯努利方程及其应用"><a href="#3-伯努利方程及其应用" class="headerlink" title="3. 伯努利方程及其应用"></a>3. 伯努利方程及其应用</h5><ul>
-<li>$\begin{cases}P + \frac{1}{2} \rho v^2 + \rho g h &#x3D; constant\ \frac{P}{\rho g}+\frac{v^2}{2g}+h&#x3D;const  \end{cases}$</li>
-</ul>
-<h5 id="4-5-流函数和势函数的性质及应用"><a href="#4-5-流函数和势函数的性质及应用" class="headerlink" title="4&#x2F;5. 流函数和势函数的性质及应用"></a>4&#x2F;5. 流函数和势函数的性质及应用</h5><ul>
-<li><p><strong>不可压缩流动</strong>的连续性方程：$\nabla\cdot v&#x3D;0$，此外：$\nabla\times v&#x3D;2\omega$</p>
-</li>
-<li><p><strong>流函数</strong>：$\text d\Psi&#x3D;\frac{\partial \Psi}{\partial x}\text dx+…\begin{cases}\frac{\partial \Psi}{\partial x}&#x3D;-v_y\ \frac{\partial \Psi}{\partial y}&#x3D;v_x \end{cases}$</p>
-<ul>
-<li>$\begin{cases}v_x&#x3D;ax+by\v_y&#x3D;cx+dy \end{cases}\rightarrow判断连续性\frac{\partial v_x}{\partial x}+\frac{\partial v_y}{\partial y}?&#x3D;0\rightarrow 求解$</li>
-<li>①流函数&#x3D;常数就是流线的方程。②满足连续性方程和速度场的黏性流体动力学方程组。③无旋流动$\Psi$为Laplace方程</li>
-</ul>
-</li>
-<li><p><strong>速度势</strong>：$v&#x3D;\nabla\cdot\phi\begin{cases}\frac{\partial\phi}{\partial x}&#x3D;v_x\\frac{\partial\phi}{\partial y}&#x3D;v_y  \end{cases}$</p>
-<ul>
-<li>①必须是无旋场！②稳态不可压缩流动$\phi$为Laplace方程</li>
-</ul>
-</li>
-</ul>
-<h5 id="6-流体流动方程的定律与意义"><a href="#6-流体流动方程的定律与意义" class="headerlink" title="6. 流体流动方程的定律与意义"></a>6. 流体流动方程的定律与意义</h5><ul>
-<li><p>控制体：</p>
-<ul>
-<li>质量守恒：$\iint\rho(v\cdot n)\text dA+\frac{\partial}{\partial t}\iiint\rho \text dV&#x3D;0$（流入+流出+聚积量&#x3D;0）</li>
-<li>牛二（动量守恒）：$\sum F&#x3D;\iint v\rho(v\cdot n)\text dA+\frac{\partial}{\partial t}\iiint v\rho\text dV$（合力&#x3D;动量净通量+动量聚积通量）</li>
-<li>能量守恒：$\frac{\delta Q}{\text dt}-\frac{\delta W}{\text dt}&#x3D;\iint (e+\frac P{\rho})\rho(v\cdot n)\text dA+\frac{\partial}{\partial t}\iiint e\rho\text dV$（e比能，加热-做功&#x3D;能量流量+能量聚积量）</li>
-</ul>
-</li>
-<li><p>微元：（很小的控制体）微观角度剖析，得到微分方程式。能得到量的传递方式、过程。</p>
-</li>
-<li><p>NS方程：$\rho \frac{\text DV}{\text Dt}&#x3D;\rho g-\nabla P+\mu\nabla^2v$（无黏性流体删去最后一项）</p>
-</li>
-</ul>
-<h5 id="7-湍流及复杂性"><a href="#7-湍流及复杂性" class="headerlink" title="7. 湍流及复杂性"></a>7. 湍流及复杂性</h5><ul>
-<li><p><strong>雷诺数</strong>$Re&#x3D;\frac{D\rho v}{\mu}&#x3D;\frac{Dv}{\nu}$，临界数2300</p>
-<ul>
-<li>摩擦阻力：$\frac FA&#x3D;C_f\frac{\rho v_{\infty}^2}{2}$，压力阻力：$\frac FA&#x3D;C_D\frac{\rho v_{\infty}^2}{2}$</li>
-<li>边界层$Re_x&#x3D;\frac{L\rho v}{\mu}$，层流—2×10^5^—混合—3×10^6^—湍流</li>
-</ul>
-</li>
-<li><p>柏拉修斯解（描述不可压缩、稳定的阻力流动）：</p>
-<ul>
-<li><strong>边界层厚度</strong>$\delta&#x3D;\frac{5x}{\sqrt{Re_x}}$，<strong>平均摩擦系数</strong>$C_{fL}&#x3D;\frac{1.328}{\sqrt{Re_L}}$，速度梯度$\frac{\partial v_x}{\partial y}|<em>{y&#x3D;0}&#x3D;0.332v</em>{\infty}\sqrt{\frac{v_{\infty}}{\nu x}}$</li>
-</ul>
-</li>
-<li><p>湍流：①规则流动转为复杂的多尺度涡旋运动。②计算|尺度|状态|预测|描述|测量|结果的复杂性</p>
-</li>
-<li><p><strong>压头损失</strong>：$h_L&#x3D;2f_f\frac LD\frac{v^2}g$；管内流动摩擦系数<strong>显性公式</strong>：$\frac1{\sqrt{f_f}}&#x3D;-3.6\text{lg}[\frac{6.9}{Re}+(\frac e{3.7D})^{10&#x2F;9}]$</p>
-</li>
-<li><p>摩擦系数：<strong>层流</strong>：$f_f&#x3D;\frac{16}{Re}$；<strong>光滑管湍流</strong>：$\frac1{\sqrt{f_f}}&#x3D;4\text{lg}(Re\sqrt{f_f})-0.4$；<strong>粗糙管湍流</strong>：$\frac1{\sqrt{f_f}}&#x3D;4\text{lg}\frac De+2.28$</p>
-</li>
-</ul>
-<h5 id="8-简单管路系统的设计计算"><a href="#8-简单管路系统的设计计算" class="headerlink" title="8. 简单管路系统的设计计算"></a>8. 简单管路系统的设计计算</h5><p>（计算）（最后一章）（两个摩擦大小、系数怎么计算）（不同管子相连，相加）（压头、伯努利、水泵）（看不懂）</p>
-<h5 id="9-热阻分析计算传热过程"><a href="#9-热阻分析计算传热过程" class="headerlink" title="9. 热阻分析计算传热过程"></a>9. 热阻分析计算传热过程</h5><ul>
-<li>导热热阻（固体间）$\frac{\delta}{A\lambda}$；对流热阻（与气体）$\frac1{hA}$；辐射热阻（固-气）$\frac{1-\varepsilon}{A\varepsilon}$；（固-固）$\frac 1 {AF}$<ul>
-<li>传热速率$q&#x3D;T&#x2F;R_{传导、对流}&#x3D;E&#x2F;R_{辐射}(W)$。</li>
-</ul>
-</li>
-</ul>
-<h5 id="10-导热系数和导温系数"><a href="#10-导热系数和导温系数" class="headerlink" title="10. 导热系数和导温系数"></a>10. 导热系数和导温系数</h5><ul>
-<li><strong>导热系数</strong>&#x3D;&#x3D;k（或λ）&#x3D;&#x3D;：热流量$q&#x3D;-kA,\nabla T,(W)$；（热流密度$\Psi&#x3D;\frac qA,(W&#x2F;m^2)$）</li>
-<li>导温系数（热扩散系数）：$ \frac{\partial T}{\partial t} &#x3D; \alpha \nabla^2T $，&#x3D;&#x3D;$\alpha(或K)&#x3D;\frac{\lambda}{\rho c}$&#x3D;&#x3D;，单位 $m^2&#x2F;s$。</li>
-</ul>
-<h5 id="11-肋片效率的定义及其影响因素，外延表面的强化传热"><a href="#11-肋片效率的定义及其影响因素，外延表面的强化传热" class="headerlink" title="11. 肋片效率的定义及其影响因素，外延表面的强化传热"></a>11. 肋片效率的定义及其影响因素，外延表面的强化传热</h5><ul>
-<li>一维平壁稳态导热：$q&#x3D;\frac{T_1-T_2}{\frac1{h_1A}+\frac{\delta}{\lambda A}+\frac1{h_2A}}$，借助肋片增加传热量<ul>
-<li>肋片效率$\eta&#x3D;\frac{实际传热量}{最大可能传热量}$，肋片结构|导热换热系数|流体参数|间距，与$(\frac h{\lambda A_L})^{\frac 12}H^{\frac 32}$有关</li>
-</ul>
-</li>
-</ul>
-<h5 id="12-非稳态导热"><a href="#12-非稳态导热" class="headerlink" title="12. 非稳态导热"></a>12. 非稳态导热</h5><ul>
-<li>毕渥数$Bi&#x3D;\frac{r_{\lambda}}{r_h} &#x3D;\frac{\delta h}{\lambda}&#x3D;\frac{hV}{kA}$；式中$\lambda&#x3D;k$是导热系数，$h$是对流传热系数，$\delta&#x3D;V&#x2F;A$</li>
-<li>傅里叶数$Fo&#x3D;\frac{时间}{热扰动所需扩散时间} &#x3D;\frac{a\tau}{(V&#x2F;A)^2}$。当$Bi&lt;0.1$，$hA(t-t_{\infty})&#x3D;-\rho Vc\frac{\text dT}{\text dt}\rightarrow \frac{T-T_{\infty}}{T_0-T_{\infty}}&#x3D;\text{exp}(-\frac{hAt}{\rho cV})$</li>
-</ul>
-<h5 id="13-强化表面传热系数"><a href="#13-强化表面传热系数" class="headerlink" title="13. 强化表面传热系数"></a>13. 强化表面传热系数</h5><ul>
-<li>普朗克数$Pr&#x3D;\frac{\nu}{\alpha}&#x3D;\frac{\mu&#x2F;\rho}{\lambda&#x2F;\rho c}&#x3D;\frac{\mu c}{\lambda}$；努赛尔数$Nu&#x3D;\frac{hL}{\lambda}$；斯坦顿数$St&#x3D;\frac h{\rho vc}$；晓格拉夫数$Gr&#x3D;\frac{g\alpha\Delta Tl^3}{\nu^2}$</li>
-<li>关系：$St&#x3D;\frac{Nu}{Re,Pr}&#x3D;\frac{C_f}2Pr^{-\frac23}|\overline{Nu}&#x3D;0.664Re_L^{\frac12}Pr^{\frac13}$</li>
-<li>强化表面传热系数：增加表面积&#x2F;流速，改变表面形状，导热率高的材料</li>
-</ul>
-<h5 id="14-速度和温度边界层的特性"><a href="#14-速度和温度边界层的特性" class="headerlink" title="14. 速度和温度边界层的特性"></a>14. 速度和温度边界层的特性</h5><p>速度：①边界层厚度远小于尺寸，存在较大速度梯度。②边界层区黏性主导，N-S方程；主流区速度梯度为0，欧拉方程。③ 界面处速度为零</p>
-<p>温度：①层流温度抛物线分布，湍流幂函数分布。②界面处的温度由固体表面确定。③膜温近似为$\frac{T_{\infty}+T_0}2$</p>
-<h5 id="15-无量纲准则数及其物理意义"><a href="#15-无量纲准则数及其物理意义" class="headerlink" title="15. 无量纲准则数及其物理意义"></a>15. 无量纲准则数及其物理意义</h5><p>①Re：流体惯性力和粘性力之比，小&#x3D;黏性强&#x3D;层流。②Nu：对流传热与传导传热之比。③Bi：内部导热热阻与外部对流热阻之比，一般很小&#x3D;介质内部温度梯度小&#x3D;集总参数。④Fo：时间和热传导之间的关系，大&#x3D;热传播快&#x3D;温度接近周围介质温度&#x3D;不稳定。⑤Pr：动量扩散系数与热扩散系数之比，速度边界层厚度与热边界层厚度之比，一般在1附近</p>
-<h5 id="16-换热器的设计计算和校核计算（平均温差法）"><a href="#16-换热器的设计计算和校核计算（平均温差法）" class="headerlink" title="16.  换热器的设计计算和校核计算（平均温差法）"></a>16.  换热器的设计计算和校核计算（平均温差法）</h5><ul>
-<li>对数平均温差$\Delta t_m&#x3D;\frac{\Delta t_{max}-\Delta t_{min}}{ln\frac{\Delta t_{max} }{\Delta t_{min}}}$，用 ’ 表示入口，用 ‘’ 表示出口，h热源，c冷源</li>
-<li>传热方程$\Phi&#x3D;kA\Delta t_m$，热平衡式$\Phi&#x3D;q_hc_h(t_h’-t_h’’)&#x3D;q_cc_c(t_c’’-t_c’)$，另外$q&#x3D;流量\times c\times\Delta T$</li>
-<li>步骤：总换热系数k—热平衡式求各个温度—传热方程计算所需的换热面积A</li>
-</ul>
-<h5 id="17-黑体的辐射基本定律及灰体的特性"><a href="#17-黑体的辐射基本定律及灰体的特性" class="headerlink" title="17. 黑体的辐射基本定律及灰体的特性"></a>17. 黑体的辐射基本定律及灰体的特性</h5><ul>
-<li><p>黑体（$\varepsilon&#x3D;\alpha&#x3D;1$）辐射：$\begin{cases}参数&amp;反射\rho+吸收\alpha+透射\tau&#x3D;1\单色辐射率&amp;\varepsilon_{\lambda}&#x3D;E_{\lambda}&#x2F;E,;,\varepsilon&#x3D;\alpha&#x3D;1-\rho(不透明的话)  \普朗克&amp;单色辐射E_{\lambda}&#x3D;\frac{3.742\cdot10^{-16}\lambda^{-5}}{\text{exp}(0.0144&#x2F;\lambda T)-1}\S-B&amp;E&#x3D;\sigma T^4\\text{Lambert}&amp;\frac{\text d\Phi}{\text dA\text d\Omega}&#x3D;定向辐射强度L\text{cos}\theta  \end{cases}$</p>
-</li>
-<li><p>灰体：表面辐射率&#x2F;吸收率均与波长无关，用热阻网络（见9）</p>
-</li>
-</ul>
-<h5 id="18-角系数的定义、性质以及计算方法"><a href="#18-角系数的定义、性质以及计算方法" class="headerlink" title="18. 角系数的定义、性质以及计算方法"></a>18. 角系数的定义、性质以及计算方法</h5><p>F是角系数（比例系数），求解用$\begin{cases}对称性&amp;A_1F_{12}&#x3D;A_2F_{21}\比例系数和为1&amp;\sum F&#x3D;1  \end{cases}$</p>
-<h5 id="19-多表面系统的辐射传热计算"><a href="#19-多表面系统的辐射传热计算" class="headerlink" title="19. 多表面系统的辐射传热计算"></a>19. 多表面系统的辐射传热计算</h5><ul>
-<li>强化辐射换热：增加发射率&#x2F;角系数，减少隔热板；削弱反之。用热阻网络（见9）</li>
-</ul>
-<img src="C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20230614162850774.png" alt="image-20230614162850774" style="zoom:33%;" />
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/09/24/test-0924/" data-id="clmx3rv0x0001hwth7j6e9jy7" data-title="test_0924" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
+
+阿基米德浮力定律
+$F &#x3D; \rho gV$；基本方程：$\rho g&#x3D;\nabla P$（压力方向垂直）
 
 
 
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/24/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2023-09-24T05:49:26.676Z" itemprop="datePublished">2023-09-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/24/hello-world/">Hello World</a>
-    </h1>
-  
+2. ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/09/24/hello-world/" title="Hello World">Hello World</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-09-24T05:49:26.676Z" title="Created 2023-09-24 13:49:26">2023-09-24</time></span></div><div class="content">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Quick StartCreate a new post1$ hexo new &quot;My New Post&quot;
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+More info: Writing
+Run server1$ hexo server
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+More info: Server
+Generate static files1$ hexo generate
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+More info: Generating
+Deploy to remote sites1$ hexo deploy
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/09/24/hello-world/" data-id="clmx3rv0p0000hwthegpo6plg" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2023/09/24/test-0924/">test_0924</a>
-          </li>
-        
-          <li>
-            <a href="/2023/09/24/hello-world/">Hello World</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2023 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-</body>
-</html>
+More info: Deployment
+</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">John Doe</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/09/24/test-0924/" title="test_0924">test_0924</a><time datetime="2023-09-24T06:36:27.000Z" title="Created 2023-09-24 14:36:27">2023-09-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/09/24/hello-world/" title="Hello World">Hello World</a><time datetime="2023-09-24T05:49:26.676Z" title="Created 2023-09-24 13:49:26">2023-09-24</time></div></div></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">September 2023</span><span class="card-archive-list-count">2</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">2</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-09-24T10:58:47.323Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By John Doe</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
