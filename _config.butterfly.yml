@@ -5,11 +5,14 @@
 # Site
 title: Paradox's Website
 subtitle: ''
-description: This is Paradox's Website!
+description: '未知苦处，不信神佛。'
 keywords:
 author: Paradox
 language: zh-CN
 timezone: ''
+date: '2023-09-24'
+comments: true
+top_img: f:\Paradox_Web\ParadoxTZ.github.io\photo\15-23-17-1-01035237.jpeg
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'

@@ -5,11 +5,12 @@
 # Site
 title: Paradox's Website
 subtitle: ''
-description: This is Paradox's Website
+description: "未知苦处，不信神佛"
 keywords:
 author: Paradox
-language: cn
+language: zh-CN
 timezone: ''
+top_img: https://img2.baidu.com/it/u=2312383180,3750420672&fm=253&fmt=auto&app=120&f=JPEG?w=1280&h=800
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
