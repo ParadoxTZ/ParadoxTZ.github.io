@@ -4,17 +4,18 @@
 
 # Site
 title: Paradox's Website
-subtitle: ''
 description: "未知苦处，不信神佛"
 keywords:
 author: Paradox
 language: zh-CN
 timezone: ''
-top_img: https://img2.baidu.com/it/u=2312383180,3750420672&fm=253&fmt=auto&app=120&f=JPEG?w=1280&h=800
+index_img: /image/top.jpeg
+email: 420907574@qq.com
+
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://example.com
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -41,7 +42,7 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true 
 relative_link: false
 future: true
 highlight:

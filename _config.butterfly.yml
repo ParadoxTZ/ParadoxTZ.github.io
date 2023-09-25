@@ -4,15 +4,23 @@
 
 # Site
 title: Paradox's Website
-subtitle: ''
-description: '未知苦处，不信神佛。'
+description: "111"
 keywords:
 author: Paradox
 language: zh-CN
 timezone: ''
 date: '2023-09-24'
-comments: true
-top_img: f:\Paradox_Web\ParadoxTZ.github.io\photo\15-23-17-1-01035237.jpeg
+index_img: /image/top.jpeg
+email: 420907574@qq.com
+
+# Menu
+menu:
+  首页: / || fas fa-home
+  标签: /tags/ || fas fa-tags
+  分类: /categories/ || fas fa-folder-open
+  友链: /link/ || fas fa-link
+  图库: /gallery/ || fas fa-images
+  
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
@@ -43,7 +51,7 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
 relative_link: false
 future: true
 highlight:
@@ -109,3 +117,228 @@ deploy:
   repo: https://github.com/ParadoxTZ/ParadoxTZ.github.io
   branch: main
   message: Update Hexo Static Content
+
+# Design by myself
+
+# Math
+mathjax:
+  enable: true
+
+# Code Blocks
+highlight_height_limit: 200 #代码超过200行隐藏
+
+# Social Settings
+social:
+  fab fa-github: https://github.com/ParadoxTZ || Github || "#000000"
+  fas fa-envelope: mailto:420907574@qq.com || Email || "#000000"
+  fab fa-weixin: https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=Mzg3MDk3NzYwOQ== || Wechat || "#000000"
+
+# Avatar 头像
+avatar:
+  img: /image/dog.jpg
+  effect: false # 头像不会一直转圈
+
+# Cover
+cover:
+  index_enable: true
+  aside_enable: true
+  archives_enable: true
+  position: both
+  
+# Description
+index_post_content:
+  method: 1
+
+# copy settings
+# copyright: Add the copyright information after copied content (复制的内容后面加上版权信息)
+copy:
+  enable: true
+  copyright:
+    enable: true
+    limit_count: 50
+
+# Articals
+post_copyright:
+  enable: true
+  decode: false
+  author_href:
+  license: CC BY-NC-SA 4.0
+  license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+related_post:
+  enable: true
+  limit: 6 # 显示推荐文章数目
+  date_type: created # created or updated 文章日期显示创建日或者更新日
+
+# Footer
+footer:
+  owner:
+    enable: true
+    since: 2023
+
+# Aside 侧边栏
+aside:
+  enable: true
+  hide: false
+  button: true
+  mobile: true # display on mobile
+  position: right # left or right
+  display:
+    archive: true
+    tag: true
+    category: true
+  card_author:
+    enable: true
+    description: "未知苦处，不信神佛"
+    button:
+      enable: true
+      icon: fab fa-github
+      text: "个人主页(Github)"
+      link: https://github.com/ParadoxTZ
+  card_announcement: # 公告
+    enable: true
+    content: "玩得开心！"
+  card_recent_post:
+    enable: true
+    limit: 5 # if set 0 will show all
+    sort: date # date or updated
+    sort_order: # Don't modify the setting unless you know how it works
+  card_categories:
+    enable: true
+    limit: 6 # if set 0 will show all
+    expand: none # none/true/false
+    sort_order: # Don't modify the setting unless you know how it works
+  card_tags:
+    enable: true
+    limit: 10 # if set 0 will show all
+    color: false
+    orderby: random # Order of tags, random/name/length
+    order: 1 # Sort of order. 1, asc for ascending; -1, desc for descending
+    sort_order: # Don't modify the setting unless you know how it works
+  card_archives:
+    enable: true
+    type: monthly # yearly or monthly
+    format: MMMM YYYY # eg: YYYY年MM月
+    order: -1 # Sort of order. 1, asc for ascending; -1, desc for descending
+    limit: 4 # if set 0 will show all
+    sort_order: # Don't modify the setting unless you know how it works
+  card_webinfo:
+    enable: true
+    post_count: true
+    last_push_date: true
+    sort_order: # Don't modify the setting unless you know how it works
+
+runtimeshow:
+  enable: true
+  publish_date: 9/24/2023 12:00:00
+
+# Aside widget - Newest Comments - 评论
+newest_comments:
+  enable: true
+  sort_order: # Don't modify the setting unless you know how it works
+  limit: 4
+  storage: 10 # unit: mins, save data to localStorage
+  avatar: true
+
+# Bottom Right Button
+readmode: true
+darkmode:
+  enable: true
+  button: true
+  autoChangeMode: true
+  start: 7 # 8
+  end: 23 # 22
+
+# Comments
+comments:
+  # Up to two comments system, the first will be shown as default
+  use: Waline
+  text: true # Display the comment name next to the button
+  # lazyload: The comment system will be load when comment element enters the browser's viewport.
+  # If you set it to true, the comment count will be invalid
+  lazyload: false
+  count: true # Display comment count in top_img
+  card_post_count: true # Display comment count in Home Page
+
+waline:
+  serverURL: https://paradox-comment.vercel.app/
+  bg: '#waline'
+  pageview: true
+  option:
+
+# Background
+background: url(/image/back.png)
+footer_bg: true
+canvas_nest:
+  enable: true
+  color: '170,255,180' #color of lines, default: '0,0,0'; RGB values: (R,G,B).(note: use ',' to separate.)
+  opacity: 0.9 # the opacity of line (0~1), default: 0.5.
+  zIndex: -1 # z-index property of the background, default: -1.
+  count: 149 # the number of lines, default: 99.
+  mobile: true
+canvas_fluttering_ribbon:
+  enable: true
+  mobile: false 
+
+# Beautify
+beautify:
+  enable: true
+  field: site # site/post
+  title-prefix-icon: '\f0c1'
+  title-prefix-icon-color: "#F47466"
+
+# Subtitle
+subtitle:
+  enable: true
+  # Typewriter Effect (打字效果)
+  effect: true
+  startDelay: 1000 # time before typing starts in milliseconds
+  typeSpeed: 10 # type speed in milliseconds
+  backSpeed: 0 # backspacing speed in milliseconds
+  loop: true
+  # source 调用第三方服务
+  # source: false 关闭调用
+  # source: 1  调用一言网的一句话（简体） https://hitokoto.cn/
+  # source: 2  调用一句网（简体） http://yijuzhan.com/
+  # source: 3  调用今日诗词（简体） https://www.jinrishici.com/
+  # subtitle 会先显示 source , 再显示 sub 的内容
+  source: false
+  sub:
+    - 仰天大笑出门去，我辈岂是蓬蒿人。
+    - 世事漫随流水，算来一梦浮生。
+    - 欲买桂花同载酒，终不似，少年游。
+    - 人生如逆旅，我亦是行人。
+    - 沾衣欲湿杏花雨，吹面不寒杨柳风。
+    - 取次花丛懒回顾，半缘修道半缘君。
+    - 莫唱当年长恨歌，人间亦自有银河。
+    - 晓看天色暮看云，行也思君，坐也思君。
+    - 二十四桥明月夜，玉人何处教吹箫。
+    - 夏日消溶，江河横溢，人或为鱼鳖。
+    - 早知如此绊人心，何如当初莫相识。
+    - 操千曲而后晓声，观千剑而后识器。
+
+# 加载动画 Loading Animation
+preloader:
+  enable: false
+  # source
+  # 1. fullpage-loading
+  # 2. pace (progress bar)
+  source: fullpage-loading
+  # pace theme (see https://codebyzach.github.io/pace/)
+  pace_css_url:
+
+# 字数统计
+wordcount:
+  enable: true
+  post_wordcount: true
+  min2read: true
+  total_wordcount: true
+
+# Music
+aplayer:
+  meting: true
+  asset_inject: false
+# Inject the css and script (aplayer/meting)
+aplayerInject:
+  enable: true
+  per_page: true

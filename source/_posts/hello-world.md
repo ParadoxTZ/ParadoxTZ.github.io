@@ -1,38 +1,146 @@
 ---
 title: Hello World
+top_img: /image/top3.jpg
+mathjax: true
+cover: https://img1.baidu.com/it/u=2357593784,3294108420&fm=253&fmt=auto&app=120&f=JPEG?w=854&h=480
+description: Hello, World!
+
+post_meta:
+  page:
+    date_type: both # created or updated or both 主页文章日期是创建日或者更新日或都显示
+    date_format: date # date/relative 显示日期还是相对日期
+    categories: true # true or false 主页是否显示分类
+    tags: true # true or false 主页是否显示标签
+    label: true # true or false 显示描述性文字
+  post:
+    date_type: both # created or updated or both 文章页日期是创建日或者更新日或都显示
+    date_format: date # date/relative 显示日期还是相对日期
+    categories: true # true or false 文章页是否显示分类
+    tags: true # true or false 文章页是否显示标签
+    label: true # true or false 显示描述性文字
+
+copyright_author: Paradox
+copyright_author_href: https://github.com/ParadoxTZ
+copyright_info: 此文章版权归Paradox所有，如有转载，请注明来自原作者
 ---
-Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
 
-## Quick Start
 
-### Create a new post
 
-``` bash
-$ hexo new "My New Post"
+
+
+## Hello World
+
+恭喜你找到这个文档。（好吧，作为一个名为Hello World的文档，有好奇心之人应该都会点进来看。）
+
+欢迎来到我的个人博客主页，目前这个网站正在有条不紊（手忙脚乱）地建设当中。
+
+**后文中有我的图库链接**，当然你也可以点击右上角的“图库”进入。
+
+## 一些网页端的简记
+
+### 开头
+
+在每篇文档开头，打上标签，如下：
+
+````markdown
+---
+title: 文章标题
+date: 2023-09-25
+comments: true
+mathjax: true # 开启数学公式
+top_img: /image/top3.jpg
+cover: 缩略图图片连接
+description: 文章简介
+
+post_meta:
+  page:
+    date_type: both 
+    date_format: date 
+    categories: true 
+    tags: true 
+    label: true 
+  post:
+    date_type: both 
+    date_format: date 
+    categories: true 
+    tags: true 
+    label: true 
+
+copyright_author: Paradox
+copyright_author_href: https://github.com/ParadoxTZ
+copyright_info: 此文章版权归Paradox所有，如有转载，请注明来自原作者
+
+aplayer: true
+---
+````
+
+### 使用
+
+* 文章的标题图片统一使用“/image/top3.jpg”
+
+* 页面的标题图片统一使用“/image/top.jpeg”
+
+* 标准图表网站：[Find Icons with the Perfect Look & Feel | Font Awesome](https://fontawesome.com/)
+  * 例：``<i class="fa-brands fa-github"></i>``
+  * 改为：fab fa-github
+  
+* 按钮button（附上两个好看的。第二个有手指第一个没有）
+
+```markdown
+    {% btn [url],[text],[icon],[color] [style] [layout] [position] [size] %}
+    中间用逗号或"-"隔开，按要求
+    [url]         : 链接
+    [text]        : 按钮文字
+    [icon]        : [可选] 图标
+    [color]       : [可选] 按钮背景顔色(默认style时）
+                          按钮字体和边框顔色(outline时)，default/blue/pink/red/purple/orange/green
+    [style]       : [可选] 按钮样式 默认实心，outline/留空
+    [layout]      : [可选] 按钮佈局 默认为line，block/留空
+    [position]    : [可选] 按钮位置 前提是设置了layout为block 默认为左边，center/right/留空
+    [size]        : [可选] 按钮大小，larger/留空
 ```
 
-More info: [Writing](https://hexo.io/docs/writing.html)
-
-### Run server
-
-``` bash
-$ hexo server
+```markdown
+    {% btn 'https://butterfly.js.org/',Butterfly %}
+    {% btn 'https://butterfly.js.org/',Butterfly,far fa-hand-point-right,larger %}
 ```
 
-More info: [Server](https://hexo.io/docs/server.html)
+* 
 
-### Generate static files
+### 文章缩略图
 
-``` bash
-$ hexo generate
+按需取用：
+
+```
+default_cover: 
+    - https://img2.baidu.com/it/u=1235612171,3868693941&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=281
+    - https://img1.baidu.com/it/u=2996267891,32376633&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500
+    - https://img1.baidu.com/it/u=312822943,1236795569&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800
+    - https://img0.baidu.com/it/u=1804133410,3139237737&fm=253&fmt=auto&app=120&f=JPEG?w=1280&h=800
+    - https://img1.baidu.com/it/u=161683432,2488264310&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500
+    - https://img1.baidu.com/it/u=3498215964,1377341541&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500
+    - https://img1.baidu.com/it/u=3664282049,2844914481&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500
+    - https://img0.baidu.com/it/u=2189029883,1880322455&fm=253&fmt=auto&app=120&f=JPEG?w=1280&h=800
+    - https://img1.baidu.com/it/u=2477736930,489697403&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800
+    - https://img2.baidu.com/it/u=504235302,299195994&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=281
+    - https://img0.baidu.com/it/u=6927155,1857076631&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=281
+    - https://img0.baidu.com/it/u=3270195087,2703081542&fm=253&fmt=auto&app=120&f=JPEG?w=1280&h=800
 ```
 
-More info: [Generating](https://hexo.io/docs/generating.html)
 
-### Deploy to remote sites
 
-``` bash
-$ hexo deploy
-```
+### Test Part
 
-More info: [Deployment](https://hexo.io/docs/one-command-deployment.html)
+$q=\frac{T_1-T_2}{\frac1{h_1A}+\frac{\delta}{\lambda A}+\frac1{h_2A}}$
+
+
+---
+
+My Wechat：hans420907574
+
+
+
+
+<div class="gallery-group-main">
+{% galleryGroup '壁纸' '收藏的一些壁纸' '/gallery/new/' /image/dog.jpg %}
+</div>
