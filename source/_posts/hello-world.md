@@ -4,6 +4,10 @@ top_img: /image/top3.jpg
 mathjax: true
 cover: https://img1.baidu.com/it/u=2357593784,3294108420&fm=253&fmt=auto&app=120&f=JPEG?w=854&h=480
 description: Hello, World!
+tags: 
+  - Hexo
+  - 随笔
+categories: Hexo
 
 post_meta:
   page:
@@ -51,6 +55,8 @@ mathjax: true # 开启数学公式
 top_img: /image/top3.jpg
 cover: 缩略图图片连接
 description: 文章简介
+tags: 标签
+categories: 分类
 
 post_meta:
   page:
