@@ -176,13 +176,13 @@ copy:
 post_copyright:
   enable: true
   decode: false
-  author_href:
+  author_href: https://github.com/ParadoxTZ
   license: CC BY-NC-SA 4.0
   license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
 
 related_post:
   enable: true
-  limit: 6 # 显示推荐文章数目
+  limit: 4 # 显示推荐文章数目
   date_type: created # created or updated 文章日期显示创建日或者更新日
 
 # Footer
@@ -313,9 +313,9 @@ subtitle:
   enable: true
   # Typewriter Effect (打字效果)
   effect: true
-  startDelay: 1000 # time before typing starts in milliseconds
-  typeSpeed: 10 # type speed in milliseconds
-  backSpeed: 0 # backspacing speed in milliseconds
+  startDelay: 300 # time before typing starts in milliseconds
+  typeSpeed: 150 # type speed in milliseconds
+  backSpeed: 50 # backspacing speed in milliseconds
   loop: true
   # source 调用第三方服务
   # source: false 关闭调用
@@ -330,9 +330,11 @@ subtitle:
     - 欲买桂花同载酒，终不似，少年游。
     - 人生如逆旅，我亦是行人。
     - 沾衣欲湿杏花雨，吹面不寒杨柳风。
+    - 知我者，谓我心忧；不知我者，谓我何求。
     - 取次花丛懒回顾，半缘修道半缘君。
     - 莫唱当年长恨歌，人间亦自有银河。
     - 晓看天色暮看云，行也思君，坐也思君。
+    - 圣贤庸行，大人小心。
     - 二十四桥明月夜，玉人何处教吹箫。
     - 夏日消溶，江河横溢，人或为鱼鳖。
     - 早知如此绊人心，何如当初莫相识。
