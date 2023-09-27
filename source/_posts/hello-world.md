@@ -29,17 +29,7 @@ copyright_author_href: https://github.com/ParadoxTZ
 copyright_info: 此文章版权归Paradox所有，如有转载，请注明来自原作者
 ---
 
-
-
-
-
-## Hello World
-
-恭喜你找到这个文档。（好吧，作为一个名为Hello World的文档，有好奇心之人应该都会点进来看。）
-
-欢迎来到我的个人博客主页，目前这个网站正在有条不紊（手忙脚乱）地建设当中。
-
-**后文中有我的图库链接**，当然你也可以点击右上角的“图库”进入。
+* This article is for me.
 
 ## 一些网页端的简记
 
@@ -77,7 +67,6 @@ copyright_author: Paradox
 copyright_author_href: https://github.com/ParadoxTZ
 copyright_info: 此文章版权归Paradox所有，如有转载，请注明来自原作者
 
-aplayer: true
 ---
 ````
 
@@ -140,13 +129,3 @@ default_cover:
 
 $q=\frac{T_1-T_2}{\frac1{h_1A}+\frac{\delta}{\lambda A}+\frac1{h_2A}}$
 
-
----
-
-My Wechat：hans420907574
-
-
-
-<div class="gallery-group-main">
-{% galleryGroup '画作' '源自Pixiv或其他地方的画师作品' '/gallery/new/' /image/top2.png %}
-</div>

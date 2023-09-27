@@ -20,6 +20,7 @@ menu:
   分类: /categories/ || fas fa-folder-open
   友链: /link/ || fas fa-link
   图库: /gallery/ || fas fa-images
+  说说: /artitalk/ || fas fa-pen-to-square
   
 
 # URL
@@ -76,7 +77,7 @@ index_generator:
   per_page: 10
   order_by: -date
 
-# Category & Tag
+# Category & Tag & Artitalk
 default_category: uncategorized
 category_map: 
 tag_map: 
@@ -94,7 +95,8 @@ category_img: https://github.com/ParadoxTZ/ParadoxTZ.github.io/blob/main/image/t
 # format:
 #  - category name: xxxxx
 category_per_img: https://github.com/ParadoxTZ/ParadoxTZ.github.io/blob/main/image/top2.png?raw=true
-
+archive_img: https://github.com/ParadoxTZ/ParadoxTZ.github.io/blob/main/image/top3.jpg?raw=true
+default_top_img: /image/top3.jpg
 
 # Metadata elements
 ## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
@@ -175,7 +177,7 @@ copy:
 # Articals
 post_copyright:
   enable: true
-  decode: false
+  decode: true
   author_href: https://github.com/ParadoxTZ
   license: CC BY-NC-SA 4.0
   license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
@@ -365,4 +367,32 @@ service_worker:
   - public/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}
   stripPrefix: public
   verbose: true
+
+# Artitalk
+# see https://artitalk.js.org/
+artitalk:
+  enable: true
+  appId: dojV6XqvYsl5hPoGEBvJapLo-MdYXbMMI
+  appKey: bOjcgQ6Ro8zaEoZfo1FQTbfB
+  path: artitalk
+  js:
+  option:
+  front_matter:
+
+# Search
+search:
+  path: search.xml
+  field: post
+  content: true
+  template: ./search.xml
+# Local search
+local_search:
+  enable: true
+  # Preload the search data when the page loads.
+  preload: false
+  # Show top n results per article, show all results by setting to -1
+  top_n_per_article: 5
+  # Unescape html strings to the readable one.
+  unescape: true
+
 
