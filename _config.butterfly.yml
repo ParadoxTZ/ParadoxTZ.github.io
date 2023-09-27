@@ -290,13 +290,13 @@ twikoo:
 # Background
 background: url(/image/back.png)
 footer_bg: true
-canvas_nest:
-  enable: true
-  color: '170,255,180' #color of lines, default: '0,0,0'; RGB values: (R,G,B).(note: use ',' to separate.)
-  opacity: 0.9 # the opacity of line (0~1), default: 0.5.
-  zIndex: -1 # z-index property of the background, default: -1.
-  count: 149 # the number of lines, default: 99.
-  mobile: true
+# canvas_nest:
+#   enable: true
+#   color: '170,255,180' #color of lines, default: '0,0,0'; RGB values: (R,G,B).(note: use ',' to separate.)
+#   opacity: 0.9 # the opacity of line (0~1), default: 0.5.
+#   zIndex: -1 # z-index property of the background, default: -1.
+#   count: 149 # the number of lines, default: 99.
+#   mobile: true
 canvas_fluttering_ribbon:
   enable: true
   mobile: false 
@@ -355,11 +355,12 @@ wordcount:
   min2read: true
   total_wordcount: true
 
-# Music
-aplayer:
-  meting: true
-  asset_inject: false
-# Inject the css and script (aplayer/meting)
-aplayerInject:
-  enable: true
-  per_page: true
+# Speed
+# offline config passed to sw-precache.
+service_worker:
+  maximumFileSizeToCacheInBytes: 5242880
+  staticFileGlobs:
+  - public/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}
+  stripPrefix: public
+  verbose: true
+
