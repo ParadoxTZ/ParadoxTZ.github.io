@@ -1,5 +1,6 @@
 ---
 title: Hello World
+date: 2023-09-24
 top_img: /image/top3.jpg
 mathjax: true
 cover: https://img1.baidu.com/it/u=2357593784,3294108420&fm=253&fmt=auto&app=120&f=JPEG?w=854&h=480
@@ -146,7 +147,6 @@ My Wechat：hans420907574
 
 
 
-
 <div class="gallery-group-main">
-{% galleryGroup '壁纸' '收藏的一些壁纸' '/gallery/new/' /image/dog.jpg %}
+{% galleryGroup '画作' '源自Pixiv或其他地方的画师作品' '/gallery/new/' /image/top2.png %}
 </div>

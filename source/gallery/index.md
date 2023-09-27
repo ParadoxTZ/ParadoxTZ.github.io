@@ -6,5 +6,6 @@ layout: "gallery"
 top_img: /image/top3.jpg
 ---
 <div class="gallery-group-main">
-{% galleryGroup '壁纸' '收藏的一些壁纸' '/gallery/new/' /image/dog.jpg %}
+{% galleryGroup '画作' '源自Pixiv或其他地方的画师作品' '/gallery/new/' /image/top2.png %}
 </div>
+
