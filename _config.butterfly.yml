@@ -277,7 +277,7 @@ comments:
   count: true # Display comment count in top_img
   card_post_count: true # Display comment count in Home Page
 
-#waline:
+# waline:
   #serverURL: https://paradox-comment.vercel.app/
   #bg: '#waline'
   #pageview: false
@@ -335,7 +335,7 @@ subtitle:
     - 知我者，谓我心忧；不知我者，谓我何求。
     - 取次花丛懒回顾，半缘修道半缘君。
     - 莫唱当年长恨歌，人间亦自有银河。
-    - 晓看天色暮看云，行也思君，坐也思君。
+    - 接叶巢莺，平波卷絮，断桥斜日归船。
     - 圣贤庸行，大人小心。
     - 二十四桥明月夜，玉人何处教吹箫。
     - 夏日消溶，江河横溢，人或为鱼鳖。
