@@ -395,4 +395,10 @@ local_search:
   # Unescape html strings to the readable one.
   unescape: true
 
-
+toc:
+  post: true
+  page: true
+  number: true
+  expand: true
+  style_simple: false # for post
+  scroll_percent: true
