@@ -17,6 +17,14 @@
       link: https://limestart.cn/
       avatar: https://www.fy6b.com/wp-content/uploads/2022/01/2022012108065459.jpg
       descr: 简洁优美的起始页
+    - name: Civitai
+      link: https://civitai.com
+      avatar: https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2023%2F0221%2F39245a8fj00rqe0au014hd000ls00tcp.jpg&thumbnail=660x2147483647&quality=80&type=jpg
+      descr: 好用的SD模型网站
+    - name: SD标签超市
+      link: https://tags.novelai.dev/
+      avatar: http://t13.baidu.com/it/u=2179439742,3852647689&fm=224&app=112&f=JPEG?w=342&h=500
+      descr: 构建Danbooru标签组合
 
 - class_name: 大佬的实用网站
   class_desc: ''
