@@ -12,3 +12,7 @@ top_img: /image/top3.jpg
 <div class="gallery-group-main">
 {% galleryGroup '幻想系' '偏真实2.5D风的幻想系风格AI绘画' '/gallery/幻想系/' /image/top2.png %}
 </div>
+
+<div class="gallery-group-main">
+{% galleryGroup '真实系' '真实系风格的AI绘画作品' '/gallery/真实系/' /image/top2.png %}
+</div>
