@@ -108,3 +108,13 @@ deploy:
   repo: https://github.com/ParadoxTZ/ParadoxTZ.github.io
   branch: main
   message: Update Hexo Static Content
+
+# hexo-renderer-pandoc 
+pandoc:
+  extra:
+  extensions:
+    - '+hard_line_breaks'
+    - '+emoji'
+    - '-implicit_figures'
+  template:
+

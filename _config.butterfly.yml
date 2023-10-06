@@ -404,3 +404,13 @@ toc:
   expand: true
   style_simple: false # for post
   scroll_percent: true
+
+# hexo-renderer-pandoc 
+pandoc:
+  extra:
+  extensions:
+    - '+hard_line_breaks'
+    - '+emoji'
+    - '-implicit_figures'
+  template:
+
