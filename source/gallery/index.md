@@ -16,3 +16,7 @@ top_img: /image/top3.jpg
 <div class="gallery-group-main">
 {% galleryGroup '真实系' '真实系风格的AI绘画作品' '/gallery/真实系/' /image/top2.png %}
 </div>
+
+<div class="gallery-group-main">
+{% galleryGroup '八重神子' '我不玩原神，室友胁迫我跑的图' '/gallery/八重神子/' /image/八重神子立牌.png %}
+</div>

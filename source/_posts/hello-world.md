@@ -110,10 +110,10 @@ copyright_info: 此文章版权归Paradox所有，如有转载，请注明来自
 ```
 default_cover: 
     - https://img2.baidu.com/it/u=1235612171,3868693941&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=281（√）
-    - https://img1.baidu.com/it/u=2996267891,32376633&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500
+    - https://img1.baidu.com/it/u=2996267891,32376633&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500（√）
     - https://img1.baidu.com/it/u=312822943,1236795569&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800
     - https://img0.baidu.com/it/u=1804133410,3139237737&fm=253&fmt=auto&app=120&f=JPEG?w=1280&h=800
-    - https://img1.baidu.com/it/u=161683432,2488264310&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500
+    - https://img1.baidu.com/it/u=161683432,2488264310&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500（√）
     - https://img1.baidu.com/it/u=3498215964,1377341541&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500
     - https://img1.baidu.com/it/u=3664282049,2844914481&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500
     - https://img0.baidu.com/it/u=2189029883,1880322455&fm=253&fmt=auto&app=120&f=JPEG?w=1280&h=800
