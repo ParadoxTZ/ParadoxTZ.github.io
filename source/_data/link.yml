@@ -11,7 +11,7 @@
   link_list:
     - name: 配色网站
       link: https://mycolor.space/
-      avatar: https://pbs.twimg.com/profile_images/904080332160458752/wyVe7uLQ_400x400.jpg
+      avatar: /image/wyVe7uLQ_400x400.jpg
       descr: 美化你的颜色搭配
     - name: 青柠起始页
       link: https://limestart.cn/
