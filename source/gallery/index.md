@@ -20,3 +20,7 @@ top_img: /image/top3.jpg
 <div class="gallery-group-main">
 {% galleryGroup '八重神子' '我不玩原神，室友胁迫我跑的图' '/gallery/八重神子/' /image/八重神子立牌.png %}
 </div>
+
+<div class="gallery-group-main">
+{% galleryGroup '二次元系列' '我焯，二刺猿！' '/gallery/二次元/' /image/剑冢4.png %}
+</div>
