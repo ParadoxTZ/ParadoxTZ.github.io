@@ -253,7 +253,7 @@ runtimeshow:
 
 # Aside widget - Newest Comments - 评论
 newest_comments:
-  enable: true
+  enable: false
   sort_order: # Don't modify the setting unless you know how it works
   limit: 4
   storage: 10 # unit: mins, save data to localStorage
@@ -372,7 +372,7 @@ service_worker:
 
 # Artitalk
 # see https://artitalk.js.org/
-artitalk:
+artitalk: # 用的是“说说”而不是Paradox_Web
   enable: true
   appId: dojV6XqvYsl5hPoGEBvJapLo-MdYXbMMI
   appKey: bOjcgQ6Ro8zaEoZfo1FQTbfB
