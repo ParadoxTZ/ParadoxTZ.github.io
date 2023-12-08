@@ -1165,14 +1165,14 @@ P_{em}=E_aI=P_2+p_{cu}\,;\,(p_{cu}=I_a^2R_a+2\Delta U_bI_a)
 </tr>
 <tr>
 <td>一相绕组—脉振</td>
-<td>$F<em>{\varphi\nu}=0.9\frac{IN}P\cdot k</em>{w\nu}$</td>
+<td>$ F<em>{\varphi\nu}=0.9\frac{IN}P\cdot k</em>{w\nu} $</td>
 <td>$k_{q\nu}$（$\times q$）</td>
 <td>线圈组</td>
 </tr>
 <tr>
 <td>三相绕组—旋转</td>
-<td>$F<em>{\nu}=\frac m2F</em>{\varphi\nu}$</td>
-<td>$E<em>{\phi\nu}=4.44fN\phi k</em>{w\nu}$</td>
+<td>$ F<em>{\nu}=\frac m2F</em>{\varphi\nu} $</td>
+<td>$ E<em>{\phi\nu}=4.44fN\phi k</em>{w\nu} $</td>
 <td>一相绕组</td>
 </tr>
 </tbody>
