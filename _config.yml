@@ -106,6 +106,7 @@ theme: butterfly
 deploy:
   type: git
   repo: https://github.com/ParadoxTZ/ParadoxTZ.github.io
+  # repo: https://github.com/ParadoxTZ/ParadoxTZ.github.io
   branch: main
   message: Update Hexo Static Content
 
