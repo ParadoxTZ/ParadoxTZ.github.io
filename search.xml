@@ -504,8 +504,8 @@ class="math inline">\(\varphi(\omega)\)</span>使之等于0</li>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>大三</tag>
         <tag>电气</tag>
+        <tag>大三</tag>
       </tags>
   </entry>
   <entry>
@@ -1182,8 +1182,8 @@ Q_{i}}\frac1{1-\frac{\partial Q_L}{\partial Q_{i}}}=\lambda
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>大三</tag>
         <tag>电气</tag>
+        <tag>大三</tag>
       </tags>
   </entry>
   <entry>
@@ -1543,17 +1543,24 @@ class="math inline">\(L\)</span>同理。</li>
 <ul>
 <li>恒磁通：可以认为<span class="math inline">\(-\dot E_1\approx\dot
 U_1\)</span>，在输入电压不变的情况下，<span
-class="math inline">\(\phi_m=\frac{E_1}{4.44fN}\)</span>应该保持不变，即主磁通恒定</li>
+class="math inline">\(\phi_m=\frac{E_1}{4.44fN}\)</span>应该保持不变，即主磁通恒定
+<ul>
+<li><img src="\image\电机学11.png" /></li>
+</ul></li>
 <li>自跟随：当主磁通不变时，合成磁动势<span class="math inline">\(\dot
 F_m=\dot F_1+\dot F_2=\dot I_1N_1+\dot I_2N_2=\dot
 I_0N_1\)</span>也应该保持不变，那么在接入负载出现<span
 class="math inline">\(I_2\)</span>时，<span
 class="math inline">\(I_1\)</span>将会自动修正，即<span
 class="math inline">\(\dot I_1=\dot I_0-\frac{N_2}{N_1}\dot I_2=\dot
-I_0-\frac{1}{k}\dot I_2\)</span></li>
+I_0-\frac{1}{k}\dot
+I_2\)</span>。其意义就是，变压器原副边通过<strong>磁动势平衡</strong>相关联，因此在副边电流变化的时候，原边会自动调节电流和输入功率以满足输出功率的要求。
+<ul>
+<li><img src="\image\电机学12.png" /></li>
+</ul></li>
 </ul>
 <h3 id="工作特性">工作特性</h3>
-<p>当变压器对外接通时，就像学的一个带小电阻的电压源一样，随着外电流的上升，输出电压缓慢下降，故有<span
+<p>当变压器对外接通时，就像一个带小电阻的电压源，随着外电流的上升，输出电压缓慢下降，故<span
 class="math inline">\(\Delta
 U=\frac{U_{2N}-U_2}{U_{2N}}\times100\%=1-U_2*\)</span></p>
 <p>变压器的效率随着外电流的增大先增加后减小，当不变损耗=可变损耗（<span
@@ -1578,9 +1585,15 @@ p_0+I_2^*p_k})\times100\%
 <li>Y型接法无法流通<strong>电流</strong>谐波分量，△型接法无法流通<strong>磁势</strong>谐波分量（实际上是<strong>去磁</strong>）</li>
 <li>组式变压器不会去磁，而芯式变压器会去磁</li>
 </ul>
-<p><img src="\image\电机学09.png" /></p>
-<p><strong>结论：</strong></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">原边               副边                   磁路</span><br><span class="line"> |- Y  ---------&gt;   |- Y/Y0  ---------&gt;   |- 组式 ×</span><br><span class="line"> |- Y0/△ √	   	   |- △ √	             |- 芯式 √	  </span><br></pre></td></tr></table></figure>
+<p><img src="\image\电机学09.jpg" /></p>
+<p><strong>结论：</strong><br />
+<span class="math display">\[
+\begin{gather*}
+原边\begin{cases}Y&amp;看副边\\Y_0/\Delta
+&amp;√\end{cases}\rightarrow副边\begin{cases}Y/Y_0&amp;看磁路\\\Delta&amp;√
+\end{cases}\rightarrow磁路\begin{cases}组式&amp;×\\芯式&amp;√  \end{cases}
+\end{gather*}
+\]</span></p>
 <h1 id="交流电机的一般理论">交流电机的一般理论</h1>
 <h2 id="交流电机的物理量">交流电机的物理量</h2>
 <table>
@@ -1632,7 +1645,7 @@ class="math inline">\(a=1还是2\)</span>确定串并联。从每级的第一条
 class="math inline">\(y_1\)</span>（下层边），然后右移<span
 class="math inline">\(y_2=y-y_1\)</span>（上层边），共2个线圈组（N一个，S一个）。当绕完一圈后，需要人为退一个槽。波绕组的短距不能节约用铜。</li>
 </ol>
-<p><img src="\image\电机学10.png" /></p>
+<p><img src="\image\电机学10.jpg" /></p>
 <h2 id="电动势与磁动势">电动势与磁动势</h2>
 <table style="width:100%;">
 <colgroup>
@@ -1675,14 +1688,14 @@ y_1}{\tau}90°)\)</span></td>
 <td></td>
 </tr>
 <tr class="even">
-<td>一相绕组—脉振</td>
+<td>一相绕组(脉振)</td>
 <td>$ F_{}=0.9Pk_{w} $</td>
 <td><span class="math inline">\(k_{q\nu}\)</span>（<span
 class="math inline">\(\times q\)</span>）</td>
 <td>线圈组</td>
 </tr>
 <tr class="odd">
-<td>三相绕组—旋转</td>
+<td>三相绕组(旋转)</td>
 <td>$ F_{}=m2F_{} $</td>
 <td>$ E_{}=4.44fNk_{w} $</td>
 <td>一相绕组</td>
@@ -1715,14 +1728,15 @@ class="math inline">\(k_{q\nu}=\frac{\text{sin}q\frac{\nu\alpha_1}2}{q\text{din}
 class="math inline">\(q\)</span>，一般取<span
 class="math inline">\(q\in[2,6]\)</span></p></li>
 </ol>
+<h1 id="异步电动机">异步电动机</h1>
 ]]></content>
       <categories>
         <category>课程</category>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>大三</tag>
         <tag>电气</tag>
+        <tag>大三</tag>
       </tags>
   </entry>
   <entry>
@@ -2026,13 +2040,22 @@ class="math inline">\(J_{Ri}=\overline{\sigma_i}z_{i-1}\)</span></li>
 <h2 id="inverse-velocity-kinematics">Inverse Velocity Kinematics</h2>
 <p>​
 利用齐次逆变换矩阵的导数导出上述运动学问题，最终会成为需要求解向量代数方程的首要问题，而向量代数方程不是系统的。因此，上述运动学基本上是通过雅可比矩阵求解的。</p>
+<h1 id="电机驱动">7. 电机驱动</h1>
+<ul>
+<li>现在常用的电机调速原理：PWM调制
+<ul>
+<li>动力源直接给电机供电，串联高速开关S，将供电的连续电流离散化。当开关频率极高（远高于电机响应速度时），可以忽略其对稳定性的影响</li>
+</ul></li>
+</ul>
+<p>等效电压：<span class="math inline">\(U_d=DU\)</span></p>
+<p>减速器，传感器，电机</p>
 ]]></content>
       <categories>
         <category>课程</category>
       </categories>
       <tags>
-        <tag>ACEE</tag>
         <tag>笔记</tag>
+        <tag>ACEE</tag>
         <tag>大三</tag>
       </tags>
   </entry>
@@ -3316,8 +3339,8 @@ SEQx：中断标志位，1表示有中断，只读</td>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>大三</tag>
         <tag>电气</tag>
+        <tag>大三</tag>
         <tag>微机</tag>
       </tags>
   </entry>
@@ -3366,9 +3389,9 @@ SEQx：中断标志位，1表示有中断，只读</td>
         <category>课程</category>
       </categories>
       <tags>
-        <tag>ACEE</tag>
         <tag>笔记</tag>
         <tag>大二</tag>
+        <tag>ACEE</tag>
         <tag>课程资料</tag>
       </tags>
   </entry>
@@ -3390,9 +3413,9 @@ SEQx：中断标志位，1表示有中断，只读</td>
         <category>课程</category>
       </categories>
       <tags>
-        <tag>ACEE</tag>
         <tag>笔记</tag>
         <tag>大二</tag>
+        <tag>ACEE</tag>
       </tags>
   </entry>
   <entry>
