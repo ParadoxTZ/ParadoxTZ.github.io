@@ -1883,11 +1883,11 @@ I_2’)\)</span></li>
 <p>下面给出各个功率的物理表达式：</p>
 <table>
 <colgroup>
-<col style="width: 30%" />
-<col style="width: 17%" />
-<col style="width: 17%" />
+<col style="width: 32%" />
+<col style="width: 18%" />
 <col style="width: 13%" />
-<col style="width: 20%" />
+<col style="width: 14%" />
+<col style="width: 21%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -1895,8 +1895,7 @@ I_2’)\)</span></li>
 class="math inline">\(P_1=m_1U_{1\varphi}I_{1\varphi}\text{cos}\varphi_1\)</span></th>
 <th><span
 class="math inline">\(p_{cu1}=m_1I_{1\varphi}^2R_1\)</span></th>
-<th><span
-class="math inline">\(p_{Fe}=m_1I_{1\varphi}^2R_m\)</span></th>
+<th><span class="math inline">\(p_{Fe}=m_1I_{m}^2R_m\)</span></th>
 <th><span class="math inline">\(p_{cu2}=m_1I_2’^2R_2’\)</span></th>
 <th><span
 class="math inline">\(p_{mec}=m_1I_2’^2\frac{1-s}sR_2’\)</span></th>
