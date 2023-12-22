@@ -1260,7 +1260,7 @@ e=-\frac{\partial\Psi}{\partial t}=-N\frac{\text d\phi}{\text dt}
 机座：支撑、构成磁极间的磁通回路\\
 主磁极：产生气隙磁场
 \begin{cases}
-励磁绕组：用于产生磁场（空载气隙磁场） \\
+励磁绕组：用于产生励磁磁场 \\
 主磁极铁芯
 \end{cases}
 \\电刷装置：将电枢绕组和外电路联通\\
@@ -1268,7 +1268,7 @@ e=-\frac{\partial\Psi}{\partial t}=-N\frac{\text d\phi}{\text dt}
 \end{cases}
 \\
 \\
-动子（电枢）
+转子（电枢）
 \begin{cases}
 电枢铁芯：用来放电枢绕组，由硅钢片叠成\\
 电枢绕组：机电能量转换，绕成定性线圈嵌在电枢铁芯内\\换向器
@@ -1277,7 +1277,6 @@ e=-\frac{\partial\Psi}{\partial t}=-N\frac{\text d\phi}{\text dt}
 \end{gather*}
 \]</span></p>
 <p>注：<strong>电枢</strong>和<strong>励磁</strong>究竟谁是定子谁是转子，依据不同的情况来看。直流电机中以上述为主，同步电机中则相反（即电枢变成了定子）。</p>
-<h2 id="额定值">额定值</h2>
 <ul>
 <li>额定功率<span class="math inline">\(P_N\)</span>
 <ol type="1">
@@ -1298,8 +1297,10 @@ class="math inline">\(k\)</span>。一个换向片连着两个绕组元件，一
 class="math inline">\(i,j,k\)</span>。</p>
 <p>​ 对于叠绕组，一定有<span
 class="math inline">\(k=i+1\)</span>，波绕组则是<span
-class="math inline">\(k&gt;j&gt;i\)</span>。在绕组连接表中，一根实线+一根虚线代表了一个绕组元件，其三个端点正好对应着上文的三个值：<span
-class="math inline">\(起始片\&amp;上元件边i,下元件边j,终止片k\)</span>。<br />
+class="math inline">\(k&gt;j&gt;i\)</span>。在绕组连接表中，一根实线+一根虚线代表了一个绕组元件，其三个端点正好对应着上文的三个值：起始片&amp;上元件边<span
+class="math inline">\(i\)</span>,下元件边<span
+class="math inline">\(j\)</span>,终止片<span
+class="math inline">\(k\)</span>。<br />
 <span class="math display">\[
 元件数S=虚槽数Z_u=换向片数K
 \]</span></p>
@@ -1363,78 +1364,69 @@ class="math inline">\(y_1\)</span>：同一线圈上下元件边跨过槽数</td
 <li><strong>两者唯一有区别的就是合成节距的算法</strong>，其他的都一样。</li>
 </ul>
 <h2 id="直流电机磁场">直流电机磁场</h2>
-<h3 id="励磁磁场">励磁磁场</h3>
+<p>​
+直流电机一共有两个磁场，一个是定子通电提供的定子励磁磁场，一个是转子的电枢磁场。<strong>励磁磁场</strong>相对简单，会在空间中产生<strong>励磁磁动势<span
+class="math inline">\(F_f\)</span>（起主要作用）</strong>；<strong>电枢磁场</strong>会在空间中产生电枢磁场磁动势<span
+class="math inline">\(F_a\)</span>，对励磁磁场产生影响；两者叠加产生<strong>气隙磁场（带载磁场）</strong>。</p>
+<h3 id="励磁磁场f_f">励磁磁场<span
+class="math inline">\(F_f\)</span></h3>
+<p><strong>分类：</strong></p>
 <ol type="1">
 <li>他励：励磁绕组和电枢绕组用不同的独立电源供电</li>
 <li>并励：励磁绕组和电枢绕组并联供电</li>
 <li>串励：励磁绕组和电枢绕组串联供电</li>
 <li>复励：有两个励磁绕组，并+串；积复励/差复励</li>
 </ol>
-<h3 id="空载磁场气隙磁场用下标f表示">空载磁场（气隙磁场）：用下标<span
-class="math inline">\(f\)</span>表示</h3>
-<p><strong>（一）磁通与磁动势</strong></p>
-<p>定义：电枢里面没有电流，只有励磁里面加上了一点电流。</p>
-<p>磁通主回路：主磁极 - 气隙 - 电枢铁芯 - 气隙 - 另一个主磁极 - 定子 -
-原主磁极</p>
-<p>因此有总磁动势<span class="math inline">\(F_0=\oint H\text
+<p><strong>磁场特点：</strong></p>
+<ol type="1">
+<li><p>在空载时，电枢电流<span
+class="math inline">\(I_a=0\)</span>，不产生磁场。因此空载时直流电机的磁场分布，就是励磁磁场。</p></li>
+<li><p><strong>励磁磁场由主磁极的主磁通产生</strong>，因为存在严重的饱和，因此在主磁极覆盖范围内均水平，在气隙处迅速下降。</p>
+<p><img src="\image\电机学02.png" /></p></li>
+<li><p>总磁动势计算：<span class="math inline">\(F_0=\oint H\text
 dl=2I_fN_f\)</span>，若忽略漏磁通，则<span
-class="math inline">\(F_0=2F_f\,\,;\,\,F_f=I_fN_f\)</span></p>
-<p><strong>（二）磁化曲线</strong></p>
-<p><img src="\image\电机学02.png" /></p>
-<p>​ 左图所示是主磁场磁通密度分布，边缘处由于气隙的存在，B显著减小。</p>
-<p>​ 把<span class="math inline">\(F,\phi\)</span>和<span
-class="math inline">\(E,i\)</span>对应起来就很好理解右边的图了，一开始磁通都很大很密，给了多大磁动势就能产生多大的磁通。之后由于气隙的存在，“阻力”变大，就非线性了。注意饱和系数的定义，是大于1的数。</p>
-<p>​ 或者这样想，<span
-class="math inline">\(\phi=BS=Blx\)</span>，也就是说磁通是对磁通密度B的积分，在边缘处由于B急剧减小，因此<span
-class="math inline">\(\phi\)</span>也很只能缓慢的增大。而F与i相关，i均匀分布，因此F线性增大。</p>
-<h3 id="电枢磁场用下标a表示">电枢磁场：用下标<span
-class="math inline">\(a\)</span>表示</h3>
-<p><strong>（一）电刷放置在几何中心线上</strong></p>
-<p>目的：正负电刷之间得到最大电压</p>
-<p>在几何中心线上，电刷的位置，磁动势恰好为0，两侧电流流向相反，磁动势极性相反。</p>
-<p><img src="\image\电机学01.png" /></p>
-<p>因此：<span class="math inline">\(F_a(x)=\Sigma i=\frac{Ni}{\pi
-D_a}\cdot x=Ax\,\,(x&lt;\frac{\tau}2)\,\,;\,\,A\triangleq \frac{Ni}{\pi
-D_a}\,\)</span>，（以电刷作为原点）</p>
-<p>其中：A的定义是单位长度的电流量，也就是电流线密度。F更严谨的推导应该是全电流定律，画一个闭合曲线，由于铁芯内几乎不产生磁压降（也就是铁芯的H远小于空气中的H），一个闭合回路经过两段气隙所以有：<span
-class="math inline">\(\Sigma Hl\approx \frac{Ni}{\pi D_a}\cdot 2x\approx
-2F_a\)</span>，F<sub>a</sub>为<strong>气隙内的磁动势</strong>。</p>
-<p>而B不完全这样变化，<span
-class="math inline">\(B_a(x)=\mu_0H_a(x)=\mu_0\frac{F_a(x)}{\delta&#39;}\)</span>，或者<span
-class="math inline">\(B=\frac1{\mu_0}\frac{\Delta\phi}{\Delta
-A}=\frac{F_a/R_m}{\Delta A}=\frac{F_a}{\Delta
-A\cdot\frac1{\mu_0}\frac{\delta&#39;}{\Delta
-A}}=\mu_0\frac{F_a(x)}{\delta&#39;}\)</span>，其中<span
-class="math inline">\(\delta&#39;\)</span>就是气隙的长度。一开始气隙大小不变，因此B线性增加，然后因为气隙急剧增大的缘故B急剧减小，变成马鞍形。</p>
-<p><img src="\image\电机学04.png" /></p>
-<p>上图就是解释磁动势和磁通密度为什么是静止的，随着电枢的不断旋转，虽然每个绕组元件的电流都不断改变，但是宏观上转前转后是一样的。</p>
-<p><strong>（二）电刷不在几何中心线上</strong></p>
-<p>在实际中，由于误差导致电刷偏离了中心线一个小角度<span
+class="math inline">\(F_0=2F_f\,\,;\,\,F_f=I_fN_f\)</span>。</p></li>
+</ol>
+<h3 id="电枢磁场f_a">电枢磁场<span
+class="math inline">\(F_a\)</span></h3>
+<p>​
+电枢是转子，<strong>电枢磁场由电枢绕组上的导体通入的电流产生</strong>，而导体均匀分布导致电流近似均匀分布，因此电枢磁场磁动势大小随着坐标<span
+class="math inline">\(x\)</span>线性增大。直到通过换向片处电流反向，此时磁动势大小线性减小。</p>
+<p><strong>(a) 电刷放置在几何中心线上:</strong></p>
+<ol type="1">
+<li><p><strong>磁动势计算</strong>：<span
+class="math inline">\(F_a={\sum i}=\frac{x}{\pi D_a}Ni_a=\frac{Ni_a}{\pi
+D_a}x\)</span>，并定义电枢表面线负荷<span
+class="math inline">\(A\triangleq \frac{Ni_a}{\pi D_a}\)</span></p></li>
+<li><p>气隙电枢磁密：<span
+class="math inline">\(B_{ax}=\mu_0\frac{F}{\delta&#39;}\)</span>，先线性增大，超出主磁极范围接近换向片后，由于气隙的急剧增大而急剧减小。</p>
+<p><img src="\image\电机学01.png" /></p></li>
+</ol>
+<p><strong>(b) 电刷不在几何中心线上:</strong></p>
+<ol type="1">
+<li>在实际中，由于误差导致电刷偏离了中心线一个小角度<span
 class="math inline">\(\beta\)</span>，即长度<span
-class="math inline">\(b_{\beta}=\frac D2\beta\)</span>。</p>
-<h3 id="带载磁场电枢反应">带载磁场（电枢反应）</h3>
-<p>带载磁场 = 空载磁场 + 电枢磁场</p>
-<p><img src="\image\电机学03.png" /></p>
+class="math inline">\(b_{\beta}=\frac D2\beta\)</span>。</li>
+<li>将磁场分解（实际上是将环绕了电枢一圈的电枢电流分解）为交轴磁场和直轴磁场。
+<ol type="1">
+<li>交轴磁动势：与<strong>原电枢磁动势</strong>很像，以<strong>原电刷位置对称（几何中心线）</strong>，但是三角波的尖头被削平。</li>
+<li>直轴磁动势：与原<strong>励磁磁动势</strong>很像，以<strong>主磁极位置对称</strong>，方向相同或者相反。</li>
+</ol></li>
+</ol>
+<h3 id="电枢反应">电枢反应</h3>
+<p>​
+电枢反应实际上就是指两个磁场叠加，合起来对电机的工作产生影响。不难看出，<strong>两个磁场都是静止的</strong>：励磁磁场静止是因为定子本来就静止，可以直接看做是不动的永磁体；电枢磁场静止是因为，即使电枢导体的电流在随着转子转动经过换向器不断改变方向，但是<strong>宏观上磁场一直以换向器为中心对称</strong>。</p>
 <p><img src="\image\电机学05.png" /></p>
 <p>​
-负载运行时，合成磁场由励磁磁动势和电枢磁动势共同产生，即求和。上文讲过，空载气隙磁场是一个两端很小，中间基本平顶的图形；而电枢磁场是一个马鞍形的磁场，那么就把这种对气隙磁场的畸变作用，成为电枢反应。其作用有三：</p>
+由于<strong>励磁磁场沿主磁极轴对称，而电枢磁场沿换向片对称，主磁极与电刷正好相差90°电角度</strong>（电刷塞在两磁极中的空隙里），因此一般呈现交轴电枢反应（建议与同步电机一起看）：</p>
 <ol type="1">
-<li>电枢磁场会使气隙磁场畸变，每个主极下的磁场，一半去磁，一半增磁。
-<ol type="1">
-<li>发电机：前极尖去磁，后极尖增磁</li>
-<li>电动机：反之</li>
-</ol></li>
-<li>磁密零点发生偏移（物理中心线偏移）
-<ol type="1">
-<li>发电机：物理中性线顺电枢旋转方向前移<span
-class="math inline">\(\alpha\)</span></li>
-<li>电动机：反之</li>
-</ol></li>
-<li>每极气隙总磁通不变</li>
+<li>两者相位差90°，电枢磁场使励磁磁场产生畸变</li>
+<li>交轴反应理论不改变总磁通大小，但是由于饱和，增磁处难以增磁，因此磁通一般而言还是会减小</li>
+<li>直轴电枢反应由电刷偏离几何中心线引起，表现为增磁或去磁</li>
+<li><strong>电枢反应的影响一般在题目中会用额外励磁电流 <span
+class="math inline">\(I_{faq}\)</span>
+等效，表示为了“抗衡”电枢反应，需要额外提供的励磁</strong></li>
 </ol>
-<ul>
-<li>如果饱和了再发生电枢反应，去磁照样去，但是增磁增不上去了（吃撑了再吃就吃不下了），所以总体产生了去磁效应。</li>
-</ul>
 <h3 id="感应电动势电磁转矩">感应电动势&amp;电磁转矩</h3>
 <p><span class="math display">\[
 \begin{gather*}
@@ -1442,23 +1434,248 @@ E_a=\frac{NP}{60a}\cdot\phi \cdot n\\T=\frac{NP}{2\pi a}\cdot\phi\cdot
 I_a
 \end{gather*}
 \]</span></p>
-<h2 id="直流发电机">直流发电机</h2>
-<p>感觉挺简单的，就是说比较好理解</p>
-<p><img src="\image\电机学06.png" /><br />
-<span class="math display">\[
-\begin{gather*}
-E_a=U+I_aR_a+2\Delta U_b\\
-U=I_f(R_f+R_j)\\
-P_{em}=E_aI=P_2+p_{cu}\,;\,(p_{cu}=I_a^2R_a+2\Delta U_bI_a)
-\end{gather*}
-\]</span><br />
-随着电流提高产生去磁效应，用<span
-class="math inline">\(I_{faq}\)</span>来等效产生的去磁效应。意思就是，对于外电路，看起来有<span
-class="math inline">\(I_f\)</span>的电流（比如<span
-class="math inline">\(\frac{U}{R_f+R_j}\)</span>和<span
-class="math inline">\(I_{fN}\)</span>），但是对电枢的空载特性而言，只有<span
-class="math inline">\(I_{f0}=I_f-I_{faq}\)</span>的电流产生电枢电动势，也就是查表用的/查到的都是<span
-class="math inline">\(I_{f0}\)</span></p>
+<h2 id="直流电机外部模型">直流电机外部模型</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>发电机</th>
+<th>电动机</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>模型</td>
+<td><img src="\image\电机学04.jpg" /></td>
+<td><img src="\image\电机学03.jpg" /></td>
+</tr>
+<tr class="even">
+<td>电压</td>
+<td><span class="math inline">\(E_a=U+I_aR_a+2\Delta U_b\)</span></td>
+<td><span class="math inline">\(U=E_a+I_a(R_a+R_{aj})\)</span></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><span class="math inline">\(U=I_f(R_f+R_j)\)</span></td>
+<td><span class="math inline">\(U=I_f(R_f+R_j)\)</span></td>
+</tr>
+<tr class="even">
+<td>电流</td>
+<td><span class="math inline">\(I_a=I+I_f\)</span></td>
+<td><span class="math inline">\(I=I_a+I_f\)</span></td>
+</tr>
+<tr class="odd">
+<td>转矩</td>
+<td><span class="math inline">\(T_1=T_{em}+T_0\)</span></td>
+<td><span class="math inline">\(T_{em}=T_2+T_0\)</span></td>
+</tr>
+<tr class="even">
+<td>功率</td>
+<td><img src="\image\电机学061.jpg" /></td>
+<td><img src="\image\电机学062.jpg" /></td>
+</tr>
+</tbody>
+</table>
+<p>[注]：在并励发电机功率中也有<span
+class="math inline">\(p_{cuf}\)</span>的铜耗，这里没标注</p>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 45%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>发电机</strong></th>
+<th><strong>电动机</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>负载特性</strong></td>
+<td><img src="\image\电机学20.png" /></td>
+<td><img src="\image\电机学22.png" /></td>
+</tr>
+<tr class="even">
+<td><strong>特点</strong></td>
+<td>对发电机而言，<strong>电枢反应的影响等效为额外的励磁电流<span
+class="math inline">\(I_{faq}\)</span></strong>，并且由于<span
+class="math inline">\(I_aR_a\)</span>电流—端电压”表或曲线时，需要使用<span
+class="math inline">\(I_{f0}=I_{fN}-I_{faq}\)</span>！复励中串联的磁动势需要折算：<span
+class="math inline">\(\frac{I_sN_s}{N_f}\)</span></td>
+<td>其实没啥好说的，这图应该见过比较多次的。需要注意的就是 <span
+class="math inline">\(\eta=(1-\frac {\sum p}{P_1})\times
+100\%\)</span>，在可变损耗<span
+class="math inline">\(I_a^2R_a\)</span>=不变损耗<span
+class="math inline">\(p_0\)</span>时取到效率最大值</td>
+</tr>
+<tr class="odd">
+<td><strong>外特性</strong></td>
+<td><img src="\image\电机学21.png" /></td>
+<td><img src="\image\电机学23.png" /></td>
+</tr>
+<tr class="even">
+<td><strong>特点</strong></td>
+<td>对于并励发电机，除了上图的<span
+class="math inline">\(U_0=f(I_f)\)</span>外还需要满足<span
+class="math inline">\(U_0=I_f(R_f+R_j)\)</span>，<strong>两者的交点即为空载端电压</strong>。因此其自励是需要满足<strong>剩磁+励磁电阻大小合适</strong>两个条件（当然接法要正确）</td>
+<td>方程：<span
+class="math inline">\(n=\frac{U-I_aR_a}{C_e\phi}=\frac{U}{C_e\phi}-\frac{R_a}{C_eC_T\phi^2}T_{em}\)</span>。这条最基础的方程就揭示了三个调速方法：<strong>调压</strong>（向下平移）、<strong>串阻</strong>（向下倾斜）、<strong>弱磁</strong>（向上平移+向下倾斜）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="电动机的调节">电动机的调节</h2>
+<p><span class="math display">\[
+n=\frac{U-I_aR_a}{C_e\phi}=\frac{U}{C_e\phi}-\frac{R_a}{C_eC_T\phi^2}T_{em}
+\]</span></p>
+<h3 id="起动">起动</h3>
+<p>​ 起动的要求是具有足够小的电流<span
+class="math inline">\(I_{st}\)</span>与足够大的启动转矩<span
+class="math inline">\(T_{st}\)</span>。由电动机的机械特性（即上表中的外特性），可以得到：</p>
+<table>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 37%" />
+<col style="width: 47%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>降压起动</th>
+<th>串电阻起动</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>起动电流</strong></td>
+<td><span class="math inline">\(I_{st}=\frac{U&#39;}{R_a}\)</span></td>
+<td><span
+class="math inline">\(I_{st}=\frac{U_N}{R_a+R_{aj}}\)</span></td>
+</tr>
+<tr class="even">
+<td><strong>起动转矩</strong></td>
+<td><span
+class="math inline">\(T_{st}=\frac{U&#39;C_T\phi}{R_a}\)</span></td>
+<td><span
+class="math inline">\(T_{st}=\frac{U_NC_T\phi}{R_a+R_{aj}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="调速">调速</h3>
+<table>
+<colgroup>
+<col style="width: 5%" />
+<col style="width: 18%" />
+<col style="width: 31%" />
+<col style="width: 43%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>调压调速</th>
+<th>串电阻调速</th>
+<th>弱磁调速</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>特点</strong></td>
+<td>只能降转速，特性曲线一样硬</td>
+<td>只能降转速，特性曲线变软，耗能，轻载时不明显</td>
+<td>只能增转速，用于恒转矩负载时<span
+class="math inline">\(I_a=\frac{T}{C_T\phi}\)</span>变高，适用于恒功率负载</td>
+</tr>
+</tbody>
+</table>
+<h3 id="制动">制动</h3>
+<table style="text-align: center;">
+<tr>
+<th rowspan="2">
+分类
+</th>
+<th colspan="2">
+反接制动
+</th>
+<th rowspan="2">
+能耗制动
+</th>
+<th colspan="2">
+回馈制动
+</th>
+</tr>
+<tr>
+<th>
+电压反向(II)
+</th>
+<th>
+电动势反向(IV)
+</th>
+<th>
+电压反向(IV)
+</th>
+<th>
+电压不反向(II)
+</th>
+</tr>
+<tr>
+<th>
+实现
+</th>
+<td>
+电枢电压UN反向并串限流电阻
+</td>
+<td>
+串一个极大的电阻Raj
+</td>
+<td>
+断开电源并串限流电阻Raj
+</td>
+<td>
+电压反向的反接制动，n=0不停机，Tem=0时切除电阻使匀速下放
+</td>
+<td>
+电车下坡时具有同向转矩，转速冲过y轴
+</td>
+</tr>
+<tr>
+<th>
+特点
+</th>
+<td>
+快速停机，需要在n=0时手动停机
+</td>
+<td>
+特性曲线极软，适用于位能型负载
+</td>
+<td>
+恒转矩负载：自动停机<br>位能型负载：反向起动
+</td>
+<td>
+位能型负载的匀速下放
+</td>
+<td>
+电车下坡
+</td>
+</tr>
+<tr>
+<th>
+能流方向
+</th>
+<td colspan="2">
+电源给电机供能，同系统动能一起消耗在电阻上
+</td>
+<td>
+电源断开无输入，动能消耗在电阻上
+</td>
+<td>
+匀速下放阶段将势能转成电能回给电网
+</td>
+<td>
+能量回馈制动状态
+</td>
+</tr>
+</table>
 <h1 id="变压器">变压器</h1>
 <h2 id="等效电路与物理量">等效电路与物理量</h2>
 <table>
@@ -1963,7 +2180,7 @@ class="math inline">\(p_{Fe,ad,mec}\)</span>，同样可变损耗=不变损耗�
 <li>电磁转矩<span class="math inline">\(T_{em}=T_0+\frac
 P{\Omega}\)</span>，近似有截距的一次函数，但是由于转速的下降，转矩曲线略微上翘</li>
 </ol>
-<h2 id="起动">起动</h2>
+<h2 id="起动-1">起动</h2>
 <p>一般要求电机起动的时候具有较大的转矩<span
 class="math inline">\(T_{st}\)</span>和较小的起动电流<span
 class="math inline">\(I_{st}\)</span></p>
@@ -2021,7 +2238,7 @@ class="math inline">\(I_{st}\)</span>指的是电网提供的三相线电流</li
 </ul>
 <p><strong>绕线式异步电机起动：</strong></p>
 <p>不论是<strong>转子串电阻起动</strong>还是<strong>频敏电阻器起动</strong>，都是类似的，与直流电机电枢回路串电阻起动相似：分级起动，逐渐切除/减小电阻，固有特性逐渐变硬，电流不会超过限制。</p>
-<h2 id="调速">调速</h2>
+<h2 id="调速-1">调速</h2>
 <p>原理：由<span
 class="math inline">\(n=(1-s)\frac{60f}p\)</span>，改变<span
 class="math inline">\(s,f,p\)</span>均可完成电机的调速。</p>
@@ -2109,7 +2326,7 @@ s{s_m}+\frac{s_m}s}\approx\frac{2K_M}{s_m}\cdot s
 ~;~\frac{T_a}{T_b}=\frac{s_a}{s_b}
 \]</span><br />
 <img src="\image\电机学18.png" /></p>
-<h2 id="制动">制动</h2>
+<h2 id="制动-1">制动</h2>
 <table style="text-align: center;">
 <tr>
 <th rowspan="2">
