@@ -27,16 +27,229 @@
 ]]></content>
   </entry>
   <entry>
+    <title>微机原理（DSP）补充</title>
+    <url>/2023/12/27/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%EF%BC%88DSP%EF%BC%89%E8%A1%A5%E5%85%85/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="微机原理补充">微机原理补充</h1>
+<h2 id="cpu模块">CPU模块</h2>
+<h3 id="cpu寄存器">CPU寄存器</h3>
+<p>​
+2812芯片大体上分为：中央处理单元（CPU），存储器和外设。其中的CPU寄存器如下（大致）：</p>
+<pre>
+CPU寄存器
+   |- 读写改集成的累加器模块 ALU
+           |- 加法器 ACC(32) = AH(16) + AL(16)
+   |- 32位乘法器模块 
+           |- 乘数寄存器(暂存) : XT
+           |- 乘法寄存器(结果) : P(32) = PH(16) + PL(16)
+   |- 辅助寄存器模块 ARAU(32) : 地址寄存器算术单元
+           |- 辅助寄存器 AR(8个×32位) : XARn (n=0~7) = 高16位 + ARn (低16位)
+           |- 数据页指针 DP(16) : 直接寻址(22,4M) = DP(16) + 偏移量(6)
+   |- 堆栈指针 SP(16) : 偏移量小于64, 只能访问[0,0xffffH]低地址空间单元, 复位0x0400
+   |- 程序计数器 PC : 总是包含到达D2阶段指令的地址
+   |- 指令计数器 IC : 装入下一条指令的地址, 保持到下个D2阶段
+   |- 状态寄存器 ST0/ST1
+           |- 溢出位 V : 1为有溢出, 用于判断有符号运算是否出错
+           |- 进位/借位位 C : 用于判断无符号数高低, 对有符号数而言不重要
+                    |- 0 : 无进位/有借位
+                    |- 1 : 有进位/无借位
+           |- 负标志位 N : 1为有负数产生,用于有符号数判断大小
+           |- 零标志位 Z : 1为有0产生
+           |- 符号扩展模式位 SXM : 0-无扩展, 1-符号扩展
+           |- (ST1) - 辅助寄存器指针 ARP 
+   |- 其他 (如中断控制寄存器IFR,IER等)
+</pre>
+<h3 id="总线">总线</h3>
+<p>​ 2812的存储器空间被分为了两大块：程序空间（P）和数据空间（D）。</p>
+<p>​
+访问任一空间，都需要两种总线配合：地址总线（A）和数据总线（D），前者终于传送存储单元的地址，后者用于传送存储单元的具体内容。</p>
+<ul>
+<li>下面对英文缩写做一点简单的说明：</li>
+</ul>
+<pre>
+    P : Program 程序(空间)
+    A : Address 地址(总线)
+    D : Data    数据(空间或总线)
+    R/W : Read/Write 读取/写入 省略表示两者均可
+    B : Base 总线
+</pre>
+<ul>
+<li>下面就是2812CPU对存储空间内数据的调用的过程</li>
+</ul>
+<pre>
+        存储空间         程序空间P              数据空间D
+                           |               |-----|-----|
+                           |               |           |
+        地址总线A         PAB(22)        DWAB(32)     DRAB(32)
+                           |-------|      |            |    
+                           |       |------|            |
+        数据总线D         PRDB(32)      D/PWDB(32)    DRDB(32)
+</pre>
+<p>可以看到：</p>
+<ol type="1">
+<li>一共有6跟总线，三根数据总线，3根地址总线</li>
+<li>地址总线A少一根的原因是程序空间P的读写共用一根总线（因此程序的读写不能同时进行）</li>
+<li>数据总线D少一根的原因是程序、数据空间共用一根总线进行数据的写入</li>
+</ol>
+<h3 id="指令流水线">指令流水线</h3>
+<p>2812的指令流水线大体上遵循一下几点规则：</p>
+<ol type="1">
+<li>一条指令最多分8步完成</li>
+<li>每一步都要一个时间间隔完成</li>
+<li>同一时间最多可能有8条指令在执行</li>
+<li>步与步之间可能会插入间隔（如当此步需要用到上一步的结果，就会等待）</li>
+</ol>
+<p>流水线的8步分别为：</p>
+<pre>
+    获取指令地址 ——> 获取指令内容 ——> 对指令进行解码 ——> 解析操作数地址
+ ——> 锁定操作数地址 ——> 获取操作数 ——> CPU执行'real work' ——> 将结果存入到内存
+</pre>
+<h2 id="指令系统寻址">2812指令系统——寻址</h2>
+<h3 id="寻址的基本操作">寻址的基本操作</h3>
+<p>​
+2812采用增强型哈佛总线结构，能够并行的访问地址和数据存储空间，其寻址的范围为
+<code>[0,0x3fffff]</code>
+（即2<sup>22</sup>=4M）。介绍寻址之前，大致先了解一下 <code>MOV</code>
+指令，大意就是：<code>MOV A B</code>
+近似于把B放到A里面，这也是最重要的汇编语言之一。</p>
+<p>​ 寻址方式大致上的分类有以下3种：</p>
+<table>
+<thead>
+<tr class="header">
+<th>寻址方式</th>
+<th>含义</th>
+<th>写法</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>立即寻址</strong></td>
+<td>直接对应数字本身</td>
+<td>#</td>
+</tr>
+<tr class="even">
+<td><strong>直接寻址</strong></td>
+<td>某一个单元格内对应的数字</td>
+<td>@</td>
+</tr>
+<tr class="odd">
+<td><strong>间接寻址</strong></td>
+<td>指向某个单元的指针对应的单元中的数字</td>
+<td>*</td>
+</tr>
+</tbody>
+</table>
+<p>​ 下面介绍一些常用的寻址方法及其写法（下文中 <code>loc16</code>
+表示任一16位的地址/数据存储单元）：</p>
+<ol type="1">
+<li><p><strong>立即数寻址</strong>（把数据送到寄存器）</p>
+<ol type="1">
+<li>数据不能太大，一般为16bit，只有XAR可以接受22bit的数据</li>
+<li>ACC不能直接接受更多位的立即数</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">MOVL XARn, #<span class="number">22b</span>it</span><br><span class="line">MOVW DP, #<span class="number">16b</span>it</span><br><span class="line">MOVW DP, #<span class="number">16b</span>it &gt;&gt; <span class="number">6</span></span><br><span class="line">MOV SP, #<span class="number">16b</span>it</span><br><span class="line">MOV ACC, #<span class="number">16b</span>it</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>偏移量直接寻址</strong>（DP的使用，好用的）</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">MOVW DP, #<span class="number">0x70D0</span> &gt;&gt; <span class="number">6</span>	   <span class="comment">// 把70D4“赋值”给DP</span></span><br><span class="line">MOV @<span class="number">4</span>, #<span class="number">16b</span>it          <span class="comment">// 偏移量=4，把某个数16bit“赋值”给70D4单元</span></span><br></pre></td></tr></table></figure>
+<p>因为DP寻址方式是用16位DP“并上”6位偏移量来实现的，因此为了避免繁杂的计算，在给DP输入时要把
+<code>0x70D4</code>
+右移6位，直接移到偏移量的位置上，就可以把“并”换成简单的加法。</p></li>
+<li><p><strong>堆栈间接寻址</strong>（SP的使用）</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">MOV SP, #<span class="number">0x70DF</span>         <span class="comment">// 把70DF“赋值”给SP</span></span><br><span class="line">MOV *-SP[<span class="number">5</span>], #<span class="number">16b</span>it      <span class="comment">// 偏移量=-5，*表示C语言的指针，把某个数16bit“赋值”给70DA单元</span></span><br></pre></td></tr></table></figure>
+<p>SP就是只能用负的偏移量，也就是
+<code>-SP[n]</code>，别问为什么</p></li>
+<li><p><strong>寄存器间接寻址</strong>（AR/XAR的使用）</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">MOV XAR6, #<span class="number">0x70D0</span>       <span class="comment">// 把70D4“赋值”给XAR6</span></span><br><span class="line">MOV *+XAR6[<span class="number">4</span>], #<span class="number">16b</span>it    <span class="comment">// 偏移量=4，把某个数16bit“赋值”给70D4单元</span></span><br></pre></td></tr></table></figure>
+<p>AR/XAR就是只能用正的偏移量，也就是
+<code>+XARn[m]</code>，别问为什么</p>
+<p>上述方法2/3/4的第二行都属于 <code>MOV loc16 #16bit</code>
+的形式</p></li>
+<li><p><strong>寄存器直接寻址</strong>（说实话我看不太懂）</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">MOVL XAR2, @ACC        <span class="comment">// MOV loc16, AX</span></span><br><span class="line">MOVL ACC, @XAR2        <span class="comment">// MOV AX, loc16</span></span><br></pre></td></tr></table></figure>
+<p>之前讲过，ACC(32)=AH(16)+AL(16)，这里用AX指代AH或AL中的任意一个。AX是汇编里面比较特殊的一个量，其他的东西建议别管这个寻址方式</p></li>
+<li><p><strong>空间立即寻址</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">MOV *(<span class="number">0</span>:<span class="number">16b</span>it),loc16     <span class="comment">// 这个是通式</span></span><br><span class="line">MOV *(<span class="number">0</span>:<span class="number">0x70D4</span>), @AX     <span class="comment">// 这个是例子</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>以下是两种被<strong>禁止</strong>的寻址写法：
+<ul>
+<li><code>MOV loc16 loc16</code>，代表为：<code>MOV DP XAR</code>，但是
+<code>ACC(AH/AL)</code> 除外</li>
+<li><code>MOC *(0:0x16bit), #16bit</code>，代表为：<code>MOV *(0:0x70D4), 0xFF00</code></li>
+</ul></li>
+</ul>
+<h3 id="寻址例程">寻址例程</h3>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Gpfmux=0xF0FF (Gpfmux地址为0x70D4) </span></span><br><span class="line"><span class="comment">/* Code 1 */</span></span><br><span class="line">MOVW DP,#<span class="number">0x70D0</span> &gt;&gt; <span class="number">6</span></span><br><span class="line">MOV @<span class="number">4</span>, #<span class="number">0xF0FF</span></span><br><span class="line"><span class="comment">/* Code 2 */</span></span><br><span class="line">MOV AL,#<span class="number">0xF0FF</span> </span><br><span class="line">MOV *(<span class="number">0</span>:<span class="number">0x70D4</span>),@AL  <span class="comment">// 利用中间变量AL进行空间立即寻址</span></span><br><span class="line"><span class="comment">/* Code 3 */</span></span><br><span class="line">MOVL XAR2,#<span class="number">0x70D0</span> </span><br><span class="line">MOV *+XAR2[<span class="number">4</span>],#<span class="number">0xF0FF</span></span><br></pre></td></tr></table></figure>
+<h2 id="汇编语言">汇编语言</h2>
+<h3 id="常用汇编语言">常用汇编语言</h3>
+<ol type="1">
+<li><p><strong>传送指令</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">MOV / MOVL (<span class="number">32b</span>it) / MOVW (专用于DP) / MOVU (高位<span class="number">0</span>扩展)</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>简单指令集</strong>（AX=AH或AL）</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 加法 */</span> ADD AX, loc16  <span class="comment">// AX = AX + loc16</span></span><br><span class="line"><span class="comment">/* 减法 */</span> SUB AX, loc16  <span class="comment">// AX = AX - loc16</span></span><br><span class="line"><span class="comment">/* 比较 */</span> CMP AX, loc16  <span class="comment">// 根据比较结果置位，但不会改动数值</span></span><br><span class="line">    				   <span class="comment">// 如置零位ZF，符号位SF</span></span><br><span class="line"><span class="comment">/* 与 */</span>  AND AX, loc16  <span class="comment">// AX = AX &amp; loc16</span></span><br><span class="line"><span class="comment">/* 或 */</span>  OR AX, loc16   <span class="comment">// AX = AX | loc16</span></span><br><span class="line"><span class="comment">/* 取反 */</span> NEG AX, loc16  <span class="comment">// AX = -AX</span></span><br></pre></td></tr></table></figure>
+<p>上面的指令后面多一个B表示短指令，如<code>ANDB AX #8bit</code></p></li>
+<li><p><strong>移位指令</strong>（可以代替以2为倍数的乘除法）</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">LSL AX, #<span class="number">16b</span>it  <span class="comment">// 逻辑左移(unsigned)</span></span><br><span class="line">LSR AX, #<span class="number">16b</span>it  <span class="comment">// 逻辑右移(unsigned)</span></span><br><span class="line">ASR AX, #<span class="number">16b</span>it  <span class="comment">// 算数右移(signed)，保留符号位</span></span><br><span class="line">    		  <span class="comment">// 例: LSR AL, #4 表示 AL = AL / 16</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>重复执行</strong>（常用于除法，要背除法的代码段）</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">RPT #N<span class="number">-1</span>    <span class="comment">// 重复下一行N次</span></span><br><span class="line">|| ....     <span class="comment">// 只能写简单的代码，比如加、减等</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>乘法</strong>（写法很多，只介绍其中一种）</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">MPYB P,T,#<span class="number">8b</span>it   <span class="comment">// P (signed 32) = T (signed 16) * 8bit (unsigned 8)</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>条件减法</strong>（常用于除法，要背除法的代码段）</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">SUBCU ACC, loc16   <span class="comment">// ACC = ACC 条件减 loc16，具体原理不想写了</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>条件指令</strong>（好多啊，这咋记得住啊）</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">B CODE, LOGIC    <span class="comment">// B代表条件指令，SB短跳8bit，LB长跳22bit</span></span><br><span class="line">    			<span class="comment">// CODE是代码块的名称，可以理解为C或Py的函数</span></span><br><span class="line">    			<span class="comment">// LOGIC表示条件，满足跳转，不满足不跳</span></span><br></pre></td></tr></table></figure>
+<pre>
+条件列表：
+中文名    条件名             翻译              具体判断标准
+不等于     NEQ         Not Equal To             Z = 0
+等于       EQ            Equal To               Z = 1
+大于       GT          Greater Then         Z = 0 AND N = 0
+大于等于   GEQ     Greater Then Or Equal To      N = 0
+小于       LT           Less Then               N = 1
+小于等于   LEQ     Less Then Or Equal To     Z = 1 OR N = 1
+高于       HI             Higher            C = 1 AND Z = 0
+高于等于  HIS,C   Higher Or Same, Carry Set      C = 1
+低于     LO,NC      Lower, Carry Clear          C = 0
+低于等于   LOS         Lower Or Same         C = 0 OR Z = 1
+未溢出     NOV         No Overflow               V = 0
+溢出       OV            Overflow               V = 1
+我不到啊   NTC        Test Bit Not Set           TC = 0
+我不到啊   TC          Test Bit Set              TC = 1
+</pre></li>
+</ol>
+<h3 id="汇编代码块">汇编代码块</h3>
+<ol type="1">
+<li><p><strong>除法</strong>（需要记）</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 无符号数除法 */</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  Num ÷ Den = Quot ... Rem</span></span><br><span class="line"><span class="comment">  商: Quot = Num / Den</span></span><br><span class="line"><span class="comment">  余数: Rem = Num % Den</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">MOVU ACC, @Num    <span class="comment">// AH = 0, AL = Num,</span></span><br><span class="line">RPT #<span class="number">15</span>         <span class="comment">// 16bit, Repeat 15 times</span></span><br><span class="line">||SUBCU ACC, @Den  <span class="comment">// 条件减法</span></span><br><span class="line">MOV @Rem, AH     <span class="comment">// 余数存在高位AH，移到Rem里</span></span><br><span class="line">MOV @Quot, AL    <span class="comment">// 商存在低位AL，移到Quot里</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>代码块的调用</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 代码块的调用——类似于C与Py的函数 */</span></span><br><span class="line">TODO  <span class="comment">// PRE CODE </span></span><br><span class="line">LC NAME  <span class="comment">// 调用</span></span><br><span class="line">TODO  <span class="comment">// POST CODE</span></span><br><span class="line"></span><br><span class="line">NAME:</span><br><span class="line">  TODO  <span class="comment">// FUNCTION</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>考试的代码块要求</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 考试的代码块要求 */</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  1. 有标号，或者“函数名”</span></span><br><span class="line"><span class="comment">  2. 以LRET结束</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">/* 示例 */</span></span><br><span class="line">TEST:</span><br><span class="line">  TODO  <span class="comment">// Code Here</span></span><br><span class="line">  LRET</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="实例">实例</h3>
+]]></content>
+      <categories>
+        <category>课程</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>大三</tag>
+        <tag>电气</tag>
+        <tag>微机</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>控制理论整理</title>
     <url>/2023/12/05/%E6%8E%A7%E5%88%B6%E7%90%86%E8%AE%BA/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><ul>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="控制理论乙">控制理论（乙）</h1>
+<ul>
 <li>这门课在讲什么东西？
 <ul>
 <li>控制——将一个输入信号丢到控制系统（一个黑匣子）中，得到一个输出信号</li>
 <li>控制系统的性质、响应、稳定性，以及我们怎么去搭建控制系统</li>
 <li>是信号分析与处理的后续课程</li>
 </ul></li>
+<li>下面我将分四章来进行阐述：</li>
 </ul>
+<p>[toc]</p>
 <h2 id="系统的时域分析">系统的时域分析</h2>
 <h3 id="信号分析与处理基础">信号分析与处理基础</h3>
 <table>
@@ -84,7 +297,7 @@ class="math inline">\(\Delta_k\)</span>为去除第k条前向通道后的特征�
 P=\frac1{\Delta}\sum_kP_k\Delta_k
 \]</span></p>
 <h3 id="稳态误差">稳态误差</h3>
-<h4 id="基本原理">基本原理：</h4>
+<h4 id="基本原理">基本原理</h4>
 <ul>
 <li>默认单位闭环传递函数，即H(s)为1。否则其定义式有分歧。</li>
 </ul>
@@ -96,7 +309,7 @@ P=\frac1{\Delta}\sum_kP_k\Delta_k
 {1+G(s)H(s)}\,;\,e_{ss}=\text{lim}_{s\rightarrow0}\frac{sR(s)}
 {1+G(s)H(s)}\end{gather*}
 \]</span></p>
-<h4 id="公式">公式：</h4>
+<h4 id="公式">公式</h4>
 <table>
 <colgroup>
 <col style="width: 20%" />
@@ -171,17 +384,17 @@ class="math inline">\(\frac{Max-Final}{Final}\times100\%\)</span></td>
 </tr>
 <tr class="even">
 <td>一阶</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>/</td>
+<td>/</td>
+<td>/</td>
+<td>/</td>
 <td>3T或4T</td>
 </tr>
 <tr class="odd">
 <td>二阶</td>
 <td><span
 class="math inline">\(\text{exp}(-\frac{\xi\pi}{\sqrt{1-\xi^2}})\)</span></td>
-<td></td>
+<td>/</td>
 <td><span
 class="math inline">\(\frac{\pi-\text{atan}\frac{\sqrt{1-\xi^2}}{\xi}}{\omega_n\sqrt{1-\xi^2}}=\frac{\pi-\beta}{\omega_d}\)</span></td>
 <td><span class="math inline">\(\frac{\pi}{\omega_d}\)</span></td>
@@ -203,11 +416,11 @@ j\omega_d\end{gather*}
 </ul>
 <table>
 <colgroup>
-<col style="width: 2%" />
-<col style="width: 21%" />
-<col style="width: 13%" />
-<col style="width: 34%" />
-<col style="width: 26%" />
+<col style="width: 3%" />
+<col style="width: 18%" />
+<col style="width: 16%" />
+<col style="width: 27%" />
+<col style="width: 33%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -221,10 +434,16 @@ j\omega_d\end{gather*}
 <tbody>
 <tr class="odd">
 <td>含义</td>
-<td>阻尼比（<span
-class="math inline">\(\xi=\text{cos}\theta\)</span>）</td>
+<td>阻尼比</td>
 <td>无阻尼自然振荡角频率</td>
-<td>阻尼自然振荡频率：<span
+<td>阻尼自然振荡频率</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>公式</td>
+<td><span class="math inline">\(\xi=\text{cos}\theta\)</span></td>
+<td></td>
+<td><span
 class="math inline">\(\omega_d=\omega_n\sqrt{1-\xi^2}\)</span></td>
 <td><span
 class="math inline">\(\text{atan}\frac{\sqrt{1-\xi^2}}{\xi}\)</span></td>
@@ -329,34 +548,6 @@ class="math inline">\(\omega=1\)</span>，高度<span
 class="math inline">\(20\text{lg}K_a\)</span>；<strong>延长线交点<span
 class="math inline">\((\sqrt{K_a},0)\)</span></strong></li>
 </ol>
-<h3 id="时域与频域的对应关系">时域与频域的对应关系</h3>
-<ul>
-<li>开环系统中，相位裕量<span
-class="math inline">\(\gamma\)</span>与阻尼比<span
-class="math inline">\(\xi\)</span>同向增长，得：
-<ul>
-<li>相位裕量<span class="math inline">\(\gamma\)</span>与最大超调量<span
-class="math inline">\(\sigma_p\)</span>、时间量<span
-class="math inline">\(t_r/t_s\)</span>成反比</li>
-<li>剪切频率<span class="math inline">\(\omega_c\)</span>与时间量<span
-class="math inline">\(t_r/t_s\)</span>成反比（<span
-class="math inline">\(\omega_c\)</span>大—&gt;复现输入的速度更快）</li>
-</ul></li>
-<li>闭环系统中：
-<ul>
-<li>谐振峰值<span
-class="math inline">\(M_r=\frac{M_{max}}{M(0)}\)</span>与最大超调量<span
-class="math inline">\(\sigma_p\)</span>成正比，与时间量<span
-class="math inline">\(t_r/t_s\)</span>成反比</li>
-</ul></li>
-<li>补充（记中频段宽度为<span
-class="math inline">\(h=\frac{\omega_3}{\omega_2}\)</span>）
-<ul>
-<li><span
-class="math inline">\(M_r=\frac{h+1}{h-1}=\frac1{\text{sin}\gamma
-}\)</span></li>
-</ul></li>
-</ul>
 <h2 id="系统稳定的四种判定">系统稳定的四种判定</h2>
 <p>劳斯判据、根轨迹、奈氏图、伯德图+余量</p>
 <p>下面用一道题来演示一下（求该<strong>闭环系统</strong>稳定的时候K的取值范围）：<br />
@@ -498,6 +689,242 @@ class="math inline">\(\varphi(\omega)\)</span>使之等于0</li>
 <li>md这题有点复杂我不太会算啊</li>
 </ul></li>
 </ul>
+<h2 id="控制系统的设计">控制系统的设计</h2>
+<h3 id="系统的设计指标">系统的设计指标</h3>
+<p>​
+事实上，这一小节的内容贯穿整个控制理论的课程，个人认为也是整个控制理论最重要的内容。</p>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 45%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>设计指标</th>
+<th>时域指标</th>
+<th>频域指标</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>静态性能</strong></td>
+<td>静态误差：<span class="math inline">\(e_{ss}\)</span></td>
+<td>静态误差系数：<span class="math inline">\(K_{p,v,a}\)</span></td>
+</tr>
+<tr class="even">
+<td><strong>动态性能</strong></td>
+<td>时间：<span
+class="math inline">\(t_p~,~t_s\propto\frac1{\omega_c}\)</span><br />超调量：<span
+class="math inline">\(\sigma_p\propto\frac1{\gamma}\)</span></td>
+<td>剪切频率：<span
+class="math inline">\(\omega_c\)</span><br />中频宽度：<span
+class="math inline">\(h=\frac{\omega_3}{\omega_2}\)</span></td>
+</tr>
+<tr class="odd">
+<td><strong>稳定性</strong></td>
+<td></td>
+<td>相位裕量：$<span class="math inline">\(&lt;br
+/&gt;幅值裕量：\)</span>K_g$</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>个人的理解是，“稳定性”是独立于静态和动态性能的一个指标，是分析整个系统的前提（倘若不稳定，就没有后续分析的必要了）。如果硬要说是哪方面的话，还是感觉跟静态性能更接近一点（可以理解为如果系统不稳定，那么系统的静态性能为无穷差）。</p></li>
+<li><p>闭环系统中：</p>
+<ul>
+<li>谐振峰值：<span
+class="math inline">\(M_r=\frac{M_{max}}{M(0)}\)</span>，与最大超调量<span
+class="math inline">\(\sigma_p\)</span>成正比，与时间量<span
+class="math inline">\(t_r/t_s\)</span>成反比</li>
+<li>补充：<span
+class="math inline">\(M_r=\frac{h+1}{h-1}=\frac1{\text{sin}\gamma
+}\)</span></li>
+</ul></li>
+</ul>
+<h3 id="校正装置与频率法设计">校正装置与频率法设计</h3>
+<h4 id="超前校正与滞后校正">超前校正与滞后校正</h4>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 45%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>超前校正</th>
+<th>滞后校正</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>表达式</strong></td>
+<td><span class="math inline">\(\frac{1+Ts}{1+\alpha
+Ts}=\frac1{\alpha}\frac{s+\frac1T}{s+\frac1{\alpha T}}\)</span></td>
+<td><span class="math inline">\(\frac{1+Ts}{1+\beta
+Ts}=\frac1{\beta}\frac{s+\frac1T}{s+\frac1{\beta T}}\)</span></td>
+</tr>
+<tr class="even">
+<td><strong>稳态性能</strong></td>
+<td>不会改善系统的静态（稳态）性能</td>
+<td>改变开环增益，提升稳态性能</td>
+</tr>
+<tr class="odd">
+<td><strong>动态性能</strong></td>
+<td>通过增斜率，增相位裕量提升动态性能</td>
+<td>将斜率使剪切频率前移，降低动态性能</td>
+</tr>
+<tr class="even">
+<td><strong>原理</strong></td>
+<td>1. 用中间<strong>+20dB/dec</strong>提穿越频率处的斜率<br />2.
+用超前的相角提相位裕量，使<span
+class="math inline">\(\omega_g\)</span>大幅后移</td>
+<td>1. 新剪切频率<span
+class="math inline">\(\omega_c&#39;\)</span>处，用<strong>-20dB</strong>降幅值<br />2.
+使剪切频率<span
+class="math inline">\(\omega_c\)</span>大幅前移以提高相位裕量</td>
+</tr>
+<tr class="odd">
+<td><strong>原则</strong></td>
+<td><strong>剪切频率<span
+class="math inline">\(\omega_c\)</span>近似不变，选在最大超前角的位置<span
+class="math inline">\(\omega_m\)</span></strong></td>
+<td><strong>在新剪切频率<span
+class="math inline">\(\omega_c&#39;\)</span>处相角不变，幅值降20dB</strong></td>
+</tr>
+<tr class="even">
+<td><strong>步骤</strong></td>
+<td>1. 求所需补偿的最大超前角 <span
+class="math inline">\(\phi_m=\gamma&#39;-\gamma+\varepsilon\)</span><br />2.
+计算参数 <span
+class="math inline">\(\text{sin}\phi_m=\frac{1-\alpha}{1+\alpha}\rightarrow\alpha=\frac{1-\text{sin}\phi_m}{1+\text{sin}\phi_m}\)</span><br />3.
+由<strong>原则</strong>：<span
+class="math inline">\(20\text{lg}|G_0(j\omega_m)|=10\text{lg}\frac1{\alpha}\)</span><br />4.
+由3解得<span class="math inline">\(\omega_m\)</span>并带入 <span
+class="math inline">\(\omega_m=\frac1{\sqrt{\alpha}T}\)</span></td>
+<td>1. 由<strong>原则</strong>：<span
+class="math inline">\(\varphi(\omega_c&#39;)=\gamma+\varepsilon-180°\)</span><br />2.
+由1解得<span class="math inline">\(\omega_c&#39;\)</span>并带入 <span
+class="math inline">\(20\text{lg}|G(j\omega_c&#39;)|=20\text{lg}\beta\)</span><br />3.
+取 <span class="math inline">\(\beta =
+\text{max}{10,\beta}\)</span><br />4. 取 <span
+class="math inline">\(\omega_2=\frac1T=\frac{\omega_c}{5-10}\)</span></td>
+</tr>
+</tbody>
+</table>
+<h4 id="滞后-超前校正">滞后-超前校正</h4>
+<p><span class="math display">\[
+G_c(s)=\frac{(T_1s+1)(T_2s+1)}{(\frac{T_1}{\beta}s+1)(\beta
+T_2s+1)}~;~\beta&gt;1~,~T_2&gt;T_1
+\]</span></p>
+<p><strong>原则：</strong>（实际上就是一个PID控制器）</p>
+<ol type="1">
+<li>用超前部分来增大系统的相位裕量，改善动态性能</li>
+<li>用滞后部分来改善系统的静态性能</li>
+<li>相位的滞后会带来不利影响，因此很显然滞后校正的转折频率要小于超前校正</li>
+</ol>
+<p><strong>步骤：</strong></p>
+<ol type="1">
+<li><p>求新的剪切频率 <span class="math inline">\(\omega_c&#39;\)</span>
+如下：</p>
+<ol type="1">
+<li>若题目要求快速性，则用题目给的 <span
+class="math inline">\(\omega_c&#39;\)</span></li>
+<li>若题目没有对此做出要求，解方程 <span
+class="math inline">\(\varphi(\omega_c&#39;)=-180°\)</span>
+，作为新的剪切频率</li>
+</ol></li>
+<li><p><strong>滞后校正</strong></p>
+<ol type="1">
+<li>见“原则3”：取 <span
+class="math inline">\(\omega_2=\frac1T=\frac{\omega_c&#39;}{10}\)</span></li>
+<li>在工程上一般选取 <span class="math inline">\(\beta=10\)</span>
+（见“滞后校正-步骤3”）</li>
+</ol></li>
+<li><p><strong>超前校正</strong></p>
+<ol type="1">
+<li><p>考虑剪切频率处满足 <span
+class="math inline">\(20\text{lg}|G(j\omega_c&#39;)|=0\)</span>，故计算
+<span class="math inline">\(20\text{lg}|G_c(j\omega_c&#39;)|
+=-20\text{lg}|G_0(j\omega_c)|=-K\)</span></p></li>
+<li><p>由下图：<span class="math inline">\(20\times
+(\text{lg}\omega_c&#39;-\text{lg}\omega_1)=20-K\)</span></p>
+<p><img src="\image\控制理论08.jpg" /></p></li>
+<li><p>注：由于已经取了 <span
+class="math inline">\(\beta=10\)</span>，因此两个转折频率满足十倍频的关系</p></li>
+</ol></li>
+<li><p>校验：若不满足，取 <span
+class="math inline">\(\omega_c&#39;&#39;&lt;\omega_c&#39;\)</span>，使相位裕量进一步增大</p></li>
+</ol>
+<h4 id="校正装置的选取">校正装置的选取</h4>
+<ol type="1">
+<li>倘若系统稳定，稳态性能已经满足要求，相位裕量不够，那么就用超前校正</li>
+<li>倘若系统不稳定，如果用超前校正可能会使最大超前角<span
+class="math inline">\(\phi_m\)</span>接近甚至大于90°，这是不可实现的，因此不稳定系统需要使用滞后校正</li>
+<li>有时使用单纯的滞后校正会使系统剪切频率 <span
+class="math inline">\(\omega_c&#39;\)</span>
+过小，快速性不满足要求，这个时候上滞后-超前校正</li>
+</ol>
+<h3 id="根轨迹法设计">根轨迹法设计</h3>
+<h4 id="超前校正">超前校正</h4>
+<p>​ 不管是用哪一种方法，都遵循下面这一张图和一条最基本的原则公式：</p>
+<p><img src="\image\控制理论09.jpg" /></p>
+<p>​ 在上图中，<span
+class="math inline">\(s_d\)</span>是我们希望校正到的闭环极点，闭环极点满足<strong>相角-180°，幅值为1</strong>的条件。各点与<span
+class="math inline">\(s_d\)</span>连线同正<span
+class="math inline">\(x\)</span>轴的夹角之和就是相角，因此图中的<span
+class="math inline">\(\phi\)</span>也表示校正系统提供给原系统的补偿角。<strong>在任何一种情况下，都应该先计算补偿角。</strong>因此有：<br />
+<span class="math display">\[
+\phi+\angle G_0(s_d)=-\pi
+\]</span></p>
+<table>
+<colgroup>
+<col style="width: 4%" />
+<col style="width: 31%" />
+<col style="width: 31%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>零极点抵消法</th>
+<th>比值<span class="math inline">\(\alpha\)</span>最大法</th>
+<th>幅值确定法</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>条件</strong></td>
+<td>所希望的闭环主导极点<span
+class="math inline">\(s_d\)</span>的正下方实轴上恰好有一开环极点</td>
+<td>最方便，当其余两个条件都不满足时用这个</td>
+<td>当题目对稳态误差系数<span
+class="math inline">\(K_{p,v,a}\)</span>有要求时用幅值确定法</td>
+</tr>
+<tr class="even">
+<td><strong>例题</strong></td>
+<td>p173 例6-6</td>
+<td>p172 例6-5</td>
+<td>p175 例6-7</td>
+</tr>
+<tr class="odd">
+<td><strong>步骤</strong></td>
+<td>取 <span class="math inline">\(\frac1T\approx p_i\)</span>，<span
+class="math inline">\(p_i\)</span>为该正下方极点，如<span
+class="math inline">\(p_i=1\)</span>可取<span
+class="math inline">\(\frac1T=1.1,1.2,0.9\)</span>等</td>
+<td>1. 套公式：<span
+class="math inline">\(\gamma=\frac12(\pi-\theta-\phi)\)</span><br />2.
+需要额外计算闭环增益，以满足根轨迹的幅值条件 <span
+class="math inline">\(|G(s_d)=1|\)</span></td>
+<td>1. 记：<span
+class="math inline">\(u=\frac{|s_d^{\nu}|\sum|s_d+p_i|}{\sum|s_d+z_i|}\)</span><br />2.
+计算：<span class="math inline">\(\text{cot}
+\gamma=\frac{u/k-\text{cos}\phi}{\text{sin}\phi}\)</span></td>
+</tr>
+</tbody>
+</table>
 ]]></content>
       <categories>
         <category>课程</category>
