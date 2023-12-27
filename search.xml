@@ -27,8 +27,8 @@
 ]]></content>
   </entry>
   <entry>
-    <title>微机原理（DSP）补充</title>
-    <url>/2023/12/27/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%EF%BC%88DSP%EF%BC%89%E8%A1%A5%E5%85%85/</url>
+    <title>微机原理课本外知识点补充</title>
+    <url>/2023/12/27/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E8%AF%BE%E6%9C%AC%E5%A4%96%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="微机原理补充">微机原理补充</h1>
 <h2 id="cpu模块">CPU模块</h2>
 <h3 id="cpu寄存器">CPU寄存器</h3>
@@ -231,8 +231,8 @@ CPU寄存器
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>大三</tag>
         <tag>电气</tag>
+        <tag>大三</tag>
         <tag>微机</tag>
       </tags>
   </entry>
@@ -931,8 +931,8 @@ class="math inline">\(u=\frac{|s_d^{\nu}|\sum|s_d+p_i|}{\sum|s_d+z_i|}\)</span><
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>大三</tag>
         <tag>电气</tag>
+        <tag>大三</tag>
       </tags>
   </entry>
   <entry>
@@ -1609,8 +1609,8 @@ Q_{i}}\frac1{1-\frac{\partial Q_L}{\partial Q_{i}}}=\lambda
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>大三</tag>
         <tag>电气</tag>
+        <tag>大三</tag>
       </tags>
   </entry>
   <entry>
@@ -2885,8 +2885,8 @@ Tm大小不变，机械特性与原点对称后变软
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>大三</tag>
         <tag>电气</tag>
+        <tag>大三</tag>
       </tags>
   </entry>
   <entry>
@@ -4489,8 +4489,8 @@ SEQx：中断标志位，1表示有中断，只读</td>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>大三</tag>
         <tag>电气</tag>
+        <tag>大三</tag>
         <tag>微机</tag>
       </tags>
   </entry>
