@@ -30,6 +30,18 @@
     <title>微机原理课本外知识点补充</title>
     <url>/2023/12/27/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E8%AF%BE%E6%9C%AC%E5%A4%96%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="微机原理补充">微机原理补充</h1>
+<ul>
+<li><strong>整理了PDF版本，内容跟下面差别不大，好处是可以打印而且不会出现渲染问题</strong>
+<ul>
+<li><a href="\myfile\微机原理补充.pdf" target="_blank">微机原理补充PDF版</a></li>
+</ul></li>
+<li>在这里推一个98帖子：
+<ul>
+<li>【E电园】徐习东老师DSP_电子笔记及一些资料分享
+https://www.cc98.org/topic/4751962
+复制本链接，打开【CC98】微信小程序，直接查看本帖！</li>
+</ul></li>
+</ul>
 <h2 id="cpu模块">CPU模块</h2>
 <h3 id="cpu寄存器">CPU寄存器</h3>
 <p>​
@@ -148,7 +160,7 @@ CPU寄存器
 </ol>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line">MOVL XARn, #<span class="number">22b</span>it</span><br><span class="line">MOVW DP, #<span class="number">16b</span>it</span><br><span class="line">MOVW DP, #<span class="number">16b</span>it &gt;&gt; <span class="number">6</span></span><br><span class="line">MOV SP, #<span class="number">16b</span>it</span><br><span class="line">MOV ACC, #<span class="number">16b</span>it</span><br></pre></td></tr></table></figure></li>
 <li><p><strong>偏移量直接寻址</strong>（DP的使用，好用的）</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">MOVW DP, #<span class="number">0x70D0</span> &gt;&gt; <span class="number">6</span>	   <span class="comment">// 把70D4“赋值”给DP</span></span><br><span class="line">MOV @<span class="number">4</span>, #<span class="number">16b</span>it          <span class="comment">// 偏移量=4，把某个数16bit“赋值”给70D4单元</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">MOVW DP, #<span class="number">0x70D0</span> &gt;&gt; <span class="number">6</span>	   <span class="comment">// 把70D0“赋值”给DP</span></span><br><span class="line">MOV @<span class="number">4</span>, #<span class="number">16b</span>it          <span class="comment">// 偏移量=4，把某个数16bit“赋值”给70D4单元</span></span><br></pre></td></tr></table></figure>
 <p>因为DP寻址方式是用16位DP“并上”6位偏移量来实现的，因此为了避免繁杂的计算，在给DP输入时要把
 <code>0x70D4</code>
 右移6位，直接移到偏移量的位置上，就可以把“并”换成简单的加法。</p></li>
@@ -157,7 +169,7 @@ CPU寄存器
 <p>SP就是只能用负的偏移量，也就是
 <code>-SP[n]</code>，别问为什么</p></li>
 <li><p><strong>寄存器间接寻址</strong>（AR/XAR的使用）</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">MOV XAR6, #<span class="number">0x70D0</span>       <span class="comment">// 把70D4“赋值”给XAR6</span></span><br><span class="line">MOV *+XAR6[<span class="number">4</span>], #<span class="number">16b</span>it    <span class="comment">// 偏移量=4，把某个数16bit“赋值”给70D4单元</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">MOV XAR6, #<span class="number">0x70D0</span>       <span class="comment">// 把70D0“赋值”给XAR6</span></span><br><span class="line">MOV *+XAR6[<span class="number">4</span>], #<span class="number">16b</span>it    <span class="comment">// 偏移量=4，把某个数16bit“赋值”给70D4单元</span></span><br></pre></td></tr></table></figure>
 <p>AR/XAR就是只能用正的偏移量，也就是
 <code>+XARn[m]</code>，别问为什么</p>
 <p>上述方法2/3/4的第二行都属于 <code>MOV loc16 #16bit</code>
@@ -182,7 +194,7 @@ CPU寄存器
 <h3 id="常用汇编语言">常用汇编语言</h3>
 <ol type="1">
 <li><p><strong>传送指令</strong></p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">MOV / MOVL (<span class="number">32b</span>it) / MOVW (专用于DP) / MOVU (高位<span class="number">0</span>扩展)</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">MOV / MOVL (<span class="number">32b</span>it) / MOVW (专用于DP) / MOVU (高位<span class="number">0</span>扩展，常用于ACC)</span><br></pre></td></tr></table></figure></li>
 <li><p><strong>简单指令集</strong>（AX=AH或AL）</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 加法 */</span> ADD AX, loc16  <span class="comment">// AX = AX + loc16</span></span><br><span class="line"><span class="comment">/* 减法 */</span> SUB AX, loc16  <span class="comment">// AX = AX - loc16</span></span><br><span class="line"><span class="comment">/* 比较 */</span> CMP AX, loc16  <span class="comment">// 根据比较结果置位，但不会改动数值</span></span><br><span class="line">    				   <span class="comment">// 如置零位ZF，符号位SF</span></span><br><span class="line"><span class="comment">/* 与 */</span>  AND AX, loc16  <span class="comment">// AX = AX &amp; loc16</span></span><br><span class="line"><span class="comment">/* 或 */</span>  OR AX, loc16   <span class="comment">// AX = AX | loc16</span></span><br><span class="line"><span class="comment">/* 取反 */</span> NEG AX, loc16  <span class="comment">// AX = -AX</span></span><br></pre></td></tr></table></figure>
 <p>上面的指令后面多一个B表示短指令，如<code>ANDB AX #8bit</code></p></li>
@@ -191,7 +203,7 @@ CPU寄存器
 <li><p><strong>重复执行</strong>（常用于除法，要背除法的代码段）</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line">RPT #N<span class="number">-1</span>    <span class="comment">// 重复下一行N次</span></span><br><span class="line">|| ....     <span class="comment">// 只能写简单的代码，比如加、减等</span></span><br></pre></td></tr></table></figure></li>
 <li><p><strong>乘法</strong>（写法很多，只介绍其中一种）</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">MPYB P,T,#<span class="number">8b</span>it   <span class="comment">// P (signed 32) = T (signed 16) * 8bit (unsigned 8)</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">MPYB P,T,#<span class="number">8b</span>it   <span class="comment">// P (signed 32) = T (signed 16) * 8bit (unsigned 8)</span></span><br><span class="line">            <span class="comment">// P (32) = PH (16) + PL (16)</span></span><br></pre></td></tr></table></figure></li>
 <li><p><strong>条件减法</strong>（常用于除法，要背除法的代码段）</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line">SUBCU ACC, loc16   <span class="comment">// ACC = ACC 条件减 loc16，具体原理不想写了</span></span><br></pre></td></tr></table></figure></li>
 <li><p><strong>条件指令</strong>（好多啊，这咋记得住啊）</p>
@@ -214,25 +226,33 @@ CPU寄存器
 我不到啊   NTC        Test Bit Not Set           TC = 0
 我不到啊   TC          Test Bit Set              TC = 1
 </pre></li>
+<li><p><strong>自增</strong>（i++，这个不用背）</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">INC loc16  <span class="comment">// 如 INC @2</span></span><br></pre></td></tr></table></figure></li>
 </ol>
 <h3 id="汇编代码块">汇编代码块</h3>
 <ol type="1">
 <li><p><strong>除法</strong>（需要记）</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 无符号数除法 */</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  Num ÷ Den = Quot ... Rem</span></span><br><span class="line"><span class="comment">  商: Quot = Num / Den</span></span><br><span class="line"><span class="comment">  余数: Rem = Num % Den</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">MOVU ACC, @Num    <span class="comment">// AH = 0, AL = Num,</span></span><br><span class="line">RPT #<span class="number">15</span>         <span class="comment">// 16bit, Repeat 15 times</span></span><br><span class="line">||SUBCU ACC, @Den  <span class="comment">// 条件减法</span></span><br><span class="line">MOV @Rem, AH     <span class="comment">// 余数存在高位AH，移到Rem里</span></span><br><span class="line">MOV @Quot, AL    <span class="comment">// 商存在低位AL，移到Quot里</span></span><br></pre></td></tr></table></figure></li>
 <li><p><strong>代码块的调用</strong></p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 代码块的调用——类似于C与Py的函数 */</span></span><br><span class="line">TODO  <span class="comment">// PRE CODE </span></span><br><span class="line">LC NAME  <span class="comment">// 调用</span></span><br><span class="line">TODO  <span class="comment">// POST CODE</span></span><br><span class="line"></span><br><span class="line">NAME:</span><br><span class="line">  TODO  <span class="comment">// FUNCTION</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 代码块的调用——类似于C与Py的函数 */</span></span><br><span class="line">TODO  <span class="comment">// PRE CODE </span></span><br><span class="line">LC NAME  <span class="comment">// 调用, LC = CALL</span></span><br><span class="line">TODO  <span class="comment">// POST CODE</span></span><br><span class="line"></span><br><span class="line">NAME:</span><br><span class="line">  TODO  <span class="comment">// FUNCTION</span></span><br></pre></td></tr></table></figure></li>
 <li><p><strong>考试的代码块要求</strong></p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 考试的代码块要求 */</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  1. 有标号，或者“函数名”</span></span><br><span class="line"><span class="comment">  2. 以LRET结束</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">/* 示例 */</span></span><br><span class="line">TEST:</span><br><span class="line">  TODO  <span class="comment">// Code Here</span></span><br><span class="line">  LRET</span><br></pre></td></tr></table></figure></li>
 </ol>
-<h3 id="实例">实例</h3>
+<h3 id="汇编实例">汇编实例</h3>
+<p><strong>例1</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  将9000H单元中的16进制数(&lt;99)转为8421BCD码存入9002H单元中</span></span><br><span class="line"><span class="comment">  如：51H = 81 -&gt; 81H</span></span><br><span class="line"><span class="comment">  实现方法：51H/10 = 8...1 -&gt; 8*16+1 = 81</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">  MOVW DP, #<span class="number">0x9000</span> &gt;&gt; <span class="number">6</span></span><br><span class="line">  MOVU ACC, @<span class="number">0</span></span><br><span class="line">  LC HEX2BCD</span><br><span class="line">  MOV @<span class="number">2</span>, AL</span><br><span class="line">  </span><br><span class="line">HEX2BCD:</span><br><span class="line">  MOV T, #<span class="number">10</span></span><br><span class="line">  RPT #<span class="number">15</span></span><br><span class="line">  ||SUBCU ACC, @T  <span class="comment">// 除法: 高位AH=余数, 低位AL=商</span></span><br><span class="line">  LSL AL, #<span class="number">4</span>    <span class="comment">// AL = AL(3..0) * 16</span></span><br><span class="line">  ADD AL, @AH    <span class="comment">// AL = AL + AH</span></span><br><span class="line">  LRET</span><br></pre></td></tr></table></figure>
+<p><strong>例2</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  将9004H单元中的8421BCD码转为16进制数存入9006H单元</span></span><br><span class="line"><span class="comment">  如：56H -&gt; 56 = 38H</span></span><br><span class="line"><span class="comment">  实现方法：56H -&gt; 5*10+6 = 56 = 38H</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">BCD2HEX:</span><br><span class="line">  MOVW DP, #<span class="number">0x9000</span> &gt;&gt; <span class="number">6</span></span><br><span class="line">  MOVU ACC, @<span class="number">4</span>  <span class="comment">// ACC = 0 0 | 5 6</span></span><br><span class="line">  MOV AH, @AL  <span class="comment">// ACC = 5 6 | 5 6</span></span><br><span class="line">  ASR AH, #<span class="number">4</span>  <span class="comment">// AH = 0 5</span></span><br><span class="line">  AND AL, #<span class="number">0x0F</span>  <span class="comment">// AL = 0 6</span></span><br><span class="line">  MOV T, @AH</span><br><span class="line">  MPYB P,T,#<span class="number">10</span>  <span class="comment">// P = AH * 10</span></span><br><span class="line">  MOV AH, @PL  <span class="comment">// AH = 50</span></span><br><span class="line">  ADD AH, @AL  <span class="comment">// AH = 50 + 6</span></span><br><span class="line">  MOV @<span class="number">6</span>, AH</span><br><span class="line">  LRET</span><br></pre></td></tr></table></figure>
+<p><strong>例3</strong>（这个太难了考试不会考的）</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  数组求和，求给定数组前10个元素之和，C代码如下：</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">int</span> k = <span class="number">0</span>,i;</span><br><span class="line"><span class="type">int</span> m[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++) k += m[i];</span><br><span class="line"><span class="comment">/* 下面是汇编语言写法 */</span></span><br><span class="line"><span class="comment">/* int k = 0,i; */</span> </span><br><span class="line">  MOVW DP, #<span class="number">0x3F9000</span> &gt;&gt; <span class="number">6</span>  <span class="comment">// 设i为@0, k为@1</span></span><br><span class="line">  MOV @<span class="number">1</span>, #<span class="number">0</span>  <span class="comment">// k = 0</span></span><br><span class="line"><span class="comment">/* int m[10] */</span></span><br><span class="line">  MOV XAR4, #<span class="number">0x3F9040</span>  <span class="comment">// 设为数组初始地址</span></span><br><span class="line"><span class="comment">/* for(i=0;i&lt;10;i++) k += m[i]; */</span></span><br><span class="line">  MOV @<span class="number">0</span>, #<span class="number">0</span>  <span class="comment">// i = 0</span></span><br><span class="line">  MOV AL, @<span class="number">0</span></span><br><span class="line">L1:</span><br><span class="line">  MOV ACC, @<span class="number">0</span></span><br><span class="line">  ADDL @XAR4, ACC  <span class="comment">// XAR4 = &amp;m[i]</span></span><br><span class="line">  MOV AL, *+XAR4[<span class="number">0</span>]  <span class="comment">// AL = m[i]</span></span><br><span class="line">  ADD @<span class="number">1</span>, AL  <span class="comment">// k = k + m[i]</span></span><br><span class="line">  </span><br><span class="line">  INC @<span class="number">0</span>  <span class="comment">// i++</span></span><br><span class="line">  MOV AL, @<span class="number">0</span>  <span class="comment">// AL = i</span></span><br><span class="line">  CMPB AL, #<span class="number">10</span></span><br><span class="line">  SB L1, LT  <span class="comment">// LT = Less Than</span></span><br><span class="line">  LRET</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>课程</category>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
         <tag>微机</tag>
       </tags>
   </entry>
@@ -931,8 +951,8 @@ class="math inline">\(u=\frac{|s_d^{\nu}|\sum|s_d+p_i|}{\sum|s_d+z_i|}\)</span><
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
       </tags>
   </entry>
   <entry>
@@ -1609,8 +1629,8 @@ Q_{i}}\frac1{1-\frac{\partial Q_L}{\partial Q_{i}}}=\lambda
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
       </tags>
   </entry>
   <entry>
@@ -2885,8 +2905,8 @@ Tm大小不变，机械特性与原点对称后变软
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
       </tags>
   </entry>
   <entry>
@@ -4489,8 +4509,8 @@ SEQx：中断标志位，1表示有中断，只读</td>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
         <tag>微机</tag>
       </tags>
   </entry>
