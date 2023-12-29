@@ -1679,7 +1679,6 @@ Q_{i}}\frac1{1-\frac{\partial Q_L}{\partial Q_{i}}}=\lambda
 </tr>
 </tbody>
 </table>
-<h2 id="重要定律">重要定律</h2>
 <ol type="1">
 <li><p>全电流定律<br />
 <span class="math display">\[
@@ -1881,7 +1880,7 @@ E_a=\frac{NP}{60a}\cdot\phi \cdot n\\T=\frac{NP}{2\pi a}\cdot\phi\cdot
 I_a
 \end{gather*}
 \]</span></p>
-<h2 id="直流电机外部模型">直流电机外部模型</h2>
+<h2 id="直流电机模型与特性曲线">直流电机模型与特性曲线</h2>
 <table>
 <thead>
 <tr class="header">
@@ -1925,6 +1924,7 @@ I_a
 </table>
 <p>[注]：在并励发电机功率中也有<span
 class="math inline">\(p_{cuf}\)</span>的铜耗，这里没标注</p>
+<p><a id="ee">同步电机零功率因数负载特性</a></p>
 <table>
 <colgroup>
 <col style="width: 9%" />
@@ -2394,7 +2394,7 @@ class="math inline">\(k_{q\nu}=\frac{\text{sin}q\frac{\nu\alpha_1}2}{q\text{din}
 class="math inline">\(q\)</span>，一般取<span
 class="math inline">\(q\in[2,6]\)</span></p></li>
 </ol>
-<h1 id="异步电动机">异步电动机</h1>
+<h1 id="异步电机">异步电机</h1>
 <h2 id="工作原理">工作原理</h2>
 <p>异步电机的参数定义及公式如下：</p>
 <table>
@@ -2899,6 +2899,219 @@ Tm大小不变，机械特性与原点对称后变软
 </tr>
 </table>
 <p><img src="\image\电机学19.png" /></p>
+<h1 id="同步电机">同步电机</h1>
+<h2 id="结构与运行原理">结构与运行原理</h2>
+<h3 id="同步电机结构">同步电机结构</h3>
+<p>​
+同步电机与直流电机正好相反，定子是电枢，转子是励磁，具有较高且可调的功率因数，也可以发出无功。定转子二者产生的磁场相对静止（均以同步速<span
+class="math inline">\(n=\frac{60f}p\)</span>旋转），并且保证气隙合成磁场恒定（这也是机电能量转换的必要条件）。两磁场之间的相位差决定了电磁转矩<span
+class="math inline">\(T_{em}\)</span>的方向，由此决定的电机的运行状态：<br />
+<span class="math display">\[
+\begin{gather*}\begin{cases}定子：&amp;旋转磁场（电枢磁场）&amp;相位超前时~T_{em}&gt;0&amp;电动机\\转子：&amp;直流励磁（主极、机械磁场）&amp;相位超前时~T_{em}&lt;0&amp;发电机\\&amp;&amp;注：空载时~T_{em}=0&amp;调相机  \end{cases}\end{gather*}
+\]</span><br />
+​
+同步电机主要用作发电机（与异步电机主要用作电动机相反），其分类如下：<br />
+<span class="math display">\[
+\begin{gather*}\begin{cases}隐极式：&amp;汽轮发电机&amp;转子大小齿结构，约\frac23开槽&amp;适合高速旋转\\凸极式：&amp;水轮发电机&amp;有可辅助起动抑制震荡的阻尼绕组&amp;低转速
+\end{cases} \end{gather*}
+\]</span></p>
+<h3 id="电枢反应-1">电枢反应</h3>
+<p>​ 在空载运行时，同步电机的电动势就是<span
+class="math inline">\(E_0=-\omega \frac{\text d\phi}{\text dt}=\sqrt2\pi
+fNk\phi_0\)</span>，是一个大小仅与励磁电流<span
+class="math inline">\(I_f\)</span>挂钩、**相位滞后$_0$90°**的量，其特性曲线也就是磁化曲线。与直流电机类似，电枢反应的意思就是接入负载后，电枢产生的磁场影响空载磁场，将气隙合成磁场改变。</p>
+<p>​
+电枢反应仍然可以被分解为交轴和直轴。交轴分量产生电磁转矩，直轴分量引起去磁或增磁（一般而言是前者）。下方图片中几个物理量的关系是：<span
+class="math inline">\(F_{f1}\)</span>与<span
+class="math inline">\(\phi_0\)</span>基本近似为同向，<span
+class="math inline">\(E_0\)</span>落后90°，定子电流<span
+class="math inline">\(I\)</span>落后<span
+class="math inline">\(E_0\)</span>内功率因数角<span
+class="math inline">\(\psi\)</span>，定子磁场<span
+class="math inline">\(F_a\)</span>与<span
+class="math inline">\(I\)</span>同向。</p>
+<p><img src="\image\电机学24.png" /></p>
+<p>​ 为了下面两小节理解方便，这里定义四个角度：<br />
+<span class="math display">\[
+\begin{gather*}\begin{cases}内功率因数角：&amp;\psi=(\dot E_0\wedge\dot
+I)&amp;\psi=\varphi+\theta\\功率因数角：&amp;\varphi=(\dot U\wedge\dot
+I)\\功率角（功角）：&amp;\theta=(\dot E_0\wedge\dot
+U)\\内功率角：&amp;\theta_i=(\dot E_0\wedge\dot E_{\delta})  \end{cases}
+\end{gather*}
+\]</span></p>
+<h3 id="隐极与凸极的负载运行">隐极与凸极的负载运行</h3>
+<p>​
+根据做题感受，同步电机的等效电路图是“最不重要”的，更重要的是矢量图。因为涉及到大量的角度，需要画矢量图，用几何的方法图解电动势的关系。</p>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 45%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>隐极</th>
+<th>凸极</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>矢量图</strong></td>
+<td><img src="\image\电机学25.png" /></td>
+<td><img src="\image\电机学27.png" /></td>
+</tr>
+<tr class="even">
+<td><strong>等效电路</strong></td>
+<td><img src="\image\电机学26.png" /></td>
+<td><img src="\image\电机学28.jpg" /></td>
+</tr>
+<tr class="odd">
+<td><strong>特点</strong></td>
+<td>用两个电抗来等效电枢反映压降<span class="math inline">\(\dot
+E_a\)</span>和漏抗压降<span class="math inline">\(\dot
+E_{\sigma}\)</span>，同步电抗<span
+class="math inline">\(X_t=X_a+X_{\sigma}\)</span>同时反应了电枢反应和漏磁通的影响</td>
+<td>将<span class="math inline">\(\dot F_a\)</span>分解为<span
+class="math inline">\(\dot F_{ad}+\dot F_{aq}\)</span>，分别用<span
+class="math inline">\(X_{ad}&gt;X_{aq}\)</span>和<span
+class="math inline">\(\dot I_d,\dot I_q\)</span>反映。并把漏抗<span
+class="math inline">\(X_{\sigma}\)</span>分到交直轴同步电抗中去</td>
+</tr>
+<tr class="even">
+<td><strong>饱和影响</strong></td>
+<td>此时不能把<span class="math inline">\(E_a/E_0\)</span>从<span
+class="math inline">\(E_{\delta}\)</span>中区分出来<br />故<span
+class="math inline">\(\dot E_{\delta}=\dot U+\dot
+I(R_a+jX_{\sigma})\)</span></td>
+<td>交轴气隙较大，认为不受饱和影响<br />改变<span
+class="math inline">\(\dot E_d\)</span>，有<span
+class="math inline">\(\dot E_d+\dot E_{aq}=\dot E_{\delta}\)</span></td>
+</tr>
+<tr class="odd">
+<td><strong>注</strong></td>
+<td>计算中<span
+class="math inline">\(F_a\)</span>是正弦波<br />空载特性中<span
+class="math inline">\(F_a\)</span>是方波</td>
+<td><span class="math inline">\(\dot E_Q\)</span>与<span
+class="math inline">\(\dot E_0\)</span>同向，先算<span
+class="math inline">\(\dot E_Q\)</span><br /><span
+class="math inline">\(E_Q=E_0-I_d(X_d-X_q)\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="工作特性-2">工作特性</h3>
+<p><strong>短路特性</strong></p>
+<p>​ 在短路时，电压比较小因此磁化曲线一定不饱和，故满足<span
+class="math inline">\(E_0\propto I_f\)</span>且<span
+class="math inline">\(I_k=\frac{E_0}{X_t}\)</span>，故<span
+class="math inline">\(I_k\propto
+I_f\)</span>，因此短路特性呈一条直线。同时观察短路特性和空载特性，可以得到短路比定义和公式如下：</p>
+<p><span class="math display">\[
+K_c=\frac{I_{k0}(I_{f0}\rightarrow
+U_N)}{I_N}=\frac{I_{f0}(U=U_N)}{I_{fk}(I_k=I_N)}=K_{\mu}\frac1{X_d^*}~;~(K_{\mu}&gt;1,是饱和系数)
+\]</span><br />
+<strong>零功率因数负载特性</strong></p>
+<p>​ 类似于<a
+href="#ee">直流发电机的负载特性</a>，为了克服直轴去磁磁动势和漏抗压降，往右下方偏移了一部分。</p>
+<p><strong>外特性与调整特性</strong></p>
+<p>​
+一般而言电机是感性的，因此即使外电路接纯电阻负载，随着电流的增大，端电压也会减小。接感性负载时端电压下降更加厉害，接容性负载可以抑制端电压的下降，甚至使之上升。</p>
+<h2 id="同步电机的并网运行">同步电机的并网运行</h2>
+<p>​
+同步电机并网之后，电机的输出端电压将会与电网电压完全一致，也就是发电机电压的相序、波形、频率、大小和相位与电网必须保持一致。</p>
+<h3 id="并网连接三相灯指示">并网连接——三相灯指示</h3>
+<table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 15%" />
+<col style="width: 25%" />
+<col style="width: 39%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>暗灯法（直连）</th>
+<th>旋灯法</th>
+<th>调节方法</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>等频率</strong></td>
+<td>三盏灯明度不再变化</td>
+<td>灯光不再旋转闪烁（或旋转很慢）</td>
+<td>调节发电机转速n</td>
+</tr>
+<tr class="even">
+<td><strong>等电压（大小+相位）</strong></td>
+<td>三盏灯同时熄灭</td>
+<td>灯光1熄灭，2/3亮度相同</td>
+<td>调节发电机电压大小<br />发电机瞬时速度（相位）</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>自同步法：</strong>励磁绕组不通电接限流电阻，，用原动机拖动直至接近同步转速，先并网然后迅速接通励磁（不要限流电阻）</li>
+</ul>
+<h3 id="平衡方程与功角特性">平衡方程与功角特性</h3>
+<p><img src="\image\电机学29.jpg" /></p>
+<ul>
+<li>电磁功率的表达式如下：</li>
+</ul>
+<p><span class="math display">\[
+\begin{gather*}
+P_{em}=P_2(mUI\text{cos}\varphi)+p_{cu2}(mI^2R_a\approx0)\Rightarrow
+P_{em}\approx
+P_2\\P_{em}=\frac{mE_0U}{X_d}\text{sin}\theta+\frac{mU^2}2(\frac1{X_q}-\frac1{X_d})\text{sin}2\theta\\P_{em}=mE_0I_q  \end{gather*}
+\]</span></p>
+<h4 id="有功调节与静态稳定">有功调节与静态稳定</h4>
+<p>​
+从上文的表达式可以看出来，在<strong>并网之后有功功率仅与空载电动势<span
+class="math inline">\(E_0\)</span>和功率角<span
+class="math inline">\(\theta\)</span>有关</strong>。这就是所谓的“功角特性”——有功功率的大小与功率角紧密关联，而功率角反映的就是交轴电枢反应的影响，是转子主极轴线与气隙合成磁场轴线之间的相差。</p>
+<ul>
+<li><p><strong>自跟随：</strong>为了增加有功，需调大输入功率（力矩），转子瞬间加速使励磁电动势<span
+class="math inline">\(\dot E_0\)</span>超前电网电压<span
+class="math inline">\(\dot U\)</span>，增大功率角<span
+class="math inline">\(\theta\)</span>，因此<span
+class="math inline">\(I_q\)</span>增加、电磁制动转矩<span
+class="math inline">\(T_{em}\)</span>增加，重新稳定。</p></li>
+<li><p><strong>静态稳定：</strong>由于<span
+class="math inline">\(P_{em}\propto
+\text{sin}\theta\)</span>，随着功率角的增大输出功率先增加后减小。<strong>只有在<span
+class="math inline">\(\theta\in[0,90°]\)</span>的范围内才能稳定。</strong></p></li>
+<li><p><strong>Def：</strong></p>
+<ul>
+<li>比整步功率<span class="math inline">\(P_{syn}=\frac{\text
+dP_{em}}{\text d\theta}=\frac{mE_0U}{X_d}\text{cos}\theta\)</span></li>
+<li>过载能力<span
+class="math inline">\(K_m=\frac{P_{max}}{P_N}=\frac1{\text{sin}\theta_N}\)</span></li>
+</ul></li>
+</ul>
+<h4 id="无功调节与v型曲线">无功调节与V型曲线</h4>
+<p>​ 在调节无功功率时，需要保持有功功率不变，即<span
+class="math inline">\(E_0\text{sin}\theta=\text{const}\)</span>，<span
+class="math inline">\(I_q=I\text{cos}\varphi=\text{const}\)</span>。认为<span
+class="math inline">\(\text{cos}\varphi=1\)</span>，即<span
+class="math inline">\(I=I_{min}\)</span>时的状态叫做“正常励磁”，此时不输出无功。</p>
+<ul>
+<li><strong>恒磁通：</strong>
+<ul>
+<li>并网时<span class="math inline">\(U=\text{const}\)</span>，因此<span
+class="math inline">\(E_{\delta}\approx
+U=\text{const}\)</span>，因此气隙合成磁通不会变化</li>
+</ul></li>
+<li><strong>自跟随：</strong>
+<ul>
+<li>当励磁增加，励磁磁动势增加时，电枢反应输出滞后的电流（感性无功），使之去磁</li>
+<li>当励磁减小，励磁磁动势降低时，电枢反应输出超前的电流（容性无功），使之增磁
+<ul>
+<li>欠励的励磁电流不能过小，否则功角将超过90°进入不稳定区，电枢电流的增磁效应不足以补偿主磁通，产生不了足够的电磁转矩拖住转子，电机失步。</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><img src="\image\电机学30.png" /></p>
 ]]></content>
       <categories>
         <category>课程</category>
