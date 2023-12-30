@@ -1636,7 +1636,14 @@ Q_{i}}\frac1{1-\frac{\partial Q_L}{\partial Q_{i}}}=\lambda
   <entry>
     <title>电机学笔记（总）</title>
     <url>/2023/10/07/%E7%94%B5%E6%9C%BA%E5%AD%A6/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="导论与数理基础">导论与数理基础</h1>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><ul>
+<li><strong>整理了PDF版本，内容跟下面差别不大，好处是可以打印而且不会出现渲染问题</strong>
+<ul>
+<li>为了防止电机学课程总结作业的查重（那啥x），带了一点点水印，应该不影响阅读</li>
+<li><a href="\myfile\电机学笔记_水印版.pdf" target="_blank">电机学笔记(Watermark)</a></li>
+</ul></li>
+</ul>
+<h1 id="导论与数理基础">导论与数理基础</h1>
 <table>
 <colgroup>
 <col style="width: 4%" />
