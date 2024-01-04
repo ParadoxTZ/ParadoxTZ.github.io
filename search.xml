@@ -321,8 +321,8 @@ class="math inline">\(m\le2^3-1=7\)</span></p>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
         <tag>微机</tag>
       </tags>
   </entry>
@@ -670,13 +670,14 @@ s^3&amp;2&amp;9K\\s^{2}&amp;(1-10K)&amp;K\\s&amp;\frac{K(7-90K)}{1-10K}
 </tbody>
 </table>
 <p><span class="math display">\[
-\Rightarrow K&gt;0,1-10K&gt;0,7-90K&gt;0\\0&lt;K&lt;\frac7{90}
+\begin{gather*}\Rightarrow
+K&gt;0,1-10K&gt;0,7-90K&gt;0\\0&lt;K&lt;\frac7{90}\end{gather*}
 \]</span></p>
 <h3 id="根轨迹图">根轨迹图</h3>
 <p>根轨迹作图法的8条规则（1.2条合起来）：</p>
 <ol type="1">
 <li>连续性、对称性（实轴）</li>
-<li>根轨迹条数=最高阶次，起点=开环极点，终点=开环零点（或终点）</li>
+<li>根轨迹条数=最高阶次，起点=开环极点，终点=开环零点（或无穷远）</li>
 <li>实轴上右侧零极点数目之和为奇数的位置有根轨迹</li>
 <li>渐近线：起点<span
 class="math inline">\(\sigma=\frac{\Sigma(-p)-\Sigma(-z)}{n-m}\)</span>，倾角<span
@@ -721,7 +722,7 @@ class="math inline">\(N=-P\)</span>（逆时针旋转）</li>
 <p><strong>本题演示：</strong></p>
 <p><img src="\image\控制理论03.png" /><br />
 <span class="math display">\[
-\begin{gather*}G(j\omega)=\frac{K(1+28\omega^2)+jK\omega(7-20\omega^2)}{-\omega^2(1+4\omega^2)}
+\begin{gather*}G(j\omega)=\frac{K(1+28\omega^2)+jK\omega(7-20\omega^2)}{-\omega^2(1+4\omega^2)}（上下乘分母的共轭化为实数）
 \\\varphi(\omega)=\text{atan}\frac{K\omega(7-20\omega^2)}{K(1+28\omega^2)}-\pi=\pi\Rightarrow\omega^2=\frac7{20}\\
 \Rightarrow G(j\omega)=\frac{90K}7e^{j\pi}=-\frac{90K}7\ge -1\Rightarrow
 K\le\frac7{90}
@@ -769,7 +770,7 @@ class="math inline">\(\omega_g\)</span>—相角-180°点</td>
 <li>用增益裕量的计算与上面奈氏图的计算式子几乎一样</li>
 <li>用相位裕量的计算如下：（注：<span
 class="math inline">\(1-s\)</span>相当于用<span
-class="math inline">\(1+s\)</span>写，相位直接加2π并反向）
+class="math inline">\(1+s\)</span>写，相位直接加π并反向）
 <ul>
 <li>其斜率为：（-40)—(0.1)—&gt;(-20)—(0.5)—&gt;(-40)—(1)—&gt;(-20)</li>
 <li>假设其在<span
@@ -1021,8 +1022,8 @@ class="math inline">\(u=\frac{|s_d^{\nu}|\sum|s_d+p_i|}{\sum|s_d+z_i|}\)</span><
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
       </tags>
   </entry>
   <entry>
@@ -1699,8 +1700,8 @@ Q_{i}}\frac1{1-\frac{\partial Q_L}{\partial Q_{i}}}=\lambda
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
       </tags>
   </entry>
   <entry>
@@ -1709,9 +1710,11 @@ Q_{i}}\frac1{1-\frac{\partial Q_L}{\partial Q_{i}}}=\lambda
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><ul>
 <li><strong>整理了PDF版本，内容跟下面差别不大，好处是可以打印而且不会出现渲染问题</strong>
 <ul>
-<li>为了防止电机学课程总结作业的查重（那啥x），带了一点点水印，应该不影响阅读</li>
+<li>为了防止电机学课程总结作业的查重（那啥x），老版本带了一点点水印，应该不影响阅读</li>
 <li><a href="\myfile\电机学笔记_水印版.pdf" target="_blank">电机学笔记(Watermark)</a></li>
+<li><a href="\myfile\电机学笔记.pdf" target="_blank">电机学笔记</a></li>
 </ul></li>
+<li>字太多了，难免有打错的，大家见谅（找到问题跟我说一句谢谢）</li>
 </ul>
 <h1 id="导论与数理基础">导论与数理基础</h1>
 <table>
@@ -2452,8 +2455,65 @@ class="math inline">\(N_y\)</span>是线圈匝数</li>
 <li>记：<strong>每相串联匝数：</strong><span
 class="math inline">\(N=\frac{2PqN_y}a(双层)=\frac{PqN_y}2(单层)\)</span></li>
 <li>最后的公式（<strong>一相脉振磁动势、三相旋转磁动势和一相绕组相电动势</strong>）直接记，都是根据上面一步步演化来的，主要推导的难点就是每相串联匝数的公式和单层、双层修正中是否需要乘2。</li>
-<li><strong>谐波</strong>记得把幅值再乘上一个<span
-class="math inline">\(\frac1\nu\)</span></li>
+</ul>
+<h3 id="谐波的计算">谐波的计算</h3>
+<p>​ 一般我们见到的就是同步谐波，这里讲一下同步谐波的特点和计算：</p>
+<ul>
+<li>同步谐波跟着基波一起旋转，他是傅里叶变换里面出来的，因此在基波走完一个周期的时候同步谐波可以走<span
+class="math inline">\(\nu\)</span>个周期。因此同步谐波的数据满足：
+<ol type="1">
+<li>转速与基波转速相等：<span
+class="math inline">\(n_{\nu}=n_1\)</span></li>
+<li>频率比基波频率要高：<span class="math inline">\(f_{\nu}=\nu
+f_1\)</span></li>
+<li>极距比基波极距要小：<span
+class="math inline">\(\tau_{\nu}=\frac{\tau}{\nu}\)</span></li>
+<li>级数比基波级数要大：<span class="math inline">\(P_{\nu}=\nu
+P\)</span></li>
+</ol></li>
+<li>所以在计算同步谐波幅值的时候，需要对上面的公式做以下几点修正：
+<ol type="1">
+<li>两个修正系数都要变，一个变成<span
+class="math inline">\(\nu\alpha\)</span>，一个变成<span
+class="math inline">\(\nu y_1\)</span>，可能出现负值</li>
+<li>公式中的频率要进行修正成 <span class="math inline">\(\nu
+f\)</span></li>
+<li>由于磁通 <span class="math inline">\(\phi=B\tau
+l\)</span>，如果题中没有说明磁场的关系（<span
+class="math inline">\(\frac{B_{\nu}}{B_1}\)</span>），就按照 <span
+class="math inline">\(B_{\nu}=\frac1{\nu}B_1\)</span>
+的关系修正，否则按照题目的规定；同时修正极距 <span
+class="math inline">\(\tau_{\nu}=\frac1{\nu}\tau\)</span></li>
+<li>因此在默认情况下且不考虑修正系数 <span
+class="math inline">\(k_{w\nu}\)</span>，谐波的幅值是基波幅值的<span
+class="math inline">\(\frac1{\nu}\)</span></li>
+</ol></li>
+</ul>
+<h3 id="磁动势谐波的计算">磁动势谐波的计算</h3>
+<ul>
+<li>上述对磁动势不适用，磁动势谐波的特点为：
+<ol type="1">
+<li>频率与基波频率相等：<span
+class="math inline">\(f_{\nu}=f_1\)</span>（即角频率）</li>
+<li>转速比基波转速要小：<span
+class="math inline">\(n_{\nu}=\frac1{\nu}n_1\)</span>（<span
+class="math inline">\(n=\frac{60f}p\)</span>）</li>
+<li>极距比基波极距要小：<span
+class="math inline">\(\tau_{\nu}=\frac{\tau}{\nu}\)</span></li>
+<li>级数比基波级数要大：<span class="math inline">\(P_{\nu}=\nu
+P\)</span></li>
+</ol></li>
+<li>所以在计算<strong>磁动势</strong>的谐波幅值的时候，需要对上面的公式做以下几点修正：
+<ol type="1">
+<li>两个修正系数都要变，一个变成<span
+class="math inline">\(\nu\alpha\)</span>，一个变成<span
+class="math inline">\(\nu y_1\)</span>，可能出现负值</li>
+<li>在默认情况下且不考虑修正系数 <span
+class="math inline">\(k_{w\nu}\)</span>，谐波的幅值是基波幅值的<span
+class="math inline">\(\frac1{\nu}\)</span></li>
+<li>写具体表达式的时候，由于电角度受极数的影响，故<span
+class="math inline">\(\theta_{\nu}=\nu\theta\)</span></li>
+</ol></li>
 </ul>
 <h3 id="削弱谐波的影响">削弱谐波的影响</h3>
 <ol type="1">
@@ -2651,7 +2711,7 @@ class="math inline">\(p_{mec}=m_1I_2’^2\frac{1-s}sR_2’\)</span></th>
 class="math inline">\(T_{em}=\frac{P_{mec}}{\Omega}=\frac{P_{mec}}{(1-s)\Omega_1}=\frac{P_{em}}{\Omega_1}\)</span></li>
 <li><span
 class="math inline">\(T_{em}=\frac{m_1E_2&#39;I_2&#39;\text{cos}\varPsi_2}{\Omega_1}
-=\frac{m_12\pi f_1N_1k_{w1}\phi_1I_2&#39;\text{cos}\varPsi_2}{2\pi
+=\frac{m_1\sqrt2\pi f_1N_1k_{w1}\phi_1I_2&#39;\text{cos}\varPsi_2}{2\pi
 f_1/p}=C_M\phi_1I_2&#39;\text{cos}\varPsi_2\)</span>
 <ol type="1">
 <li>其中<span
@@ -3195,8 +3255,8 @@ U=\text{const}\)</span>，因此气隙合成磁通不会变化</li>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
       </tags>
   </entry>
   <entry>
@@ -4799,8 +4859,8 @@ SEQx：中断标志位，1表示有中断，只读</td>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
         <tag>微机</tag>
       </tags>
   </entry>
