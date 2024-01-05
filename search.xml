@@ -2744,7 +2744,7 @@ f(R_1+X_{1\sigma}+X_{2\sigma}&#39;^2)}\)</span></li>
 <li>C点（起动点）
 <ol type="1">
 <li><span class="math inline">\(s=1,n=0\)</span></li>
-<li><span class="math inline">\(T_{st}=\frac{m_1pU_1^2}{2\pi
+<li><span class="math inline">\(T_{st}=\frac{m_1pU_1^2R_2&#39;}{2\pi
 f_1[(R_1+R_2&#39;^2)+(X_{1\sigma}+X_{2\sigma}&#39;^2)]}\)</span></li>
 </ol></li>
 <li>记：
