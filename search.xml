@@ -82,8 +82,8 @@
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
       </tags>
   </entry>
   <entry>
@@ -385,8 +385,8 @@ class="math inline">\(m\le2^3-1=7\)</span></p>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
         <tag>微机</tag>
       </tags>
   </entry>
@@ -1168,8 +1168,8 @@ class="math inline">\(\alpha=k\frac{\tau}T\)</span>，查表</li>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
       </tags>
   </entry>
   <entry>
@@ -1846,8 +1846,8 @@ Q_{i}}\frac1{1-\frac{\partial Q_L}{\partial Q_{i}}}=\lambda
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
       </tags>
   </entry>
   <entry>
@@ -3401,8 +3401,8 @@ U=\text{const}\)</span>，因此气隙合成磁通不会变化</li>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
       </tags>
   </entry>
   <entry>
@@ -3720,8 +3720,8 @@ class="math inline">\(J_{Ri}=\overline{\sigma_i}z_{i-1}\)</span></li>
         <category>课程</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
         <tag>ACEE</tag>
+        <tag>笔记</tag>
         <tag>大三</tag>
       </tags>
   </entry>
@@ -5005,8 +5005,8 @@ SEQx：中断标志位，1表示有中断，只读</td>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
         <tag>微机</tag>
       </tags>
   </entry>
@@ -5055,9 +5055,9 @@ SEQx：中断标志位，1表示有中断，只读</td>
         <category>课程</category>
       </categories>
       <tags>
+        <tag>ACEE</tag>
         <tag>笔记</tag>
         <tag>大二</tag>
-        <tag>ACEE</tag>
         <tag>课程资料</tag>
       </tags>
   </entry>
@@ -5079,9 +5079,9 @@ SEQx：中断标志位，1表示有中断，只读</td>
         <category>课程</category>
       </categories>
       <tags>
+        <tag>ACEE</tag>
         <tag>笔记</tag>
         <tag>大二</tag>
-        <tag>ACEE</tag>
       </tags>
   </entry>
   <entry>
