@@ -27,6 +27,151 @@
 ]]></content>
   </entry>
   <entry>
+    <title>电机系统建模与分析</title>
+    <url>/2024/04/02/%E7%94%B5%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%BB%BA%E6%A8%A1%E4%B8%8E%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><ul>
+<li>觉得卡的或者遇到公式渲染不出来的情况请开翻墙，ZJU的校网就是依托。</li>
+</ul>
+<h1 id="chap1.-摘要">Chap1. 摘要</h1>
+<blockquote>
+<p>若无特殊说明，本文中使用斜体的<span
+class="math inline">\(p\)</span>表示电机极对数，用正体的<span
+class="math inline">\(\text p\)</span>表示海氏算子<span
+class="math inline">\(\frac{\text d}{\text dt}\)</span></p>
+</blockquote>
+<h1 id="chap2.-微分方程数值解法">Chap2. 微分方程数值解法</h1>
+<h1 id="chap3.-一般化电机模型">Chap3. 一般化电机模型</h1>
+<h1 id="chap4.-直流电机仿真">Chap4. 直流电机仿真</h1>
+<h1 id="chap5.-三相交流电机在相坐标系下的模型">Chap5.
+三相交流电机在相坐标系下的模型</h1>
+<p>按照<strong>电动机</strong>原则选取正方向，即：</p>
+<ol type="1">
+<li>绕组轴线的方向是磁链正方向，<u>正电流产生正磁链</u></li>
+<li>从外向绕组看，<u>电压与电流正方向同向</u>，输入功率为正</li>
+<li><u>电磁转矩正方向就是转子旋转的方向</u>，负载<span
+class="math inline">\(T_L\)</span>、阻尼<span
+class="math inline">\(B\Omega\)</span>、惯性<span
+class="math inline">\(Jp\Omega\)</span>转矩相反</li>
+</ol>
+<p><img src="\image\电机建模01.png" /></p>
+<p>考虑D轴与Q轴正交解耦，则其<strong>电压平衡式</strong>为：<br />
+<span class="math display">\[
+\begin{gather*}\begin{cases}U_a=\text
+p\varPsi_a+R_ai_a&amp;（B、C相同理）\\U_f=\text
+p\varPsi_f+R_fi_f\\U_D=U_Q=0&amp;（阻尼短路绕组）  \end{cases}
+\end{gather*}
+\]</span><br />
+即：<br />
+$$<br />
+<span class="math display">\[\begin{gather*}  \begin{bmatrix}
+u_a\\u_b\\u_c\\u_f\\0\\0
+\end{bmatrix}=\text p\begin{bmatrix}
+\varPsi_a\\\varPsi_b\\\varPsi_c\\\varPsi_f\\\varPsi_D\\\varPsi_Q
+\end{bmatrix}+\begin{bmatrix}
+R_s&amp;0&amp;0&amp;0&amp;0&amp;0\\0&amp;R_s&amp;0&amp;0&amp;0&amp;0\\0&amp;0&amp;R_s&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;R_f&amp;0&amp;0\\0&amp;0&amp;0&amp;0&amp;R_D&amp;0\\0&amp;0&amp;0&amp;0&amp;0&amp;R_Q
+\end{bmatrix}
+\begin{bmatrix}
+i_a\\i_b\\i_c\\i_f\\i_D\\i_Q
+\end{bmatrix}
+
+\end{gather*}\]</span><br />
+$$<br />
+其中磁链矩阵<span
+class="math inline">\([\varPsi]\)</span>可以表示为<span
+class="math inline">\([L][I]\)</span>，由于转子励磁旋转导致DQ轴与定子相轴耦合关系改变，电感矩阵<span
+class="math inline">\([L]\)</span>时变。电感矩阵中各分量结果如下：</p>
+<p><a id="三相电感"><a
+href="#三相交流电机电感矩阵">三相交流电机电感矩阵推导</a></a></p>
+<ol type="1">
+<li><p><strong>定子绕组自感系数</strong><br />
+<span class="math display">\[
+\begin{gather*}
+L_{aa}=L_{aal}(漏感)+\frac{L_{aad}+L_{aaq}}2+\frac{L_{aad}-L_{aaq}}2cos2\theta\\
+L_{bb}=L_{aal}(漏感)+\frac{L_{aad}+L_{aaq}}2+\frac{L_{aad}-L_{aaq}}2cos2(\theta-\frac{2\pi}3)\\
+L_{cc}=L_{aal}(漏感)+\frac{L_{aad}+L_{aaq}}2+\frac{L_{aad}-L_{aaq}}2cos2(\theta+\frac{2\pi}3)
+\end{gather*}
+\]</span></p>
+<ol type="1">
+<li>对于隐极同步电机（<span
+class="math inline">\(L_{aad}=L_{aaq}\)</span>），自感系数是常数</li>
+</ol></li>
+<li><p><strong>定子绕组互感系数</strong><br />
+<span class="math display">\[
+\begin{gather*}
+M_{ab}=-(M_{abl}+\frac{L_{aad}+L_{aaq}}4)+\frac{L_{aad}-L_{aaq}}4cos2(\theta+\frac{2\pi}3)
+\end{gather*}
+\]</span></p>
+<ol type="1">
+<li>互感是负的，因为轴线相差120°</li>
+<li>AB相的互感用C相的角度，其余同理</li>
+</ol></li>
+<li><p><strong>定子与转子之间的互感</strong><br />
+<span class="math display">\[
+\begin{gather*}M_{af}=M_{fa}=M_{af1}cos\theta\\M_{bf}=M_{fb}=M_{af1}cos(\theta-\frac{2\pi}3)\\M_{cf}=M_{fc}=M_{af1}cos(\theta+\frac{2\pi}3)
+\end{gather*}
+\]</span></p>
+<ol type="1">
+<li>定子绕组自感变化周期是<span
+class="math inline">\(\pi\)</span>，这个是<span
+class="math inline">\(2\pi\)</span>。下同。</li>
+</ol></li>
+<li><p><strong>定子绕组与转子D轴阻尼绕组间互感</strong><br />
+<span class="math display">\[
+M_{aD}=M_{Da}=M_{aD1}cos\theta
+\]</span></p></li>
+<li><p><strong>定子绕组与转子Q轴阻尼绕组间互感</strong><br />
+<span class="math display">\[
+M_{aQ}=M_{Qa}=-M_{aQ1}sin\theta
+\]</span></p></li>
+<li><p><strong>转子绕组自感、互感</strong><br />
+<span class="math display">\[
+\begin{gather*}
+L_f=L_{fl}+L_{f\delta}\\L_D=L_{Dl}+L_{D\delta}\\L_Q=L_{Ql}+L_{Q\delta}\\M_{fD}=M_{Df}=M_{fDl}+M_{fD\delta}
+\end{gather*}
+\]</span></p>
+<ol type="1">
+<li>由于DQ轴正交解耦，故不存在互感</li>
+</ol></li>
+</ol>
+<p>由此得到：<br />
+<span class="math display">\[
+\begin{gather*}
+\begin{bmatrix}
+\varPsi_a\\\varPsi_b\\\varPsi_c\\\varPsi_f\\\varPsi_D\\\varPsi_Q
+\end{bmatrix}=\begin{bmatrix}
+L_{aa}&amp;M_{ab}&amp;M_{ac}&amp;M_{af}&amp;M_{aD}&amp;M_{aQ}\\
+M_{ba}&amp;L_{bb}&amp;M_{bc}&amp;M_{bf}&amp;M_{bD}&amp;M_{bQ}\\
+M_{ca}&amp;M_{cb}&amp;L_{cc}&amp;M_{cf}&amp;M_{cD}&amp;M_{cQ}\\
+M_{fa}&amp;M_{fb}&amp;M_{fc}&amp;L_f&amp;M_{fD}&amp;0\\
+M_{Da}&amp;M_{Db}&amp;M_{Dc}&amp;M_{Df}&amp;L_D&amp;0\\
+M_{Qa}&amp;M_{Qb}&amp;M_{Qc}&amp;0&amp;0&amp;L_Q
+\end{bmatrix}\cdot \begin{bmatrix}
+i_a\\i_b\\i_c\\i_f\\i_D\\i_Q
+\end{bmatrix}
+\end{gather*}
+\]</span><br />
+对应的，其<a id="三相转矩"><strong>转矩平衡式</strong></a>为（<a
+href="#三相交流电机电磁转矩">电磁转矩的推导过程</a>）：<br />
+<span class="math display">\[
+T_e=\frac p2[I]^T\frac{\partial[L]}{\partial\theta}[I]
+\]</span></p>
+<h1 id="chap6.-坐标变换">Chap6. 坐标变换</h1>
+<h1 id="附录-公式推导">附录-公式推导</h1>
+<h3 id="三相交流电机电感矩阵">三相交流电机电感矩阵</h3>
+<p><a href="#三相电感">Return</a></p>
+<h3 id="三相交流电机电磁转矩">三相交流电机电磁转矩</h3>
+<p><a href="#三相转矩">Return</a></p>
+]]></content>
+      <categories>
+        <category>课程</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>大三</tag>
+        <tag>电气</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>大三（秋冬）课程总结</title>
     <url>/2024/01/15/%E5%A4%A7%E4%B8%89%E4%B8%8A%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="课程总结">课程总结</h1>
@@ -3720,8 +3865,8 @@ class="math inline">\(J_{Ri}=\overline{\sigma_i}z_{i-1}\)</span></li>
         <category>课程</category>
       </categories>
       <tags>
-        <tag>ACEE</tag>
         <tag>笔记</tag>
+        <tag>ACEE</tag>
         <tag>大三</tag>
       </tags>
   </entry>
@@ -5055,9 +5200,9 @@ SEQx：中断标志位，1表示有中断，只读</td>
         <category>课程</category>
       </categories>
       <tags>
-        <tag>ACEE</tag>
         <tag>笔记</tag>
         <tag>大二</tag>
+        <tag>ACEE</tag>
         <tag>课程资料</tag>
       </tags>
   </entry>
@@ -5079,9 +5224,9 @@ SEQx：中断标志位，1表示有中断，只读</td>
         <category>课程</category>
       </categories>
       <tags>
-        <tag>ACEE</tag>
         <tag>笔记</tag>
         <tag>大二</tag>
+        <tag>ACEE</tag>
       </tags>
   </entry>
   <entry>
