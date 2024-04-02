@@ -1,0 +1,216 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>电机系统建模与分析 | Paradox's Website</title><meta name="author" content="Paradox,420907574@qq.com"><meta name="copyright" content="Paradox"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="要是所有老师上课都能像sjx老师一样就好了"><meta property="og:type" content="article"><meta property="og:title" content="电机系统建模与分析"><meta property="og:url" content="http://zju-paradox.top/2024/04/02/%E7%94%B5%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%BB%BA%E6%A8%A1%E4%B8%8E%E5%88%86%E6%9E%90/index.html"><meta property="og:site_name" content="Paradox&#39;s Website"><meta property="og:description" content="要是所有老师上课都能像sjx老师一样就好了"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://zju-paradox.top/image/Fufu.jpg"><meta property="article:published_time" content="2024-04-02T06:00:15.080Z"><meta property="article:modified_time" content="2024-04-02T09:20:43.660Z"><meta property="article:author" content="Paradox"><meta property="article:tag" content="笔记"><meta property="article:tag" content="大三"><meta property="article:tag" content="电气"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="http://zju-paradox.top/image/Fufu.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://zju-paradox.top/2024/04/02/%E7%94%B5%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%BB%BA%E6%A8%A1%E4%B8%8E%E5%88%86%E6%9E%90/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload='this.media="all"'><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload='this.media="all"'><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":5,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Paradox","link":"链接: ","source":"来源: Paradox's Website","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE={title:"电机系统建模与分析",isPost:!0,isHome:!1,isHighlightShrink:!1,isToc:!0,postUpdate:"2024-04-02 17:20:43"}</script><noscript><style type="text/css">#nav{opacity:1}.justified-gallery img{opacity:1}#post-meta time,#recent-posts time{display:inline!important}</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/image/dog.jpg" onerror='onerror=null,src="/img/friend_404.gif"' alt="avatar"></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr class="custom-hr"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i> <span>首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i> <span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i> <span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i> <span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-images"></i> <span>图库</span></a></div><div class="menus_item"><a class="site-page" href="/artitalk/"><i class="fa-fw fas fa-pen-to-square"></i> <span>说说</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image:url(/image/top3.jpg)"><nav id="nav"><span id="blog-info"><a href="/" title="Paradox's Website"><span class="site-name">Paradox's Website</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i> <span>搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i> <span>首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i> <span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i> <span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i> <span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-images"></i> <span>图库</span></a></div><div class="menus_item"><a class="site-page" href="/artitalk/"><i class="fa-fw fas fa-pen-to-square"></i> <span>说说</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">电机系统建模与分析</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-04-02T06:00:15.080Z" title="发表于 2024-04-02 14:00:15">2024-04-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-04-02T09:20:43.660Z" title="更新于 2024-04-02 17:20:43">2024-04-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AF%BE%E7%A8%8B/">课程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="电机系统建模与分析"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2024/04/02/%E7%94%B5%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%BB%BA%E6%A8%A1%E4%B8%8E%E5%88%86%E6%9E%90/#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="chap1.-摘要">Chap1. 摘要</h1><blockquote><p>觉得卡的或者遇到公式渲染不出来的情况请开翻墙，ZJU的校网就是依托。</p><p>若无特殊说明，本文中使用斜体的<span class="math inline">\(p\)</span>表示电机极对数，用正体的<span class="math inline">\(\text p\)</span>表示海氏算子<span class="math inline">\(\frac{\text d}{\text dt}\)</span></p><p>期中可能会放PDF版本</p></blockquote><h1 id="chap2.-微分方程数值解法">Chap2. 微分方程数值解法</h1><h1 id="chap3.-一般化电机模型">Chap3. 一般化电机模型</h1><h2 id="基本概念">基本概念</h2><p>一般化电机的基本假设：</p><ol type="1"><li>一对级电机（<span class="math inline">\(p=1\)</span>），极对数是可以等效的</li><li>绕组是可以等效的，如三相变为两相</li><li>伪静止线圈：构成线圈的导体是运动的（以<span class="math inline">\(\omega\)</span>旋转），但是d、q线圈是由电刷所规定的，因此轴线静止。<ol type="1"><li>线圈中的电流在空间产生轴线静止的磁场</li><li>导体实际上在旋转，因此还是会有旋转电势</li></ol></li><li>磁路不饱和（可用叠加原理）</li><li>不计剩磁、涡流、磁滞损耗</li><li>气隙磁密按正弦规律分布</li><li>只关心导体分布在哪些槽内，不关心具体的连接方式和整、短距等</li></ol><h2 id="基本方程式">基本方程式</h2><h3 id="正方向的规定">正方向的规定</h3><table style="width:100%"><colgroup><col style="width:7%"><col style="width:44%"><col style="width:19%"><col style="width:28%"></colgroup><thead><tr class="header"><th></th><th>原则</th><th>模型</th><th>方程式</th></tr></thead><tbody><tr class="odd"><td><strong>电动机</strong></td><td>1. 正电流产生正磁链<br>2. 从外向线圈看，电压与电流正方向相同<br>3. 线圈的输入功率为正值</td><td><img src="\image\电机建模04.png"></td><td><span class="math inline">\(\varPsi=Li\\U=Ri+e\\e=\text p\varPsi\)</span></td></tr><tr class="even"><td><strong>发电机</strong></td><td>1. 正电流产生负磁链<br>2. 从线圈向外看，电压与电流正方向相同<br>3. 线圈的输出功率为正值</td><td><img src="\image\电机建模05.png"></td><td><span class="math inline">\(\varPsi=-Li\\U=e-Ri\\e=\text p\varPsi\)</span></td></tr></tbody></table><table><colgroup><col style="width:10%"><col style="width:61%"><col style="width:28%"></colgroup><thead><tr class="header"><th></th><th>原则</th><th>方程式</th></tr></thead><tbody><tr class="odd"><td><strong>电动机</strong></td><td>1. 电磁转矩正方向就是旋转方向<br>2.负载、阻尼、惯性转矩正方向与之相反</td><td><span class="math inline">\(T_e=T_L+T_D+J\text p\Omega\)</span></td></tr><tr class="even"><td><strong>发电机</strong></td><td>1. 外施转矩正方向就是旋转方向<br>2.负载、阻尼、惯性转矩正方向与之相反</td><td><span class="math inline">\(T_m=T_e+T_D+J\text p\Omega\)</span></td></tr></tbody></table><h3 id="电磁方程式">电磁方程式</h3><blockquote><p>电枢（转子）按发电机原则规定正方向</p><p>励磁（定子）按电动机原则规定正方向</p></blockquote><p><img src="\image\电机建模06.png"><br> <span class="math display">\[ \begin{gather*} \begin{cases} u_d=\text p\varPsi_d-R_di_d-K_q\omega\phi_q(旋转电势e_{dr})\\ u_q=\text p\varPsi_q-R_qi_q+K_d\omega\phi_d(旋转电势e_{qr})\\ u_{fd}=\text p\varPsi_{fd}+R_{fd}i_{fd}\\ u_{kq}=\text p\varPsi_{kq}+R_{kq}i_{kq} \end{cases} \end{gather*} \]</span><br> 根据<a href="#一般化旋转电势">对应的推导</a>，旋转电势中：<br> <span class="math display">\[ \begin{gather*} \begin{cases} e_{dr}=-K_q\omega\phi_q=-\omega\varPsi_q\\ e_{qr}=K_d\omega\phi_d=\omega\varPsi_d \end{cases} \end{gather*} \]</span><br> 并带入<span class="math inline">\(\varPsi=LI\)</span>，得到电磁方程式为：<br> <span class="math display">\[ \begin{gather*} [U]=\text p[L][I]+[R][I]+\omega[G][I]\\ \text p[I]=[L]^{-1}({[U]-[R][I]-\omega[G][I]}) \end{gather*} \]</span><br> 其中：<br> <span class="math display">\[ \begin{gather*} [L]=\begin{bmatrix} -L_d&amp;0&amp;M_{afd}&amp;0\\0&amp;-L_q&amp;0&amp;M_{akq}\\-M_{fad}&amp;0&amp;L_{fd}&amp;0\\0&amp;-M_{kaq}&amp;0&amp;L_q \end{bmatrix}&amp;,&amp;[G]=\begin{bmatrix} 0&amp;L_q&amp;0&amp;-M_{akq}\\L_d&amp;0&amp;-M_{afd}&amp;0\\0&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;0 \end{bmatrix} \end{gather*} \]</span></p><h1 id="chap4.-直流电机仿真">Chap4. 直流电机仿真</h1><h1 id="chap5.-三相交流电机在相坐标系下的模型">Chap5. 三相交流电机在相坐标系下的模型</h1><p>按照<strong>电动机</strong>原则选取正方向，即：</p><ol type="1"><li>绕组轴线的方向是磁链正方向，<u>正电流产生正磁链</u></li><li>从外向绕组看，<u>电压与电流正方向同向</u>，输入功率为正</li><li><u>电磁转矩正方向就是转子旋转的方向</u>，负载<span class="math inline">\(T_L\)</span>、阻尼<span class="math inline">\(B\Omega\)</span>、惯性<span class="math inline">\(Jp\Omega\)</span>转矩相反</li></ol><p><img src="\image\电机建模01.png"></p><p>考虑D轴与Q轴正交解耦，则其<strong>电压平衡式</strong>为：<br> <span class="math display">\[ \begin{gather*}\begin{cases}U_a=\text p\varPsi_a+R_ai_a&amp;（B、C相同理）\\U_f=\text p\varPsi_f+R_fi_f\\U_D=U_Q=0&amp;（阻尼短路绕组） \end{cases} \end{gather*} \]</span><br> 即：<br> <span class="math display">\[ \begin{gather*} \begin{bmatrix} u_a\\u_b\\u_c\\u_f\\0\\0 \end{bmatrix}=\text p\begin{bmatrix} \varPsi_a\\\varPsi_b\\\varPsi_c\\\varPsi_f\\\varPsi_D\\\varPsi_Q \end{bmatrix}+\begin{bmatrix} R_s&amp;0&amp;0&amp;0&amp;0&amp;0\\0&amp;R_s&amp;0&amp;0&amp;0&amp;0\\0&amp;0&amp;R_s&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;R_f&amp;0&amp;0\\0&amp;0&amp;0&amp;0&amp;R_D&amp;0\\0&amp;0&amp;0&amp;0&amp;0&amp;R_Q \end{bmatrix} \begin{bmatrix} i_a\\i_b\\i_c\\i_f\\i_D\\i_Q \end{bmatrix} \end{gather*} \]</span><br> 其中磁链矩阵<span class="math inline">\([\varPsi]\)</span>可以表示为<span class="math inline">\([L][I]\)</span>，由于转子励磁旋转导致DQ轴与定子相轴耦合关系改变，电感矩阵<span class="math inline">\([L]\)</span>时变。电感矩阵中各分量结果如下：</p><p><a id="三相电感"><a href="#三相交流电机电感矩阵">三相交流电机电感矩阵推导</a></a></p><ol type="1"><li><p><strong>定子绕组自感系数</strong><br> <span class="math display">\[ \begin{gather*} L_{aa}=L_{aal}(漏感)+\frac{L_{aad}+L_{aaq}}2+\frac{L_{aad}-L_{aaq}}2cos2\theta\\ L_{bb}=L_{aal}(漏感)+\frac{L_{aad}+L_{aaq}}2+\frac{L_{aad}-L_{aaq}}2cos2(\theta-\frac{2\pi}3)\\ L_{cc}=L_{aal}(漏感)+\frac{L_{aad}+L_{aaq}}2+\frac{L_{aad}-L_{aaq}}2cos2(\theta+\frac{2\pi}3) \end{gather*} \]</span></p><ol type="1"><li>对于隐极同步电机（<span class="math inline">\(L_{aad}=L_{aaq}\)</span>），自感系数是常数</li></ol></li><li><p><strong>定子绕组互感系数</strong><br> <span class="math display">\[ \begin{gather*} M_{ab}=-(M_{abl}+\frac{L_{aad}+L_{aaq}}4)+\frac{L_{aad}-L_{aaq}}4cos2(\theta+\frac{2\pi}3) \end{gather*} \]</span></p><ol type="1"><li>互感是负的，因为轴线相差120°</li><li>AB相的互感用C相的角度，其余同理</li></ol></li><li><p><strong>定子与转子之间的互感</strong><br> <span class="math display">\[ \begin{gather*}M_{af}=M_{fa}=M_{af1}cos\theta\\M_{bf}=M_{fb}=M_{af1}cos(\theta-\frac{2\pi}3)\\M_{cf}=M_{fc}=M_{af1}cos(\theta+\frac{2\pi}3) \end{gather*} \]</span></p><ol type="1"><li>定子绕组自感变化周期是<span class="math inline">\(\pi\)</span>，这个是<span class="math inline">\(2\pi\)</span>。下同。</li></ol></li><li><p><strong>定子绕组与转子D轴阻尼绕组间互感</strong><br> <span class="math display">\[ M_{aD}=M_{Da}=M_{aD1}cos\theta \]</span></p></li><li><p><strong>定子绕组与转子Q轴阻尼绕组间互感</strong><br> <span class="math display">\[ M_{aQ}=M_{Qa}=-M_{aQ1}sin\theta \]</span></p></li><li><p><strong>转子绕组自感、互感</strong><br> <span class="math display">\[ \begin{gather*} L_f=L_{fl}+L_{f\delta}\\L_D=L_{Dl}+L_{D\delta}\\L_Q=L_{Ql}+L_{Q\delta}\\M_{fD}=M_{Df}=M_{fDl}+M_{fD\delta} \end{gather*} \]</span></p><ol type="1"><li>由于DQ轴正交解耦，故不存在互感</li></ol></li></ol><p>由此得到：<br> <span class="math display">\[ \begin{gather*} \begin{bmatrix} \varPsi_a\\\varPsi_b\\\varPsi_c\\\varPsi_f\\\varPsi_D\\\varPsi_Q \end{bmatrix}=\begin{bmatrix} L_{aa}&amp;M_{ab}&amp;M_{ac}&amp;M_{af}&amp;M_{aD}&amp;M_{aQ}\\ M_{ba}&amp;L_{bb}&amp;M_{bc}&amp;M_{bf}&amp;M_{bD}&amp;M_{bQ}\\ M_{ca}&amp;M_{cb}&amp;L_{cc}&amp;M_{cf}&amp;M_{cD}&amp;M_{cQ}\\ M_{fa}&amp;M_{fb}&amp;M_{fc}&amp;L_f&amp;M_{fD}&amp;0\\ M_{Da}&amp;M_{Db}&amp;M_{Dc}&amp;M_{Df}&amp;L_D&amp;0\\ M_{Qa}&amp;M_{Qb}&amp;M_{Qc}&amp;0&amp;0&amp;L_Q \end{bmatrix}\cdot \begin{bmatrix} i_a\\i_b\\i_c\\i_f\\i_D\\i_Q \end{bmatrix} \end{gather*} \]</span><br> 对应的，其<a id="三相转矩"><strong>转矩平衡式</strong></a>为（<a href="#三相交流电机电磁转矩">电磁转矩的推导过程</a>）：<br> <span class="math display">\[ T_e=\frac p2[I]^T\frac{\partial[L]}{\partial\theta}[I] \]</span></p><h1 id="chap6.-坐标变换">Chap6. 坐标变换</h1><h1 id="附录-公式推导">附录-公式推导</h1><h3 id="一般化电机旋转电势">一般化电机旋转电势</h3><p><a href="#电磁方程式">Return</a></p><h3 id="三相交流电机电感矩阵">三相交流电机电感矩阵</h3><p>（贴图绝对不是因为我懒得抄了，绝对不是….）</p><p><img src="\image\电机建模02.png"></p><p><img src="\image\电机建模03.png"></p><p><a href="#三相电感">Return</a></p><h3 id="三相交流电机电磁转矩">三相交流电机电磁转矩</h3><p><strong>法1 虚功（虚位移）</strong>（下面<span class="math inline">\(\Omega\)</span>指机械位移）<br> <span class="math display">\[ \begin{gather*} W=\frac 12\varPsi_ai_a\Rightarrow W=\frac12[I]^T[L][I] \\ T_e=\frac{\partial W}{\partial\Omega}=p\frac{\partial W}{\partial\theta}=\frac p2[I]^T\frac{\partial [L]}{\partial\theta}[I] \end{gather*} \]</span><br> <strong>法2 能量守恒</strong>（下面<span class="math inline">\(\Omega\)</span>指机械角速度）</p><p>电磁储能功率公式推导：<br> <span class="math display">\[ \begin{gather*} P=\frac{dW}{dt}=\frac12\text p[I]^T[L][I]+\frac12[I]^T\text p[L][I]+\frac12[I]^T[L]\text p[I]\\=[I]^T[L]\text p[I]+\frac12[I]^T\text p[L][I] \end{gather*} \]</span><br> 能量守恒：<br> <span class="math display">\[ \begin{gather*} P_{abc}=[I]^T[U]=[I]^T\{[R][I]+\text p([L][I]) \}\\ P_{m}=\Omega T_m=-\Omega T_L=-\Omega(T_e-B\Omega-J\text p\Omega)\\ 电磁、机械损耗~——~电磁、机械储能~——~电磁、机械储能\\\Rightarrow T_e=\frac p2[I]^T\frac{\partial [L]}{\partial\theta}[I] \end{gather*} \]</span><br> <a href="#三相转矩">Return</a></p></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者:</span> <span class="post-copyright-info"><a target="_blank" rel="noopener" href="https://github.com/ParadoxTZ">Paradox</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接:</span> <span class="post-copyright-info"><a href="http://zju-paradox.top/2024/04/02/%E7%94%B5%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%BB%BA%E6%A8%A1%E4%B8%8E%E5%88%86%E6%9E%90/">http://zju-paradox.top/2024/04/02/电机系统建模与分析/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明:</span> <span class="post-copyright-info">此文章版权归Paradox所有，如有转载，请注明来自原作者</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a><a class="post-meta__tags" href="/tags/%E5%A4%A7%E4%B8%89/">大三</a><a class="post-meta__tags" href="/tags/%E7%94%B5%E6%B0%94/">电气</a></div><div class="post_share"><div class="social-share" data-image="/image/Fufu.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload='this.media="all"'><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/01/15/%E5%A4%A7%E4%B8%89%E4%B8%8A%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/" title="大三（秋冬）课程总结"><img class="cover" src="/image/%E5%B0%81%E9%9D%A2.png" onerror='onerror=null,src="/img/404.jpg"' alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">大三（秋冬）课程总结</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/01/15/%E5%A4%A7%E4%B8%89%E4%B8%8A%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/" title="大三（秋冬）课程总结"><img class="cover" src="/image/%E5%B0%81%E9%9D%A2.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-15</div><div class="title">大三（秋冬）课程总结</div></div></a></div><div><a href="/2023/12/27/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E8%AF%BE%E6%9C%AC%E5%A4%96%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85/" title="微机原理课本外知识点补充"><img class="cover" src="/image/DZ.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-27</div><div class="title">微机原理课本外知识点补充</div></div></a></div><div><a href="/2023/12/05/%E6%8E%A7%E5%88%B6%E7%90%86%E8%AE%BA/" title="控制理论整理"><img class="cover" src="/image/boat-4812434_1280.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-05</div><div class="title">控制理论整理</div></div></a></div><div><a href="/2023/10/10/%E7%94%B5%E5%8A%9B%E7%B3%BB%E7%BB%9F%E7%A8%B3%E6%80%81%E5%88%86%E6%9E%90/" title="电力系统稳态分析笔记"><img class="cover" src="https://ts1.cn.mm.bing.net/th/id/R-C.8305e77baddb6a1d66427138c4bcf314?rik=I%2b2vBdO0M0WXZw&riu=http%3a%2f%2fdrdbsz.oss-cn-shenzhen.aliyuncs.com%2f2102221710291487864535.jpeg&ehk=OO%2b7zr1kzXoAe8kaZ8%2bFn21amKId1R0r%2bfo0%2fH%2fGxpE%3d&risl=&pid=ImgRaw&r=0" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-10</div><div class="title">电力系统稳态分析笔记</div></div></a></div></div></div><hr class="custom-hr"><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i> <span>评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/image/dog.jpg" onerror='this.onerror=null,this.src="/img/friend_404.gif"' alt="avatar"></div><div class="author-info__name">Paradox</div><div class="author-info__description">未知苦处，不信神佛</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ParadoxTZ"><i class="fab fa-github"></i><span>个人主页(Github)</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/ParadoxTZ" target="_blank" title="Github"><i class="fab fa-github" style="color:#000"></i></a><a class="social-icon" href="mailto:420907574@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color:#000"></i></a><a class="social-icon" href="https://mp.weixin.qq.com/mp/profile_ext?action=home&amp;__biz=Mzg3MDk3NzYwOQ==" target="_blank" title="Wechat"><i class="fab fa-weixin" style="color:#000"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">玩得开心！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#chap1.-%E6%91%98%E8%A6%81"><span class="toc-number">1.</span> <span class="toc-text">Chap1. 摘要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#chap2.-%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E6%95%B0%E5%80%BC%E8%A7%A3%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">Chap2. 微分方程数值解法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#chap3.-%E4%B8%80%E8%88%AC%E5%8C%96%E7%94%B5%E6%9C%BA%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">Chap3. 一般化电机模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">3.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%96%B9%E7%A8%8B%E5%BC%8F"><span class="toc-number">3.2.</span> <span class="toc-text">基本方程式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E6%96%B9%E5%90%91%E7%9A%84%E8%A7%84%E5%AE%9A"><span class="toc-number">3.2.1.</span> <span class="toc-text">正方向的规定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B5%E7%A3%81%E6%96%B9%E7%A8%8B%E5%BC%8F"><span class="toc-number">3.2.2.</span> <span class="toc-text">电磁方程式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#chap4.-%E7%9B%B4%E6%B5%81%E7%94%B5%E6%9C%BA%E4%BB%BF%E7%9C%9F"><span class="toc-number">4.</span> <span class="toc-text">Chap4. 直流电机仿真</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#chap5.-%E4%B8%89%E7%9B%B8%E4%BA%A4%E6%B5%81%E7%94%B5%E6%9C%BA%E5%9C%A8%E7%9B%B8%E5%9D%90%E6%A0%87%E7%B3%BB%E4%B8%8B%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-number">5.</span> <span class="toc-text">Chap5. 三相交流电机在相坐标系下的模型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#chap6.-%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2"><span class="toc-number">6.</span> <span class="toc-text">Chap6. 坐标变换</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%95-%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC"><span class="toc-number">7.</span> <span class="toc-text">附录-公式推导</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E8%88%AC%E5%8C%96%E7%94%B5%E6%9C%BA%E6%97%8B%E8%BD%AC%E7%94%B5%E5%8A%BF"><span class="toc-number">7.0.1.</span> <span class="toc-text">一般化电机旋转电势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E7%9B%B8%E4%BA%A4%E6%B5%81%E7%94%B5%E6%9C%BA%E7%94%B5%E6%84%9F%E7%9F%A9%E9%98%B5"><span class="toc-number">7.0.2.</span> <span class="toc-text">三相交流电机电感矩阵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E7%9B%B8%E4%BA%A4%E6%B5%81%E7%94%B5%E6%9C%BA%E7%94%B5%E7%A3%81%E8%BD%AC%E7%9F%A9"><span class="toc-number">7.0.3.</span> <span class="toc-text">三相交流电机电磁转矩</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/04/02/%E7%94%B5%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%BB%BA%E6%A8%A1%E4%B8%8E%E5%88%86%E6%9E%90/" title="电机系统建模与分析"><img src="/image/Fufu.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="电机系统建模与分析"></a><div class="content"><a class="title" href="/2024/04/02/%E7%94%B5%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%BB%BA%E6%A8%A1%E4%B8%8E%E5%88%86%E6%9E%90/" title="电机系统建模与分析">电机系统建模与分析</a><time datetime="2024-04-02T06:00:15.080Z" title="发表于 2024-04-02 14:00:15">2024-04-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/15/%E5%A4%A7%E4%B8%89%E4%B8%8A%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/" title="大三（秋冬）课程总结"><img src="/image/%E5%B0%81%E9%9D%A2.png" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="大三（秋冬）课程总结"></a><div class="content"><a class="title" href="/2024/01/15/%E5%A4%A7%E4%B8%89%E4%B8%8A%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/" title="大三（秋冬）课程总结">大三（秋冬）课程总结</a><time datetime="2024-01-15T07:31:06.092Z" title="发表于 2024-01-15 15:31:06">2024-01-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/12/27/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E8%AF%BE%E6%9C%AC%E5%A4%96%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85/" title="微机原理课本外知识点补充"><img src="/image/DZ.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="微机原理课本外知识点补充"></a><div class="content"><a class="title" href="/2023/12/27/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E8%AF%BE%E6%9C%AC%E5%A4%96%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85/" title="微机原理课本外知识点补充">微机原理课本外知识点补充</a><time datetime="2023-12-27T07:28:57.562Z" title="发表于 2023-12-27 15:28:57">2023-12-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/12/05/%E6%8E%A7%E5%88%B6%E7%90%86%E8%AE%BA/" title="控制理论整理"><img src="/image/boat-4812434_1280.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="控制理论整理"></a><div class="content"><a class="title" href="/2023/12/05/%E6%8E%A7%E5%88%B6%E7%90%86%E8%AE%BA/" title="控制理论整理">控制理论整理</a><time datetime="2023-12-05T07:13:22.401Z" title="发表于 2023-12-05 15:13:22">2023-12-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/10/%E7%94%B5%E5%8A%9B%E7%B3%BB%E7%BB%9F%E7%A8%B3%E6%80%81%E5%88%86%E6%9E%90/" title="电力系统稳态分析笔记"><img src="https://ts1.cn.mm.bing.net/th/id/R-C.8305e77baddb6a1d66427138c4bcf314?rik=I%2b2vBdO0M0WXZw&amp;riu=http%3a%2f%2fdrdbsz.oss-cn-shenzhen.aliyuncs.com%2f2102221710291487864535.jpeg&amp;ehk=OO%2b7zr1kzXoAe8kaZ8%2bFn21amKId1R0r%2bfo0%2fH%2fGxpE%3d&amp;risl=&amp;pid=ImgRaw&amp;r=0" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="电力系统稳态分析笔记"></a><div class="content"><a class="title" href="/2023/10/10/%E7%94%B5%E5%8A%9B%E7%B3%BB%E7%BB%9F%E7%A8%B3%E6%80%81%E5%88%86%E6%9E%90/" title="电力系统稳态分析笔记">电力系统稳态分析笔记</a><time datetime="2023-10-10T08:20:54.065Z" title="发表于 2023-10-10 16:20:54">2023-10-10</time></div></div></div></div></div></div></main><footer id="footer" style="background-image:url(/image/top3.jpg)"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By Paradox</div><div class="framework-info"><span>框架</span> <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题</span> <a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://paradoxtz.zeabur.app',
+      region: 'ap-hangzhou',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://paradoxtz.zeabur.app',
+      region: 'ap-hangzhou',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i> <span>数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><script async>window.onload=function(){var e=document.createElement("script"),t=document.getElementsByTagName("script")[0];e.type="text/javascript",e.async=!0,e.src="/sw-register.js?v="+Date.now(),t.parentNode.insertBefore(e,t)}</script></body></html>
