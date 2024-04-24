@@ -28,15 +28,14 @@
   <entry>
     <title>电力电子技术</title>
     <url>/2024/04/18/%E7%94%B5%E5%8A%9B%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="电力电子技术">电力电子技术</h1>
-<h2 id="功率半导体器件">功率半导体器件</h2>
-<h3 id="分类与基本型">分类与基本型</h3>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="功率半导体器件">功率半导体器件</h1>
+<h2 id="分类与基本型">分类与基本型</h2>
 <table>
 <colgroup>
-<col style="width: 16%" />
+<col style="width: 15%" />
 <col style="width: 17%" />
-<col style="width: 32%" />
-<col style="width: 32%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -67,7 +66,7 @@ class="math inline">\((A,K,G)\)</span>四层<br />阳极a门极g共同控制<br 
 class="math inline">\(U_{DRM}\)</span><br />反向重复峰值电压 ：<span
 class="math inline">\(U_{RRM}\)</span><br />额定电压：<span
 class="math inline">\(U_R=\min\{U_{DRM},U_{RRM}\}\)</span><br />额定（通态平均）电流：<span
-class="math inline">\(I_{T(AV)}=\frac{1.5-2}{1.57}I_T\)</span><br />维持电流：<span
+class="math inline">\(I_{T(AV)}=\frac{1.5\sim2}{1.57}I_T\)</span><br />维持电流：<span
 class="math inline">\(I_H\)</span><br />擎住电流：<span
 class="math inline">\(I_L\)</span></td>
 </tr>
@@ -80,7 +79,7 @@ class="math inline">\(U_{CEM}\)</span><br />饱和压降：<span
 class="math inline">\(U_{CES}\)</span></td>
 </tr>
 <tr class="even">
-<td>功率场效应晶体管<br />P-MOSFET</td>
+<td>功率场效应晶体管P-MOSFET</td>
 <td>单极型<br />全控型<br />电压驱动</td>
 <td><span class="math inline">\(g_m=\frac{\Delta i_D}{\Delta
 U_{GS}}\)</span><br />当<span
@@ -98,6 +97,355 @@ class="math inline">\(U_{be}\)</span><br />但一般在15V附近</td>
 </tr>
 </tbody>
 </table>
+<h2 id="各管特性">各管特性</h2>
+<h3 id="晶闸管scr">晶闸管SCR</h3>
+<ul>
+<li>晶闸管是一个三端<span
+class="math inline">\((A,K,G)\)</span>四层<span
+class="math inline">\((P_1-N_1-P_2-N_2)\)</span>的半导体器件，同时承受正向阳极电压
+<span class="math inline">\(V_{AK}\)</span> 和正向门极电压 <span
+class="math inline">\(V_{GK}\)</span>
+才能导通。称维持晶闸管从阻断转为导通并撤除 <span
+class="math inline">\(V_G\)</span>
+时的最小电流为<strong>擎住电流</strong> <span
+class="math inline">\(I_L\approx(2\sim4)I_H\)</span>。</li>
+<li>要使晶闸管关断，需使其阳极电流 <span
+class="math inline">\(I_a\)</span> 降低到<strong>维持电流</strong> <span
+class="math inline">\(I_H\)</span>
+（几十毫安）以下。但是要使其真正关断（恢复正向阻断能力），必须加一定时间<strong>反压</strong>（因此导致晶闸管不能应对高频）。</li>
+<li>用 <span class="math inline">\(I_T\)</span>
+表示晶闸管流过的<strong>电流有效值</strong>，其<strong>额定电流</strong>
+<span class="math inline">\(I_{T(AV)}\)</span>
+是有效值转为平均值后的1.5~2倍，故 <span
+class="math inline">\(I_{T(AV)}=\frac{1.5\sim2}{1.57}I_T\)</span>。</li>
+</ul>
+<h3 id="大功率晶体管gtr">大功率晶体管GTR</h3>
+<ul>
+<li>相当于高中学的三极管，一般工作在（准）饱和区和截止区。在关断时，会由于“除去基区超量储存电荷”和
+<span class="math inline">\(C_{be}\)</span>
+引起一点时间的反向电流。</li>
+<li><strong>二次击穿现象</strong>：考虑 <span
+class="math inline">\(I_C-U_{CE}\)</span> 曲线，正常情况下随着 <span
+class="math inline">\(U_{CE}\)</span> 增大，<span
+class="math inline">\(I_C\)</span> 基本不变，但是当 <span
+class="math inline">\(U_{CE}\)</span> 过大时，会使 <span
+class="math inline">\(I_{C}\)</span>
+开始增大（一次击穿，可逆）然后瞬间击穿三极管使电压大幅减小（二次击穿，不可逆），电流很大。</li>
+</ul>
+<h3 id="场效应晶体管p_mosfet">场效应晶体管P_MOSFET</h3>
+<ul>
+<li>场效应晶体管是多数载流子器件，不存在少数载流子特有的存储效应，因此开关时间短，可高频运行。其
+<span class="math inline">\(i_D-U_{DS}\)</span> 曲线与GTR的 <span
+class="math inline">\(I_C-U_{CE}\)</span> 曲线十分接近。</li>
+<li>P-MOSFET时电压控制器件（比电流型简单多了），但是通态压降大，不适用于大功率</li>
+</ul>
+<h3 id="绝缘栅双极型晶体管igbt">绝缘栅双极型晶体管IGBT</h3>
+<ul>
+<li><strong>擎住效应</strong>：当通态集电极电流大于某临界值（静态擎住），或关断过程中电压变化速率过快（动态擎住）会导致寄生晶闸管导通，栅极对器件失控。</li>
+</ul>
+<h1 id="驱动与保护">驱动与保护</h1>
+<h2 id="晶闸管">晶闸管</h2>
+<p>​ 晶闸管触发电路的作用是将控制信号 <span
+class="math inline">\(U_k\)</span> 转变为控制角 <span
+class="math inline">\(\alpha\)</span>
+信号，向晶闸管提供门极电流，以决定各个晶闸管的导通时刻。</p>
+<h3 id="锯齿波同步移相触发器">锯齿波同步移相触发器</h3>
+<p><img src="/image/电力电子1.jpg" /></p>
+<ol type="1">
+<li><strong>同步检测：</strong>当左下角正弦同步电压 <span
+class="math inline">\(u_{TB}\)</span> 由正变负时，开关管 <span
+class="math inline">\(V_{T2}\)</span>
+截止，开始形成锯齿波，此即为“同步”。锯齿波的宽度=电容 <span
+class="math inline">\(C_2\)</span> 的充电时间=开关管 <span
+class="math inline">\(V_{T2}\)</span> 的截止时间。当开关管 <span
+class="math inline">\(V_{T2}\)</span> 左侧的 Q 点被充电到 1.4V
+时钳位，开关管导通，因此可以通过调节 Q点的充电时间常数 RC 来调整开关管
+<span class="math inline">\(V_{T2}\)</span> 的截止时间。</li>
+<li><strong>锯齿波形成：</strong>红色虚线框中近似为恒流源，通过 <span
+class="math inline">\(C_2\)</span> 充电，开关管 <span
+class="math inline">\(V_{T2}\)</span>
+放电。充电为恒流源，放电时间极快，因此近似为不连续（具有零电压）的锯齿波。</li>
+<li><strong>移相控制：</strong>通过下方的两个电压 <span
+class="math inline">\(u_k,u_P\)</span> 来对锯齿波（<span
+class="math inline">\(0\sim V_M\)</span>）进行一个向下的平移（<span
+class="math inline">\(-\Delta v\sim V_M-\Delta
+V\)</span>）。平移后锯齿波与零的交点不再是原点，这个偏移的角度基本等于移相角（实际上是与
+0.7V 的交点，考虑到晶体管 <span class="math inline">\(VT_4\)</span>
+的发射极压降）</li>
+<li><strong>脉冲的形成与放大：</strong>当 <span
+class="math inline">\(VT_4\)</span> 开通（锯齿波电压&gt;0.7V）时，A
+点低电平，<span class="math inline">\(VT_5\)</span>
+关断，后续一系列管子全部导通，使 <span
+class="math inline">\(u_{c8},u_B\)</span> 瞬间低电平。后续 <span
+class="math inline">\(C_3\)</span> 迅速充电使<span
+class="math inline">\(VT_5\)</span> 导通，后续一系列管子全部关断，<span
+class="math inline">\(u_{c8},u_B\)</span> 重新变高。</li>
+<li><strong>强触发脉冲：</strong>变压器将 <span
+class="math inline">\(u_B\)</span>
+瞬间变化的这一段截出来，得到一个窄脉冲（大概是这样，这块讲的不是很清楚）</li>
+</ol>
+<p><img src="/image/电力电子2.jpg" /></p>
+<h3 id="同步的实现附例题">同步的实现（附例题）</h3>
+<p>同步：晶闸管阳极电压和同步电压协调、相互配合工作，我们需要确定同步信号
+<span class="math inline">\(u_{Ta}\)</span> 与对应晶闸管阳极电压 <span
+class="math inline">\(u_a\)</span>
+之间的相位关系。下面直接给出结论，表格内是<strong>同步电压 <span
+class="math inline">\(u_T\)</span> 相对于主电压的相位关系</strong>。</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>正弦波移相</th>
+<th>锯齿波移相</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>NPN晶体管</strong></td>
+<td>滞后120°</td>
+<td>反相</td>
+</tr>
+<tr class="even">
+<td><strong>PNP晶体管</strong></td>
+<td>超前60°</td>
+<td>同相</td>
+</tr>
+</tbody>
+</table>
+<p><img src="/image/电力电子3.jpg" /></p>
+<h4 id="例1.-书-p49-例-2-2">例1. 书 P49 例 2-2</h4>
+<ul>
+<li><p><strong>Q.</strong> 整流变压器（主变压器）为 Y/Y-12
+连接组，同步变压器为 <span class="math inline">\(\Delta\)</span>/Y-5
+连接组，触发器采用NPN晶体管组成的正弦波同步触发电路，阻容滤波滞后30°（即
+<span class="math inline">\(u_{T}&#39;\)</span> 滞后 <span
+class="math inline">\(u_T\)</span>
+30°），求主电路阳极电压与触发器同步电压的对应关系。</p></li>
+<li><p><strong>分析：</strong>可以理解为某个电力电子电路有两个输入端，一个接主电路（abc），一个接同步触发电路（TaTbTc），而这两个电路都是从同一个交流电压源
+<span class="math inline">\(u_1\)</span> 上接过来的。一般来讲当然是 a
+对应 Ta（Ta<span
+class="math inline">\(&#39;\)</span>）或这样，但是为了满足上表的关系，我们不一定能这么接，比如我们需要
+a 对应 Tb，这个就叫对应关系表。</p>
+<ol type="1">
+<li><strong>查表</strong>。NPN晶体管组成的正弦波同步触发电路，需要同步电压滞后主电压120°，这里因为有阻容滞后电路，因此对应着表示
+<span class="math inline">\(u_{Ta}&#39;\)</span> 要滞后 <span
+class="math inline">\(u_a\)</span> 120°，<span
+class="math inline">\(u_{Ta}\)</span> 要滞后 <span
+class="math inline">\(u_{a}\)</span> 90°。</li>
+<li>接着来看矢量图（不会画的话回去复习电机学第三章），主变压器 Y/Y-12
+表示 <span class="math inline">\(U_{AB}\)</span> 与 <span
+class="math inline">\(U_{ab}\)</span> 是同相位的，设为 12
+点方向。线电压要超前相电压30°（自己想象一下图），因此 <span
+class="math inline">\(U_a\)</span> 在 1 点钟方向。</li>
+<li>接下来看同步变压器的矢量图，由于是从同一个交流电压源 <span
+class="math inline">\(u_1\)</span> 上接过来的，因此 <span
+class="math inline">\(U_{TAB}\)</span> 就是 <span
+class="math inline">\(U_{AB}\)</span>，也在 12 点钟方向。同步变压器为
+<span class="math inline">\(\Delta\)</span>/Y-5 连接组，表示 <span
+class="math inline">\(U_{Tab}\)</span> 在 5 点钟方向，因此 <span
+class="math inline">\(U_{Ta}\)</span> 在 6 点钟方向。</li>
+<li>上面分析了，按理说 <span class="math inline">\(u_{Ta}\)</span>
+要滞后 <span class="math inline">\(u_{a}\)</span> 90°，也就是说 <span
+class="math inline">\(U_{Ta}\)</span> 应该在 4
+点钟方向才行，但是现在不在。考虑一下同步信号的其他相5，按照 AZBXCY
+的顺序，<span class="math inline">\(U_{T(-b)}\)</span> 刚好超前 <span
+class="math inline">\(U_{Ta}\)</span> 60°，也就是说 <span
+class="math inline">\(U_{T(-b)}\)</span> 刚好就在 4
+点钟方向。有了阳极电压 <span class="math inline">\(U_a\)</span>
+对应的同步电压相，就可以把这个表补充完整如下。</li>
+</ol></li>
+</ul>
+<p><img src="/image/电力电子4.jpg" /></p>
+<h4 id="例2.-书-p71-习题11">例2. 书 P71 习题11</h4>
+<ul>
+<li><strong>Q.</strong> （本题以 <span
+class="math inline">\(\Delta\)</span>/Y-1 为例）整流变压器（主变压器）为
+Y/Y-12 连接组，同步变压器为 <span
+class="math inline">\(\Delta\)</span>/Y-1
+连接组，触发器采用NPN晶体管组成的锯齿波同步触发电路，试选择 RC
+滤波（滞后）环节，并求主电路阳极电压与触发器同步电压的对应关系。
+<ol type="1">
+<li><strong>查表</strong>。NPN晶体管组成的锯齿波同步触发电路，需要同步电压滞后主电压180°（反相），因此对应着表示
+<span class="math inline">\(u_{Ta}&#39;\)</span> 要滞后 <span
+class="math inline">\(u_a\)</span> 180°。</li>
+<li>类似的，主变压器 Y/Y-12 表示 <span
+class="math inline">\(U_{AB}\)</span> 与 <span
+class="math inline">\(U_{ab}\)</span> 是同相位的，设为 12 点方向，因此
+<span class="math inline">\(U_a\)</span> 在 1 点钟方向。同步变压器为
+<span class="math inline">\(\Delta\)</span>/Y-1 连接组，表示 <span
+class="math inline">\(U_{Tab}\)</span> 在 1 点钟方向，因此 <span
+class="math inline">\(U_{Ta}\)</span> 在 2 点钟方向。</li>
+<li>按理说需要 <span class="math inline">\(u_{Ta}\)</span> 在 <span
+class="math inline">\(u_a\)</span> 的反相，即 7 点钟方向，但是现在在 2
+点钟方向。但是这里我们可以发现，因为每相间相差60°，即 2
+小时，因此同步变压器的复变对应的每一相都不可能在 7
+点钟。所以，我们这个时候要引入 RC 滤波（滞后）电路。滞后 30°
+就够了。</li>
+<li>滞后 30° 得到 <span class="math inline">\(U_{Ta}&#39;\)</span> 在 3
+点钟方向，按照 AZBXCY 的顺序，<span
+class="math inline">\(U_{Tb}&#39;\)</span> 刚好滞后 <span
+class="math inline">\(U_{Ta}&#39;\)</span> 120°，即 <span
+class="math inline">\(U_{Tb}&#39;\)</span> 刚好在 7
+点钟方向，这样就得到了对应关系表，把这个表补充完整如下。</li>
+</ol></li>
+</ul>
+<p><img src="/image/电力电子5.jpg" /></p>
+<h3 id="晶闸管的保护">晶闸管的保护</h3>
+<table>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 44%" />
+<col style="width: 44%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>类型</th>
+<th>保护方式</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>串联</td>
+<td>并联均压电阻或阻容</td>
+<td>使同时关断，减小换流反向电流</td>
+</tr>
+<tr class="even">
+<td>并联</td>
+<td>串联均流电感（同名端反向）</td>
+<td>感应出反向电势以减小环流</td>
+</tr>
+<tr class="odd">
+<td>过压保护</td>
+<td>1. 变压器星形中心点接地<br />2. 变压器副边阻容接地<br />3.
+压敏电阻（稳压二极管）接地<br />4. 在直流侧设置相同的措施</td>
+<td>1. 减小变压器分布电容的瞬时过电压<br />4.
+防止感性负载磁场能量的突然释放</td>
+</tr>
+<tr class="even">
+<td>过流保护</td>
+<td>1. 交流进线电抗采用大漏抗变压器<br />2.
+电流检测装置，过流时发出信号<br />3. 直流快速开关（2ms）<br />4.
+快速熔断器</td>
+<td>1. 利用电抗限制短路电流<br />2. 需一定时间才能相应（0.2s）<br />4.
+最后的防线，一般不希望熔断</td>
+</tr>
+<tr class="odd">
+<td>电压上升率限制</td>
+<td>1. 电源输入端串交流进线电抗 L<sub>T</sub><br />2.
+每个桥臂上串桥臂电感 Ls</td>
+<td>抑制换流 <span class="math inline">\(\frac{\text du}{\text
+dt}\)</span></td>
+</tr>
+<tr class="even">
+<td>电流上升率限制</td>
+<td>1. 利用整流变压器漏抗/交流进线电抗<br />2. 每个桥臂上串桥臂电感
+Ls<br />3. 整流式阻容保护</td>
+<td>3. 使电容放电电流不经过晶闸管</td>
+</tr>
+</tbody>
+</table>
+<h2 id="其他器件典型驱动电路">其他器件典型驱动电路</h2>
+<h3 id="贝克箝位电路">贝克箝位电路</h3>
+<ul>
+<li>当 GTR 导通后，基极驱动电路应该能提供足够大的基极电流使 GTR
+处于（准）饱和状态，以降低导通损耗，保证器件安全。</li>
+<li>当 GTR 导通后，又不希望 GTR
+处于深度饱和状态，否则存储时间过长不利于关断和高频响应。</li>
+<li>贝克箝位电路是一种抗饱和电路，可以使 GTR 工作在准饱和状态，<span
+class="math inline">\(U_{ce}\)</span> 基本等于 1.4V。</li>
+</ul>
+<p><img src="/image/电力电子6.jpg" /></p>
+<h3 id="gtr缓冲电路">GTR缓冲电路</h3>
+<ul>
+<li>通过错开高电压、大电流出现的时刻，使两者之积（瞬时功率）减小
+<ul>
+<li>用电容 C 来吸收电压，使关断时刻<strong>电压上升减慢</strong></li>
+<li>用电感 L 来吸收电流，使开通时刻<strong>电流上升减慢</strong></li>
+</ul></li>
+</ul>
+<p><img src="/image/电力电子7.jpg" /></p>
+<h1 id="ac-dc-变换整流">AC-DC 变换：整流</h1>
+<ul>
+<li>这里不做非常细致的推导和详解，只做一些总结，可能不全</li>
+<li>如果物理量有下标 <code>d</code> ，表示平均值，比如 <span
+class="math inline">\(U_d,I_d,I_{dT}(晶闸管),I_{dDF}(蓄流二极管)\)</span>
+等</li>
+<li>如果物理量没有下标 <code>d</code> ，表示有效值，比如 <span
+class="math inline">\(U_2,I_2,I_T(晶闸管),I_{DF}(蓄流二极管)\)</span>
+等</li>
+</ul>
+<h2 id="单相与三相整流">单相与三相整流</h2>
+<h3 id="负载电压和负载电流">负载电压和负载电流</h3>
+<ol type="1">
+<li><p>当带电阻性负载时，负载电压最低下降到
+0，这是临界连续点，所以电阻性负载可能出现断续。当带电感性负载时，负载电压可以继续下降到负值。而接上<strong>蓄流二极管</strong>的时候，又和电阻性负载类似的，电压不会过零！</p></li>
+<li><p>负载电压后面的三角函数系数的决定因素是<strong>电压连续还是断续</strong>：</p>
+<ol type="1">
+<li>若<strong>电压连续</strong>，则 <span
+class="math inline">\(U_d=U_{d0}\cos\alpha\)</span></li>
+<li>若<strong>电压断续</strong>，则 <span
+class="math inline">\(U_d=U_{d0}\frac{1+\cos}2\)</span>（也不一定是1，可能是其他值，一般是1）</li>
+</ol>
+<p>断续里面这个 <span class="math inline">\(\frac{1+\cos}2\)</span>
+不一定是 <span
+class="math inline">\(\alpha\)</span>，主要看移相角的定义，比如在单相中是
+<span class="math inline">\(\alpha\)</span>，三相中就是 <span
+class="math inline">\(\alpha+\frac{\pi}6\)</span></p></li>
+<li><p>负载电压前面的系数可以参考 3.5 节中的公式：<span
+class="math inline">\(U_d=\frac{\sqrt2m}{\pi}\sin\frac{\pi}mU_s\cos\alpha\)</span>，当然这里的三角系数要用上面写的那样做，不一定是
+<span class="math inline">\(\cos\alpha\)</span></p>
+<ol type="1">
+<li>单相桥式（<span
+class="math inline">\(n=2\)</span>）：<strong>0.9</strong></li>
+<li>三相半波（<span
+class="math inline">\(n=3\)</span>）：<strong>1.17</strong></li>
+<li>三相桥式（<span
+class="math inline">\(n=6,U_s=\sqrt3U_2\)</span>：<strong>2.34</strong></li>
+<li>唯一不太一样的就是单相半波，需要额外注意一下是单相桥式的一半</li>
+</ol></li>
+<li><p>不论有没有电感，平均电流都是 <span
+class="math inline">\(I_d=\frac{U_d}{R_d}\)</span>，阻性负载中电流与电压波形一致，阻感性负载中电流
+<span class="math inline">\(I=\text{const}\)</span>
+（除单相半波整流不接蓄流二极管这一特殊情况外）</p></li>
+<li><p>带 阻感-反电势 负载时，平均电流修正为 <span
+class="math inline">\(I_d=\frac{U_d-E}{R_d}\)</span></p></li>
+</ol>
+<h3 id="其他物理量">其他物理量</h3>
+<ol type="1">
+<li><strong>晶闸管平均电流</strong> <span
+class="math inline">\(I_{dT}\)</span>
+主要看<strong>晶闸管的导通时间</strong>（由于一般都只考虑阻感性负载（甚至带蓄流二极管）下的
+<span class="math inline">\(I_T\)</span>，即确保 <span
+class="math inline">\(I_d=\text{const}\)</span>），一般都有 <span
+class="math inline">\(I_{dT}=\frac{\tau}{nT_s}I_d\)</span>，也就是说负载电流就是在不同时刻接入不同晶闸管上流过的电流而已。如：
+<ol type="1">
+<li>单相半波：<span
+class="math inline">\(I_{dT}=\frac{\pi-\alpha}{2\pi}I_d\)</span></li>
+<li>单相桥式：<span
+class="math inline">\(I_{dT}=\frac12I_d\)</span>（两个桥臂轮流，不管有没有电感都是这样）</li>
+<li>三相半波/三相桥式：<span
+class="math inline">\(I_{dT}=\frac13I_d\)</span></li>
+</ol></li>
+<li><strong>晶闸管电流有效值</strong> <span
+class="math inline">\(I_T\)</span>，由于一般都只考虑阻感性负载（甚至带蓄流二极管）下的
+<span class="math inline">\(I_T\)</span>，即确保 <span
+class="math inline">\(I_d=\text{const}\)</span>，那么这个时候<strong>有效值的系数就是均值的系数开根号</strong>：<span
+class="math inline">\(I_T=\sqrt{\frac{\tau}{nT_s}}I_d\)</span></li>
+<li><strong>变压器输出电流有效值</strong> <span
+class="math inline">\(I_2\)</span>：这个是线电压的有效值，也就是说我们一般考虑某一相（对三相整流而言），这个相对来讲比较复杂，好像也没有什么通用的公式
+<ol type="1">
+<li>单相半波：变压器输出电流就是晶闸管电流</li>
+<li>单相桥式：<span
+class="math inline">\(I_2=\sqrt{\frac1{\pi}\int_{\alpha}^{\pi}\frac{\sqrt2U_2}{R_d}\sin\omega
+t}=\frac{U_2}{R_d}\sqrt{\frac1{2\pi}\sin2\alpha+\frac{\pi-\alpha}{\pi}}\)</span></li>
+<li>三相半波：变压器输出电流就是晶闸管电流，即 <span
+class="math inline">\(I_2=\sqrt{\frac13}I_d\)</span></li>
+<li>三相桥式：由于三相桥式输出的是线电压，因此同一时间有两相导通，故
+<span class="math inline">\(I_2=\sqrt{\frac1{2\pi}(
+\frac{2\pi}3I_d^2+\frac{2\pi}3{(-I_d)}^2}=\sqrt{\frac23}I_d\)</span></li>
+</ol></li>
+</ol>
 ]]></content>
       <categories>
         <category>课程</category>
