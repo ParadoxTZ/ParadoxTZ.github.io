@@ -26,6 +26,23 @@
 ]]></content>
   </entry>
   <entry>
+    <title>运筹学 Cheating Sheet（微雕）分享</title>
+    <url>/2024/04/27/%E8%BF%90%E7%AD%B9%E5%AD%A6/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="运筹学">运筹学</h1>
+<p>运筹学考试允许携带一张A4纸，参考了一些ryjj的笔记。有些东西我在打印出来之后又自己补充了一些。</p>
+<p><a href="\myfile\Cheating Sheet.pdf" target="_blank">PDF版本</a></p>
+<p><a href="\myfile\Cheating Sheet.docx" target="_blank">Word版本（不排除乱码的可能）</a></p>
+]]></content>
+      <categories>
+        <category>课程</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>大三</tag>
+        <tag>电气</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>电力电子技术</title>
     <url>/2024/04/18/%E7%94%B5%E5%8A%9B%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="功率半导体器件">功率半导体器件</h1>
@@ -452,8 +469,8 @@ class="math inline">\(I_2=\sqrt{\frac13}I_d\)</span></li>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
       </tags>
   </entry>
   <entry>
@@ -1246,8 +1263,8 @@ p([I]&#39;^T[\frac32\varPsi_d,~\frac32\varPsi_q,~3\varPsi_0,~[\varPsi_r]]^T)
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
       </tags>
   </entry>
   <entry>
@@ -1306,8 +1323,8 @@ p([I]&#39;^T[\frac32\varPsi_d,~\frac32\varPsi_q,~3\varPsi_0,~[\varPsi_r]]^T)
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
       </tags>
   </entry>
   <entry>
@@ -1609,8 +1626,8 @@ class="math inline">\(m\le2^3-1=7\)</span></p>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
         <tag>微机</tag>
       </tags>
   </entry>
@@ -2392,8 +2409,8 @@ class="math inline">\(\alpha=k\frac{\tau}T\)</span>，查表</li>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
       </tags>
   </entry>
   <entry>
@@ -3070,8 +3087,8 @@ Q_{i}}\frac1{1-\frac{\partial Q_L}{\partial Q_{i}}}=\lambda
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
       </tags>
   </entry>
   <entry>
@@ -4625,8 +4642,8 @@ U=\text{const}\)</span>，因此气隙合成磁通不会变化</li>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
       </tags>
   </entry>
   <entry>
@@ -6229,8 +6246,8 @@ SEQx：中断标志位，1表示有中断，只读</td>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
         <tag>微机</tag>
       </tags>
   </entry>
@@ -6254,8 +6271,8 @@ SEQx：中断标志位，1表示有中断，只读</td>
       </categories>
       <tags>
         <tag>大二</tag>
-        <tag>电气</tag>
         <tag>课程资料</tag>
+        <tag>电气</tag>
       </tags>
   </entry>
   <entry>
@@ -6338,8 +6355,8 @@ id="电气学院大二春夏课程笔记汇总">电气学院大二（春夏）�
       <tags>
         <tag>笔记</tag>
         <tag>大二</tag>
-        <tag>电气</tag>
         <tag>课程资料</tag>
+        <tag>电气</tag>
       </tags>
   </entry>
   <entry>
