@@ -563,7 +563,7 @@ class="math inline">\(U_d&gt;0\)</span> 的情况，形成短路</li>
 <li>交流电压缺相、电源消失等，只有反电势E，使之通过晶闸管短路</li>
 <li>逆变角 <span class="math inline">\(\beta\)</span>
 太小，晶闸管承受反压时间不够无法关断。一般要求 <span
-class="math inline">\(\beta_{min}=30°-35°\)</span></li>
+class="math inline">\(\beta_{min}=30°\sim35°\)</span></li>
 </ol>
 <h2 id="电路谐波及功率因数">电路谐波及功率因数</h2>
 <ul>
@@ -690,7 +690,31 @@ class="math inline">\(\alpha&lt;\varphi\)</span>
 变频电路只能降频，是通过对高频输入电路的不断通断控制，形成一个平均等效的低频正弦波输出。要实现变频，必须不断改变晶闸管的触发角
 <span
 class="math inline">\(\alpha\)</span>，一般采用余弦交点控制法。</p>
-<p><img src="\image\电力电子23.png" /></p>
+<p><img src="/image/电力电子23.png" /></p>
+<p>​ 加在负载上的电压一共有六种，其幅值相同，相位相差60°，，用 <span
+class="math inline">\(u_1\sim u_6\)</span>
+表示。每次比较前后两相电压与余弦参考电压 <span
+class="math inline">\(u_R\)</span> 的差值，若 <span
+class="math inline">\(u_{i+1}-u_R&lt;u_R-u_i\)</span>，那么就切换到下一个管子使其导通。即管子切换的临界条件为：<span
+class="math inline">\(u_R=\frac{u_i+u_{i+1}}2\)</span></p>
+<p><img src="/image/电力电子24.png" /></p>
+<p>​
+上图中红色的是最终的输出波形。对于上述六脉波变频电路，一般要求输出电压不能高于电网电压的<span
+class="math inline">\(\frac13\sim\frac12\)</span>，即约 20Hz。</p>
+<p>​
+晶闸管换流时需要从电网中吸收感性无功，因此输入功率因数一定滞后。理想的输出电压是
+<span
+class="math inline">\(u_R=\sqrt2U_1\sin\omega_1t\)</span>，实际的输出电压为
+<span
+class="math inline">\(u_i=U_{do}\cos\alpha_i\)</span>，当两者相等时，有
+<span
+class="math inline">\(\cos\alpha_i=\frac{\sqrt2U_1}{U_{do}}\sin\omega_1t\)</span>，因此定义输出电压比：<br />
+<span class="math display">\[
+\gamma=\frac{\sqrt2U_1}{U_{do}}
+\]</span><br />
+​<span class="math inline">\(\gamma\)</span> 越小，输出电压越低，半周期内
+<span class="math inline">\(\alpha\)</span>
+的平均值越接近90°，功率因数越低。</p>
 ]]></content>
       <categories>
         <category>课程</category>
