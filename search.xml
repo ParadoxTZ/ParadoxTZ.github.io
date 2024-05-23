@@ -418,7 +418,7 @@ class="math inline">\(n=2\)</span>）：<strong>0.9</strong></li>
 <li>三相半波（<span
 class="math inline">\(n=3\)</span>）：<strong>1.17</strong></li>
 <li>三相桥式（<span
-class="math inline">\(n=6,U_s=\sqrt3U_2\)</span>：<strong>2.34</strong></li>
+class="math inline">\(n=6,U_s=\sqrt3U_2\)</span>）：<strong>2.34</strong></li>
 <li>唯一不太一样的就是单相半波，需要额外注意一下是单相桥式的一半</li>
 </ol></li>
 <li><p>不论有没有电感，平均电流都是 <span
@@ -445,10 +445,10 @@ class="math inline">\(I_{dT}=\frac12I_d\)</span>（两个桥臂轮流，不管�
 class="math inline">\(I_{dT}=\frac13I_d\)</span></li>
 </ol></li>
 <li><strong>晶闸管电流有效值</strong> <span
-class="math inline">\(I_T\)</span>，由于一般都只考虑阻感性负载（甚至带蓄流二极管）下的
+class="math inline">\(I_T\)</span>，由于一般都只考虑<strong>阻感性</strong>负载（甚至带蓄流二极管）下的
 <span class="math inline">\(I_T\)</span>，即确保 <span
 class="math inline">\(I_d=\text{const}\)</span>，那么这个时候<strong>有效值的系数就是均值的系数开根号</strong>：<span
-class="math inline">\(I_T=\sqrt{\frac{\tau}{nT_s}}I_d\)</span></li>
+class="math inline">\(I_T=\sqrt{\frac{\tau}{nT_s}}I_d\)</span>（如果是电阻性负载就不能这么写）</li>
 <li><strong>变压器输出电流有效值</strong> <span
 class="math inline">\(I_2\)</span>：这个是线电压的有效值，也就是说我们一般考虑某一相（对三相整流而言），这个相对来讲比较复杂，好像也没有什么通用的公式
 <ol type="1">
@@ -463,6 +463,234 @@ class="math inline">\(I_2=\sqrt{\frac13}I_d\)</span></li>
 \frac{2\pi}3I_d^2+\frac{2\pi}3{(-I_d)}^2}=\sqrt{\frac23}I_d\)</span></li>
 </ol></li>
 </ol>
+<h3 id="波形与总结">波形与总结</h3>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 5%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>单相半波</th>
+<th>单相桥式</th>
+<th>三相半波</th>
+<th>三相桥式</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>电路</td>
+<td><img src="\image\电力电子01.png" /></td>
+<td><img src="\image\电力电子04.png" /></td>
+<td><img src="\image\电力电子07.png" /></td>
+<td><img src="\image\电力电子10.png" /></td>
+</tr>
+<tr class="even">
+<td>阻性</td>
+<td><img src="\image\电力电子02.png" /></td>
+<td><img src="\image\电力电子05.png" /></td>
+<td><img src="\image\电力电子08.png" /></td>
+<td><img src="\image\电力电子11.png" /></td>
+</tr>
+<tr class="odd">
+<td>感性</td>
+<td><img src="\image\电力电子03.png" /></td>
+<td><img src="\image\电力电子06.png" /></td>
+<td><img src="\image\电力电子09.png" /></td>
+<td><img src="\image\电力电子12.png" /></td>
+</tr>
+<tr class="even">
+<td>蓄流</td>
+<td><img src="\image\电力电子13.png" /></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>反电势</td>
+<td></td>
+<td><img src="\image\电力电子14.png" /></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="换流重叠角">换流重叠角</h3>
+<p>​
+在换流时认为两管同时导通，考虑电感影响，输出电压下降为两相电压的平均值（因为在换流时一般情况下电压肯定是升高的，因此现在考虑换流重叠电压会降低）。下降的电压为：<br />
+<span class="math display">\[
+\Delta U_d=\frac{mX_B}{2\pi}I_d
+\]</span><br />
+​换流重叠角的计算式：<br />
+<span class="math display">\[
+\cos\alpha-\cos(\alpha+\mu)=\frac{2I_dX_B}{\sqrt6U_2}
+\]</span><br />
+​在计算时，先不考虑换流重叠的影响，计算出原先的直流输出电压 <span
+class="math inline">\(U_{d0}\)</span>，然后考虑换流重叠电压降，计算电流：<br />
+<span class="math display">\[
+I_d=\frac{U_{d0}-\Delta U_d}R\Rightarrow
+I_d=\frac{U_{d0}}{R+\frac{mX_B}{2\pi}}
+\]</span></p>
+<h2 id="有源逆变">有源逆变</h2>
+<p>​
+按理说有源逆变不该在这里出现的，但是因为电路图和原理比较像，所以就一起讲掉了。有源逆变能产生的条件有二：</p>
+<ol type="1">
+<li>有一个能使电能倒流的直流电势。<strong>电势的极性与晶闸管单向导电性相同</strong>，且大小稍大于直流平均电压。</li>
+<li>变流电路直流侧能产生负值的直流平均电压（即必须是感性负载）</li>
+</ol>
+<p>​ 考虑到第二个条件，一般晶闸管的控制角 <span
+class="math inline">\(\alpha&gt;\pi\)</span>，因此有时也采用 <span
+class="math inline">\(\beta=\pi-\alpha\)</span>
+来代替。需要注意的是，在逆变状态下，电路的 <span
+class="math inline">\(U_d,E\)</span>
+均需代以<strong>负值</strong>。故有：<br />
+<span class="math display">\[
+I_d=\frac{U_d-E}R
+\]</span></p>
+<h3 id="逆变颠覆">逆变颠覆</h3>
+<p>​
+在逆变状态下发生以下事故，可能导致逆变颠覆，即直流电势的短路之类。</p>
+<ol type="1">
+<li>晶闸管脉冲丢失或延时，使出现 <span
+class="math inline">\(U_d&gt;0\)</span>
+的情况，交流电压和直流电势顺向串联</li>
+<li>晶闸管故障，正向阻断期误导通，使出现 <span
+class="math inline">\(U_d&gt;0\)</span> 的情况，形成短路</li>
+<li>交流电压缺相、电源消失等，只有反电势E，使之通过晶闸管短路</li>
+<li>逆变角 <span class="math inline">\(\beta\)</span>
+太小，晶闸管承受反压时间不够无法关断。一般要求 <span
+class="math inline">\(\beta_{min}=30°-35°\)</span></li>
+</ol>
+<h2 id="电路谐波及功率因数">电路谐波及功率因数</h2>
+<ul>
+<li>定义：
+<ul>
+<li>位移系数：<span
+class="math inline">\(\cos\varphi_1=\frac{P_{基波}}{S_{基波}}=\cos\alpha(忽略换流重叠角)\)</span></li>
+<li>畸变系数：<span class="math inline">\(\frac{I_1}I\)</span></li>
+<li>功率因数：<span class="math inline">\(\cos\varphi=\frac
+PS=\frac{I_1}{I}\cos\varphi_1\)</span></li>
+</ul></li>
+<li>单相桥式电路：
+<ul>
+<li>基波分量电流有效值：<span
+class="math inline">\(I_1=0.9I\)</span></li>
+<li>功率因数：<span
+class="math inline">\(\cos\varphi=\frac{I_1}{I}\cos\varphi_1=0.9\cos\alpha\)</span></li>
+</ul></li>
+<li>三相桥式整流：
+<ul>
+<li>功率因数：<span
+class="math inline">\(\cos\varphi=\frac{I_1}{I}\cos\varphi_1=0.955\cos\alpha\)</span></li>
+</ul></li>
+</ul>
+<p>另外，输出侧的电压平均值为：<br />
+<span class="math display">\[
+U_d=\frac{\sqrt2m}{\pi}\cdot\sin\frac{\pi}m\cdot U_S\cos\alpha
+\]</span></p>
+<h2 id="大功率整流与平衡电抗器">大功率整流与平衡电抗器</h2>
+<table>
+<thead>
+<tr class="header">
+<th><img src="\image\电力电子15.png" /></th>
+<th><img src="\image\电力电子16.png" /></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<p>​
+带平衡电抗器的双反星型整流电路相当于两个三相半波整流反极性连接，形成一个六脉波的六相半波整流，但是由于电感的作用，现在的输出电压是两个三相半波的均值。即相当于从相电压（<span
+class="math inline">\(a-z-b-x-c-y\)</span>）变成（<span
+class="math inline">\(az-zb-bx-xc-cy-ya\)</span>）。因此有以下几个优点：</p>
+<ol type="1">
+<li>直流电压的脉动情况比三相半波要小</li>
+<li>两组三相半波在任意时刻均有一相导通，因此没有直流磁化</li>
+<li>与六相半波整流相比，变压器副边绕组利用率翻倍</li>
+<li>每个整流元件的工作时间从 <span
+class="math inline">\(\frac{\pi}6\)</span> 提高到了 <span
+class="math inline">\(\frac{\pi}3\)</span>，提高了利用率</li>
+</ol>
+<h1 id="ac-ac-变换变流">AC-AC 变换：变流</h1>
+<h2 id="调压电路">调压电路</h2>
+<p>​
+调压电路的基本操作有三种，分别是通断、相位和斩波。这里都采用相位的控制方式。</p>
+<p>​ 调压电路比整流电路要复杂一些，因为输出端的电压电流会交变</p>
+<table>
+<colgroup>
+<col style="width: 4%" />
+<col style="width: 31%" />
+<col style="width: 31%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>单相+电阻</th>
+<th>单相+阻感</th>
+<th>三相+电阻</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>电路</td>
+<td><img src="\image\电力电子17.png" /></td>
+<td><img src="\image\电力电子18.png" /></td>
+<td><img src="\image\电力电子19.png" /></td>
+</tr>
+<tr class="even">
+<td>波形</td>
+<td><img src="\image\电力电子20.png" /></td>
+<td><img src="\image\电力电子21.png" /></td>
+<td><img src="\image\电力电子22.png" /></td>
+</tr>
+<tr class="odd">
+<td>功率因数</td>
+<td><span
+class="math inline">\(\cos\varphi=\sqrt{\frac1{2\pi}\sin\alpha+\frac{\pi-\alpha}{\pi}}\)</span></td>
+<td><span class="math inline">\(\tan\varphi=\frac{\omega
+L}R\)</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>导通角</td>
+<td><span class="math inline">\(\theta=\pi-\alpha\)</span></td>
+<td>由一超越方程决定</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>输出电压</td>
+<td><span class="math inline">\(U=U_1\cos\varphi\)</span></td>
+<td></td>
+<td>1. 三个管子导通时，输出相电压<br />2.
+两个管子导通时，输出线电压的一半</td>
+</tr>
+<tr class="even">
+<td>备注</td>
+<td></td>
+<td>1. <span class="math inline">\(\alpha&gt;\varphi\)</span>
+时正常工作，<span class="math inline">\(i_o\)</span>断续，<span
+class="math inline">\(u_o\)</span>为缺块正弦波<br />2. <span
+class="math inline">\(\alpha=\varphi\)</span>
+时变流无效，输入=输出<br />3. <span
+class="math inline">\(\alpha&lt;\varphi\)</span>
+时失控，在脉冲信号来时晶闸管仍承受反压，变成单管整流</td>
+<td>1. 三相中至少两相导通才能构成回路<br />2.
+为保证导通，应采用大于60°的宽脉冲<br />3. 导通顺序为1-6，各差60°</td>
+</tr>
+</tbody>
+</table>
+<p>注：笔者也看不懂三相调压</p>
+<h2 id="变频电路">变频电路</h2>
+<p>​
+变频电路只能降频，是通过对高频输入电路的不断通断控制，形成一个平均等效的低频正弦波输出。要实现变频，必须不断改变晶闸管的触发角
+<span
+class="math inline">\(\alpha\)</span>，一般采用余弦交点控制法。</p>
+<p><img src="\image\电力电子23.png" /></p>
 ]]></content>
       <categories>
         <category>课程</category>
