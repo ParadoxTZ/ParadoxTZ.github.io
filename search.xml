@@ -715,6 +715,178 @@ class="math inline">\(\cos\alpha_i=\frac{\sqrt2U_1}{U_{do}}\sin\omega_1t\)</span
 ​<span class="math inline">\(\gamma\)</span> 越小，输出电压越低，半周期内
 <span class="math inline">\(\alpha\)</span>
 的平均值越接近90°，功率因数越低。</p>
+<h1 id="dc-dc-变换斩波">DC-DC 变换：斩波</h1>
+<p>​
+DC-DC变换的机制就是靠着电容和电感的储能来实现电压的升降（电容实际上是为了稳定输出电压，核心的电压升降还是靠电感的储能），因此分析DC-DC最直接的两个原则就是：</p>
+<ol type="1">
+<li>电感伏秒平衡</li>
+<li>电容安秒平衡</li>
+</ol>
+<h2 id="基本dc-dc变换器">基本DC-DC变换器</h2>
+<table>
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 46%" />
+<col style="width: 46%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Buck</th>
+<th>Boost</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>电路</td>
+<td><img src="/image/电力电子25.png" /></td>
+<td><img src="/image/电力电子27.png" /></td>
+</tr>
+<tr class="even">
+<td>波形</td>
+<td><img src="/image/电力电子26.png" /></td>
+<td><img src="/image/电力电子28.png" /></td>
+</tr>
+<tr class="odd">
+<td>变比</td>
+<td><span
+class="math inline">\(\frac{U_o}{U_i}=\frac{I_i}{I_o}=D\)</span></td>
+<td><span
+class="math inline">\(\frac{U_o}{U_i}=\frac{I_i}{I_o}=\frac1{1-D}\)</span></td>
+</tr>
+<tr class="even">
+<td>断续临界值</td>
+<td><span
+class="math inline">\(I_{LB}=\frac12i_{LP}=\frac12\frac{(U_i-U_o)t_{on}}{L}=\frac{ET_s}{2L}D(1-D)\)</span></td>
+<td><span
+class="math inline">\(I_{LB}=\frac12i_{LP}=\frac12\frac{U_it_{on}}{L}=\frac{U_oT_s}{2L}D(1-D)\)</span><br /><span
+class="math inline">\(I_{oB}=(1-D)I_{LB}=\frac{U_oT_s}{2L}D(1-D)^2\)</span></td>
+</tr>
+<tr class="odd">
+<td>断续变比</td>
+<td><span class="math inline">\((U_i-U_o)DT_s-U_o\delta
+T_s=0\)</span><br /><span class="math inline">\(\frac{U_o}{U_i}=\frac
+D{D+\delta}\)</span></td>
+<td><span
+class="math inline">\(U_iDT_s+(U_i-U_o)(1-D)T_s=0\)</span><br /><span
+class="math inline">\(\frac{U_o}{U_i}=\frac{D+\delta}{\delta}\)</span></td>
+</tr>
+<tr class="even">
+<td>电流纹波</td>
+<td><span class="math inline">\(\Delta
+I_L=\frac{U_o}{L}(1-D)T_s\)</span></td>
+<td><span class="math inline">\(\Delta
+I_L=\frac{U_iDT_s}{2L}\)</span></td>
+</tr>
+<tr class="odd">
+<td>电压纹波</td>
+<td><span class="math inline">\(\Delta U_o=\frac{\Delta
+Q}{C}=\frac{\frac{I_L}2\cdot\frac{T_s}2}{2C}=\frac{U_o(1-D)T_s^2}{8LC}\)</span></td>
+<td><span class="math inline">\(\Delta U_o=\frac{I_oDT_s}L\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>解释一下<strong>电压纹波</strong>的计算方法，计算电压纹波时认为<strong>输出电流平直，没有纹波</strong>，因此输出电压纹波
+<span class="math inline">\(\Delta U_o\)</span>
+实际上就是<strong>电容上的电压纹波 <span class="math inline">\(\Delta
+U_c\)</span></strong>
+<ul>
+<li>对于Buck电路，电容与电感始终是连接在一起的，所以电容的电压纹波<strong>直接由电感电流纹波产生</strong>，与输出电流无关（说的是输出电流平直，<strong>不是电感电流平直</strong>）</li>
+<li>对于Boost电路，电感与电容在 <span
+class="math inline">\(t_{on}\)</span>
+时断开，因此电容的电压纹波是由<strong>电容恒流放电产生</strong>，与电感纹波无关</li>
+<li>两者计算方法不同，切勿搞混</li>
+</ul></li>
+</ul>
+<h2 id="其他dc-dc变换器">其他DC-DC变换器</h2>
+<h3 id="buck-boost与cuk">Buck-Boost与Cuk</h3>
+<table>
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 46%" />
+<col style="width: 46%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Buck-Boost</th>
+<th>Cuk</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>说明</td>
+<td>1. 输入输出电压反极性<br />2.
+输入输出位置不变，但是可升压可降压</td>
+<td>1. 输入输出电压反极性<br />2.
+输入输出位置不变，但是可升压可降压</td>
+</tr>
+<tr class="even">
+<td>电路</td>
+<td><img src="/image/电力电子29.png" /></td>
+<td><img src="/image/电力电子30.png" /></td>
+</tr>
+<tr class="odd">
+<td>变比</td>
+<td><span class="math inline">\(\frac{U_o}{U_i}=\frac{I_i}{I_o}=\frac
+D{1-D}\)</span></td>
+<td><span class="math inline">\(\frac{U_o}{U_i}=\frac{I_i}{I_o}=\frac
+D{1-D}\)</span><br /><span
+class="math inline">\(\frac{U_{c1}}{U_i}=\frac1{1-D}~,~\frac{U_{c1}}{U_o}=\frac1D\)</span></td>
+</tr>
+<tr class="even">
+<td>电流纹波</td>
+<td><span class="math inline">\(\Delta I_L=\frac{EDT_s}L\)</span></td>
+<td><span class="math inline">\(\Delta I_{L1}=\frac{EDT_s}{L_1}~,~\Delta
+I_{L2}=\frac{EDT_s}{L_2}\)</span></td>
+</tr>
+<tr class="odd">
+<td>电压纹波</td>
+<td><span class="math inline">\(\Delta U_o=\frac{I_oDT_s}C\)</span></td>
+<td><span class="math inline">\(\Delta
+U_{c1}=\frac{I(1-D)T_s}{C_1}~,~\Delta
+U_{c2}=\frac{DET_s^2}{8L_2C_2}\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="晶闸管斩波">晶闸管斩波</h3>
+<table>
+<thead>
+<tr class="header">
+<th><img src="/image/电力电子31.png" /></th>
+<th><img src="/image/电力电子32.png" /></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<ol type="1">
+<li>VT1导通，电源电压E直接加到负载</li>
+<li>VT2导通，C、L1、VT2 谐振使电容C电压反向充电到
+-E，电源电压E直接加到负载</li>
+<li>VT1受反压关断，谐振回路电流为0（LC谐振电压最大时电流为0），谐振结束，VT2也关断</li>
+<li>C、L1、VD1、L2、VD2 构成谐振回路，电容重新充电到
+E，负载电压=电源电压E - 电容电压</li>
+<li>VDF蓄流，等待步骤1的响应</li>
+</ol>
+<h4 id="斩波变阻">斩波变阻</h4>
+<p><img src="/image/电力电子33.png" /></p>
+<p><span class="math display">\[
+R^*=R_d+(1-D)R_{ex}
+\]</span></p>
+<h3 id="双向dc-dc">双向DC-DC</h3>
+<p>​ 双向DC-DC与Boost-Buck电路的区别在于：</p>
+<ol type="1">
+<li>双向DC-DC是恒定一边电压高，一边电压低，但是输入和输出可以不断交换（比如电池-电网回路就是双向DC-DC，电网电压要高于蓄电池，但是电能流向会根据需求改变）</li>
+<li>Buck-Boost电路是输入和输出端固定不变，但是输入到输出可以降压也可以升压</li>
+</ol>
+<p><img src="/image/电力电子34.png" /></p>
+<p>​ 其中 V1、VD2 构成Buck降压电路，V2、VD1
+构成Boost升压电路。电路图中<strong>电机电压比电网电压要小</strong>。</p>
+<ul>
+<li>桥式可逆斩波比较简单，不想写了，自己看《电机控制》的书。</li>
+</ul>
 ]]></content>
       <categories>
         <category>课程</category>
