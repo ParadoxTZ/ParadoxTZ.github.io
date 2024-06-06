@@ -887,6 +887,255 @@ R^*=R_d+(1-D)R_{ex}
 <ul>
 <li>桥式可逆斩波比较简单，不想写了，自己看《电机控制》的书。</li>
 </ul>
+<h1 id="dc-ac-变换逆变">DC-AC 变换：逆变</h1>
+<p>鉴于很多负载（电机）经常需要不同频率的电流，因此变频是电力电子变换当中一个比较重要的课题。一般的变频分为两种：交-交变频和交-直-交变频，前者在AC-AC中已经讲过，后者的后半部分就是DC-AC的重要应用之一。</p>
+<p>此外直流电源向交流负载供电就需要逆变结构，比如带储能的电网，从储能到电网的电能流动就需要逆变。</p>
+<h2 id="逆变电路的分类">逆变电路的分类</h2>
+<table>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 42%" />
+<col style="width: 44%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>类别</th>
+<th>电压源型</th>
+<th>电流源型</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>图片</td>
+<td><img src="/image/电力电子35.png" /></td>
+<td><img src="/image/电力电子36.png" /></td>
+</tr>
+<tr class="even">
+<td>电压波形</td>
+<td>矩形波（方波）</td>
+<td>正弦波</td>
+</tr>
+<tr class="odd">
+<td>电流波形</td>
+<td>正弦波</td>
+<td>矩形波（方波）</td>
+</tr>
+<tr class="even">
+<td>储能元件</td>
+<td>大电容</td>
+<td>大电感</td>
+</tr>
+<tr class="odd">
+<td>结构与保护</td>
+<td>过电流保护困难，复杂</td>
+<td>抗电流冲击力强，容易保护</td>
+</tr>
+<tr class="even">
+<td>适用</td>
+<td>稳频稳压电源、不可逆电力拖动系统</td>
+<td>电力拖动系统制动，频繁加减速正反转</td>
+</tr>
+<tr class="odd">
+<td>四象限运行</td>
+<td>电压极性固定，换向不方便</td>
+<td>电流极性固定，换向容易</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 34%" />
+<col style="width: 34%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>电网换流</th>
+<th>负载谐振式换流</th>
+<th>强迫换流</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>电网电压自动过零变负，晶闸管关断，自然换流</td>
+<td>利用回路谐振使电流过零，要求电流超前电压（容性）</td>
+<td>附加换流环节，利用储能元件释放脉冲电流关断晶闸管</td>
+</tr>
+</tbody>
+</table>
+<h2 id="并联负载谐振式">并联负载谐振式</h2>
+<p><img src="/image/电力电子37.png" /></p>
+<p><img src="/image/电力电子38.png" /></p>
+<ul>
+<li><p><strong>基本工作原理：</strong>原先 VT14
+导通，电路如图(a)所示运行。在 <span class="math inline">\(t_2\)</span>
+时刻触发导通 VT23；对比 VT1 和 VT3，可以认为 <span
+class="math inline">\(u_{T3}&gt;u_{T1}\)</span>，因此 VT3 会导通钳位，将
+VT1 截止，其电压 <span
+class="math inline">\(u_{T1}=-E\)</span>。对VT2和VT4同理。于是 VT14
+电流迅速下降，VT23 电流迅速上升，四个晶闸管重叠导通，构成换流时间 <span
+class="math inline">\(t_{\mu}\)</span></p></li>
+<li><p><strong>换流相关分析：</strong>换流时间为 <span
+class="math inline">\(t_{\mu}\)</span>，晶闸管关断时间为 <span
+class="math inline">\(t_{q}\)</span>。为保证晶闸管可靠关断，晶闸管必须在换流结束之后承受
+<span class="math inline">\(t_{\beta}&gt;t_q\)</span>
+时间的反压。负载电流为 VT14 和 VT23 电流的叠加，因此电流在换流开始后的
+<span class="math inline">\(\frac{t_{\mu}}2\)</span> 关闭，电压需要在
+<span class="math inline">\(t_{\mu}+t_{\beta}\)</span>
+之后关断，因此功率因数角所对应的<strong>电流超前电压的时间为</strong>：<br />
+<span class="math display">\[
+t_{\varphi}=\frac{t_{\mu}}2+t_{\beta}~;~\varphi=\omega\,t_{\varphi}
+\]</span></p></li>
+<li><p><strong>电路与负载特性：</strong>此图为电流源型逆变器，因此电流近似方波，电压近似正弦波。若认为
+<span class="math inline">\(\omega L\gg R\)</span>，则有 <span
+class="math inline">\(Z=\frac LC\frac{1}{R+j(\omega L-1/\omega
+C)}\)</span>，要求电路呈现容性，必须有 <span
+class="math inline">\(\omega&gt;\omega_0=\frac1{\sqrt{LC}}\)</span>。再考虑可靠换流，则有：<br />
+<span class="math display">\[
+t_{\varphi}=\frac{\varphi}{\omega}=\frac1{\omega}\left(
+\frac{\frac1{\omega C}-\omega L} R\right)&gt;t_q
+\]</span></p></li>
+<li><p><strong>电路参数：</strong></p>
+<ul>
+<li>基波电流有效值：<span
+class="math inline">\(I_{o1}=\frac{2\sqrt2}{\pi}I_d\)</span></li>
+<li>输出电压有效值：<span
+class="math inline">\(U_o=\frac{\pi}{2\sqrt2}\frac E{\cos\varphi
+\cos\mu}\approx1.11\frac E{\cos\varphi}\)</span></li>
+</ul></li>
+</ul>
+<h2 id="强迫换流">强迫换流</h2>
+<p><img src="/image/电力电子39.png" /></p>
+<ul>
+<li><strong>基本工作原理：</strong>设 VT56 导通，电容 <span
+class="math inline">\(C_5\)</span> 被充电至左-右+。触发导通 VT1 后，电容
+<span class="math inline">\(C_5\)</span> 的电压使 VT1 导通钳位，VT5
+承受反压关断。输入端恒流给等效电容 <span
+class="math inline">\(\frac32C\)</span> 充电，直到 VD1 导通（与 VD5
+同时导通），此时谐振回路（<span
+class="math inline">\(2L\times\frac32C\)</span>）形成，A相电流上升，C相电流下降。</li>
+<li><strong>电路特性：</strong>
+<ul>
+<li>每个晶闸管导通120°（三分之一周期），同一时间只有2个晶闸管导通</li>
+<li>换向发生在上或下桥臂的元件组之间，即 VT1/3/5 之间和 VT2/4/6
+之间</li>
+<li>换向使引起大自感电势 <span class="math inline">\(e_L=L\frac{\text
+di}{\text dt}\)</span>，因此电感 L 不要太大</li>
+<li>最终每相都输出六阶梯波</li>
+</ul></li>
+</ul>
+<h2 id="电压源型逆变">电压源型逆变</h2>
+<h3 id="单相桥式逆变">单相桥式逆变</h3>
+<p><img src="/image/电力电子35.png" /></p>
+<p>有两种工作方式：</p>
+<ol type="1">
+<li>14相同，23相同，两组之间互补，<span
+class="math inline">\(U_o=\frac{2\sqrt2}{\pi}U_d\)</span> 不可调压</li>
+<li>12互补，34互补，但是3滞后1 <span
+class="math inline">\(\theta\in(0,\pi)\)</span>，可调压。<span
+class="math inline">\(\theta\)</span> 越大电压越大</li>
+</ol>
+<h3 id="三相桥式逆变">三相桥式逆变</h3>
+<table>
+<thead>
+<tr class="header">
+<th>电路图</th>
+<th>输出波形</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="/image/电力电子44.png" /></td>
+<td><img src="/image/电力电子45.png" /></td>
+</tr>
+</tbody>
+</table>
+<p><a href="#多电平化">Return 多电平化</a></p>
+<blockquote>
+<p>至于为什么是 <span
+class="math inline">\(\frac13E和\frac23E\)</span>，因为原本负载各相对电源中点
+<span class="math inline">\(O&#39;\)</span> 的电压幅值是 <span
+class="math inline">\(\frac E2\)</span>，</p>
+<p>而负载中性点对电源中性点的电压 <span
+class="math inline">\(u_{OO&#39;}=\frac13\sum
+u_{PO&#39;}\)</span>（P为各相），所以是一个 3 倍频，幅值为 <span
+class="math inline">\(\frac E6\)</span>的电压</p>
+<p>两者合起来就是 <span class="math inline">\(\frac E2-\frac
+E6=\frac13E~,~\frac E2+\frac E6=\frac23E\)</span></p>
+</blockquote>
+<ul>
+<li>电路参数
+<ul>
+<li>线电压基波幅值：<span class="math inline">\(u_{AB1m}=1.1
+E\)</span>，基波有效值：<span
+class="math inline">\(u_{AB1}=0.78E\)</span></li>
+<li>相电压基波幅值：<span class="math inline">\(u_{AO1m}=0.637
+E\)</span>，基波有效值：<span
+class="math inline">\(u_{AO1}=0.45E\)</span></li>
+</ul></li>
+</ul>
+<h2 id="多重化及多电平化">多重化及多电平化</h2>
+<ul>
+<li>电路的多重化和多电平化的目的都是改善逆变器的波形，使之更接近正弦波，但是两者的实现方式不同。
+<ul>
+<li>多重化通过变压器实现，来将多组逆变器输出错开一定的相位后再相连</li>
+<li>多电平化通过几个电平台阶合成阶梯波以逼近正弦波</li>
+</ul></li>
+</ul>
+<h3 id="多重化">多重化</h3>
+<p>多重化分为串联和并联两种：串联多重化是将几个逆变器的输出串联起来，多用于电压源型；并联多重化是将及格逆变器的输出并联起来，多用于电流源型逆变器。</p>
+<table>
+<thead>
+<tr class="header">
+<th>电路图</th>
+<th>输出波形</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="/image/电力电子40.png" /></td>
+<td><img src="/image/电力电子41.png" /></td>
+</tr>
+</tbody>
+</table>
+<ol type="1">
+<li>易看出该电路由两个三相电压源型逆变器组成，每个逆变器输出的都是六阶梯波，各相之间相差60°，两组之间完全相同</li>
+<li>但是两组的变压器不同，第一组是 <span
+class="math inline">\(\Delta/Y-12\)</span> 连接，第二组是 <span
+class="math inline">\(\Delta/Z-1\)</span>
+连接，即第二组的输出要滞后输入30°，但是第二组是线电压第一组是相电压，线电压又要超前相电压30°，所以两组的相位就相同了。</li>
+</ol>
+<blockquote>
+<p>注：我不能理解书上的话，我觉得图 5-21
+怎么数怎么是一个十阶梯波。而且我也不是很理解变压器为什么会，或者说为什么要输出同相位，我觉得就是要相位相差30°这个电路才能正常工作（原本各阶梯之间差60°，现在两个相差30°的叠在一起，不就阶梯数翻倍了吗？）书上166页倒数第二段也说了依次错开
+<span class="math inline">\(\frac{\pi}{3m}\)</span> 的相位。</p>
+<p>所以我觉得书上画的那种不是通用的正常的形式，而是另一个可行的形式。不然按理说两个逆变器就应该都输出六阶梯波。</p>
+</blockquote>
+<h3 id="多电平化">多电平化</h3>
+<table>
+<thead>
+<tr class="header">
+<th>电路图</th>
+<th>输出波形</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="/image/电力电子42.png" /></td>
+<td><img src="/image/电力电子43.png" /></td>
+</tr>
+</tbody>
+</table>
+<ol type="1">
+<li>以A相为例，原本的电路是 VT1 和 VT4
+互补，并且在一周期内均工作120°，中间有120°时间的空（60°×2）</li>
+<li>引入新的晶闸管，VT1’与 VT4 互补，VT4’与 VT1
+互补，也就是说这两个管子在一周期内要工作240°，中间有120°的重合（60°×2）</li>
+<li>这样<a href="#三相桥式逆变">原本的六阶梯波</a>就由 (<span
+class="math inline">\(\frac E2,0,-\frac E2\)</span>)
+构成，两相之间相差120°，变成有 <span class="math inline">\(E,\frac
+E2,0,-\frac E2,-E\)</span> 的阶梯波</li>
+</ol>
 ]]></content>
       <categories>
         <category>课程</category>
