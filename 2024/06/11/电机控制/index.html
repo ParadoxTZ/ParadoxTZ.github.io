@@ -1,0 +1,216 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>电机控制 | Paradox's Website</title><meta name="author" content="Paradox,420907574@qq.com"><meta name="copyright" content="Paradox"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="请速速购入FPX标配！（这门课没作业反倒让我不知道考什么了）"><meta property="og:type" content="article"><meta property="og:title" content="电机控制"><meta property="og:url" content="http://zju-paradox.top/2024/06/11/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/index.html"><meta property="og:site_name" content="Paradox&#39;s Website"><meta property="og:description" content="请速速购入FPX标配！（这门课没作业反倒让我不知道考什么了）"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://zju-paradox.top/image/fpx.jpg"><meta property="article:published_time" content="2024-06-11T06:34:53.677Z"><meta property="article:modified_time" content="2024-06-11T08:46:38.561Z"><meta property="article:author" content="Paradox"><meta property="article:tag" content="笔记"><meta property="article:tag" content="大三"><meta property="article:tag" content="电气"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="http://zju-paradox.top/image/fpx.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://zju-paradox.top/2024/06/11/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload='this.media="all"'><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload='this.media="all"'><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":5,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Paradox","link":"链接: ","source":"来源: Paradox's Website","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE={title:"电机控制",isPost:!0,isHome:!1,isHighlightShrink:!1,isToc:!0,postUpdate:"2024-06-11 16:46:38"}</script><noscript><style type="text/css">#nav{opacity:1}.justified-gallery img{opacity:1}#post-meta time,#recent-posts time{display:inline!important}</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/image/dog.jpg" onerror='onerror=null,src="/img/friend_404.gif"' alt="avatar"></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr class="custom-hr"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i> <span>首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i> <span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i> <span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i> <span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-images"></i> <span>图库</span></a></div><div class="menus_item"><a class="site-page" href="/artitalk/"><i class="fa-fw fas fa-pen-to-square"></i> <span>说说</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image:url(/image/top3.jpg)"><nav id="nav"><span id="blog-info"><a href="/" title="Paradox's Website"><span class="site-name">Paradox's Website</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i> <span>搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i> <span>首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i> <span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i> <span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i> <span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-images"></i> <span>图库</span></a></div><div class="menus_item"><a class="site-page" href="/artitalk/"><i class="fa-fw fas fa-pen-to-square"></i> <span>说说</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">电机控制</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-06-11T06:34:53.677Z" title="发表于 2024-06-11 14:34:53">2024-06-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-06-11T08:46:38.561Z" title="更新于 2024-06-11 16:46:38">2024-06-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AF%BE%E7%A8%8B/">课程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="电机控制"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2024/06/11/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="电机控制">电机控制</h1><h2 id="直流电机的控制">直流电机的控制</h2><h3 id="晶闸管与双闭环调速">晶闸管与双闭环调速</h3><p><img src="/image/djkz01.png"></p><ol type="1"><li><p><strong>PI调节器的作用：</strong></p><ol type="1"><li>速度调节器 ST：<ol type="1"><li>调速精度，做到静态无差；使机械特性硬，满足负载要求；</li><li>实现转速快速调节。</li></ol></li><li>电流调节器 LT：<ol type="1"><li>精确满足负载转矩大小要求；</li><li>调速的快速动态特性(转矩的快速响应)。</li></ol></li></ol></li><li><p><strong>电流环在内的原因：</strong></p><ol type="1"><li>时间常数小，响应更快</li><li>引入电流环是为了控制电枢电流</li><li>电流仅与负载转矩有关</li></ol></li><li><p><strong>PI参数的影响：</strong></p><ol type="1"><li><p>Kp增大，提高系统动态性能；反之削弱</p></li><li><p>Ki增大，静态误差减少，但系统容易震荡；</p><p>Ki减小，积分太弱，稳态误差难以快速减小</p></li><li><p>Kd过大或过小，增加系统超调和调节时间</p></li></ol></li></ol><p><img src="/image/djkz02.png"></p><ol start="4" type="1"><li><p><strong>起动过程特征：</strong></p><ol type="1"><li><p><strong>起动：</strong><span class="math inline">\(i_d\)</span> 由 0 上升到 <span class="math inline">\(I_{d \,max}\)</span>（限幅值）；</p><p>ST、LT 全部饱和限幅，蜕化为限幅器，系统实为速度、电流双开环；</p></li><li><p><strong>加速：</strong><span class="math inline">\(i_d=I_{d \,max}\)</span> 恒定（电流调节结果，非限幅）；</p><p>ST 饱和限幅，LT 作 PI 调节，实为电流单闭环系统</p></li><li><p><strong>PI 调节至稳态:</strong> 转速稳定至 <span class="math inline">\(n=n_g\)</span>，电流稳定至 <span class="math inline">\(i_d=I_L\)</span>（对应 <span class="math inline">\(T_L\)</span>）；</p><p>ST、LT 均作 PI 调节，真正速度、电流双闭环工作。</p></li></ol></li></ol><h3 id="pwm调速">PWM调速</h3><table><thead><tr class="header"><th><img src="/image/djkz03.png"></th><th>的<img src="/image/djkz05.png"></th></tr></thead><tbody></tbody></table><table><colgroup><col style="width:9%"><col style="width:45%"><col style="width:45%"></colgroup><thead><tr class="header"><th></th><th>单极性</th><th>双极性</th></tr></thead><tbody><tr class="odd"><td>工作方式</td><td>1. VT3关断，VT4导通<br>2. VT1 和 VT2 轮流导通<br>3. 控制电压为负时，13对调，24对调</td><td>1. VT1 和 VT4 同极性<br>2. VT2 和 VT3 同极性<br>3. 两组极性（通断）互补</td></tr><tr class="even"><td>负载电压系数</td><td><span class="math inline">\(\rho=D\)</span></td><td><span class="math inline">\(\rho=2D-1\)</span></td></tr><tr class="odd"><td>工作流程</td><td>1. VT1 通，电动运行<br>2. VD2 蓄流，电动运行<br>3. VT2 和 VD4 导通，能耗制动<br>4. VD1 和 VD4 蓄流，再生制动</td><td>1. VT1 和 VT4 导通，电动运行<br>2. VD2 和 VD3 蓄流，电动运行<br>3. VT3 和 VT2 导通，反接制动<br>4. VD4 和 VD1 蓄流，能耗制动</td></tr></tbody></table><p><img src="/image/djkz04.jpg"></p><h2 id="异步电机的控制">异步电机的控制</h2><p>调速主经常使用“转差功率不变型”调速方式，即保证 s （P<sub>em</sub>）不变。如异步电机的变频调速和变极调速均属于这类方式。还有“转差功率消耗型”调速方式，通过消耗转差功率 <span class="math inline">\(P_{em}=sP_e\)</span> 来换取转速的下降，如调压调速，串电阻调速。</p><h3 id="调压调速">调压调速</h3><p><img src="/image/djkz06.jpg"></p><ul><li>电机电磁转矩：<span class="math inline">\(T_e\propto U^2\)</span></li><li>缺点：调速范围较小（<span class="math inline">\(s\in(0,s_m)\)</span>）。只能降压调速，且 <span class="math inline">\(\phi_m=\frac{U_1}{4.44K_{dp}f_1N}\)</span>，属于弱磁调速。依靠增大转差频率 s 调速，转子回路消耗的滑差频率增大。</li></ul><p><strong>串级调速</strong></p><p>串级调速是指在转子中引入与转子同频（<span class="math inline">\(sf_1\)</span>）的转子电势，以吸收或补充滑差功率，从而进行调速。详见第三章。</p><h3 id="变频调速">变频调速</h3><p><img src="/image/djkz07.png"></p><table><colgroup><col style="width:6%"><col style="width:48%"><col style="width:45%"></colgroup><thead><tr class="header"><th></th><th>基频下调</th><th>基频上调</th></tr></thead><tbody><tr class="odd"><td>要求</td><td>保持气隙磁通 <span class="math inline">\(\phi_m\)</span> 恒定→磁路工作点不变<br>变频中维持 <span class="math inline">\(E_1/f_1\)</span> 为定值<br>适合恒转矩负载</td><td>定子电压 <span class="math inline">\(U_1=U_{1N}\)</span><br>属于弱磁调速，适合恒功率负载</td></tr><tr class="even"><td>机械特性</td><td><img src="/image/djkz07.png"></td><td><img src="/image/djkz10.jpg"></td></tr><tr class="odd"><td></td><td><span class="math inline">\(\Delta n\)</span> 不变，s-T向下平移<br>考虑阻感压降，Tm略有下降</td><td><span class="math inline">\(\Delta n\)</span> 变大，机械特性变软<br>气隙磁通↓ → 电磁转矩↓</td></tr></tbody></table><h4 id="基频以下电压补偿控制">基频以下电压补偿控制</h4><p><img src="/image/djkz09.jpg"></p><table><colgroup><col style="width:2%"><col style="width:34%"><col style="width:34%"><col style="width:29%"></colgroup><thead><tr class="header"><th></th><th>恒气隙电势频比 <span class="math inline">\(E_1\)</span></th><th>恒电压频比 <span class="math inline">\(U_1\)</span></th><th>恒转子磁通 <span class="math inline">\(E_r\)</span></th></tr></thead><tbody><tr class="odd"><td>特点</td><td>气隙磁通 <span class="math inline">\(\phi_m\)</span> 恒定<br>需要补偿定子阻抗上的压降<br>n-T 曲线纯向下平移<br>低频下 <span class="math inline">\(T_{st}\)</span> 大，<span class="math inline">\(I_{st}\)</span> 小</td><td>类似前一个，但控制更方便<br>最大转矩 <span class="math inline">\(T_{st}\)</span> 随频率降低而减小</td><td>机械特性 n-T 为直线<br>不同同步速下，为一簇平行线</td></tr></tbody></table><h3 id="静止变频器与pwm">静止变频器与PWM</h3><p>可以看看这个：<a href="https://zju-paradox.top/2024/04/18/电力电子技术/#ac-ac-变换变流">电力电子技术 | Paradox's Website (zju-paradox.top)</a></p><h4 id="正弦脉宽调制-spwm">正弦脉宽调制 SPWM</h4><p><img src="/image/djkz15.jpg"></p><table><colgroup><col style="width:33%"><col style="width:33%"><col style="width:33%"></colgroup><thead><tr class="header"><th>单极性控制</th><th>双极性控制</th><th>载波比N</th></tr></thead><tbody><tr class="odd"><td><img src="/image/djkz12.png"></td><td><img src="/image/djkz14.jpg"></td><td><img src="/image/djkz13.png"></td></tr></tbody></table><ul><li>具体实现方法：<ol type="1"><li>自然采样法：通过一组三相对称的正弦参考信号（调制波）与等腰三角电压信号（载波）进行比较，由交点处控制通断</li><li>制定谐波消去法：解方程</li></ol></li><li>双极性控制：<ol type="1"><li>PWM 是 <span class="math inline">\(\pm\frac{U_d}2\)</span> ，得到输出电压 <span class="math inline">\(u_R=(2D-1)\frac{U_d}2\)</span></li><li>线电压 <span class="math inline">\(U_{AB}=U_A-U_B\)</span>，由 <span class="math inline">\(\pm U_d,0\)</span> 三种电压选择</li></ol></li><li>电压控制：<ol type="1"><li>三角波频率（载波频率）→ 开关频率，越高性能越好</li><li>正弦波频率、幅值 → 输出正弦波频率、幅值</li></ol></li><li>载波比 <span class="math inline">\(N=f_T/f_R\)</span>：<ul><li>最好选择 N 为 3 的倍数，这样能保证输出波形<strong>正负半波对称</strong>，且<strong>三相波形互差120°对称</strong></li></ul></li><li>开关死区的影响：<ol type="1"><li>由于开关死区，会存在上下两管均关断的情况，因此输出电压幅值下降。平均偏差电压 <span class="math inline">\(U_{ef}=\frac{t_dU_dN}T\)</span></li><li>变频器输出频率越低，死区影响越严重。</li><li>功率因数越大，电压电流同向越久，死区影响越严重。</li></ol></li></ul></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者:</span> <span class="post-copyright-info"><a target="_blank" rel="noopener" href="https://github.com/ParadoxTZ">Paradox</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接:</span> <span class="post-copyright-info"><a href="http://zju-paradox.top/2024/06/11/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/">http://zju-paradox.top/2024/06/11/电机控制/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明:</span> <span class="post-copyright-info">此文章版权归Paradox所有，如有转载，请注明来自原作者</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a><a class="post-meta__tags" href="/tags/%E5%A4%A7%E4%B8%89/">大三</a><a class="post-meta__tags" href="/tags/%E7%94%B5%E6%B0%94/">电气</a></div><div class="post_share"><div class="social-share" data-image="/image/fpx.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload='this.media="all"'><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/04/27/%E8%BF%90%E7%AD%B9%E5%AD%A6/" title="运筹学 Cheating Sheet（微雕）分享"><img class="cover" src="/image/keyan.jpg" onerror='onerror=null,src="/img/404.jpg"' alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">运筹学 Cheating Sheet（微雕）分享</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/04/27/%E8%BF%90%E7%AD%B9%E5%AD%A6/" title="运筹学 Cheating Sheet（微雕）分享"><img class="cover" src="/image/keyan.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-27</div><div class="title">运筹学 Cheating Sheet（微雕）分享</div></div></a></div><div><a href="/2024/04/18/%E7%94%B5%E5%8A%9B%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/" title="电力电子技术"><img class="cover" src="/image/zjutop3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-18</div><div class="title">电力电子技术</div></div></a></div><div><a href="/2024/04/02/%E7%94%B5%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%BB%BA%E6%A8%A1%E4%B8%8E%E5%88%86%E6%9E%90/" title="电机系统建模与分析"><img class="cover" src="/image/Fufu.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-02</div><div class="title">电机系统建模与分析</div></div></a></div><div><a href="/2024/01/15/%E5%A4%A7%E4%B8%89%E4%B8%8A%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/" title="大三（秋冬）课程总结"><img class="cover" src="/image/%E5%B0%81%E9%9D%A2.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-15</div><div class="title">大三（秋冬）课程总结</div></div></a></div></div></div><hr class="custom-hr"><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i> <span>评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/image/dog.jpg" onerror='this.onerror=null,this.src="/img/friend_404.gif"' alt="avatar"></div><div class="author-info__name">Paradox</div><div class="author-info__description">未知苦处，不信神佛</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ParadoxTZ"><i class="fab fa-github"></i><span>个人主页(Github)</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/ParadoxTZ" target="_blank" title="Github"><i class="fab fa-github" style="color:#000"></i></a><a class="social-icon" href="mailto:420907574@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color:#000"></i></a><a class="social-icon" href="https://mp.weixin.qq.com/mp/profile_ext?action=home&amp;__biz=Mzg3MDk3NzYwOQ==" target="_blank" title="Wechat"><i class="fab fa-weixin" style="color:#000"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">玩得开心！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6"><span class="toc-number">1.</span> <span class="toc-text">电机控制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B4%E6%B5%81%E7%94%B5%E6%9C%BA%E7%9A%84%E6%8E%A7%E5%88%B6"><span class="toc-number">1.1.</span> <span class="toc-text">直流电机的控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%99%B6%E9%97%B8%E7%AE%A1%E4%B8%8E%E5%8F%8C%E9%97%AD%E7%8E%AF%E8%B0%83%E9%80%9F"><span class="toc-number">1.1.1.</span> <span class="toc-text">晶闸管与双闭环调速</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pwm%E8%B0%83%E9%80%9F"><span class="toc-number">1.1.2.</span> <span class="toc-text">PWM调速</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E6%AD%A5%E7%94%B5%E6%9C%BA%E7%9A%84%E6%8E%A7%E5%88%B6"><span class="toc-number">1.2.</span> <span class="toc-text">异步电机的控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E5%8E%8B%E8%B0%83%E9%80%9F"><span class="toc-number">1.2.1.</span> <span class="toc-text">调压调速</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%A2%91%E8%B0%83%E9%80%9F"><span class="toc-number">1.2.2.</span> <span class="toc-text">变频调速</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E9%A2%91%E4%BB%A5%E4%B8%8B%E7%94%B5%E5%8E%8B%E8%A1%A5%E5%81%BF%E6%8E%A7%E5%88%B6"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">基频以下电压补偿控制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%AD%A2%E5%8F%98%E9%A2%91%E5%99%A8%E4%B8%8Epwm"><span class="toc-number">1.2.3.</span> <span class="toc-text">静止变频器与PWM</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A3%E5%BC%A6%E8%84%89%E5%AE%BD%E8%B0%83%E5%88%B6-spwm"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">正弦脉宽调制 SPWM</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/06/11/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/" title="电机控制"><img src="/image/fpx.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="电机控制"></a><div class="content"><a class="title" href="/2024/06/11/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/" title="电机控制">电机控制</a><time datetime="2024-06-11T06:34:53.677Z" title="发表于 2024-06-11 14:34:53">2024-06-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/27/%E8%BF%90%E7%AD%B9%E5%AD%A6/" title="运筹学 Cheating Sheet（微雕）分享"><img src="/image/keyan.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="运筹学 Cheating Sheet（微雕）分享"></a><div class="content"><a class="title" href="/2024/04/27/%E8%BF%90%E7%AD%B9%E5%AD%A6/" title="运筹学 Cheating Sheet（微雕）分享">运筹学 Cheating Sheet（微雕）分享</a><time datetime="2024-04-27T07:08:45.727Z" title="发表于 2024-04-27 15:08:45">2024-04-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/18/%E7%94%B5%E5%8A%9B%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/" title="电力电子技术"><img src="/image/zjutop3.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="电力电子技术"></a><div class="content"><a class="title" href="/2024/04/18/%E7%94%B5%E5%8A%9B%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/" title="电力电子技术">电力电子技术</a><time datetime="2024-04-18T06:46:34.042Z" title="发表于 2024-04-18 14:46:34">2024-04-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/02/%E7%94%B5%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%BB%BA%E6%A8%A1%E4%B8%8E%E5%88%86%E6%9E%90/" title="电机系统建模与分析"><img src="/image/Fufu.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="电机系统建模与分析"></a><div class="content"><a class="title" href="/2024/04/02/%E7%94%B5%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%BB%BA%E6%A8%A1%E4%B8%8E%E5%88%86%E6%9E%90/" title="电机系统建模与分析">电机系统建模与分析</a><time datetime="2024-04-02T06:00:15.080Z" title="发表于 2024-04-02 14:00:15">2024-04-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/15/%E5%A4%A7%E4%B8%89%E4%B8%8A%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/" title="大三（秋冬）课程总结"><img src="/image/%E5%B0%81%E9%9D%A2.png" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="大三（秋冬）课程总结"></a><div class="content"><a class="title" href="/2024/01/15/%E5%A4%A7%E4%B8%89%E4%B8%8A%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/" title="大三（秋冬）课程总结">大三（秋冬）课程总结</a><time datetime="2024-01-15T07:31:06.092Z" title="发表于 2024-01-15 15:31:06">2024-01-15</time></div></div></div></div></div></div></main><footer id="footer" style="background-image:url(/image/top3.jpg)"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By Paradox</div><div class="framework-info"><span>框架</span> <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题</span> <a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://paradoxtz.zeabur.app',
+      region: 'ap-hangzhou',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://paradoxtz.zeabur.app',
+      region: 'ap-hangzhou',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i> <span>数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><script async>window.onload=function(){var e=document.createElement("script"),t=document.getElementsByTagName("script")[0];e.type="text/javascript",e.async=!0,e.src="/sw-register.js?v="+Date.now(),t.parentNode.insertBefore(e,t)}</script></body></html>
