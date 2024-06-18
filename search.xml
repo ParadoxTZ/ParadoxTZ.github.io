@@ -1208,8 +1208,8 @@ class="math inline">\(az-zb-bx-xc-cy-ya\)</span>）。因此有以下几个优�
 <li>两组三相半波在任意时刻均有一相导通，因此没有直流磁化</li>
 <li>与六相半波整流相比，变压器副边绕组利用率翻倍</li>
 <li>每个整流元件的工作时间从 <span
-class="math inline">\(\frac{\pi}6\)</span> 提高到了 <span
-class="math inline">\(\frac{\pi}3\)</span>，提高了利用率</li>
+class="math inline">\(\frac{\pi}3\)</span> 提高到了 <span
+class="math inline">\(\frac{2\pi}3\)</span>，提高了利用率</li>
 </ol>
 <h1 id="ac-ac-变换变流">AC-AC 变换：变流</h1>
 <h2 id="调压电路">调压电路</h2>
