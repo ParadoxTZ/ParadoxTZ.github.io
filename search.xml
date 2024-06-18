@@ -641,7 +641,16 @@ class="math inline">\(i_{sM}^*,i_{sT}^*\)</span>，可以采取如下措施：</
   <entry>
     <title>电力电子技术</title>
     <url>/2024/04/18/%E7%94%B5%E5%8A%9B%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="功率半导体器件">功率半导体器件</h1>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="电力电子技术">电力电子技术</h1>
+<ul>
+<li>下文中公式出现 <code>$$</code> ，<code>\</code>
+等形式就是没渲染好，最好开翻墙…因为确实有点卡</li>
+<li><strong>整理了PDF版本，内容跟下面差别不大，好处是可以打印而且不会出现渲染问题</strong>
+<ul>
+<li><a href="\myfile\电力电子技术笔记.pdf" target="_blank">电力电子技术笔记PDF</a></li>
+</ul></li>
+</ul>
+<h1 id="功率半导体器件">功率半导体器件</h1>
 <h2 id="分类与基本型">分类与基本型</h2>
 <table>
 <colgroup>
@@ -2917,7 +2926,7 @@ class="math inline">\(m\le2^3-1=7\)</span></p>
 <li>是信号分析与处理的后续课程</li>
 </ul></li>
 <li><p>下面我将分四章来进行阐述：</p></li>
-<li><p>整理了PDF版本，内容跟下面差别不大，好处是可以打印而且不会出现渲染问题**</p>
+<li><p>整理了PDF版本，内容跟下面差别不大，好处是可以打印而且不会出现渲染问题</p>
 <ul>
 <li><a href="\myfile\控制理论（乙）.pdf" target="_blank">控制理论笔记</a></li>
 </ul></li>
