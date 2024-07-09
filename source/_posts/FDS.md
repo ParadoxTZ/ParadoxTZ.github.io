@@ -3,7 +3,7 @@ title: 数据结构基础FDS
 top_img: /image/top3.jpg
 mathjax: true
 cover: https://img-qn.51miz.com/Photo/2017/03/27/23/P226220_c682c184336b010907a3ea4842f8ea38.jpg
-description: 数据结构基础FDS课程笔记
+description: Ooops！（整个ACEE里面最受益匪浅的一门课）
 tags: 
   - 笔记
   - 大二
