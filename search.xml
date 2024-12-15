@@ -26,6 +26,132 @@
 ]]></content>
   </entry>
   <entry>
+    <title>电机工程创新实践（短学期）</title>
+    <url>/2024/12/13/%E7%94%B5%E6%9C%BA%E5%B7%A5%E7%A8%8B%E5%88%9B%E6%96%B0%E5%AE%9E%E8%B7%B5/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="电机工程创新实践">电机工程创新实践</h1>
+<ul>
+<li>这门课本来应该是在寒假一起修的短学期课程，但是hxy老师把它放到冬学期上了。一周一节，一共四节课左右，剩下的时间自己做大作业。但奈何本人最近一直在实习….</li>
+<li>这门课的要求是设计一个小型电机，体验一下设计流程。不过<strong>真正在工程实践中电机的设计流程并不如此</strong>（以至于黄老师自己都不会用ANSYS），本人也没有进行什么优化，反正看上去还行。本篇文章走一下hxy老师的设计流程。</li>
+<li>课不用怎么听，基本靠自学</li>
+<li><strong>本人不会设计电机</strong></li>
+</ul>
+<h2 id="基本电机参数设计">1. 基本电机参数设计</h2>
+<p>​
+这块跟大三下学期学的电机设计区别不太大，不过不需要搞得那么复杂，只需要设计几个基本的参数就行了。黄老师的PPT里有流程示范，基本跟着她那个走就行（顺带一提，黄老师基本不看钉钉但是微信秒回，所以催她发文件最好微信）</p>
+<h3 id="主要尺寸关系式">1.1 主要尺寸关系式</h3>
+<p>先根据设计要求，找到电机的转矩、转速、电压要求。</p>
+<p>根据电机基本尺寸关系式（分子6.1那个，详见电机设计）计算电枢外径<span
+class="math inline">\(D_0\)</span>。其中：</p>
+<ul>
+<li>A可以取值在15~50 × 10<sup>3</sup> A/m</li>
+<li><span class="math inline">\(B_{\delta}\)</span>可以取值在0.6~0.8
+T</li>
+<li><span class="math inline">\(\alpha_p\)</span>可以取值在0.7左右</li>
+<li><span class="math inline">\(K_{nm}\)</span>取值在1.1，<span
+class="math inline">\(K_{dp}\)</span>取值在0.92或0.96</li>
+<li>尺寸比<span
+class="math inline">\(\lambda\)</span>可以取得很小（因为我设计的是机器人关节电机，所以取的0.1左右，D比l大很多）</li>
+</ul>
+<p>​
+然后确定内转子还是外转子。黄老师设计的是外转子，我是内转子。内转子可以参考电机设计这本书的例程，定子内径（即约为转子外径）大概就是外径的0.6~0.8，反正这个要求不是特别大，最终大概设计出来定子轭部跟定子齿的宽度差不多就行（轭部可以细一点）</p>
+<p>​
+这里我的参数大概是80,50（仅供参考）。转子内径要求不大，给转子轭部稍微留点空间。一般设计个30以上吧，这个对电机性能影响很小，尽量让转子轭部薄一点。</p>
+<h3 id="槽极配合">1.2 槽极配合</h3>
+<p>​
+hxy老师的PPT上有两个表格，分别是不同槽极配合下的绕组系数和谐波与噪声（这两个表横纵坐标反了别看岔），谐波选数字稍微大一点（意思就是谐波小），绕组系数大一些。一般都是分数槽集中绕组，一些比较经典的设计比如12s10p，12s9p等等，对这些槽极配合等比例放大（比如我用的24s20p）也是个不错的选择。我看有人说24s20p的波形没有特别好，他用的好像有三十多极，具体我有点记不清了。反正这么大的电机，极数二三十差不多了，电机越大可以把极对数增大。</p>
+<h3 id="材料选型">1.3 材料选型</h3>
+<p>​ 我是不会一点，老师选啥我选啥，抄PPT的</p>
+<h3 id="槽型设计">1.4 槽型设计</h3>
+<p>​
+我是不会一点，《电机设计》选啥我选啥。把他在第十章设计的槽等比缩放一下（按照电枢直径）就是我的槽了！（免责声明：吴立建上课也是这么说的）</p>
+<p>好的，现在你就非常粗略的设计完电机了（没事，没设计的部分ANSYS会帮你设计的）</p>
+<h2 id="rmxprt-建模">2. RMxprt 建模</h2>
+<p>给一个参考链接，可以跟着他做一下建模，数据用自己的就好：https://www.bilibili.com/video/BV1cN411r7Wu</p>
+<p><img src="\image\hxy1.png" /></p>
+<ul>
+<li><p>推荐用参数化建模，如左下角红线所示，这样之后做参数扫描比较方便。</p></li>
+<li><p>如果一些必填的参数你不知道怎么取，可以参考黄老师PPT中的取法（但也不一定对），这里给点参考：永磁体厚度可以在2mm左右，气隙可以在1mm左右（黄老师取的2mm太大了）</p></li>
+<li><p>windings的参数设计慎填，因为你可能会设计的一坨屎（没错我一开始就是这样），把必要的几个填一下，比如并联支路数是1还是2，剩下的丢给他自己设计吧，比如匝数、线径啥的。不合适后面再改。</p></li>
+<li><p><strong>黄老师会发一个电机设计报告的word模板，如果第三四节课后还没发，记得找她要。</strong>对着那个报告做会轻松很多。做完上面这几步，你已经可以填写<strong>表1.1和表1.2</strong>了。</p></li>
+</ul>
+<h2 id="maxwell-建模与仿真">3. Maxwell 建模与仿真</h2>
+<p>​
+使用setup创建Maxwell2D模型，绝大部分仿真都需要在Maxwell里面跑，<strong>原因是RMxprt里面的仿真只能是
+<code>Constant Power</code>，但是我们需要的是用电流源来进行仿真</strong>。</p>
+<p>不要立刻进行仿真。</p>
+<h3 id="磁场磁密云图磁力线分布与气隙磁密">3.1
+磁场：磁密云图、磁力线分布与气隙磁密</h3>
+<p>​ ctrl+A 全选，右键选择<code>plot mesh</code>进行剖分，在左侧的Field
+Overlays里面可以看到剖分图。如果剖分没有出来的话，双击一下电机模型的左下角，有一个Time=0的东西，双击完成就能看到了。然后分别进行A和B的调用。</p>
+<p><img src="\image\hxy4.png" /></p>
+<p><img src="\image\hxy9.png" /></p>
+<p>如下图所示，画一条气隙线，原点在电机圆心，半径刚好穿过气隙。画完后只用保留线，把<code>coverlines</code>删了</p>
+<p><img src="\image\hxy3.png" /></p>
+<p>​ 如下图所示，添加气隙磁密。气隙磁密一共两个，径向<span
+class="math inline">\(B_r\)</span>和切向<span
+class="math inline">\(B_t\)</span>，所以一共添加两次，就是在第二步操作中分别选择切向Target和径向Normal，然后分别命名Bt和Br就行。步骤用蓝色标出。</p>
+<p><img src="\image\hxy5.png" /></p>
+<p>​
+接着进行仿真设置，右键setup1选择properties进行设置，为了少跑几个周期，可以减小一点总时间。时间设多少随你，大概三个周期就够。上面那个100可以减小点，20,50啥的都行，具体含义自己看英文。</p>
+<p><img src="\image\hxy2.png" /></p>
+<p>​
+在仿真之前，非常重要的一部是如下图所示进行设置，从电压源改成电流源。<strong>具体数值要根据设计的电机参数进行更改</strong>。BC相减/加三分之二π就行。一开始I0设置成0模拟空载，n设置成额定转速。</p>
+<p><img src="\image\hxy8.png" /></p>
+<p>开始仿真！</p>
+<p>​
+为了查看气隙磁密，分别进行下面两步操作。其中第二张图的7200是取点的数量，越多越慢，我感觉1440之后区别不大了，尽量设成个360的倍数就行。查看气隙磁密并填入<strong>图4.3</strong>中。</p>
+<p><img src="\image\hxy6.png" /></p>
+<p><img src="\image\hxy7.png" /></p>
+<p>在左侧的Field
+Overlays里面可以看到磁密云图、磁力线分布，填入<strong>图4.1，4.2</strong>中。右键Result选择FFT，如下</p>
+<p><img src="\image\hxy10.png" /></p>
+<p>最后怎么处理的数据自己去查。</p>
+<h3 id="电场感应电势与电流">3.2 电场：感应电势与电流</h3>
+<p>​
+齿槽转矩就是输入电流为0时的点击转矩，可以直接看自带的Torque曲线就行了</p>
+<p>​
+感应电压曲线也是。由于本实验要求输入电压最低30V，因此感应电动势<strong>不能超过这个数值</strong>，否则需要额外的控制。如果超过了，则需要减少线圈匝数cond，其可以在左下角的variable里面找到。此外，如果这个比较<strong>不正弦</strong>的话可能需要调整一下其它参数。如果需要减少匝数的话，那就需要增加绕线截面积了（为了确保电流一样）。为了应付教学，可以直接把原来的线径按比例放大（平方关系），但实际中涉及到选型是不能这么做的。</p>
+<p>​
+磁链、电感和电阻也是一样的，自己去调一下Result里面的数据（低情商：我也是猜的）</p>
+<p>​ 至于怎么调曲线：Result - Create Transient Report - Create
+Rectangular Report</p>
+<h3 id="负载特性">3.3 负载特性</h3>
+<p>首先先进行参数扫描，如下</p>
+<p><img src="\image\hxy11.png" /></p>
+<p><img src="\image\hxy12.png" /></p>
+<p>​
+对新得到的ParameterSetup1进行分析Analyze，由于扫的点数很多，所以可能耗时很久。然后如下图所示进行转矩-电流曲线的扫描。需要注意的是，如果之前更改过cond（匝数），那么他在仿真的时候会把两种cond都仿真一次，所以可以在families里面把cond换成你需要的那个，而不是all</p>
+<p><img src="\image\hxy13.png" /></p>
+<p>​
+其他的转矩波形、感应电动势直接调出来就行。需要注意的是要手动把电流设置成额定电流（额定电流从上面的转矩-电流曲线中读出），具体操作方法为：</p>
+<p>​ 右键Result中相应的图表 - Modify - Families - 电流改成额定电流</p>
+<p>​
+接着，用转矩-电流曲线同样的方法，找到交直轴电感Ld，Lq（记得用Average值）与电流的关系</p>
+<p>​
+左下角Variable把输入电流改成额定电流，跑一遍Setup1，再去看电机磁密云图</p>
+<p>​
+正常情况下，Maxwell仿真是不包含涡流损耗和永磁损耗的，要主动选择。步骤如下，选择Core
+loss和Eddy Current loss之后把所有的都勾上。</p>
+<p><img src="\image\hxy14.png" /></p>
+<p>​
+不同转速、电流下的数据点下，电机的效率MAP图跟上面的扫描也是类似的，设置类似如下（记得把仿真的间隔调一下，不然得跑很久很久）</p>
+<p><img src="\image\hxy15.png" /></p>
+<h3 id="过载">3.4 过载</h3>
+<p>把电机电密调到50，你看下原来的电密，应该会是50的三分之一到二分之一，把电流等比放大就行。然后跑一次。</p>
+<p>电流就是正常的电流</p>
+<p>磁密云图也不用管温度要求了，就是之前的磁密云图</p>
+<p>这个是什么意思呢，就是如果退磁严重的话，需要你把永磁体厚度增厚，也就是说前面重来一遍喵。</p>
+]]></content>
+      <categories>
+        <category>课程</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>电气</tag>
+        <tag>大四</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【短篇】 二月十三</title>
     <url>/2024/07/09/%E4%BA%8C%E6%9C%88%E5%8D%81%E4%B8%89/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="二月十三">二月十三</h1>
@@ -1174,8 +1300,8 @@ a，比如转矩控制转速，电流控制转矩，电流控制磁链，电压�
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>大三</tag>
         <tag>电气</tag>
+        <tag>大三</tag>
       </tags>
   </entry>
   <entry>
@@ -1191,8 +1317,8 @@ a，比如转矩控制转速，电流控制转矩，电流控制磁链，电压�
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>大三</tag>
         <tag>电气</tag>
+        <tag>大三</tag>
       </tags>
   </entry>
   <entry>
@@ -2310,8 +2436,8 @@ E2,0,-\frac E2,-E\)</span> 的阶梯波</li>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>大三</tag>
         <tag>电气</tag>
+        <tag>大三</tag>
       </tags>
   </entry>
   <entry>
@@ -3104,8 +3230,8 @@ p([I]&#39;^T[\frac32\varPsi_d,~\frac32\varPsi_q,~3\varPsi_0,~[\varPsi_r]]^T)
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>大三</tag>
         <tag>电气</tag>
+        <tag>大三</tag>
       </tags>
   </entry>
   <entry>
@@ -3164,8 +3290,8 @@ p([I]&#39;^T[\frac32\varPsi_d,~\frac32\varPsi_q,~3\varPsi_0,~[\varPsi_r]]^T)
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>大三</tag>
         <tag>电气</tag>
+        <tag>大三</tag>
       </tags>
   </entry>
   <entry>
@@ -3467,8 +3593,8 @@ class="math inline">\(m\le2^3-1=7\)</span></p>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>大三</tag>
         <tag>电气</tag>
+        <tag>大三</tag>
         <tag>微机</tag>
       </tags>
   </entry>
@@ -4250,8 +4376,8 @@ class="math inline">\(\alpha=k\frac{\tau}T\)</span>，查表</li>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>大三</tag>
         <tag>电气</tag>
+        <tag>大三</tag>
       </tags>
   </entry>
   <entry>
@@ -4928,8 +5054,8 @@ Q_{i}}\frac1{1-\frac{\partial Q_L}{\partial Q_{i}}}=\lambda
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>大三</tag>
         <tag>电气</tag>
+        <tag>大三</tag>
       </tags>
   </entry>
   <entry>
@@ -6483,8 +6609,8 @@ U=\text{const}\)</span>，因此气隙合成磁通不会变化</li>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>大三</tag>
         <tag>电气</tag>
+        <tag>大三</tag>
       </tags>
   </entry>
   <entry>
@@ -8087,8 +8213,8 @@ SEQx：中断标志位，1表示有中断，只读</td>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>大三</tag>
         <tag>电气</tag>
+        <tag>大三</tag>
         <tag>微机</tag>
       </tags>
   </entry>
@@ -8292,8 +8418,8 @@ A}+\frac1{h_2A}}\)</span></p>
         <category>Hexo</category>
       </categories>
       <tags>
-        <tag>随笔</tag>
         <tag>Hexo</tag>
+        <tag>随笔</tag>
       </tags>
   </entry>
 </search>
