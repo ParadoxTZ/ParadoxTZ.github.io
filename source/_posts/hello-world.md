@@ -8,7 +8,7 @@ description: Hello, World!
 tags: 
   - Hexo
   - 随笔
-categories: Hexo
+categories: 软件教程
 
 post_meta:
   page:
