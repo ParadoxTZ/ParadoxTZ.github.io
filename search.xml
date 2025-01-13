@@ -26,6 +26,130 @@
 ]]></content>
   </entry>
   <entry>
+    <title>基于Git和gitee的协同开发</title>
+    <url>/2025/01/13/%E5%9F%BA%E4%BA%8EGit%E5%92%8Cgitee%E7%9A%84%E5%8D%8F%E5%90%8C%E5%BC%80%E5%8F%91/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="基于git和gitee的协同开发">基于Git和gitee的协同开发</h1>
+<h2 id="下载与安装">下载与安装</h2>
+<p>​
+翻墙，进入Git官网下载对应版本并安装，需要同Vscode下载在同一台电脑上。安装完成后于桌面右键→Git
+Bash Here，若成功打开命令窗口则环境配置成功。</p>
+<p>​ Git 是一个分布式的代码托管工具，其工作流程如下：</p>
+<p><img src="\image\git1.png" /></p>
+<p>其中：</p>
+<ol type="1">
+<li>Working Directory
+(工作区)：我们编辑与变动的代码文件，都在工作区下；</li>
+<li>Stating Area
+(缓存区)：代码有变动的时候，我们可以把每次变动后的代码，提交到 git
+缓存区。让 git 记录代码的变动；</li>
+<li>Respository (仓库)：在 git 缓存区的代码，都可以提交到 git
+仓库进行托管。从图中可以看到，本地的仓库（一般指PC）可以将代码提交到远程的仓库（一般指
+git 服务器，如github和国内的gitee）。</li>
+</ol>
+<p><strong>一般工作流程：</strong>本地配置Git仓库→编写代码→提交到本地仓库（一般指PC）→提交到远端仓库（此处以gitee为例）→从远端仓库下载最新的代码→循环</p>
+<p><strong>以下内容建议使用新的test来进行尝试，不要第一次上手就在成型的库里操作，以免打乱文件</strong></p>
+<h2 id="从零开始新建项目全流程">从零开始新建项目全流程</h2>
+<h3 id="git初始化与建立远端连接">Git初始化与建立远端连接</h3>
+<p>​
+在PC工作区新建一个文件夹用于存放该项目的所有代码，在文件夹内执行右键→Git
+Bash
+Here进入Git命令窗口。输入<code>git.init</code>。观察到工作区内新增隐藏文件夹<code>.git</code>。</p>
+<p>​
+命令窗口输入以下代码进行基本配置。本地账户可以任意设置，与远端关系不大。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;&lt;myUserName&gt;&quot;</span>   // &lt;&gt;内表示自行命名</span><br><span class="line">git config --global user.email <span class="string">&quot;&lt;xxxx@qq.com&gt;&quot;</span> // 可以是其他邮箱</span><br></pre></td></tr></table></figure>
+<p>​
+此时已经完成Git的初始化和基本配置，下面开始建立远端仓库连接。在网页端打开gitee并登录（注册），在右上角的“+”中选择新建仓库，并命名为<code>test1</code>。方便起见，这里都采用HTTPS的方式进行连接（SSH连接需要额外配置）。</p>
+<p>​
+复制该仓库的HTTPS地址，比如<code>https://gitee.com/akribis/test1.git</code>。在命令窗口中输入：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote add origin https://gitee.com/akribis/test1.git</span><br></pre></td></tr></table></figure>
+<p>​ 若没有报错，则认为远端连接建立完成。</p>
+<h3 id="缓存提交与推送">缓存、提交与推送</h3>
+<p>​
+代码上传的过程共分为三步——缓存、提交与推送，分别是代码（文件）经历本地工作区、缓冲区、本地仓库、远端仓库的过程。</p>
+<ol type="1">
+<li><p><strong>缓存add（本地工作区→缓冲区）</strong></p>
+<p>​
+在本地工作区新建一个文件（以<code>README.md</code>和<code>test1.m</code>为例），或者在本地工作区中对某个文件的内容进行了改动，需要在命令窗口进行如下操作（两种方法任选其一）：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">// method 1</span><br><span class="line">git add README.md</span><br><span class="line">git add test1.m</span><br><span class="line">// method 2</span><br><span class="line">git add .</span><br></pre></td></tr></table></figure>
+<p>​
+其中，<code>git add .</code>表示缓存所有内容，无需一个个操作。</p></li>
+<li><p><strong>提交commit（缓冲区→本地仓库）</strong></p>
+<p>​ 缓冲区仅用于记录更改，真正的托管需要在本地仓库中完成，操作如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit -m <span class="string">&quot;&lt;first commit test&gt;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>​
+其中<code>&lt;&gt;</code>的内容表示版本说明，本次更新增加、删减了哪些内容</p></li>
+<li><p><strong>推送push（本地仓库→远端仓库）</strong></p>
+<p>​
+在建立过于远端仓库的连接的基础上，可以通过以下代码进行推送（同步）：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push -u origin master // 将本地当前的master分支提交远端master</span><br></pre></td></tr></table></figure>
+<p>​
+如果未在git上登录远端仓库gitee，会自动弹出gitee的登录框，输入gitee账号的账户与密码登录即可。可以在gitee上的仓库中看到，里面多了<code>README.md</code>和<code>test1.m</code>两个文件。</p></li>
+</ol>
+<h3 id="远端同步与分支">远端同步与分支</h3>
+<p>​
+在其他同事更改完各自的代码并上传后，你需要更新你的本地仓库，这个将远端仓库的代码下载到本地的过程称之为<strong>同步</strong>，代码为<code>pull</code>。示例如下：</p>
+<p>​
+在远端仓库gitee中新建一个<strong>分支</strong>，命名为<code>Develop</code>，选择从<code>master</code>中创建。分支的意义是不同开发人员对同一个项目在不同内容方向上独立工作，互不干扰。每个分支都从主分支上克隆，多个开发人员基于不同分支并行开发（在分支上进行测试以确保代码无误），完成后再合并到主分支（这一步由管理员进行）。</p>
+<p>​
+回到同步，你可以在gitee上对新的Develop分支进行内容的修改，比如打开<code>README.md</code>输入一段随机字符串。这时这些修改在你的本地仓库PC上是未发生的（这一点可以通过在命令窗口中输入<code>git branch</code>得到，此时应该只有<code>master</code>分支），因此需要同步。在命令窗口中输入：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure>
+<p>​
+此时会显示<code>Already up to data</code>（或者可能是其他的内容），而明明远端仓库要更加新一点。这是因为两端分支不同步导致的。你需要在PC上新建<code>develop</code>分支，如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout develop</span><br></pre></td></tr></table></figure>
+<p>​
+<code>git checkout</code>是切换分支的命令，这个时候（在之前已经执行过<code>pull</code>的基础上）它会自动帮你创建一个新分支<code>develop</code>并且和远端仓库关联（可以通过<code>git branch</code>命令验证）。如果希望验证该关联性，可以新建一个文件，再执行一边缓存、提交和推送的完整过程，观察gitee上是否有正确地更新。</p>
+<p>​
+如何在本地观察当前分支呢？在工作区中打开命令窗口并使用<code>git branch</code>可以看到当前分支。此时使用<code>git checkout</code>命令则可以切换到另一个分支当中。如果两个分支中的文件不同，你会惊人的发现你的工作区（即文件夹中）的文件变了，如图：</p>
+<p><img src="\image\git2.png" /></p>
+<p>​
+这里你也许已经发现使用命令窗口进行git配置非常麻烦：不可视化、文件管理仍然混乱、容易进到别的分支当中去而不自知。</p>
+<p>​
+<strong>以上内容主要是为了了解、熟悉Git的原理和操作，下面来讲解如何在VSCode中进行使用和同步。</strong></p>
+<h2 id="基于vscode的同步">基于VSCode的同步</h2>
+<h3 id="创建vscode与gitee的连接">创建VSCode与gitee的连接</h3>
+<p>​
+VSCode在安装时默认会带有git管理的插件，图标是用曲线连接的三个点，可以通过<code>Ctrl Shift G</code>调出来。点击“初始化仓库”即可自动创建git，相当于<code>git init</code>。</p>
+<p>​
+通过下图图示操作添加远程库，在上方的URL框中输入gitee项目的链接（以<code>.git</code>结尾的URL），命名就是前文最早在<code>git config</code>中的命名，没有很深的含义。</p>
+<p><img src="\image\git4.png" /></p>
+<p>​
+如下图所示，进行个人分支的选择和拷贝。可以直接在gitee网站上新建分支（最好是以自己的名字或分支功能命名），然后直接在这里选择“远程分支”；当然也可以在这里直接新建分支，然后把原分支的内容拷贝过来。这里以前者为例：</p>
+<p><img src="\image\git5.png" /></p>
+<p>​
+<strong>以后，左下角的这个标识就是你当前更改、上传、同步的分支。请时刻确保你更改的是自己的分支内容。</strong></p>
+<h3 id="缓存提交与推送-1">缓存、提交与推送</h3>
+<p>​ 还记得git的工作逻辑吗？缓存、提交与推送。这里一一演示。</p>
+<ul>
+<li><strong>缓存：本地工作区→缓冲区</strong></li>
+</ul>
+<p>​
+图标右下角的“3”是指本次一共经过了三次修改，其中M/U/D分别表示修改/新建和删除。本地工作区和缓冲区就对应图中的“更改”和“暂存的更改”——所以缓冲区的本质就是暂存。<strong>这一步可以直接通过点击“更改”栏右边的“+”完成。</strong></p>
+<p><img src="\image\git6.png" /></p>
+<ul>
+<li><strong>提交：缓冲区→本地仓库</strong></li>
+</ul>
+<p>​
+提交的英文是Commit，这一步一个非常关键的步骤就是需要在提交的时候同时上传“提交说明”，来简述这次提交干了些什么事情。单击提交之后，VSCode会自动生成一个提交说明的文件，自动生成了本次提交的修改内容，需要在第一行中进行一些简单的说明。写完后点击右上角的“√”进行提交。</p>
+<p><img src="\image\git7.png" /></p>
+<ul>
+<li><strong>推送：本地仓库→远端仓库</strong></li>
+</ul>
+<p>​
+推送的操作可以直接点击同步（这个命名不好，同步应该是从远端下载）或者右键…选择推送。可以在gitee上看到新的推送内容（在对应的分支中）。</p>
+<p><img src="\image\git8.png" /></p>
+<h3 id="远端同步">远端同步</h3>
+<p>​ 没啥好讲的，英文版本就是pull，中文翻译是拉取。</p>
+<p>​ 值得一提的是左下角的源代码管理图中含有历史信息，可以进行溯源。</p>
+]]></content>
+      <categories>
+        <category>软件教程</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>编程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MATLAB面向对象编程</title>
     <url>/2025/01/02/MATLAB%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="基础">基础</h1>
