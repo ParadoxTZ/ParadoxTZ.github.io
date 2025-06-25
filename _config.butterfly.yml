@@ -216,7 +216,7 @@ aside:
       link: https://github.com/ParadoxTZ
   card_announcement: # 公告
     enable: true
-    content: "玩得开心！"
+    content: "未知苦处，不信神佛。"
   card_recent_post:
     enable: true
     limit: 5 # if set 0 will show all
