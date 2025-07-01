@@ -292,7 +292,8 @@ twikoo:
   option:
 
 # Background
-background: url(/image/back.png)
+# background: url(/image/back.png)
+background: /image/back.png
 footer_bg: true
 # canvas_nest:
 #   enable: true

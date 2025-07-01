@@ -2,6 +2,7 @@ cd F:\Paradox_Web\ParadoxTZ.github.io
 call hexo clean
 call hexo g 
 
+hexo call gulp
 
 call hexo d
 
