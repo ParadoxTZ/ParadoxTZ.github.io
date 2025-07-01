@@ -142,6 +142,7 @@ deploy:
 # Math
 mathjax:
   enable: true
+  per_page: true
 
 # Code Blocks
 highlight_height_limit: 200 #代码超过200行隐藏
