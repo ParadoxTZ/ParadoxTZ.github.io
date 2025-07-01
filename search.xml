@@ -23,81 +23,6 @@
       </tags>
   </entry>
   <entry>
-    <title>MATLAB面向对象编程</title>
-    <url>/2025/01/02/MATLAB%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="基础">基础</h1>
-<h2 id="类与对象">类与对象</h2>
-<p>下面这是一个类<code>class</code>：</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% ClassName.m</span></span><br><span class="line"><span class="keyword">classdef</span> className &lt; handle</span><br><span class="line">	<span class="keyword">properties</span> <span class="comment">% 属性 block</span></span><br><span class="line">		...</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">methods</span>   <span class="comment">% 方法 block</span></span><br><span class="line">   		...</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>下面以创建一个二维点的案例作为示例，其中<code>Point2D</code>是一个类，<code>p1</code>和<code>p2</code>是对象</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% Point2D.m</span></span><br><span class="line"><span class="keyword">classdef</span> Point2D &lt; handle</span><br><span class="line">	<span class="keyword">properties</span></span><br><span class="line">		x = <span class="number">0.0</span>; <span class="comment">% 默认值，可没有，如y</span></span><br><span class="line">		y</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">methods</span></span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">obj</span> = <span class="title">Point2D</span><span class="params">(x0,y0)</span> % 构造类型函数</span></span><br><span class="line">			obj.x = x0;</span><br><span class="line">			obj.y = y0;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">normalize</span><span class="params">(obj)</span>     % 归一化方法类函数</span></span><br><span class="line">			r = <span class="built_in">sqrt</span>(obj.x^<span class="number">2</span> + obj.y^<span class="number">2</span>);</span><br><span class="line">			obj.x = obj.x/r;</span><br><span class="line">			obj/y = obj.y/r;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>这里的<code>Point2D</code>不是普通的函数，是一个类的构造函数<code>Constructor</code>，可以用以下方法创建对象：</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">p1 = Point2D(<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line">p2 = Point2D(<span class="number">2.5</span>,<span class="number">4.0</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="类的属性方法及其分类">类的属性、方法及其分类</h2>
-<p>用下面一段代码（仍然以<code>Point2D</code>为例说明）</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="keyword">classdef</span> Point2D &lt; handle</span><br><span class="line">	<span class="keyword">properties</span></span><br><span class="line">		x</span><br><span class="line">		y</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">properties</span>(Constant)   <span class="comment">% 常量属性</span></span><br><span class="line">		R = <span class="built_in">pi</span>/<span class="number">180</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">properties</span>(Dependent)  <span class="comment">% 非独立属性</span></span><br><span class="line">		r <span class="comment">% 不占用存储空间，可以通过p1.r调用</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">properties</span>(Hidden)    <span class="comment">% 隐藏属性</span></span><br><span class="line">		var <span class="comment">% 不会显示，开发、交互时有用</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">methods</span></span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">result</span> = <span class="title">get</span>.<span class="title">r</span><span class="params">(obj)</span></span></span><br><span class="line">			result = <span class="built_in">sqrt</span>(obj.x^<span class="number">2</span> + obj.y^<span class="number">2</span>); <span class="comment">% 通过get方法进行调用计算</span></span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">		normalize(obj); <span class="comment">% 仅提供声明，可在外部独立文件中编程</span></span><br><span class="line">		           <span class="comment">% 需要创建名为@Point2D的文件夹，把这些都丢进去</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>在定义方法时，<code>obj</code>必须作为成员方法的参数之一，说明传递给该成员方法的参数是一个对象。当然你可以使用任何其他单词，这里使用<code>obj</code>是为了和C++语言中的<code>this</code>以及Python中的<code>self</code>进行区分</p>
-<p>虽然方法也可以通过函数调用，如<code>normalize(p1)</code>，但还是更推荐使用点调用，即<code>p1.normalize()</code>。</p>
-<h2 id="类的构造函数">类的构造函数</h2>
-<p>构造函数Constructor是一种特殊的成员方法，比如上文的<code>p1 = Point2D(1,1);</code>：</p>
-<ul>
-<li>其<strong>名字与类名相同</strong></li>
-<li>类定义中至多只能有1个构造函数</li>
-<li>其返回值必须只能是新创建的对象</li>
-<li>这是唯一一个创建新对象的方法</li>
-</ul>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% 提供多种输入参数数目的方法</span></span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">obj</span> = <span class="title">Point2D</span><span class="params">(x0,y0)</span></span></span><br><span class="line">	<span class="keyword">if</span> nargin==<span class="number">0</span> <span class="comment">% 输入参数数量</span></span><br><span class="line">		obj.x = <span class="number">0</span>; obj.y = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">elseif</span> nargin==<span class="number">2</span></span><br><span class="line">		obj.x=x0; obj.y=y0;</span><br><span class="line">	<span class="keyword">elseif</span> nargin==<span class="number">1</span></span><br><span class="line">		obj.x=x0;obj.y=x0;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		error(<span class="string">&#x27;wrong input&#x27;</span>);</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>如果没有创建构造函数，MATLAB后台会自动创建一个空函数用于构造。该函数没有输入。</p>
-<h2 id="类的关系继承组合聚集">类的关系：继承、组合、聚集</h2>
-<h3 id="继承">继承</h3>
-<p>在逻辑上，继承即为泛化关系，表示B是A的“一种”(a kind
-of)，是父子、基类-派生类的关系。子类是父类的特殊类型，具有父类的全部属性，比如父类是电机，具有定子、转子、气隙这些属性，子类可以是永磁同步电机，额外具有永磁体属性。如：</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% Point3D.m</span></span><br><span class="line"><span class="keyword">classdef</span> Point3D &lt; Point2D</span><br><span class="line">	<span class="keyword">properties</span></span><br><span class="line">		z</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">methods</span></span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">obj</span> = <span class="title">Point3D</span><span class="params">(x0,y0,z0)</span>;</span></span><br><span class="line">			obj = obj@Point2D(x0,y0); <span class="comment">% 用@表示调用父类，子类必须先调用父类</span></span><br><span class="line">			obj.z = z0;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">print</span><span class="params">(obj)</span>;</span></span><br><span class="line">			print@Point2D(obj); <span class="comment">% 调用同名方法：函数名@父类类名(obj，其它参数)</span></span><br><span class="line">			<span class="built_in">disp</span>([<span class="string">&#x27;z=&#x27;</span>,num2str(obj.z)]);</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<h3 id="组合">组合</h3>
-<p>继承中子类可以得到父类的全部属性，但是不能为了让B的功能更多而盲目地对A和B使用继承，否则将造成混乱。另一种逻辑关系是组合，比如人脸和五官之间的关系。</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="keyword">classdef</span> Mouse &lt; handle</span><br><span class="line">	<span class="comment">% ...</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">... <span class="comment">% Other Classes in other Matlab Files</span></span><br><span class="line"><span class="keyword">classdef</span> Face &lt; handle <span class="comment">% 使用handle而非多重继承：Mouse&amp;Eye&amp;Nose</span></span><br><span class="line">	<span class="keyword">properties</span></span><br><span class="line">		mouse</span><br><span class="line">		... <span class="comment">% Others Like eye/nose/ear</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">methods</span></span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">obj</span>=<span class="title">Face</span><span class="params">()</span></span></span><br><span class="line">			obj.mouse = Mouse();</span><br><span class="line">			... <span class="comment">% Others Like Eye/Nose/Ear</span></span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<h3 id="聚集">聚集</h3>
-<p>聚集跟组合的关系类似，但聚集更加<strong>松散</strong>。部分结构不依赖于整体存在，比如自行车的车轮可以先被定义（制造），然后再装到自行车上面去。这意味着<strong>子对象可以被独立创建</strong>。</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%% Bike.m</span></span><br><span class="line"><span class="keyword">classdef</span> Bike &lt; handle</span><br><span class="line">	<span class="keyword">properties</span></span><br><span class="line">		frontWheel</span><br><span class="line">		rearWheel</span><br><span class="line">		seat</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">%% Scripts</span></span><br><span class="line">frontWheelObj = Wheel();  <span class="comment">% 独立存在</span></span><br><span class="line">rearWheelObj = Wheel();</span><br><span class="line">seatObj = Seat();</span><br><span class="line">...</span><br><span class="line">myBike = Bike();</span><br><span class="line">myBike.frontWheel = frontWheelObj; <span class="comment">% 聚集关系</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<h2 id="handle类的set和get方法">Handle类的set和get方法</h2>
-<h3 id="set方法">set方法</h3>
-<p>set方法为对象
-属性的幅值提供了一个中间层，在对象A的外部，任何对属性a（A.a）的幅值都需要经过<code>set.a</code>这个中间层，通常用来检测赋值是否合理，如：</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="keyword">classdef</span> Point_Quadrant1 &lt; handle</span><br><span class="line">	<span class="keyword">properties</span></span><br><span class="line">		x</span><br><span class="line">		y</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">methods</span></span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">set</span>.<span class="title">x</span><span class="params">(obj,valx)</span></span></span><br><span class="line">			<span class="keyword">if</span> (valx&lt;<span class="number">0</span>)</span><br><span class="line">				error(<span class="string">&#x27;Not in First Quadrant&#x27;</span>);</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				obj.x = valx;</span><br><span class="line">			<span class="keyword">end</span></span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">set</span>.<span class="title">y</span><span class="params">(obj,valy)</span> </span></span><br><span class="line">			<span class="comment">% ...略</span></span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<h3 id="get方法">get方法</h3>
-<p>get方法已经在上面介绍过了，是一种对成员属性查询的中间层。可以理解为get和set的调用正好相反：</p>
-<ul>
-<li><code>set</code>是对某个值进行设置，因此写为：<code>obj.a = val</code></li>
-<li><code>get</code>是对某个值进行调用，因此写为：<code>val = obj.a</code></li>
-</ul>
-<p>进阶用法暂时不讲了</p>
-<h2 id="访问权限">访问权限</h2>
-<p>跟前面属性的非独立、常量、隐藏属性类型，<strong>属性和方法</strong>都可以加上权限设置：<code>methods(Access = private/protected/public)</code></p>
-<p>在OOP中，<code>public</code>类应该尽量少用，这和面向对象的封装是矛盾的</p>
-<p>此外，<code>Access</code>还可以细分为<code>GetAccess</code>和<code>SetAccess</code>，表示读取权限和设置权限</p>
-<p>此外，还可以通过更加细节的设置，指定某个类的访问权限，比如：</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%% BankAccount.m</span></span><br><span class="line"><span class="keyword">classdef</span> BankAccount &lt; handle</span><br><span class="line">	<span class="keyword">properties</span>(SetAccess = &#123;?BankTeller,?Paradox&#125;) <span class="comment">% 只允许BankTeller、Paradox、类内部的方法访问</span></span><br><span class="line">		balance <span class="comment">% 允许银行柜员修改账户余额的数值</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">methods</span></span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">deposit</span><span class="params">(obj,val)</span></span></span><br><span class="line">			obj.balance = obj.balance+val; <span class="comment">% 存钱，类内部的成员方法可以访问</span></span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">%% BankTeller.m</span></span><br><span class="line"><span class="keyword">classdef</span> BankTeller &lt; handle</span><br><span class="line">	<span class="keyword">methods</span></span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">deposit</span><span class="params">(obj,acc,val)</span></span></span><br><span class="line">			acc.balance = acc.balance+val; <span class="comment">% 因为具有访问权限，所以可以直接修改</span></span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">%% Scripts</span></span><br><span class="line">myCard = BankAccount();</span><br><span class="line">myCard.deposit(<span class="number">500</span>); <span class="comment">% 存500块钱，允许</span></span><br><span class="line">myCard.balance = myCard.balance+<span class="number">500</span>; <span class="comment">% 妄图直接修改账户余额，报错！</span></span><br><span class="line">xiaoE = BankTeller();</span><br><span class="line">xiaoE.deposit(myCard,<span class="number">500</span>); <span class="comment">% 银行柜员小E给你的卡增加了500块钱，允许</span></span><br></pre></td></tr></table></figure>
-<h1 id="句柄类和实体值类">句柄类和实体值类</h1>
-<h2 id="定义与区别">定义与区别</h2>
-<p>以下只是鄙人粗浅的理解：</p>
-<ul>
-<li>可以认为句柄类对象（Handle）是MATLAB传参的一种高级手段，有点类似于C的指针。MATLAB会在内存中开出一块空间，用于存放这个变量的具体数值，而在该对象中仅留下一个地址，指向该数据存放的位置。</li>
-<li><code>value</code>类适合比较简单的数据，其原理就是很单纯的数值传递，且对对象的处理主要不是为了改变原有的数值，而是为了获得新的事物</li>
-<li><code>handle</code>类适合希望这些数据在各个方法、函数之间迅捷传递，不需要被局部复制，所有对象共享属性（改一个就能改掉所有）的时候。</li>
-<li>他俩操作的区别主要就是有没有在<code>classdef</code>里面加上<code>&lt; handle</code></li>
-</ul>
-<h2 id="类的析构函数-destructor">类的析构函数 Destructor</h2>
-<p>看不懂喵</p>
-]]></content>
-      <categories>
-        <category>软件教程</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
-        <tag>编程</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>纯小白也能变大画师？SD：AI绘画的神！</title>
     <url>/2023/10/02/AI%E7%BB%98%E7%94%BB/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="引言">引言</h1>
@@ -759,6 +684,106 @@ Off里面可以大大减少AI误判程度。</p>
       </tags>
   </entry>
   <entry>
+    <title>MATLAB面向对象编程</title>
+    <url>/2025/01/02/MATLAB%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="基础">基础</h1>
+<h2 id="类与对象">类与对象</h2>
+<p>下面这是一个类<code>class</code>：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% ClassName.m</span></span><br><span class="line"><span class="keyword">classdef</span> className &lt; handle</span><br><span class="line">	<span class="keyword">properties</span> <span class="comment">% 属性 block</span></span><br><span class="line">		...</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">methods</span>   <span class="comment">% 方法 block</span></span><br><span class="line">   		...</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>下面以创建一个二维点的案例作为示例，其中<code>Point2D</code>是一个类，<code>p1</code>和<code>p2</code>是对象</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% Point2D.m</span></span><br><span class="line"><span class="keyword">classdef</span> Point2D &lt; handle</span><br><span class="line">	<span class="keyword">properties</span></span><br><span class="line">		x = <span class="number">0.0</span>; <span class="comment">% 默认值，可没有，如y</span></span><br><span class="line">		y</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">methods</span></span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">obj</span> = <span class="title">Point2D</span><span class="params">(x0,y0)</span> % 构造类型函数</span></span><br><span class="line">			obj.x = x0;</span><br><span class="line">			obj.y = y0;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">normalize</span><span class="params">(obj)</span>     % 归一化方法类函数</span></span><br><span class="line">			r = <span class="built_in">sqrt</span>(obj.x^<span class="number">2</span> + obj.y^<span class="number">2</span>);</span><br><span class="line">			obj.x = obj.x/r;</span><br><span class="line">			obj/y = obj.y/r;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>这里的<code>Point2D</code>不是普通的函数，是一个类的构造函数<code>Constructor</code>，可以用以下方法创建对象：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">p1 = Point2D(<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line">p2 = Point2D(<span class="number">2.5</span>,<span class="number">4.0</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="类的属性方法及其分类">类的属性、方法及其分类</h2>
+<p>用下面一段代码（仍然以<code>Point2D</code>为例说明）</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="keyword">classdef</span> Point2D &lt; handle</span><br><span class="line">	<span class="keyword">properties</span></span><br><span class="line">		x</span><br><span class="line">		y</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">properties</span>(Constant)   <span class="comment">% 常量属性</span></span><br><span class="line">		R = <span class="built_in">pi</span>/<span class="number">180</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">properties</span>(Dependent)  <span class="comment">% 非独立属性</span></span><br><span class="line">		r <span class="comment">% 不占用存储空间，可以通过p1.r调用</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">properties</span>(Hidden)    <span class="comment">% 隐藏属性</span></span><br><span class="line">		var <span class="comment">% 不会显示，开发、交互时有用</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">methods</span></span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">result</span> = <span class="title">get</span>.<span class="title">r</span><span class="params">(obj)</span></span></span><br><span class="line">			result = <span class="built_in">sqrt</span>(obj.x^<span class="number">2</span> + obj.y^<span class="number">2</span>); <span class="comment">% 通过get方法进行调用计算</span></span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">		normalize(obj); <span class="comment">% 仅提供声明，可在外部独立文件中编程</span></span><br><span class="line">		           <span class="comment">% 需要创建名为@Point2D的文件夹，把这些都丢进去</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>在定义方法时，<code>obj</code>必须作为成员方法的参数之一，说明传递给该成员方法的参数是一个对象。当然你可以使用任何其他单词，这里使用<code>obj</code>是为了和C++语言中的<code>this</code>以及Python中的<code>self</code>进行区分</p>
+<p>虽然方法也可以通过函数调用，如<code>normalize(p1)</code>，但还是更推荐使用点调用，即<code>p1.normalize()</code>。</p>
+<h2 id="类的构造函数">类的构造函数</h2>
+<p>构造函数Constructor是一种特殊的成员方法，比如上文的<code>p1 = Point2D(1,1);</code>：</p>
+<ul>
+<li>其<strong>名字与类名相同</strong></li>
+<li>类定义中至多只能有1个构造函数</li>
+<li>其返回值必须只能是新创建的对象</li>
+<li>这是唯一一个创建新对象的方法</li>
+</ul>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% 提供多种输入参数数目的方法</span></span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">obj</span> = <span class="title">Point2D</span><span class="params">(x0,y0)</span></span></span><br><span class="line">	<span class="keyword">if</span> nargin==<span class="number">0</span> <span class="comment">% 输入参数数量</span></span><br><span class="line">		obj.x = <span class="number">0</span>; obj.y = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">elseif</span> nargin==<span class="number">2</span></span><br><span class="line">		obj.x=x0; obj.y=y0;</span><br><span class="line">	<span class="keyword">elseif</span> nargin==<span class="number">1</span></span><br><span class="line">		obj.x=x0;obj.y=x0;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		error(<span class="string">&#x27;wrong input&#x27;</span>);</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>如果没有创建构造函数，MATLAB后台会自动创建一个空函数用于构造。该函数没有输入。</p>
+<h2 id="类的关系继承组合聚集">类的关系：继承、组合、聚集</h2>
+<h3 id="继承">继承</h3>
+<p>在逻辑上，继承即为泛化关系，表示B是A的“一种”(a kind
+of)，是父子、基类-派生类的关系。子类是父类的特殊类型，具有父类的全部属性，比如父类是电机，具有定子、转子、气隙这些属性，子类可以是永磁同步电机，额外具有永磁体属性。如：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% Point3D.m</span></span><br><span class="line"><span class="keyword">classdef</span> Point3D &lt; Point2D</span><br><span class="line">	<span class="keyword">properties</span></span><br><span class="line">		z</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">methods</span></span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">obj</span> = <span class="title">Point3D</span><span class="params">(x0,y0,z0)</span>;</span></span><br><span class="line">			obj = obj@Point2D(x0,y0); <span class="comment">% 用@表示调用父类，子类必须先调用父类</span></span><br><span class="line">			obj.z = z0;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">print</span><span class="params">(obj)</span>;</span></span><br><span class="line">			print@Point2D(obj); <span class="comment">% 调用同名方法：函数名@父类类名(obj，其它参数)</span></span><br><span class="line">			<span class="built_in">disp</span>([<span class="string">&#x27;z=&#x27;</span>,num2str(obj.z)]);</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="组合">组合</h3>
+<p>继承中子类可以得到父类的全部属性，但是不能为了让B的功能更多而盲目地对A和B使用继承，否则将造成混乱。另一种逻辑关系是组合，比如人脸和五官之间的关系。</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="keyword">classdef</span> Mouse &lt; handle</span><br><span class="line">	<span class="comment">% ...</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">... <span class="comment">% Other Classes in other Matlab Files</span></span><br><span class="line"><span class="keyword">classdef</span> Face &lt; handle <span class="comment">% 使用handle而非多重继承：Mouse&amp;Eye&amp;Nose</span></span><br><span class="line">	<span class="keyword">properties</span></span><br><span class="line">		mouse</span><br><span class="line">		... <span class="comment">% Others Like eye/nose/ear</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">methods</span></span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">obj</span>=<span class="title">Face</span><span class="params">()</span></span></span><br><span class="line">			obj.mouse = Mouse();</span><br><span class="line">			... <span class="comment">% Others Like Eye/Nose/Ear</span></span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="聚集">聚集</h3>
+<p>聚集跟组合的关系类似，但聚集更加<strong>松散</strong>。部分结构不依赖于整体存在，比如自行车的车轮可以先被定义（制造），然后再装到自行车上面去。这意味着<strong>子对象可以被独立创建</strong>。</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%% Bike.m</span></span><br><span class="line"><span class="keyword">classdef</span> Bike &lt; handle</span><br><span class="line">	<span class="keyword">properties</span></span><br><span class="line">		frontWheel</span><br><span class="line">		rearWheel</span><br><span class="line">		seat</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">%% Scripts</span></span><br><span class="line">frontWheelObj = Wheel();  <span class="comment">% 独立存在</span></span><br><span class="line">rearWheelObj = Wheel();</span><br><span class="line">seatObj = Seat();</span><br><span class="line">...</span><br><span class="line">myBike = Bike();</span><br><span class="line">myBike.frontWheel = frontWheelObj; <span class="comment">% 聚集关系</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h2 id="handle类的set和get方法">Handle类的set和get方法</h2>
+<h3 id="set方法">set方法</h3>
+<p>set方法为对象
+属性的幅值提供了一个中间层，在对象A的外部，任何对属性a（A.a）的幅值都需要经过<code>set.a</code>这个中间层，通常用来检测赋值是否合理，如：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="keyword">classdef</span> Point_Quadrant1 &lt; handle</span><br><span class="line">	<span class="keyword">properties</span></span><br><span class="line">		x</span><br><span class="line">		y</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">methods</span></span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">set</span>.<span class="title">x</span><span class="params">(obj,valx)</span></span></span><br><span class="line">			<span class="keyword">if</span> (valx&lt;<span class="number">0</span>)</span><br><span class="line">				error(<span class="string">&#x27;Not in First Quadrant&#x27;</span>);</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				obj.x = valx;</span><br><span class="line">			<span class="keyword">end</span></span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">set</span>.<span class="title">y</span><span class="params">(obj,valy)</span> </span></span><br><span class="line">			<span class="comment">% ...略</span></span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="get方法">get方法</h3>
+<p>get方法已经在上面介绍过了，是一种对成员属性查询的中间层。可以理解为get和set的调用正好相反：</p>
+<ul>
+<li><code>set</code>是对某个值进行设置，因此写为：<code>obj.a = val</code></li>
+<li><code>get</code>是对某个值进行调用，因此写为：<code>val = obj.a</code></li>
+</ul>
+<p>进阶用法暂时不讲了</p>
+<h2 id="访问权限">访问权限</h2>
+<p>跟前面属性的非独立、常量、隐藏属性类型，<strong>属性和方法</strong>都可以加上权限设置：<code>methods(Access = private/protected/public)</code></p>
+<p>在OOP中，<code>public</code>类应该尽量少用，这和面向对象的封装是矛盾的</p>
+<p>此外，<code>Access</code>还可以细分为<code>GetAccess</code>和<code>SetAccess</code>，表示读取权限和设置权限</p>
+<p>此外，还可以通过更加细节的设置，指定某个类的访问权限，比如：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%% BankAccount.m</span></span><br><span class="line"><span class="keyword">classdef</span> BankAccount &lt; handle</span><br><span class="line">	<span class="keyword">properties</span>(SetAccess = &#123;?BankTeller,?Paradox&#125;) <span class="comment">% 只允许BankTeller、Paradox、类内部的方法访问</span></span><br><span class="line">		balance <span class="comment">% 允许银行柜员修改账户余额的数值</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">methods</span></span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">deposit</span><span class="params">(obj,val)</span></span></span><br><span class="line">			obj.balance = obj.balance+val; <span class="comment">% 存钱，类内部的成员方法可以访问</span></span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">%% BankTeller.m</span></span><br><span class="line"><span class="keyword">classdef</span> BankTeller &lt; handle</span><br><span class="line">	<span class="keyword">methods</span></span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">deposit</span><span class="params">(obj,acc,val)</span></span></span><br><span class="line">			acc.balance = acc.balance+val; <span class="comment">% 因为具有访问权限，所以可以直接修改</span></span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">%% Scripts</span></span><br><span class="line">myCard = BankAccount();</span><br><span class="line">myCard.deposit(<span class="number">500</span>); <span class="comment">% 存500块钱，允许</span></span><br><span class="line">myCard.balance = myCard.balance+<span class="number">500</span>; <span class="comment">% 妄图直接修改账户余额，报错！</span></span><br><span class="line">xiaoE = BankTeller();</span><br><span class="line">xiaoE.deposit(myCard,<span class="number">500</span>); <span class="comment">% 银行柜员小E给你的卡增加了500块钱，允许</span></span><br></pre></td></tr></table></figure>
+<h1 id="句柄类和实体值类">句柄类和实体值类</h1>
+<h2 id="定义与区别">定义与区别</h2>
+<p>以下只是鄙人粗浅的理解：</p>
+<ul>
+<li>可以认为句柄类对象（Handle）是MATLAB传参的一种高级手段，有点类似于C的指针。MATLAB会在内存中开出一块空间，用于存放这个变量的具体数值，而在该对象中仅留下一个地址，指向该数据存放的位置。</li>
+<li><code>value</code>类适合比较简单的数据，其原理就是很单纯的数值传递，且对对象的处理主要不是为了改变原有的数值，而是为了获得新的事物</li>
+<li><code>handle</code>类适合希望这些数据在各个方法、函数之间迅捷传递，不需要被局部复制，所有对象共享属性（改一个就能改掉所有）的时候。</li>
+<li>他俩操作的区别主要就是有没有在<code>classdef</code>里面加上<code>&lt; handle</code></li>
+</ul>
+<h2 id="类的析构函数-destructor">类的析构函数 Destructor</h2>
+<p>看不懂喵</p>
+]]></content>
+      <categories>
+        <category>软件教程</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>编程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Read Me</title>
+    <url>/2023/09/27/Read%20Me/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>欢迎来到我的个人博客主页</p>
+<ul>
+<li>你可以在右上角的<strong>分类</strong>和<strong>标签</strong>中找到你所需要的资料，或者在右侧边栏中找到他们。</li>
+<li>你可以在右上角的<strong>搜索</strong>栏中快速搜索到你需要的内容。</li>
+<li>你可以在右上角的<strong>友链</strong>中找到其他人的博客，和一些有意思的网站。</li>
+<li>你可以在右上角的<strong>图库</strong>中找到一些能播的图片</li>
+<li><strong>说说</strong>和<strong>评论</strong>我已经关闭了，我确实不了解这方面的配置，太久没人使用，就关闭了。如果你想找我的话，微信上还是可以聊的。</li>
+</ul>
+<hr />
+<p>​
+累了，写不动了。或许，我的笔记本来也就不会有多少人看吧，当初也是心血来潮做的这个网页，不过细细想来，确实也没对大家产生多少的帮助。</p>
+<p>​
+我见过好多不一样的人了。有的人能够轻松地理解，合作起来畅快无比，钻研起来永无止境；有的人当我把一步步怎么做的教程丢在他们面前，都完全不会操作，如同嗷嗷待哺的婴儿。</p>
+<p>​ 或许以后就是随缘更新了吧，自己想记的笔记就记一下。</p>
+<p>​
+也曾想变成传说中的大佬一样，仿佛难以望其项背的神话。可是我做不到，我承认了，我只是个普通人罢了，没有卓越的天资，没有伟岸的人格，没有坚韧的精神。确实最近是被一些东西打击到了。再妄想做些什么笔记出来帮助你们，恍如痴人说梦，我还不够格。</p>
+<hr />
+<ul>
+<li>My Wechat：hans420907574</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2023/09/24/hello-world/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><ul>
@@ -799,223 +824,6 @@ A}+\frac1{h_2A}}\)</span></p>
       <tags>
         <tag>Hexo</tag>
         <tag>随笔</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Read Me</title>
-    <url>/2023/09/27/Read%20Me/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>欢迎来到我的个人博客主页</p>
-<ul>
-<li>你可以在右上角的<strong>分类</strong>和<strong>标签</strong>中找到你所需要的资料，或者在右侧边栏中找到他们。</li>
-<li>你可以在右上角的<strong>搜索</strong>栏中快速搜索到你需要的内容。</li>
-<li>你可以在右上角的<strong>友链</strong>中找到其他人的博客，和一些有意思的网站。</li>
-<li>你可以在右上角的<strong>图库</strong>中找到一些能播的图片</li>
-<li><strong>说说</strong>和<strong>评论</strong>我已经关闭了，我确实不了解这方面的配置，太久没人使用，就关闭了。如果你想找我的话，微信上还是可以聊的。</li>
-</ul>
-<hr />
-<p>​
-累了，写不动了。或许，我的笔记本来也就不会有多少人看吧，当初也是心血来潮做的这个网页，不过细细想来，确实也没对大家产生多少的帮助。</p>
-<p>​
-我见过好多不一样的人了。有的人能够轻松地理解，合作起来畅快无比，钻研起来永无止境；有的人当我把一步步怎么做的教程丢在他们面前，都完全不会操作，如同嗷嗷待哺的婴儿。</p>
-<p>​ 或许以后就是随缘更新了吧，自己想记的笔记就记一下。</p>
-<p>​
-也曾想变成传说中的大佬一样，仿佛难以望其项背的神话。可是我做不到，我承认了，我只是个普通人罢了，没有卓越的天资，没有伟岸的人格，没有坚韧的精神。确实最近是被一些东西打击到了。再妄想做些什么笔记出来帮助你们，恍如痴人说梦，我还不够格。</p>
-<hr />
-<ul>
-<li>My Wechat：hans420907574</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
-    <title>从Word、MarkDown到Latex，打造最优雅的写作方式</title>
-    <url>/2025/06/26/latex%E6%95%99%E7%A8%8B/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">本来我是没有写这篇文章的，但是因为最近正好换了新电脑，所以Latex环境要全部重配，因此干脆顺便记录一下使用过程以及debug过程。</span><br></pre></td></tr></table></figure>
-<h1 id="markdown与typora">Markdown与Typora</h1>
-<h2 id="功能介绍与下载安装">功能介绍与下载安装</h2>
-<ul>
-<li><p><strong>Markdown</strong>是一种轻量化文本标记语言，其本质同word差别不大，对于理工科人而言，最好的区别在于其在word的基础上增加了<strong>公式</strong>与一些简单的<strong>标记</strong>（比如这里显示的加粗与前面的序列）。可以将Markdown试做Latex的超级轻量化版本，主要用于掌握数学公式的语法，这在后续撰写Latex的时候也将更加习惯。</p></li>
-<li><p><strong>Typora</strong>是markdown的编辑器之一，如同Microsoft和WPS都是word的编辑器之一一样。Typora简洁并且独立，同时也为Markdown做了一定的特定优化方案，缺点是要钱，不过下面有一套完整的免(po)费(jie)Typora下载方案：</p></li>
-<li><p>先在以下链接中下载1.9.3版本（实际上是1.9.5）：<a
-href="https://typoraio.cn/releases/stable.html">Typora — stable release
-channel</a></p></li>
-<li><p>下载完成后进入该链接下载工具包（百度云或蓝奏云）并根据教程进行序列号提取：<a
-href="https://blog.csdn.net/qq_61621323/article/details/141036982">Typora
-免费安装教程（支持版本：1.9.5）_typora免费版-CSDN博客</a></p></li>
-</ul>
-<h2 id="markdown的配置">Markdown的配置</h2>
-<p>完成安装后，进入“文件”-“偏好设置”，进行一些个人推荐的基础配置：</p>
-<ol type="1">
-<li>“编辑器” - “成对使用的符号” - “匹配Markdown字符”
-勾选，这个选项可以让你更方便的进行字体的<strong>加粗</strong>和<em>倾斜</em>。</li>
-<li>“Markdown” - “Markdown扩展语法” - “内联公式<span
-class="math display">\[”
-勾选，这个可以让你快速的用`\]</span>`输入行内公式，现在这个用法已经不算很扩展了，很多编译器（包括Latex的）都支持。其他的扩展语法可勾可不勾，但需要知道的是这些语法是Typora才有的，换成Latex语法或者其他的Markdown编辑器都是不支持的，仅是为了方便你使用。</li>
-<li>“外观” - “字体大小” 可以改成自定义，自行调整大小，我用的16-17。</li>
-</ol>
-<h2 id="markdown的语法">Markdown的语法</h2>
-<p>Markdown本身的语法很简单，基本常用就是以下几个：（没列出来的一般就用的比较少了）</p>
-<table>
-<thead>
-<tr>
-<th>语法</th>
-<th>备注</th>
-<th>效果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>**加粗**</code></td>
-<td>（快捷键 Ctrl+B）</td>
-<td><strong>加粗</strong></td>
-</tr>
-<tr>
-<td><code>*斜体*</code></td>
-<td>（快捷键 Ctrl+I）</td>
-<td><em>斜体</em></td>
-</tr>
-<tr>
-<td><code>&lt;u&gt;下划线&lt;/u&gt;</code></td>
-<td>（快捷键 Ctrl+U）</td>
-<td><u>下划线</u></td>
-</tr>
-<tr>
-<td><code>|标题1|标题2|</code></td>
-<td>（Ctrl+Enter换行）</td>
-<td>表格</td>
-</tr>
-<tr>
-<td><code>-</code>（后面有空格）</td>
-<td>（Tab变子列表）</td>
-<td>无序列表</td>
-</tr>
-<tr>
-<td><code>1.</code>（后面有空格）</td>
-<td>（Tab变子列表）</td>
-<td>有序列表</td>
-</tr>
-<tr>
-<td><code>#</code>（后面有空格）</td>
-<td></td>
-<td>一级标题</td>
-</tr>
-<tr>
-<td><code>##</code>（后面有空格）</td>
-<td>（以此类推，最小6级）</td>
-<td>二级标题</td>
-</tr>
-</tbody>
-</table>
-<p>比较难记的是数学公式，行内数学公式使用<code>$公式$</code>输入，行间数学公式使用</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$$</span><br><span class="line">公式</span><br><span class="line">$$</span><br></pre></td></tr></table></figure>
-<p>输入。<strong>数学公式和希腊字母表</strong>见链接：<a
-href="https://blog.csdn.net/konglongdanfo1/article/details/85204312">markdown公式符号大全_markdown符号-CSDN博客</a>，举个例子，常见的二次方程求根公式<span
-class="math inline">\(x_{1,2}=\frac{-b \pm
-\sqrt{b^2-4ac}}{2a}\)</span>在Markdown中的语法是：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ x_&#123;1,2&#125;=\frac&#123;-b \pm \sqrt&#123;b^2-4ac&#125;&#125;&#123;2a&#125; $</span><br></pre></td></tr></table></figure>
-<p>在熟练之后，这套数学公式语法体系将比Mathtype要快上数倍。</p>
-<h1 id="基于vscode的latex编译">基于VSCode的Latex编译</h1>
-<p>​
-同上文一致，Latex也是一种文本语言，但是其结构比Markdown要复杂的多，可以说Markdown就是在Word的基础上加上了Latex的数学公式部分而已。除数学公式外，Latex能通过文本直接定义所生成内容的一切格式，就像在Word中常见的居中、字体、页码、页眉页脚、封面等等一切。Word是一种<strong>所见即所得</strong>的文本语言，而Latex<strong>不是</strong>，也就是说你<strong>所打字打出来的内容同你最终编译得到的内容（在格式方面）千差万别</strong>。</p>
-<p>​
-Latex的好处是在经历初期繁琐的设置和一定的学习成本之后，可以让创作者专注于内容本身——因为格式早就已经被写好了。</p>
-<p>​
-同Microsoft、WPS、Typora类似，Latex作为一种语言也需要相应的编辑器支持，比较常用的有简单易上手的在线编辑器Overleaf（但是因为在网页端所以存在大小限制问题），专门的TEX编辑器TexStudio（本人刚上手用的时候一直报错遂放弃），以及理工科代码领域的神，大名鼎鼎的万能软件<strong>VSCode</strong>（值得一提的是，他同样也可以当做Markdown编辑器）。</p>
-<h2 id="latex语言的下载与环境配置">Latex语言的下载与环境配置</h2>
-<ul>
-<li>本小节参考知乎<a
-href="https://zhuanlan.zhihu.com/p/166523064">Visual Studio Code
-(vscode)配置LaTeX - 知乎</a></li>
-</ul>
-<h3 id="texlive的下载与安装">TexLive的下载与安装</h3>
-<p>​
-编辑Latex所需要环境和语言有很多种可选，比如MikTex、TexLive等，具体区别可参考<a
-href="https://www.cnblogs.com/liuliang1999/p/12656706.html">（译）在Windows上使用TeX：TeX
-Live与MiKTeX的对比 - gisliuliang -
-博客园</a>。这里以TexLive为例进行安装和使用。</p>
-<p>​ TexLive的下载网址在这：<a
-href="https://tug.org/texlive/acquire-iso.html">Acquiring TeX Live as an
-ISO image - TeX Users
-Group</a>。当然如果网络不行的话，可以选择开源的镜像网站进行下载，也就是该网页中自带的“download
-from a nearby CTAN
-mirror”。所需要下载的文件是”TexLive-版本号.iso“这一光盘映像文件，这个文件极大，可能需要下载几十分钟。</p>
-<p>​ 下载完成后，进入该映像文件，选择
-<strong>"install-tl-windows"</strong>
-文件，为了后面不必要的麻烦，右键<strong>以管理员身份运行</strong>。在所出现的安装界面Installer中，仅需要更改两个内容：<strong>安装位置</strong>和<strong>取消勾选“安装TexLive前端”</strong>。（本文中所使用的前端就是VSCode，所需无需TexLive自带的前端）。安装过程如下图所示：</p>
-<p><img src="\image\latex01.png" /></p>
-<p>​
-这个下载的过程极久，总用时从大几十分钟到几个小时不等。安装结束后会出现<code>running mktexlsr ‘安装目录’</code>的字样，这是配置文件的写入。出现“欢迎进入Latex的世界”表明安装成功。可以在命令行窗口（Win+R
-→ cmd）输入<code>xelatex -v</code>来确认安装版本和完成情况。</p>
-<h3 id="vscode的下载与环境配置">VSCode的下载与环境配置</h3>
-<p>​
-如果你没有VSCode，那么直接上官网下载即可，记得更改相应的安装路径，并在安装时勾选“<strong>添加到PATH</strong>”。如果你忘记了自己是否将其添加到Path内，则在此电脑或Win中搜索“环境变量”后，查看<code>Path</code>内是否含有VSCode的安装路径（精确到<code>bin</code>），如下图。如果没有，新建添加进去即可，比如我的环境变量是<code>D:\Microsoft VS Code\bin</code>。</p>
-<p><img src="\image\latex02.png" /></p>
-]]></content>
-      <categories>
-        <category>软件教程</category>
-      </categories>
-      <tags>
-        <tag>Latex</tag>
-        <tag>Markdown</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>大三（秋冬）课程总结</title>
-    <url>/2024/01/15/%E5%A4%A7%E4%B8%89%E4%B8%8A%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="课程总结">课程总结</h1>
-<h2 id="微机原理与应用">微机原理与应用</h2>
-<p>​
-说实话，这门课的教学大纲太离谱了。这门课有闫老师和徐习东老师两个教学班，但是两个班上课的内容千差万别。一些基础知识是重合的，但是一些补充知识（闫老师班好像教了ECAN等内容，徐习东老师教了汇编）、实验课程内容、教学方式和上课顺序等等都完全不一样。这里由于我上的是徐习东老师班的微机，所以只能讲一讲徐习东老师班的感受。</p>
-<p>​
-他上课给人最大的印象就是喜欢对着一张原理图叭叭十几分钟，然后他的PPT上面就是零散地几个标题和内容，如果不听他讲课就完全无法理解；但是他讲课又很慢，很想让人睡觉玩手机，特别喜欢举一些奇怪的、生活化的例子来“帮助”我们理解。</p>
-<p>​
-如果除去他让人难以理解的讲课，他人还是挺好的，整体难度比较简单（是的，这两个班的教学难度也完全不一样）。实验课的任务都比较轻松，上课也会简单过一遍下一次实验课的代码，一个学期也只有三个实验报告。实验考试是允许使用以前自己使用过的代码的，而实验考试的内容也就是把平时实验的任务稍微改改格式（一般都是八段数码管显示时钟+非常简单的键盘响应），一般三、五分钟就能做完。听说闫老师班的实验考试就比较难了。</p>
-<p>​
-徐习东老师班的这门课比较难的可能就是一个大作业，我们是要求写中断向量表的定义、涉及到的函数等等，共3000字。想了想这个东西我还是不发出来了，不然肯定会被抄。在最后一节实验课上完之后，临近期末考的时候，徐习东老师才会开始讲CPU和汇编，这三四节课的内容反而是考试的重点，非常离谱。这部分的笔记我都放在“微机原理课外知识补充”里面了。</p>
-<h3 id="复习资料">复习资料</h3>
-<ul>
-<li><p>以下的资料大部分来自98，请尊重原作者的知识版权</p>
-<ul>
-<li><p><a href="\myfile\《微机原理与应用》思考题.pdf" target="_blank">《微机原理与应用》思考题</a></p></li>
-<li><p><a href="\myfile\21-22.pdf" target="_blank">21-22年回忆卷</a></p></li>
-<li><p><a href="\myfile\21-22答案纠错版.pdf" target="_blank">21-22回忆卷答案（我写的）</a></p></li>
-<li><p><a href="\myfile\DSP2812清华版复习资料.doc" target="_blank">DSP2812思考题</a></p></li>
-</ul></li>
-<li><p>考试的内容不难，题型如下</p></li>
-</ul>
-<ol type="1">
-<li>填空题12选8，每道题2个空</li>
-<li>简答题4选2，每题6分（徐习东老师的题有一个一般固定是汇编程序阅读，要求说明该段汇编程序执行完之后的结果）</li>
-<li>程序阅读题2选1（徐习东老师的题是汇编语言，一般也不难，就是加减乘除+寻址；闫老师的题我没细看，大概是ADC程序的初始化设置阅读题）</li>
-<li>程序设计题2选1（徐习东老师的题是CMD文件的编写+变量的定义，跟21-22回忆卷的题5-1几乎一样；闫老师的题好像是EV的初始化填空吧，给要求然后填写部分初始化数值）</li>
-<li>C语言程序设计题（中断程序编程，按要求手搓代码，包括main、CPU中断，跟21-22回忆卷的题5-2很像）</li>
-</ol>
-<h2 id="电力系统稳态分析">电力系统稳态分析</h2>
-<p>​
-怎么说呢，这门课很建议选林振智老师的班…实在不行选甘德强，这grp我是真受不了，上课=原封不动念PPT，PPT=原封不动抄书。后来我就溜到隔壁去了，林振智老师讲的还是很有激情的，至少能让你搞懂什么是重点，但是可能进度会比较慢，而且有点口音（比如三相交流电的“线”和“相”我老是听不出区别）。</p>
-<p>​
-这门课一开始学起来会有点害怕，因为作业很难，计算量也非常大，课本里有很多全新的公式和概念。但是记住一件事，就是很多东西都不考！比如长距离输电线模型，前面数学推导一大堆，实际上只要看下记住结论，甚至金奈力系数一般也都不出。比如牛顿-拉夫逊法解方程，比如PQ分解法等等，都只需要掌握原理和概念即可，因为考试根本不可能让你去手撕这么高阶的方程和行列式！而且手算潮流的迭代也不会太多，不然时间都画在计算上了。</p>
-<p>​
-然后考卷里我记得有很多选择题，都是书上比较细节的东西，可能属于概念性的内容。考前务必通读一遍课本，然后找找这些定义啊、概念啊之类的东西。后面的计算题lzz还是出的过于简单了，气煞我也，计算题拉不开分差，选择题很多都靠蒙，最后分数自然也没多高了。</p>
-<h2 id="控制理论">控制理论</h2>
-<p>​ 控制理论的回忆卷可以在98搜“2022~2023秋冬《控制理论
-(乙)》回忆卷”，然后还有一个<a href="\myfile\控论1617.pdf" target="_blank">控论16-17回忆卷</a>。前面98那张感觉一般，可能由题目他数据回忆错了，看看思路吧。感觉把书本通读一遍，然后把课后题再做一遍也是一个不错的选择。</p>
-<p>​
-非常不幸地这门课没有选到姚维老师班，ww这个老登真的服，上课不知道在讲啥，钉钉群不会建，班级不管，课程的成绩分布也不知道。还信誓旦旦地说我从来不点名，然后我就被背刺。我从第二节课开始就溜到姚维老师班去了，讲的是真好，上课氛围也很轻松。</p>
-<p>​
-这门课我感觉还是比较简单的，如果信号分析与处理学得好的话。然后多去总结内在的联系，多去了解原理，不要拘泥于表象。静态性能、动态性能，这些都和什么有关？怎样让一个系统变得更好？这些都搞明白之后，最后的校正就会好做很多。然后考试和写题要注意什么时候用开环系统分析，什么时候用闭环系统分析，一定要搞清楚，因为这很重要。</p>
-<h2 id="电机学">电机学</h2>
-<p>​
-电机学这门课我还真没怎么听到说哪个老师特别离谱。电机学总体难度确实还是有的，但是也没有被传的那么夸张，学的过程中因为全都是新知识，对模型也不清晰，所以会有些一头雾水。但是每隔一两周稍微总结一下学到的知识，把一些推导什么的去掉，去关心最后总结出来的模型就清晰了，直接用模型来代替电机，然后再把功率的流向弄懂，基本上掌握了电机学的80%了。</p>
-<p>​
-考试的题型是10分的选择题，20分的填空题，30分的简答题（6题，5分一题），40分的计算题（4题，10分一题，直流电机、变压器、异步电机、同步电机各一题）。</p>
-]]></content>
-      <categories>
-        <category>课程</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
-        <tag>电气</tag>
-        <tag>大三</tag>
       </tags>
   </entry>
   <entry>
@@ -1541,6 +1349,379 @@ class="math inline">\(J_{Ri}=\overline{\sigma_i}z_{i-1}\)</span></li>
       </tags>
   </entry>
   <entry>
+    <title>从Word、MarkDown到Latex，打造最优雅的写作方式</title>
+    <url>/2025/06/26/latex%E6%95%99%E7%A8%8B/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">本来我是没有写这篇文章的，但是因为最近正好换了新电脑，所以Latex环境要全部重配，因此干脆顺便记录一下使用过程以及debug过程。</span><br></pre></td></tr></table></figure>
+<h1 id="markdown与typora">Markdown与Typora</h1>
+<p>如果你具有较为充足的时间，并且考虑使用电子产品做课程笔记，那么Markdown将会是你在学习Latex前很好的过渡工具。</p>
+<p>如果不是，那么可以直接跳转到后文观看Latex的使用，以应付你的毕业设计。</p>
+<h2 id="功能介绍与下载安装">功能介绍与下载安装</h2>
+<ul>
+<li><strong>Markdown</strong>是一种轻量化文本标记语言，其本质同word差别不大，对于理工科人而言，最好的区别在于其在word的基础上增加了<strong>公式</strong>与一些简单的<strong>标记</strong>（比如这里显示的加粗与前面的序列）。可以将Markdown试做Latex的超级轻量化版本，主要用于掌握数学公式的语法，这在后续撰写Latex的时候也将更加习惯。
+<ul>
+<li>Word是一种<strong>所见即所得</strong>的语言，即你打出来的字同你最终得到的效果是一致的</li>
+<li>Markdown严格来讲是一种<strong>所见非所得</strong>的语言，即你所打字的内容不仅包含主要内容，还包含对格式的定义等，需要通过额外的<strong>编译</strong>步骤才能得到最终生成的文本or
+PDF。</li>
+<li>由于Markdown的语法本身比较简单，所以Typora将这种所见非所得的语言简化为了所见即所得的格式，即你在打字的同时Typora就在帮你<strong>实时编译</strong>。这一操作极大地方便了从Word过渡到Markdown的用户。</li>
+<li>Typora打字界面的左下角有一个小按钮，为<code>启用源代码模式</code>，点击即可看到所生成代码的源代码，即在<strong>编译之前</strong>的语言。有时一些小bug可以在源代码界面中进行修改。</li>
+</ul></li>
+<li><strong>Typora</strong>是markdown的编辑器之一，如同Microsoft和WPS都是word的编辑器之一一样。</li>
+<li>Typora简洁并且独立，同时也为Markdown做了一定的特定优化方案，缺点是要钱，不过下面有一套完整的免(po)费(jie)Typora下载方案：
+<ul>
+<li>先在以下链接中下载1.9.3版本（实际上是1.9.5）：<a
+href="https://typoraio.cn/releases/stable.html">Typora — stable release
+channel</a></li>
+<li>下载完成后进入该链接下载工具包（百度云或蓝奏云）并根据教程进行序列号提取：<a
+href="https://blog.csdn.net/qq_61621323/article/details/141036982">Typora
+免费安装教程（支持版本：1.9.5）_typora免费版-CSDN博客</a></li>
+</ul></li>
+</ul>
+<h2 id="markdown的配置">Markdown的配置</h2>
+<p>完成安装后，进入“文件”-“偏好设置”，进行一些个人推荐的基础配置：</p>
+<ol type="1">
+<li>“编辑器” - “成对使用的符号” - “匹配Markdown字符”
+勾选，这个选项可以让你更方便的进行字体的<strong>加粗</strong>和<em>倾斜</em>。</li>
+<li>“Markdown” - “Markdown扩展语法” - “内联公式<span
+class="math display">\[”
+勾选，这个可以让你快速的用`\]</span>`输入行内公式，现在这个用法已经不算很扩展了，很多编译器（包括Latex的）都支持。其他的扩展语法可勾可不勾，但需要知道的是这些语法是Typora才有的，换成Latex语法或者其他的Markdown编辑器都是不支持的，仅是为了方便你使用。</li>
+<li>“外观” - “字体大小” 可以改成自定义，自行调整大小，我用的16-17。</li>
+</ol>
+<h2 id="markdown的语法">Markdown的语法</h2>
+<p>Markdown本身的语法很简单，基本常用就是以下几个：（没列出来的一般就用的比较少了）</p>
+<table>
+<colgroup>
+<col style="width: 36%" />
+<col style="width: 50%" />
+<col style="width: 13%" />
+</colgroup>
+<thead>
+<tr>
+<th>语法</th>
+<th>备注</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>**加粗**</code></td>
+<td>（快捷键 Ctrl+B）</td>
+<td><strong>加粗</strong></td>
+</tr>
+<tr>
+<td><code>*斜体*</code></td>
+<td>（快捷键 Ctrl+I）</td>
+<td><em>斜体</em></td>
+</tr>
+<tr>
+<td><code>&lt;u&gt;下划线&lt;/u&gt;</code></td>
+<td>（快捷键 Ctrl+U）</td>
+<td><u>下划线</u></td>
+</tr>
+<tr>
+<td><code>|标题1|标题2|</code>（输完后回车）</td>
+<td>（Ctrl+Enter换行）</td>
+<td>表格</td>
+</tr>
+<tr>
+<td><code>-</code>（后面有空格）</td>
+<td>（Tab变子列表）</td>
+<td>无序列表</td>
+</tr>
+<tr>
+<td><code>1.</code>（后面有空格）</td>
+<td>（Tab变子列表）</td>
+<td>有序列表</td>
+</tr>
+<tr>
+<td><code>#</code>（后面有空格）</td>
+<td></td>
+<td>一级标题</td>
+</tr>
+<tr>
+<td><code>##</code>（后面有空格）</td>
+<td>（以此类推，最小6级）</td>
+<td>二级标题</td>
+</tr>
+<tr>
+<td><code>键盘左上角的顿号（波浪号下面那个）</code></td>
+<td>把内容放在两个顿号中间，行内代码</td>
+<td><code>效果</code></td>
+</tr>
+<tr>
+<td><code>键盘左上角的顿号（波浪号下面那个）</code></td>
+<td>连按三个后回车，行间代码，可选择语言(如c,python等)</td>
+<td>同上</td>
+</tr>
+</tbody>
+</table>
+<p>比较难记的是数学公式，行内数学公式使用<code>$公式$</code>输入，行间数学公式使用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$$</span><br><span class="line">公式</span><br><span class="line">$$</span><br></pre></td></tr></table></figure>
+<p>输入。<strong>数学公式和希腊字母表</strong>见链接：<a
+href="https://blog.csdn.net/konglongdanfo1/article/details/85204312">markdown公式符号大全_markdown符号-CSDN博客</a>，举个例子，常见的二次方程求根公式<span
+class="math inline">\(x_{1,2}=\frac{-b \pm
+\sqrt{b^2-4ac}}{2a}\)</span>在Markdown中的语法是：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ x_&#123;1,2&#125;=\frac&#123;-b \pm \sqrt&#123;b^2-4ac&#125;&#125;&#123;2a&#125; $</span><br></pre></td></tr></table></figure>
+<p>在熟练之后，<strong>这套数学公式语法体系将比Mathtype要快上数倍</strong>。</p>
+<h1 id="基于vscode的latex编译">基于VSCode的Latex编译</h1>
+<p>​
+同上文一致，Latex也是一种文本语言，但是其结构比Markdown要复杂的多，可以说Markdown就是在Word的基础上加上了Latex的数学公式部分而已。除数学公式外，Latex能通过文本直接定义所生成内容的一切格式，就像在Word中常见的居中、字体、页码、页眉页脚、封面等等一切。Word是一种<strong>所见即所得</strong>的文本语言，而Latex<strong>不是</strong>，也就是说你<strong>所打字打出来的内容同你最终编译得到的内容（在格式方面）千差万别</strong>。</p>
+<p>​
+Latex的好处是在经历初期繁琐的设置和一定的学习成本之后，可以让创作者专注于内容本身——因为格式早就已经被写好了。</p>
+<p>​
+同Microsoft、WPS、Typora类似，Latex作为一种语言也需要相应的编辑器支持，比较常用的有简单易上手的在线编辑器Overleaf（但是因为在网页端所以存在大小限制问题），专门的TEX编辑器TexStudio（本人刚上手用的时候一直报错遂放弃），以及理工科代码领域的神，大名鼎鼎的万能软件<strong>VSCode</strong>（值得一提的是，他同样也可以当做Markdown编辑器）。</p>
+<h2 id="下载与环境配置">下载与环境配置</h2>
+<ul>
+<li>本小节参考知乎<a
+href="https://zhuanlan.zhihu.com/p/166523064">Visual Studio Code
+(vscode)配置LaTeX - 知乎</a></li>
+</ul>
+<h3 id="texlive的下载与安装">TexLive的下载与安装</h3>
+<p>​
+编辑Latex所需要环境和语言有很多种可选，比如MikTex、TexLive等，具体区别可参考<a
+href="https://www.cnblogs.com/liuliang1999/p/12656706.html">（译）在Windows上使用TeX：TeX
+Live与MiKTeX的对比 - gisliuliang -
+博客园</a>。这里以TexLive为例进行安装和使用。</p>
+<p>​ TexLive的下载网址在这：<a
+href="https://tug.org/texlive/acquire-iso.html">Acquiring TeX Live as an
+ISO image - TeX Users
+Group</a>。当然如果网络不行的话，可以选择开源的镜像网站进行下载，也就是该网页中自带的“download
+from a nearby CTAN
+mirror”。所需要下载的文件是”TexLive-版本号.iso“这一光盘映像文件，这个文件极大，可能需要下载几十分钟。</p>
+<p>​ 下载完成后，进入该映像文件，选择
+<strong>"install-tl-windows"</strong>
+文件，为了后面不必要的麻烦，右键<strong>以管理员身份运行</strong>。在所出现的安装界面Installer中，仅需要更改两个内容：<strong>安装位置</strong>和<strong>取消勾选“安装TexLive前端”</strong>。（本文中所使用的前端就是VSCode，所需无需TexLive自带的前端）。安装过程如下图所示：</p>
+<p><img src="\image\latex01.png" /></p>
+<p>​
+这个下载的过程极久，总用时从大几十分钟到几个小时不等。安装结束后会出现<code>running mktexlsr ‘安装目录’</code>的字样，这是配置文件的写入。出现“欢迎进入Latex的世界”表明安装成功。可以在命令行窗口（Win+R
+→ cmd）输入<code>xelatex -v</code>来确认安装版本和完成情况。</p>
+<h3 id="vscode的下载与环境配置">VSCode的下载与环境配置</h3>
+<p>​
+如果你没有VSCode，那么直接上官网下载即可，记得更改相应的安装路径，并在安装时勾选“<strong>添加到PATH</strong>”。如果你忘记了自己是否将其添加到Path内，则在此电脑或Win中搜索“环境变量”后，查看<code>Path</code>内是否含有VSCode的安装路径（精确到<code>bin</code>），如下图。如果没有，新建添加进去即可，比如我的环境变量是<code>D:\Microsoft VS Code\bin</code>。</p>
+<p><img src="\image\latex02.png" /></p>
+<ol type="1">
+<li><p><strong>中文插件：</strong></p>
+<p>为安装相应的中文扩展，在VSCode的扩展栏中输入<code>Chinese</code>搜索，安装<code>Chinese (Simplified) Language Pack for Visual Studio Code</code>插件，重启VSCode后生效。</p></li>
+<li><p><strong>Latex插件：</strong></p>
+<p>在VSCode的扩展栏中输入<code>latex</code>搜索，安装<code>Latex Workshop</code>插件，直接生效。</p></li>
+<li><p><strong>设置：</strong></p>
+<ol type="1">
+<li><p>点击VSCode左下角的齿轮图案，选择<code>设置</code>。在右上角找到<code>打开设置(json)</code>的图标并单击，进入VSCode的json配置界面<code>settings.json</code>。如果是新的Latex，那么现在所呈现的内容将只有一段花括号。</p></li>
+<li><p>输入以下内容：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Latex settings:</span></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;latex-workshop.latex.autoBuild.run&quot;</span><span class="punctuation">:</span> <span class="string">&quot;never&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;latex-workshop.showContextMenu&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;latex-workshop.intellisense.package.enabled&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;latex-workshop.message.error.show&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;latex-workshop.message.warning.show&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;latex-workshop.latex.tools&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;xelatex&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;xelatex&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;-synctex=1&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;-interaction=nonstopmode&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;-file-line-error&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;%DOCFILE%&quot;</span></span><br><span class="line">            <span class="punctuation">]</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;pdflatex&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;pdflatex&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;-synctex=1&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;-interaction=nonstopmode&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;-file-line-error&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;%DOCFILE%&quot;</span></span><br><span class="line">            <span class="punctuation">]</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;latexmk&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;latexmk&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;-synctex=1&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;-interaction=nonstopmode&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;-file-line-error&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;-pdf&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;-outdir=%OUTDIR%&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;%DOCFILE%&quot;</span></span><br><span class="line">            <span class="punctuation">]</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;bibtex&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;bibtex&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;%DOCFILE%&quot;</span></span><br><span class="line">            <span class="punctuation">]</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;latex-workshop.latex.recipes&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;XeLaTeX&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;tools&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;xelatex&quot;</span></span><br><span class="line">            <span class="punctuation">]</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;PDFLaTeX&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;tools&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;pdflatex&quot;</span></span><br><span class="line">            <span class="punctuation">]</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;BibTeX&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;tools&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;bibtex&quot;</span></span><br><span class="line">            <span class="punctuation">]</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;LaTeXmk&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;tools&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;latexmk&quot;</span></span><br><span class="line">            <span class="punctuation">]</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;xelatex -&gt; bibtex -&gt; xelatex*2&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;tools&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;xelatex&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;bibtex&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;xelatex&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;xelatex&quot;</span></span><br><span class="line">            <span class="punctuation">]</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;pdflatex -&gt; bibtex -&gt; pdflatex*2&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;tools&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;pdflatex&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;bibtex&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;pdflatex&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;pdflatex&quot;</span></span><br><span class="line">            <span class="punctuation">]</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;latex-workshop.latex.clean.fileTypes&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;*.aux&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;*.bbl&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;*.blg&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;*.idx&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;*.ind&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;*.lof&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;*.lot&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;*.out&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;*.toc&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;*.acn&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;*.acr&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;*.alg&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;*.glg&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;*.glo&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;*.gls&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;*.ist&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;*.fls&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;*.log&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;*.fdb_latexmk&quot;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;latex-workshop.latex.autoClean.run&quot;</span><span class="punctuation">:</span> <span class="string">&quot;onFailed&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;latex-workshop.latex.recipe.default&quot;</span><span class="punctuation">:</span> <span class="string">&quot;lastUsed&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;latex-workshop.view.pdf.internal.synctex.keybinding&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ctrl-click&quot;</span> <span class="comment">// 我把原配置double-click改成了ctrl-click，这个是编译生成的pdf结果如何定位到原文的快捷键，个人习惯ctrl+click</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure></li>
+</ol></li>
+</ol>
+<p><strong>注：</strong></p>
+<ol type="1">
+<li>本人一般都使用Latex作为默认的PDF查看器，所以这段代码<strong>不包含外部PDF查看器的设置和使用</strong>，通常这二者是冲突的，即最好不要在使用其他软件打开所编译的PDF的情况下进行Latex的编译。</li>
+<li>根据 json
+文件编写规则，<strong>每个代码语句（除了代码块儿最后一句）都需要加上英文状态下的<code>,</code></strong>，否则就会报错；而每个代码块儿的最后一句是不需要加上<code>,</code>的。从上文整个代码块儿可以看出此规则。所以当你日后再次更改json文件为其他插件进行配置时，记得在最后加上<code>,</code>。</li>
+<li>代码块解读请参考<a
+href="https://zhuanlan.zhihu.com/p/166523064">Visual Studio Code
+(vscode)配置LaTeX -
+知乎</a>的6.2小节或其他相关文章。每篇教程所给出的latex配置json文件会有部分差异，所以为了日后使用建议还是读一下。</li>
+</ol>
+<h2
+id="以电气学院毕设为例的latex使用">以电气学院毕设为例的Latex使用</h2>
+<h3 id="基本使用步骤">基本使用步骤</h3>
+<ol type="1">
+<li>首先下载浙大电气学院下的毕设模板latex包（下载地址为<a
+href="http://ee.office.zju.edu.cn/2024/1028/c33877a2981079/page.htm">关于公布《电气工程学院2025届本科生毕业设计（论文）工作管理实施细则》的通知（更新）</a>，需内网，同毕设模板一起），解压得到如下文件夹（我是编译过了所以多了些奇奇怪怪的文件，不用在意）。其中<code>body</code>文件夹存放主要的文章内容，<code>figure</code>文件夹存放文章图片，是两个比较常用的子文件夹。</li>
+</ol>
+<p><img src="\image\latex05.png" /></p>
+<ol start="2" type="1">
+<li><p>使用VSCode打开<code>zjuthesis</code>这一整个文件夹（文件夹名字如果不是zjuthesis而是后面有一堆什么version的也一样，无所谓），并使用VSCode双击打开后缀是<code>tex</code>的文件<code>zjuthesis.tex</code>。这个tex文件是整个毕设论文的总配置文件，后面所有的子文件都被该主文件调用才能进行编译。</p></li>
+<li><p>点击VSCode右上角的绿色小三角形<code>Build Latex project</code>。</p>
+<ol type="1">
+<li>如果VSCode的左下角开始转圈，一会儿后文件夹中多了一堆同名不同后缀的文件，主要关注<code>zjuthesis.pdf</code>，则表明编译成功。可以用VSCode打开该PDF文件，并左右分屏（如下图），实现左边输入，右边观测输出的写作模式。</li>
+<li>如果没有任何反应，在搜索栏搜索<code>settings.json</code>，并重新复制上面的一长串代码后再次尝试（原因是zjuthesis可能自带了一个配置文件）。</li>
+<li>如果还不行，可尝试的操作有：1）删去<code>.latexmkrc</code>；2）在其他教程上搜索一份<code>settings.json</code>的配置代码放入。</li>
+<li>如果之前存在<strong>编译出错或长时间编译失败</strong>的问题，建议打开左侧的Latex扩展，选择<code>清理辅助文件</code>进行重置。此外，建议<strong>打开VSCode下方的命令行窗口中的<code>输出</code>栏</strong>，查看编译过程信息，若有编译问题会显示问号<code>?</code>。</li>
+</ol></li>
+</ol>
+<p><img src="\image\latex06.png" /></p>
+<ol start="4" type="1">
+<li><p>这里以<strong>电气工程学院ee的本科生undergraduate毕业设计的最终版本final</strong>（而非开题版本）进行演示。<code>zjuthesis.tex</code>文件中包含了作者的一些基本信息和文件调用，原作者有比较详细的注释，跟着填写即可，编译后右侧的PDF会同步更新。</p></li>
+<li><p>下面这些代码无需更改，但是需要看一下，只要稍微有点英文和代码基础都能理解。</p>
+<ol type="1">
+<li><code>\newcommand&#123;\inputundergraduate&#125;</code>，很明显，这启用了一个新的代码块，这段代码块将其他文件夹下<code>undergruduate</code>的部分引用了进来。下面还有一个类似的<code>\newcommand</code>，但是那个是研究生的。因为我们已经在上面设置过我们是<code>undergraduate</code>，所以只需要关注这里的就行。</li>
+<li><code>\ifthenelse&#123;\equal&#123;\Period&#125;&#123;final&#125;&#125;</code>，
+<code>\newcommand&#123;\undergradcurrstage&#125;&#123;final&#125;</code>，我们是最终版本而不是开题，所以选择<code>final</code>而不是<code>proposal</code>，所以这只需要关注这一块即可。</li>
+<li><code>\inputpage&#123;final&#125;&#123;cover&#125;</code>，说明我们的文章构成中有<code>cover</code>这一个东西。这个东西也是他帮你生成好了的。</li>
+</ol></li>
+</ol>
+<p><img src="\image\latex04.png" /></p>
+<ol start="6" type="1">
+<li><strong>那我们要改那些地方呢？</strong>——主文件<code>zjuthesis.tex</code>和你所使用的文件夹中的所有<code>.tex</code>文件就是你的内容，在本例中，就是<code>zjuthesis/undergraduate/final</code><strong>里面的所有文件，包含<code>abstract.tex</code>（摘要）、<code>content.tex</code>（目录和主体内容）等</strong>。下面一节将具体讲解在写毕设论文的时候，该如何使用它去写。</li>
+</ol>
+<h3 id="手把手教你写毕设">手把手教你写毕设</h3>
+<p>现在，可以用latex原文+pdf编译结果的双屏显示来快速熟悉该毕设的代码架构了。</p>
+<ol type="1">
+<li><p>完善填写<code>zjuthesis.tex</code>中的个人基本信息，填写完成后编译查看是否有问题。</p></li>
+<li><p>顺着PDF的结构往下阅读，可以对PDF中的文字使用<code>Ctrl+Click</code>或<code>double Click</code>来<strong>快速跳转到TEX文件对应的原文</strong>。</p>
+<ol type="1">
+<li>快捷键取决于<code>settings.json</code>中最后一行设置的<code>latex-workshop.view.pdf.internal.synctex.keybinding</code>是哪个）。</li>
+<li>可以在左侧的<strong>资源管理器中看到文件所处的位置和文件名</strong>，<strong>一般需要自己改动的文件存在上文介绍的文件夹<code>\final</code>中，不需要自己改动的文件存在<code>\page</code>中</strong>。</li>
+<li>一般而言，<strong>在标题、作者等这类属于“论文基本信息”的位置，很多Latex模板（包括上面的毕设模板）都采取的是“先定义、后调用”的方式</strong>，所以使用该双向定位可能不准。如果跳转到了<code>\page</code>下的文件中，说明实际需要修改的位置不在这里。</li>
+</ol></li>
+</ol>
+<p><img src="\image\latex07.png" /></p>
+<ol start="3" type="1">
+<li>目录是自动生成的（作者写好相应的代码了），无需改动</li>
+<li><strong>文章的主体内容章节存在<code>content.tex</code>文件中</strong>，打开即可看到如下图所示界面。
+<ol type="1">
+<li><strong>很容易知道里面所示的<code>instructions</code>、<code>introductions</code>等四部分就是<code>zjuthesis.pdf</code>生成的四个章节（第一到四章）</strong>。所以可以在这里增/删/改内容以实现文章主要内容的替换。</li>
+<li>个人建议可以先保留原文的几个章节，因为这几个章节中有一小部分Latex代码的语法说明，可以帮助你进行上手和学习。复制其中的某一章节，重命名为<code>Chapter1_Introduction</code>并仿照格式插入到<code>content.tex</code>中，并将其中的非代码部分替换为自己的内容即可得到所需内容。</li>
+</ol></li>
+</ol>
+<p><img src="\image\latex08.png" /></p>
+<h3 id="常用快捷键">常用快捷键</h3>
+<table>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 37%" />
+<col style="width: 52%" />
+</colgroup>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>作用</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ctrl+Alt+B</td>
+<td>编译Latex（等同于右上方的绿色小三角）</td>
+<td>觉得难按的可以在<code>文件-首选项-键盘快捷方式</code>中进行替换</td>
+</tr>
+<tr>
+<td>Ctrl+Alt+J</td>
+<td>从Latex文件位置快速定位到PDF位置</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>Ctrl+Click</td>
+<td>从PDF位置快速定位到Latex文件位置</td>
+<td>快捷键取决于<code>settings.json</code>最后一行</td>
+</tr>
+</tbody>
+</table>
+<h2 id="如何使用期刊的latex模板">如何使用期刊的Latex模板</h2>
+<ul>
+<li><strong>毕设论文的模板使用比期刊复杂的多得多</strong>，因为毕设论文太长了，格式要求也很多，而期刊短得多！</li>
+</ul>
+<ol type="1">
+<li><p>首先找到你所需要投稿的期刊的Latex模板，下面给出一些常用的检索方法：</p>
+<ol type="1">
+<li>IEEE的论文期刊模板： <a
+href="https://template-selector.ieee.org/secure/templateSelector/publicationType">IEEE-Template
+Selector</a></li>
+<li>SCI的论文期刊模板：<a
+href="https://www.letpub.com.cn/index.php?page=journalapp">【LetPub】最新SCI期刊影响因子查询及投稿分析系统（2024-2025年）
+- LetPub</a>，进去选择期刊后可以在作者指南或者期刊官网中找</li>
+<li>期刊官网（很多中文期刊没有Latex模板，英文的基本都有）</li>
+</ol></li>
+<li><p>以IEEE为例演示如何下载期刊的Latex模板</p>
+<ol type="1">
+<li>进入上文给出的IEEE论文期刊模板网站</li>
+<li>在这里搜索你所投稿的期刊名，如<code>IEEE Electrification Magzine</code>（IEEE
+电气化杂志），下载</li>
+<li>下载完成后解压得到如下文件夹，可以看到非常的简洁</li>
+</ol></li>
+<li><p>如何使用期刊的Latex模板</p>
+<ol type="1">
+<li><p>使用VSCode打开该<strong>文件夹</strong></p></li>
+<li><p>可以看到里面只有两个<code>.tex</code>后缀的文件，其中一个文件名是<code>how-to</code>，很明显不是正文，所以打开另一个。</p></li>
+<li><p>打开后得到如下界面，啥也别管先编译一遍，生成同名的<code>.pdf</code>文件，双屏打开，到这一步没有问题那就成功90%了。</p>
+<p><img src="\image\latex09.png" /></p></li>
+<li><p>使用上文的快捷键可以快速实现Latex代码和PDF位置的<strong>双向定位</strong>，以供你得知什么地方需要修改。值得注意的是，<strong>在标题、作者等这类属于“论文基本信息”的位置，很多Latex模板（包括上面的毕设模板）都采取的是“先定义、后调用”的方式</strong>，所以使用该双向定位可能不准。</p></li>
+</ol></li>
+</ol>
+<h1 id="latex的基本语法">Latex的基本语法</h1>
+<ul>
+<li>Latex的语法很多，没必要一口气学完。可以先看看下面的基础语法，当你需要更加精细的格式设置时，再上网搜索使用和设置方法，现学现用会更好。</li>
+</ul>
+<h2 id="换段落与换行">换段落与换行</h2>
+<p>可以用<code>\newline</code>，但<strong>一般使用空行进行新建段落</strong>。比如：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line">段落1的内容</span><br><span class="line"></span><br><span class="line">段落2的内容 <span class="comment">% 中间需要空一行才能正常生成2段</span></span><br></pre></td></tr></table></figure>
+<p>​
+这个有什么用呢，就是一般我们写完<strong>数学公式</strong>的时候下面会紧跟着，“式中，<span
+class="math inline">\(\sigma\)</span>表示……”这种<strong>不空两格的解释语句</strong>，那么这个时候这段话与数学公式间就不要空行，<strong>这样生成的内容就会顶格而非空两格</strong>。</p>
+<h2 id="标题">标题</h2>
+<p>大标题 <code>\section</code></p>
+<p>然后是
+<code>\subsection</code>，<code>\subsubsection</code>，我记得最多就到这了，也就是最后会生成<code>1.1.1 xxxxx</code>这样的标题</p>
+<h2 id="字体">字体</h2>
+<p>一般而言需要乱动字体的情况不多，一般也不建议乱动。</p>
+<p>最常用的就是<strong>加粗</strong>，在Latex中表示为<code>\textbf&#123;加粗内容&#125;</code>。此外可能会用到<em>斜体</em>，在Latex中表示为<code>\itshape&#123;斜体内容&#125;</code>。</p>
+<p>EE学院提供的zjuthesis对字体（在你看不见的定义文件中）做了比较详细的定义，所以可能存在部分函数是zjuthesis独有的（自定义了一些函数），在其他Latex文件中不适用。默认英文字体为新罗马
+Times New Roman，默认正文中的中文字体为仿宋，应该都不需要咋改。</p>
+<h2 id="列表">列表</h2>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;enumerate&#125;[label=<span class="keyword">\textbf</span>&#123;(<span class="keyword">\alph</span>*)&#125;]  <span class="comment">% itemize为无序列表，[]内为备注和格式设置</span></span><br><span class="line">    <span class="keyword">\item</span> 第一段；  <span class="comment">% \item 表示另起一段</span></span><br><span class="line">    <span class="keyword">\item</span> 第二段。</span><br><span class="line"><span class="keyword">\end</span>&#123;enumerate&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>详细配置可参考：<a
+href="https://zhuanlan.zhihu.com/p/350596731">LaTeX 排版（1）：列表 |
+Linux 中国 - 知乎</a></li>
+</ul>
+<h2 id="图片">图片</h2>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;figure&#125;[!ht]  <span class="comment">% 可选参数有：!htbp</span></span><br><span class="line">    <span class="keyword">\centering</span>  <span class="comment">% 居中</span></span><br><span class="line">    <span class="keyword">\includegraphics</span>[width=.8<span class="keyword">\linewidth</span>]&#123;example/texlive-image.png&#125;  </span><br><span class="line">    	<span class="comment">% 图片宽度设置为0.8的页宽，图片位置为\figure\example\texlive-image.png</span></span><br><span class="line">    <span class="keyword">\caption</span>&#123;清华开源镜像站Texlive&#125;  <span class="comment">% 图片下面的标题（序号自动生成）</span></span><br><span class="line">    <span class="keyword">\label</span>&#123;fig:texlive-image&#125;  <span class="comment">% 图片的标签，用于引用图片，详见下文引用</span></span><br><span class="line"><span class="keyword">\end</span>&#123;figure&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>详细配置可参考：<a
+href="https://blog.csdn.net/qq_31347869/article/details/103832190">LaTex的使用（一）：图片的插入及排版方法_latex图片排版-CSDN博客</a></p></li>
+<li><p>关于Latex进行<strong>多行多列</strong>的图片排版（比如常见的<code>图1.1 (a)aaa (b)bbb</code>），建议参考这个<a
+href="https://blog.csdn.net/binbinczsohu/article/details/109900248">关于Latex并排多张图片及加入图片说明的方法_latex图片说明-CSDN博客</a></p></li>
+</ul>
+<h2 id="表格三线表">表格（三线表）</h2>
+<p>一般而言论文中的表格都是三线表</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;table&#125;[H]</span><br><span class="line">	<span class="keyword">\caption</span>&#123;Example 1&#125;  <span class="comment">% 表格上方的标题</span></span><br><span class="line">	<span class="keyword">\centering</span>  <span class="comment">% 居中</span></span><br><span class="line">	<span class="keyword">\label</span>&#123;tab:sample&#125;  <span class="comment">% 表格的标签，用于引用图片，详见下文引用</span></span><br><span class="line">	<span class="keyword">\begin</span>&#123;tabular&#125;&#123;cccc&#125; <span class="comment">% 四个c代表该表一共四列，内容全部居中</span></span><br><span class="line">	<span class="keyword">\toprule</span> <span class="comment">% 第一道横线，下面写表格的第一行（标题行）</span></span><br><span class="line">		Item 1 <span class="built_in">&amp;</span> Item 2 <span class="built_in">&amp;</span> Item 3 <span class="built_in">&amp;</span> Item 4 <span class="keyword">\\</span>  <span class="comment">% 用&amp;分割内容，双斜杠表示换行</span></span><br><span class="line">	<span class="keyword">\midrule</span> <span class="comment">% 第二道横线 </span></span><br><span class="line">		Data1 <span class="built_in">&amp;</span> Data2 <span class="built_in">&amp;</span> Data3 <span class="built_in">&amp;</span> Data4 <span class="keyword">\\</span>  <span class="comment">% 用&amp;分割内容，必须与上文一一对应</span></span><br><span class="line">		Data5 <span class="built_in">&amp;</span> Data6 <span class="built_in">&amp;</span> Data7 <span class="built_in">&amp;</span> Data8 <span class="keyword">\\</span></span><br><span class="line">	<span class="keyword">\bottomrule</span><span class="comment">%第三道横线</span></span><br><span class="line"><span class="keyword">\end</span>&#123;tabular&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>详细配置可参考：<a
+href="https://blog.csdn.net/qq_37707218/article/details/107393636">Latex中经典三线表、多线表、内容跨行/跨列复杂表的详解与源代码_latex
+toprule-CSDN博客</a>，其中包含三线表中标题行需要有<strong>多行、多列的特殊情况</strong>，笔者在论文中也有使用。</li>
+</ul>
+<h2 id="数学公式">数学公式</h2>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;equation&#125;</span><br><span class="line">    <span class="keyword">\label</span>&#123;equ:sample&#125;  <span class="comment">% 公式的标签，用于引用图片，详见下文引用</span></span><br><span class="line">    A=<span class="keyword">\overbrace</span>&#123;(a+b+c)+<span class="keyword">\underbrace</span>&#123;i(d+e+f)&#125;<span class="built_in">_</span>&#123;<span class="keyword">\text</span>&#123;虚数&#125;&#125;&#125;<span class="built_in">^</span>&#123;<span class="keyword">\text</span>&#123;复数&#125;&#125;  <span class="comment">% 公示内容，自动编号</span></span><br><span class="line"><span class="keyword">\end</span>&#123;equation&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>关于数学公式符号语法，若有遗忘，可以参考：<a
+href="https://blog.csdn.net/Yushan_Ji/article/details/134322574">Latex数学公式符号大全（超详细）_latex数学符号-CSDN博客</a></li>
+<li>关于数学公式的换行问题，可以参考：<a
+href="https://blog.csdn.net/puchapu/article/details/86543580">Latex公式排版（编号、换行、括号内换行、对齐）_latex公式换行编号合并-CSDN博客</a></li>
+</ul>
+<h2 id="引用">引用</h2>
+<p>​
+<strong>数学公式、图片和表格的引用</strong>使用<code>\autoref</code>命令，如<code>如\autoref&#123;code:sample&#125;所示，这是一段代码。</code>，其中的<code>code:sample</code>是你在输入公式时给他写的<code>\label&#123;&#125;</code>。如果公式没有写这个，那么无法引用。</p>
+<p>​
+个人的强烈建议：可以给公式的<code>\label</code>全都命名成<code>equ:Name</code>的格式，图片<code>fig:Name</code>的格式，表格<code>tab:Name</code>的形式，方便引用。Name可以和你的图、表、公式标题一致或类似，方便引用的时候查找。</p>
+<h2 id="参考文献">参考文献</h2>
+<ul>
+<li>参考文献列在<code>ref.bib</code>中，不同于以往任何一个引用格式，BibTex是专门为Latex设计的参考文献格式，知网、谷歌学术等知名论文浏览平台均可以直接下载到所需文献的BibTex参考文献格式。复制进去即可。</li>
+<li>需要注意的是，可能需要根据学校或者论文的要求，<strong>对BibTex中所列明的参考文献条目进行删改</strong>。比如，学校的毕设论文不要求DOI，但是有些参考文献在复制BibTex格式时就会自带DOI，这个时候需要<strong>手动删除</strong>。</li>
+</ul>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line">@article&#123;example2,</span><br><span class="line">  title = &#123;Energy peer-to-peer trading in virtual microgrids in smart grids: a game-theoretic approach&#125;,</span><br><span class="line">  journal = &#123;IEEE Transactions on Smart Grid&#125;,</span><br><span class="line">  author = &#123;Kelvin Anoh and Sabita Maharjan and Augustine Ikpehai and Yan Zhang and Bamidele Adebisi&#125;,</span><br><span class="line">  year = &#123;2019&#125;,</span><br><span class="line">  urldate = &#123;2024-10-31&#125;,</span><br><span class="line">  doi = &#123;10.1109/TSG.2019.2934830&#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>参考文献的<strong>引用标签</strong>就是BibTex中第一行，<code>&#123;</code>后面紧跟的内容。这段内容是你<strong>唯一可以且需要更改</strong>的地方。为了方便引用，非常建议<strong>统一参考文献的格式</strong>，比如常见的“论文作者+论文时间”的格式<code>Paradox2025</code>，或其他你自己喜欢的格式。</li>
+<li>比如上面这个参考文献，引用方式应该是：</li>
+</ul>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line">文献<span class="keyword">\parencite</span>&#123;example2&#125;中新的实验结论表明，Paradox是最阴暗的下水道鼠鼠<span class="keyword">\cite</span>&#123;example2&#125;。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>生成的内容如下（这两种引用方式的区别应该很明显了）：</li>
+</ul>
+<p>文献<span
+class="math inline">\({[1]}\)</span>中提出了一种新的实验结论，即Paradox是最阴暗的下水道鼠鼠<span
+class="math inline">\(^{[1]}\)</span>。</p>
+<ul>
+<li>Latex会依据你的引用顺序进行自动标号。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>软件教程</category>
+      </categories>
+      <tags>
+        <tag>Latex</tag>
+        <tag>Markdown</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>基于Git和gitee的协同开发</title>
     <url>/2025/01/13/%E5%9F%BA%E4%BA%8EGit%E5%92%8Cgitee%E7%9A%84%E5%8D%8F%E5%90%8C%E5%BC%80%E5%8F%91/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="下载与安装">下载与安装</h1>
@@ -1681,6 +1862,66 @@ VSCode在安装时默认会带有git管理的插件，图标是用曲线连接�
       </tags>
   </entry>
   <entry>
+    <title>大三（秋冬）课程总结</title>
+    <url>/2024/01/15/%E5%A4%A7%E4%B8%89%E4%B8%8A%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="课程总结">课程总结</h1>
+<h2 id="微机原理与应用">微机原理与应用</h2>
+<p>​
+说实话，这门课的教学大纲太离谱了。这门课有闫老师和徐习东老师两个教学班，但是两个班上课的内容千差万别。一些基础知识是重合的，但是一些补充知识（闫老师班好像教了ECAN等内容，徐习东老师教了汇编）、实验课程内容、教学方式和上课顺序等等都完全不一样。这里由于我上的是徐习东老师班的微机，所以只能讲一讲徐习东老师班的感受。</p>
+<p>​
+他上课给人最大的印象就是喜欢对着一张原理图叭叭十几分钟，然后他的PPT上面就是零散地几个标题和内容，如果不听他讲课就完全无法理解；但是他讲课又很慢，很想让人睡觉玩手机，特别喜欢举一些奇怪的、生活化的例子来“帮助”我们理解。</p>
+<p>​
+如果除去他让人难以理解的讲课，他人还是挺好的，整体难度比较简单（是的，这两个班的教学难度也完全不一样）。实验课的任务都比较轻松，上课也会简单过一遍下一次实验课的代码，一个学期也只有三个实验报告。实验考试是允许使用以前自己使用过的代码的，而实验考试的内容也就是把平时实验的任务稍微改改格式（一般都是八段数码管显示时钟+非常简单的键盘响应），一般三、五分钟就能做完。听说闫老师班的实验考试就比较难了。</p>
+<p>​
+徐习东老师班的这门课比较难的可能就是一个大作业，我们是要求写中断向量表的定义、涉及到的函数等等，共3000字。想了想这个东西我还是不发出来了，不然肯定会被抄。在最后一节实验课上完之后，临近期末考的时候，徐习东老师才会开始讲CPU和汇编，这三四节课的内容反而是考试的重点，非常离谱。这部分的笔记我都放在“微机原理课外知识补充”里面了。</p>
+<h3 id="复习资料">复习资料</h3>
+<ul>
+<li><p>以下的资料大部分来自98，请尊重原作者的知识版权</p>
+<ul>
+<li><p><a href="\myfile\《微机原理与应用》思考题.pdf" target="_blank">《微机原理与应用》思考题</a></p></li>
+<li><p><a href="\myfile\21-22.pdf" target="_blank">21-22年回忆卷</a></p></li>
+<li><p><a href="\myfile\21-22答案纠错版.pdf" target="_blank">21-22回忆卷答案（我写的）</a></p></li>
+<li><p><a href="\myfile\DSP2812清华版复习资料.doc" target="_blank">DSP2812思考题</a></p></li>
+</ul></li>
+<li><p>考试的内容不难，题型如下</p></li>
+</ul>
+<ol type="1">
+<li>填空题12选8，每道题2个空</li>
+<li>简答题4选2，每题6分（徐习东老师的题有一个一般固定是汇编程序阅读，要求说明该段汇编程序执行完之后的结果）</li>
+<li>程序阅读题2选1（徐习东老师的题是汇编语言，一般也不难，就是加减乘除+寻址；闫老师的题我没细看，大概是ADC程序的初始化设置阅读题）</li>
+<li>程序设计题2选1（徐习东老师的题是CMD文件的编写+变量的定义，跟21-22回忆卷的题5-1几乎一样；闫老师的题好像是EV的初始化填空吧，给要求然后填写部分初始化数值）</li>
+<li>C语言程序设计题（中断程序编程，按要求手搓代码，包括main、CPU中断，跟21-22回忆卷的题5-2很像）</li>
+</ol>
+<h2 id="电力系统稳态分析">电力系统稳态分析</h2>
+<p>​
+怎么说呢，这门课很建议选林振智老师的班…实在不行选甘德强，这grp我是真受不了，上课=原封不动念PPT，PPT=原封不动抄书。后来我就溜到隔壁去了，林振智老师讲的还是很有激情的，至少能让你搞懂什么是重点，但是可能进度会比较慢，而且有点口音（比如三相交流电的“线”和“相”我老是听不出区别）。</p>
+<p>​
+这门课一开始学起来会有点害怕，因为作业很难，计算量也非常大，课本里有很多全新的公式和概念。但是记住一件事，就是很多东西都不考！比如长距离输电线模型，前面数学推导一大堆，实际上只要看下记住结论，甚至金奈力系数一般也都不出。比如牛顿-拉夫逊法解方程，比如PQ分解法等等，都只需要掌握原理和概念即可，因为考试根本不可能让你去手撕这么高阶的方程和行列式！而且手算潮流的迭代也不会太多，不然时间都画在计算上了。</p>
+<p>​
+然后考卷里我记得有很多选择题，都是书上比较细节的东西，可能属于概念性的内容。考前务必通读一遍课本，然后找找这些定义啊、概念啊之类的东西。后面的计算题lzz还是出的过于简单了，气煞我也，计算题拉不开分差，选择题很多都靠蒙，最后分数自然也没多高了。</p>
+<h2 id="控制理论">控制理论</h2>
+<p>​ 控制理论的回忆卷可以在98搜“2022~2023秋冬《控制理论
+(乙)》回忆卷”，然后还有一个<a href="\myfile\控论1617.pdf" target="_blank">控论16-17回忆卷</a>。前面98那张感觉一般，可能由题目他数据回忆错了，看看思路吧。感觉把书本通读一遍，然后把课后题再做一遍也是一个不错的选择。</p>
+<p>​
+非常不幸地这门课没有选到姚维老师班，ww这个老登真的服，上课不知道在讲啥，钉钉群不会建，班级不管，课程的成绩分布也不知道。还信誓旦旦地说我从来不点名，然后我就被背刺。我从第二节课开始就溜到姚维老师班去了，讲的是真好，上课氛围也很轻松。</p>
+<p>​
+这门课我感觉还是比较简单的，如果信号分析与处理学得好的话。然后多去总结内在的联系，多去了解原理，不要拘泥于表象。静态性能、动态性能，这些都和什么有关？怎样让一个系统变得更好？这些都搞明白之后，最后的校正就会好做很多。然后考试和写题要注意什么时候用开环系统分析，什么时候用闭环系统分析，一定要搞清楚，因为这很重要。</p>
+<h2 id="电机学">电机学</h2>
+<p>​
+电机学这门课我还真没怎么听到说哪个老师特别离谱。电机学总体难度确实还是有的，但是也没有被传的那么夸张，学的过程中因为全都是新知识，对模型也不清晰，所以会有些一头雾水。但是每隔一两周稍微总结一下学到的知识，把一些推导什么的去掉，去关心最后总结出来的模型就清晰了，直接用模型来代替电机，然后再把功率的流向弄懂，基本上掌握了电机学的80%了。</p>
+<p>​
+考试的题型是10分的选择题，20分的填空题，30分的简答题（6题，5分一题），40分的计算题（4题，10分一题，直流电机、变压器、异步电机、同步电机各一题）。</p>
+]]></content>
+      <categories>
+        <category>课程</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>大三</tag>
+        <tag>电气</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>电气学院大二（秋冬）课程资料整理（部分）</title>
     <url>/2023/09/27/%E5%A4%A7%E4%BA%8C%E4%B8%8A%E7%AD%94%E6%A1%88/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="前言">前言</h2>
@@ -1701,6 +1942,33 @@ VSCode在安装时默认会带有git管理的插件，图标是用曲线连接�
       <tags>
         <tag>大二</tag>
         <tag>电气</tag>
+        <tag>课程资料</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>工程原理</title>
+    <url>/2023/09/26/%E5%B7%A5%E7%A8%8B%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="工程原理">工程原理</h2>
+<p>上课反正是听不懂一点，真就纯念PPT</p>
+<hr />
+<ul>
+<li>百度网盘版本</li>
+</ul>
+<p>链接：https://pan.baidu.com/s/1aQJflqAabJoZLQNV5GvLcg</p>
+<p>提取码：z7gx</p>
+<p>--来自百度网盘超级会员V4的分享</p>
+<ul>
+<li>网页链接</li>
+</ul>
+<p>（寄了，文件太大传不了）</p>
+]]></content>
+      <categories>
+        <category>课程</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>大二</tag>
+        <tag>ACEE</tag>
         <tag>课程资料</tag>
       </tags>
   </entry>
@@ -2003,8 +2271,8 @@ class="math inline">\(m\le2^3-1=7\)</span></p>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
         <tag>微机</tag>
       </tags>
   </entry>
@@ -2784,8 +3052,8 @@ class="math inline">\(\alpha=k\frac{\tau}T\)</span>，查表</li>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
       </tags>
   </entry>
   <entry>
@@ -3404,9 +3672,62 @@ SEQx：中断标志位，1表示有中断，只读</td>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
         <tag>微机</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【2k字小说】 理</title>
+    <url>/2023/09/26/%E7%90%86/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="正文">正文</h2>
+<p>​
+在不是很久以前，有一个青年，坐不改姓，行不更名，最普通的姓，单名一个“理”。一个不算外地也不算本地的青年，来到这座滨海小城当老师。人如其名，正教高中物理。总之，他有了他的第一批学生。</p>
+<p>​
+可是这样一个大学刚毕业的青年，总有一些理想和热情，从他的心里喷出来，怀揣着满腔的热血，秉承着理工生挑战难题的痴迷和执着的学院风，不愿只是困囿于日常带着镣铐跳舞的课堂教学：按部就班、平稳渐进，但缺少烧脑的挑战和思维的激情。于是，他想走另外一条，名叫竞赛的路。</p>
+<p>​
+可这又是如此的困难，这是座普普通通小镇的普普通通的学校。他看着底下的学生，他们是百里挑一的天才；但所有人也都知道，想要踏入竞赛的大门，谁又不是光芒瞩目、举国无双？消息闭塞，不受待见，唯有后来转来的同为物理教师的校长肯给予他一些帮助。几年过去了，他还是他。</p>
+<p>​
+直到有一天，他收到了这样一群人，桀骜不驯，顽固不羁，也有一些青黄不接。不知为何，几年下来空白的成就墙和挫败感并没有消磨完他的锐气。学生的班主任同样也是一个物理老师，年级并不比他大多少，却早已结婚生子，过着平淡而极其有规律的生活。听到他要来招人的消息，她略有些意外，抿了抿嘴，并不鼓励也没打压的轻描淡写的向她的学生描述了这个事实。几个消息灵通的人悄悄对其他人说了些什么，然后摇了摇头。只害他多来了好几次，才有了足数的学生。</p>
+<p>​
+他和他的学生度过了数百日夜，两载寒暑，班上的人越来越少，从最初的二三十个，剩下了最后的七个。</p>
+<p>​
+那是第一个暑假，当所有人都还在的时候，他硬是上了整整一个月的课。当时学校里的课程还差很多，他就极快的将重要内容再上一遍。学竞赛要用到高等数学，他就自己硬生生的把半本高数教完。每天早上八点不到，他们刚在教室里落座不久，他便顶着一头乱糟糟的头发进来，嘴里啃着一个菜包，手上还拿着一个。课上了一个半小时，他便会“讲不动了”，开始让学生们写题，然后开始坐下来啃另外一个菜包。每天如此，一瓶牛奶，两个菜包，雷打不动。这俨然已经和微微驮着的背、街边甩卖的短袖，一起成为他的标签。</p>
+<p>​
+那个暑假走个最多的人，因为那实在是压力不小。着实，他的学生并不是一群令他期待已久的天才，而只是一些不成器的小孩。或者说，他们也并不是很服他，这也是氛围所致。</p>
+<p>​
+那是极其有规律的一段时间。每周的两节社团课，都被占去；周六下午，周日晚上，也是如此，每周五六个小时，都在305实验室里度过。常常，他们望着墙壁上牛顿的画像发呆，反复翻弄着桌上的导线和学生电源。周围是老旧的、别处用旧后换下来的桌椅，拥有完整凳面的凳子屈指可数，连电风扇都只有一个是能看出来它在动的，通常不过是嘎嘎作响的噪音显示着它还在工作。</p>
+<p>​
+日日如此，周周如此，他在学生班级里的“名声”日益高涨——诸如谁在校园前的车站偶遇了他的前女友，又如他的前女友是如何拉着谁畅谈四十分钟，再比如临近校门的教学楼不时能听见疑似他前女友的尖叫。</p>
+<p>​
+时间终于是来到了第二个寒假，学生们总算写完了令人望而生畏的“黑白皮”——标志着他们终于踏上了所谓竞赛的门槛。二月，学校里空空如也，只有几个零星的身影还在。他在前面走，他的几个学生在后面，看他如何落后校长和其他学校的竞赛教练半步，不敢多说几句；看他如何间歇的略有些佝偻着背，随声应和；看他如何一边用手支开另一侧前来的前女友，一边降低自己的存在感。</p>
+<p>​
+九月上旬，终于，迎来了备战长达整整一年半的考试。他有些兴奋，尽管不是亲自上阵，同时也带有些紧张。那并不具有多少口才的嘴中并不能蹦出几个有力的加油字眼。不一会儿，他又遇到了某某中学的竞赛教练，三步并作两步地上前去攀谈了起来。三个小时的漫长考试，仅仅是在一眨眼间就结束了，他看到高三的学长学姐喜笑颜开，看到高二的学生愁眉苦脸，唉声叹气。这种场景，那年如此，之前如此，之后如此。</p>
+<p>​
+半个月后的一天，他极其高兴的欢呼了起来，因为他的一个学生过了初赛。这或许是他任教七年来第一个考过了初赛的学生——至少传闻是如此。在那以后半个多月的故事倒是和他没了什么关系。不久后得知多少年来终于有人能在复赛中得奖，大抵是首次了。</p>
+<p>​
+然而所有的学生们都不太愿意学下去了，因为马上就会到高三了，他们需要时间留给“正课”。人一个个的走掉，他挣扎着，劝说着，但他的学生还是退出了。那一段时间，他的心或许是最痛的，不仅仅是两年心血灌注出的努力近乎付诸东流，更是刚有希望点燃了火柴，就被熄灭在黑暗里。</p>
+<p>​
+后来，他们很少再联系，他曾经的学生们搬去了独栋的高三楼。于是，之后发生的故事，都变成了写在后来的事。</p>
+<p>​
+后来，当他的学生在路上偶尔碰到他，在校门口简易的面店中看见他，有时在远处就远远的走开，亦或是尴尬的面无表情的路过。那原本就是亚健康的身体，现在已经凸起了一个不大不小的啤酒肚，搭配着一年四季相似的衣服，在寒风的吹拂下格外的明显。</p>
+<p>​
+后来，学校开设了数学竞赛，有着学校的支持，更多更好的学生都去了那里，他的学生听许多人说，再去物理竞赛的，都是所谓“挑剩下的学生”。</p>
+<p>​
+后来，连最后倔强的305实验室都换了模样，焕然一新，再也没有以往的一丝破旧之感可循。与此同时，它也失去了桌板上刻着的大字，失去了原本艰苦奋斗的回忆，失去了顶着40度高温上课的苦难，失去了一切它原本具有的样子，拥有了一切它理应具有的东西。</p>
+<p>​
+后来，当我时隔数月再度打开手机qq，却发现原本那个半年没有动静，本来消息就寥寥无几的竞赛群聊，仍然静悄悄的被置顶在最上面。我叹了口气，手指在屏幕上轻轻滑动了几下，随着它置顶标识的消失，我再也找不到它了。</p>
+<h2 id="后记">后记</h2>
+<p>​
+很久很久以后，突然有人在群里@我，说：“快看，陈理结婚了。”我打开朋友圈，一股浓浓的乡村抖音中年大叔气息涌到我的脸上来。他不再像是青年人了，坐在汽车的座椅上也不能看清是否还有啤酒肚，好在破旧的短袖和衬衫是换掉了，变得人模人样。</p>
+<p>​
+我精神有些恍惚，思绪又回到了那天，他的前女友拉着我在校门口聊了半个小时的那个下午。</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
       </tags>
   </entry>
   <entry>
@@ -4524,88 +4845,8 @@ E2,0,-\frac E2,-E\)</span> 的阶梯波</li>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>工程原理</title>
-    <url>/2023/09/26/%E5%B7%A5%E7%A8%8B%E5%8E%9F%E7%90%86/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="工程原理">工程原理</h2>
-<p>上课反正是听不懂一点，真就纯念PPT</p>
-<hr />
-<ul>
-<li>百度网盘版本</li>
-</ul>
-<p>链接：https://pan.baidu.com/s/1aQJflqAabJoZLQNV5GvLcg</p>
-<p>提取码：z7gx</p>
-<p>--来自百度网盘超级会员V4的分享</p>
-<ul>
-<li>网页链接</li>
-</ul>
-<p>（寄了，文件太大传不了）</p>
-]]></content>
-      <categories>
-        <category>课程</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
-        <tag>大二</tag>
-        <tag>ACEE</tag>
-        <tag>课程资料</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【2k字小说】 理</title>
-    <url>/2023/09/26/%E7%90%86/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="正文">正文</h2>
-<p>​
-在不是很久以前，有一个青年，坐不改姓，行不更名，最普通的姓，单名一个“理”。一个不算外地也不算本地的青年，来到这座滨海小城当老师。人如其名，正教高中物理。总之，他有了他的第一批学生。</p>
-<p>​
-可是这样一个大学刚毕业的青年，总有一些理想和热情，从他的心里喷出来，怀揣着满腔的热血，秉承着理工生挑战难题的痴迷和执着的学院风，不愿只是困囿于日常带着镣铐跳舞的课堂教学：按部就班、平稳渐进，但缺少烧脑的挑战和思维的激情。于是，他想走另外一条，名叫竞赛的路。</p>
-<p>​
-可这又是如此的困难，这是座普普通通小镇的普普通通的学校。他看着底下的学生，他们是百里挑一的天才；但所有人也都知道，想要踏入竞赛的大门，谁又不是光芒瞩目、举国无双？消息闭塞，不受待见，唯有后来转来的同为物理教师的校长肯给予他一些帮助。几年过去了，他还是他。</p>
-<p>​
-直到有一天，他收到了这样一群人，桀骜不驯，顽固不羁，也有一些青黄不接。不知为何，几年下来空白的成就墙和挫败感并没有消磨完他的锐气。学生的班主任同样也是一个物理老师，年级并不比他大多少，却早已结婚生子，过着平淡而极其有规律的生活。听到他要来招人的消息，她略有些意外，抿了抿嘴，并不鼓励也没打压的轻描淡写的向她的学生描述了这个事实。几个消息灵通的人悄悄对其他人说了些什么，然后摇了摇头。只害他多来了好几次，才有了足数的学生。</p>
-<p>​
-他和他的学生度过了数百日夜，两载寒暑，班上的人越来越少，从最初的二三十个，剩下了最后的七个。</p>
-<p>​
-那是第一个暑假，当所有人都还在的时候，他硬是上了整整一个月的课。当时学校里的课程还差很多，他就极快的将重要内容再上一遍。学竞赛要用到高等数学，他就自己硬生生的把半本高数教完。每天早上八点不到，他们刚在教室里落座不久，他便顶着一头乱糟糟的头发进来，嘴里啃着一个菜包，手上还拿着一个。课上了一个半小时，他便会“讲不动了”，开始让学生们写题，然后开始坐下来啃另外一个菜包。每天如此，一瓶牛奶，两个菜包，雷打不动。这俨然已经和微微驮着的背、街边甩卖的短袖，一起成为他的标签。</p>
-<p>​
-那个暑假走个最多的人，因为那实在是压力不小。着实，他的学生并不是一群令他期待已久的天才，而只是一些不成器的小孩。或者说，他们也并不是很服他，这也是氛围所致。</p>
-<p>​
-那是极其有规律的一段时间。每周的两节社团课，都被占去；周六下午，周日晚上，也是如此，每周五六个小时，都在305实验室里度过。常常，他们望着墙壁上牛顿的画像发呆，反复翻弄着桌上的导线和学生电源。周围是老旧的、别处用旧后换下来的桌椅，拥有完整凳面的凳子屈指可数，连电风扇都只有一个是能看出来它在动的，通常不过是嘎嘎作响的噪音显示着它还在工作。</p>
-<p>​
-日日如此，周周如此，他在学生班级里的“名声”日益高涨——诸如谁在校园前的车站偶遇了他的前女友，又如他的前女友是如何拉着谁畅谈四十分钟，再比如临近校门的教学楼不时能听见疑似他前女友的尖叫。</p>
-<p>​
-时间终于是来到了第二个寒假，学生们总算写完了令人望而生畏的“黑白皮”——标志着他们终于踏上了所谓竞赛的门槛。二月，学校里空空如也，只有几个零星的身影还在。他在前面走，他的几个学生在后面，看他如何落后校长和其他学校的竞赛教练半步，不敢多说几句；看他如何间歇的略有些佝偻着背，随声应和；看他如何一边用手支开另一侧前来的前女友，一边降低自己的存在感。</p>
-<p>​
-九月上旬，终于，迎来了备战长达整整一年半的考试。他有些兴奋，尽管不是亲自上阵，同时也带有些紧张。那并不具有多少口才的嘴中并不能蹦出几个有力的加油字眼。不一会儿，他又遇到了某某中学的竞赛教练，三步并作两步地上前去攀谈了起来。三个小时的漫长考试，仅仅是在一眨眼间就结束了，他看到高三的学长学姐喜笑颜开，看到高二的学生愁眉苦脸，唉声叹气。这种场景，那年如此，之前如此，之后如此。</p>
-<p>​
-半个月后的一天，他极其高兴的欢呼了起来，因为他的一个学生过了初赛。这或许是他任教七年来第一个考过了初赛的学生——至少传闻是如此。在那以后半个多月的故事倒是和他没了什么关系。不久后得知多少年来终于有人能在复赛中得奖，大抵是首次了。</p>
-<p>​
-然而所有的学生们都不太愿意学下去了，因为马上就会到高三了，他们需要时间留给“正课”。人一个个的走掉，他挣扎着，劝说着，但他的学生还是退出了。那一段时间，他的心或许是最痛的，不仅仅是两年心血灌注出的努力近乎付诸东流，更是刚有希望点燃了火柴，就被熄灭在黑暗里。</p>
-<p>​
-后来，他们很少再联系，他曾经的学生们搬去了独栋的高三楼。于是，之后发生的故事，都变成了写在后来的事。</p>
-<p>​
-后来，当他的学生在路上偶尔碰到他，在校门口简易的面店中看见他，有时在远处就远远的走开，亦或是尴尬的面无表情的路过。那原本就是亚健康的身体，现在已经凸起了一个不大不小的啤酒肚，搭配着一年四季相似的衣服，在寒风的吹拂下格外的明显。</p>
-<p>​
-后来，学校开设了数学竞赛，有着学校的支持，更多更好的学生都去了那里，他的学生听许多人说，再去物理竞赛的，都是所谓“挑剩下的学生”。</p>
-<p>​
-后来，连最后倔强的305实验室都换了模样，焕然一新，再也没有以往的一丝破旧之感可循。与此同时，它也失去了桌板上刻着的大字，失去了原本艰苦奋斗的回忆，失去了顶着40度高温上课的苦难，失去了一切它原本具有的样子，拥有了一切它理应具有的东西。</p>
-<p>​
-后来，当我时隔数月再度打开手机qq，却发现原本那个半年没有动静，本来消息就寥寥无几的竞赛群聊，仍然静悄悄的被置顶在最上面。我叹了口气，手指在屏幕上轻轻滑动了几下，随着它置顶标识的消失，我再也找不到它了。</p>
-<h2 id="后记">后记</h2>
-<p>​
-很久很久以后，突然有人在群里@我，说：“快看，陈理结婚了。”我打开朋友圈，一股浓浓的乡村抖音中年大叔气息涌到我的脸上来。他不再像是青年人了，坐在汽车的座椅上也不能看清是否还有啤酒肚，好在破旧的短袖和衬衫是换掉了，变得人模人样。</p>
-<p>​
-我精神有些恍惚，思绪又回到了那天，他的前女友拉着我在校门口聊了半个小时的那个下午。</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
+        <tag>电气</tag>
       </tags>
   </entry>
   <entry>
@@ -5282,8 +5523,134 @@ Q_{i}}\frac1{1-\frac{\partial Q_L}{\partial Q_{i}}}=\lambda
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>电机工程创新实践（短学期）</title>
+    <url>/2024/12/13/%E7%94%B5%E6%9C%BA%E5%B7%A5%E7%A8%8B%E5%88%9B%E6%96%B0%E5%AE%9E%E8%B7%B5/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="电机工程创新实践">电机工程创新实践</h1>
+<ul>
+<li>这门课本来应该是在寒假一起修的短学期课程，但是hxy老师把它放到冬学期上了。一周一节，一共四节课左右，剩下的时间自己做大作业。但奈何本人最近一直在实习….</li>
+<li>这门课的要求是设计一个小型电机，体验一下设计流程。不过<strong>真正在工程实践中电机的设计流程并不如此</strong>（以至于黄老师自己都不会用ANSYS），本人也没有进行什么优化，反正看上去还行。本篇文章走一下hxy老师的设计流程。</li>
+<li>课不用怎么听，基本靠自学</li>
+<li><strong>本人不会设计电机</strong></li>
+</ul>
+<h2 id="基本电机参数设计">1. 基本电机参数设计</h2>
+<p>​
+这块跟大三下学期学的电机设计区别不太大，不过不需要搞得那么复杂，只需要设计几个基本的参数就行了。黄老师的PPT里有流程示范，基本跟着她那个走就行（顺带一提，黄老师基本不看钉钉但是微信秒回，所以催她发文件最好微信）</p>
+<h3 id="主要尺寸关系式">1.1 主要尺寸关系式</h3>
+<p>先根据设计要求，找到电机的转矩、转速、电压要求。</p>
+<p>根据电机基本尺寸关系式（分子6.1那个，详见电机设计）计算电枢外径<span
+class="math inline">\(D_0\)</span>。其中：</p>
+<ul>
+<li>A可以取值在15~50 × 10<sup>3</sup> A/m</li>
+<li><span class="math inline">\(B_{\delta}\)</span>可以取值在0.6~0.8
+T</li>
+<li><span class="math inline">\(\alpha_p\)</span>可以取值在0.7左右</li>
+<li><span class="math inline">\(K_{nm}\)</span>取值在1.1，<span
+class="math inline">\(K_{dp}\)</span>取值在0.92或0.96</li>
+<li>尺寸比<span
+class="math inline">\(\lambda\)</span>可以取得很小（因为我设计的是机器人关节电机，所以取的0.1左右，D比l大很多）</li>
+</ul>
+<p>​
+然后确定内转子还是外转子。黄老师设计的是外转子，我是内转子。内转子可以参考电机设计这本书的例程，定子内径（即约为转子外径）大概就是外径的0.6~0.8，反正这个要求不是特别大，最终大概设计出来定子轭部跟定子齿的宽度差不多就行（轭部可以细一点）</p>
+<p>​
+这里我的参数大概是80,50（仅供参考）。转子内径要求不大，给转子轭部稍微留点空间。一般设计个30以上吧，这个对电机性能影响很小，尽量让转子轭部薄一点。</p>
+<h3 id="槽极配合">1.2 槽极配合</h3>
+<p>​
+hxy老师的PPT上有两个表格，分别是不同槽极配合下的绕组系数和谐波与噪声（这两个表横纵坐标反了别看岔），谐波选数字稍微大一点（意思就是谐波小），绕组系数大一些。一般都是分数槽集中绕组，一些比较经典的设计比如12s10p，12s9p等等，对这些槽极配合等比例放大（比如我用的24s20p）也是个不错的选择。我看有人说24s20p的波形没有特别好，他用的好像有三十多极，具体我有点记不清了。反正这么大的电机，极数二三十差不多了，电机越大可以把极对数增大。</p>
+<h3 id="材料选型">1.3 材料选型</h3>
+<p>​ 我是不会一点，老师选啥我选啥，抄PPT的</p>
+<h3 id="槽型设计">1.4 槽型设计</h3>
+<p>​
+我是不会一点，《电机设计》选啥我选啥。把他在第十章设计的槽等比缩放一下（按照电枢直径）就是我的槽了！（免责声明：吴立建上课也是这么说的）</p>
+<p>好的，现在你就非常粗略的设计完电机了（没事，没设计的部分ANSYS会帮你设计的）</p>
+<h2 id="rmxprt-建模">2. RMxprt 建模</h2>
+<p>给一个参考链接，可以跟着他做一下建模，数据用自己的就好：https://www.bilibili.com/video/BV1cN411r7Wu</p>
+<p><img src="\image\hxy1.png" /></p>
+<ul>
+<li><p>推荐用参数化建模，如左下角红线所示，这样之后做参数扫描比较方便。</p></li>
+<li><p>如果一些必填的参数你不知道怎么取，可以参考黄老师PPT中的取法（但也不一定对），这里给点参考：永磁体厚度可以在2mm左右，气隙可以在1mm左右（黄老师取的2mm太大了）</p></li>
+<li><p>windings的参数设计慎填，因为你可能会设计的一坨屎（没错我一开始就是这样），把必要的几个填一下，比如并联支路数是1还是2，剩下的丢给他自己设计吧，比如匝数、线径啥的。不合适后面再改。</p></li>
+<li><p><strong>黄老师会发一个电机设计报告的word模板，如果第三四节课后还没发，记得找她要。</strong>对着那个报告做会轻松很多。做完上面这几步，你已经可以填写<strong>表1.1和表1.2</strong>了。</p></li>
+</ul>
+<h2 id="maxwell-建模与仿真">3. Maxwell 建模与仿真</h2>
+<p>​
+使用setup创建Maxwell2D模型，绝大部分仿真都需要在Maxwell里面跑，<strong>原因是RMxprt里面的仿真只能是
+<code>Constant Power</code>，但是我们需要的是用电流源来进行仿真</strong>。</p>
+<p>不要立刻进行仿真。</p>
+<h3 id="磁场磁密云图磁力线分布与气隙磁密">3.1
+磁场：磁密云图、磁力线分布与气隙磁密</h3>
+<p>​ ctrl+A 全选，右键选择<code>plot mesh</code>进行剖分，在左侧的Field
+Overlays里面可以看到剖分图。如果剖分没有出来的话，双击一下电机模型的左下角，有一个Time=0的东西，双击完成就能看到了。然后分别进行A和B的调用。</p>
+<p><img src="\image\hxy4.png" /></p>
+<p><img src="\image\hxy9.png" /></p>
+<p>如下图所示，画一条气隙线，原点在电机圆心，半径刚好穿过气隙。画完后只用保留线，把<code>coverlines</code>删了</p>
+<p><img src="\image\hxy3.png" /></p>
+<p>​ 如下图所示，添加气隙磁密。气隙磁密一共两个，径向<span
+class="math inline">\(B_r\)</span>和切向<span
+class="math inline">\(B_t\)</span>，所以一共添加两次，就是在第二步操作中分别选择切向Target和径向Normal，然后分别命名Bt和Br就行。步骤用蓝色标出。</p>
+<p><img src="\image\hxy5.png" /></p>
+<p>​
+接着进行仿真设置，右键setup1选择properties进行设置，为了少跑几个周期，可以减小一点总时间。时间设多少随你，大概三个周期就够。上面那个100可以减小点，20,50啥的都行，具体含义自己看英文。</p>
+<p><img src="\image\hxy2.png" /></p>
+<p>​
+在仿真之前，非常重要的一部是如下图所示进行设置，从电压源改成电流源。<strong>具体数值要根据设计的电机参数进行更改</strong>。BC相减/加三分之二π就行。一开始I0设置成0模拟空载，n设置成额定转速。</p>
+<p><img src="\image\hxy8.png" /></p>
+<p>开始仿真！</p>
+<p>​
+为了查看气隙磁密，分别进行下面两步操作。其中第二张图的7200是取点的数量，越多越慢，我感觉1440之后区别不大了，尽量设成个360的倍数就行。查看气隙磁密并填入<strong>图4.3</strong>中。</p>
+<p><img src="\image\hxy6.png" /></p>
+<p><img src="\image\hxy7.png" /></p>
+<p>在左侧的Field
+Overlays里面可以看到磁密云图、磁力线分布，填入<strong>图4.1，4.2</strong>中。右键Result选择FFT，如下</p>
+<p><img src="\image\hxy10.png" /></p>
+<p>最后怎么处理的数据自己去查。</p>
+<h3 id="电场感应电势与电流">3.2 电场：感应电势与电流</h3>
+<p>​
+齿槽转矩就是输入电流为0时的点击转矩，可以直接看自带的Torque曲线就行了</p>
+<p>​
+感应电压曲线也是。由于本实验要求输入电压最低30V，因此感应电动势<strong>不能超过这个数值</strong>，否则需要额外的控制。如果超过了，则需要减少线圈匝数cond，其可以在左下角的variable里面找到。此外，如果这个比较<strong>不正弦</strong>的话可能需要调整一下其它参数。如果需要减少匝数的话，那就需要增加绕线截面积了（为了确保电流一样）。为了应付教学，可以直接把原来的线径按比例放大（平方关系），但实际中涉及到选型是不能这么做的。</p>
+<p>​
+磁链、电感和电阻也是一样的，自己去调一下Result里面的数据（低情商：我也是猜的）</p>
+<p>​ 至于怎么调曲线：Result - Create Transient Report - Create
+Rectangular Report</p>
+<h3 id="负载特性">3.3 负载特性</h3>
+<p>首先先进行参数扫描，如下</p>
+<p><img src="\image\hxy11.png" /></p>
+<p><img src="\image\hxy12.png" /></p>
+<p>​
+对新得到的ParameterSetup1进行分析Analyze，由于扫的点数很多，所以可能耗时很久。然后如下图所示进行转矩-电流曲线的扫描。需要注意的是，如果之前更改过cond（匝数），那么他在仿真的时候会把两种cond都仿真一次，所以可以在families里面把cond换成你需要的那个，而不是all</p>
+<p><img src="\image\hxy13.png" /></p>
+<p>​
+其他的转矩波形、感应电动势直接调出来就行。需要注意的是要手动把电流设置成额定电流（额定电流从上面的转矩-电流曲线中读出），具体操作方法为：</p>
+<p>​ 右键Result中相应的图表 - Modify - Families - 电流改成额定电流</p>
+<p>​
+接着，用转矩-电流曲线同样的方法，找到交直轴电感Ld，Lq（记得用Average值）与电流的关系</p>
+<p>​
+左下角Variable把输入电流改成额定电流，跑一遍Setup1，再去看电机磁密云图</p>
+<p>​
+正常情况下，Maxwell仿真是不包含涡流损耗和永磁损耗的，要主动选择。步骤如下，选择Core
+loss和Eddy Current loss之后把所有的都勾上。</p>
+<p><img src="\image\hxy14.png" /></p>
+<p>​
+不同转速、电流下的数据点下，电机的效率MAP图跟上面的扫描也是类似的，设置类似如下（记得把仿真的间隔调一下，不然得跑很久很久）</p>
+<p><img src="\image\hxy15.png" /></p>
+<h3 id="过载">3.4 过载</h3>
+<p>把电机电密调到50，你看下原来的电密，应该会是50的三分之一到二分之一，把电流等比放大就行。然后跑一次。</p>
+<p>电流就是正常的电流</p>
+<p>磁密云图也不用管温度要求了，就是之前的磁密云图</p>
+<p>这个是什么意思呢，就是如果退磁严重的话，需要你把永磁体厚度增厚，也就是说前面重来一遍喵。</p>
+]]></content>
+      <categories>
+        <category>课程</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>电气</tag>
+        <tag>大四</tag>
       </tags>
   </entry>
   <entry>
@@ -6837,167 +7204,802 @@ U=\text{const}\)</span>，因此气隙合成磁通不会变化</li>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
       </tags>
   </entry>
   <entry>
-    <title>电气学院大二（春夏）课程笔记汇总</title>
-    <url>/2023/09/26/%E7%94%B5%E6%B0%94%E5%AD%A6%E9%99%A2%E5%A4%A7%E4%BA%8C%E4%B8%8B%E8%AF%BE%E7%A8%8B%E6%B1%87%E6%80%BB/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2
-id="电气学院大二春夏课程笔记汇总">电气学院大二（春夏）课程笔记汇总</h2>
-<p>欢迎关注我的公众号“熬夜波比的电院日常”。</p>
-<hr />
-<h3 id="信号">信号</h3>
-<p><a href="\myfile\信号.pdf" target="_blank">信号笔记（PDF）</a></p>
-<p><a href="\myfile\张健复习PPT.pdf" target="_blank">张健复习PPT</a></p>
-<p><a href="\myfile\公式附录（考试）.pdf" target="_blank">公式附录（考试）</a></p>
-<h3 id="模电">模电</h3>
-<p>大家可以去找一下朵朵菜菜的笔记，这里文件太大传不上来。</p>
-<p><a href="\myfile\电路与电子技术(2)笔记.pdf" target="_blank">电路与电子技术(2)笔记</a></p>
-<p><a href="\myfile\《模拟电子技术基础》童诗白  第四版.pdf" target="_blank">电子书</a></p>
-<p><a href="\myfile\《电路与电子技术II》模电 期末复习.pdf" target="_blank">蔡忠法复习PPT</a></p>
-<h3 id="工磁">工磁</h3>
-<p><a href="\myfile\工程电磁场与波.pdf" target="_blank">工程电磁场与波</a></p>
-<h3 id="人工智能与物联网">人工智能与物联网</h3>
-<p><a href="\myfile\人工智能与物联网CheatSheet.pdf" target="_blank">人工智能与物联网CheatSheet</a></p>
-<h3 id="电工电子实习">电工电子实习</h3>
-<a class="btn-beautify center" href="https://mp.weixin.qq.com/s/Ao07Oi7A92OJ8S7i1vfT6Q" title="Click"><i class="far fa-hand-point-right"></i><span>Click</span></a>
+    <title>电机系统建模与分析</title>
+    <url>/2024/04/02/%E7%94%B5%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%BB%BA%E6%A8%A1%E4%B8%8E%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="chap1.-摘要">Chap1. 摘要</h1>
+<blockquote>
+<p>觉得卡的或者遇到公式渲染不出来的情况请开翻墙，ZJU的校网就是依托。</p>
+<p>若无特殊说明，本文中使用斜体的<span
+class="math inline">\(p\)</span>表示电机极对数，用正体的<span
+class="math inline">\(\text p\)</span>表示海氏算子<span
+class="math inline">\(\frac{\text d}{\text dt}\)</span></p>
+<p>期中可能会放PDF版本（<a href="\myfile\电机系统建模与分析.pdf" target="_blank">Click Here</a>）</p>
+</blockquote>
+<p><img src="\image\电机建模17.jpg" /></p>
+<h2 id="补绕组系数">补：绕组系数</h2>
+<p>现在应该是才算是完全搞懂了</p>
+<ul>
+<li>短距系数表征的是“<strong>一个线圈的上下层边</strong>”的电势矢量的合成关系</li>
+<li>分布系数表征的是“<strong>不同线圈之间（只看上层边）</strong>”的电势矢量的合成关系</li>
+</ul>
+<p>求解办法：</p>
+<ol type="1">
+<li>画绕组分布展开图，选其中一相画</li>
+<li>看看一个线圈上下层边跨过了多少电角度（记为<span
+class="math inline">\(\theta_y\)</span>），则短距系数为<span
+class="math inline">\(\sin(\frac{\theta_y}{\pi}\cdot\frac{\pi}2)\)</span></li>
+<li>看看<strong>所有线圈的上层边</strong>，把他们用矢量图画出来。同极下的直接相加，不同极下的添负号。</li>
+</ol>
+<h1 id="chap2.-微分方程数值解法">Chap2. 微分方程数值解法</h1>
+<h2 id="一阶微分方程">一阶微分方程</h2>
+<p>设一阶微分方程的一般形式为：<br />
+<span class="math display">\[
+\frac{\text dx}{\text dt}=\text px=f(t,x)
+\]</span><br />
+倘若已知初始时刻的变量值（如：<span
+class="math inline">\(x(0)\)</span>），想要得到下一时刻的值，基本思路是<span
+class="math inline">\(x_{i+1}=x_i+\text px\cdot \Delta t\)</span></p>
+<p>设等步长，相邻两时刻间的时间差（步长）为<span
+class="math inline">\(h\)</span>，</p>
+<p><strong>四阶龙格-库塔法：</strong><br />
+<span class="math display">\[
+\begin{gather*}
+K_1=f(t_i,x_i)&amp;\Rightarrow&amp; x_{i+\frac12}^{(1)}=x_i+K_1\frac
+h2\\
+K_2=f(t_{i+\frac12},x_{i+\frac12}^{(1)})&amp;\Rightarrow&amp;
+x_{i+\frac12}^{(2)}=x_i+K_2\frac h2\\
+K_3=f(t_{i+\frac12},x_{i+\frac12}^{(2)})&amp;\Rightarrow
+&amp;x_{i+1}^{(1)}=x_i+K_3h\\
+K_4=f(t_{i+1},x_{i+1}^{(1)})&amp;\Rightarrow&amp;K=\frac{K_1+2K_2+2K_3+K_4}6\\
+&amp;x_{i+1}=x_i+Kh
+\end{gather*}
+\]</span></p>
+<h2 id="一阶微分方程组">一阶微分方程组</h2>
+<p>一般采用同步梯度的方式求解多变量方程组，这里以两变量为例：<br />
+$$<br />
+<span class="math display">\[\begin{gather*}
+K_{1x}=f_x(t_i,x_i,y_i)&amp;K_{1y}=f_y(t_i,x_i,y_i)\\\Rightarrow
+x_{i+\frac12}^{(1)}=x_i+K_{1x}\frac
+h2&amp;y_{i+\frac12}^{(1)}=y_i+K_{1y}\frac h2\\
+K_{2x}=f_x(t_{i+\frac12},x_{i+\frac12}^{(1)},y_{i+\frac12}^{(1)})&amp;K_{2y}=f_y(t_{i+\frac12},x_{i+\frac12}^{(1)},y_{i+\frac12}^{(1)})\\\Rightarrow
+x_{i+\frac12}^{(2)}=x_i+K_{2x}\frac
+h2&amp;y_{i+\frac12}^{(2)}=y_i+K_{2y}\frac h2
+
+\end{gather*}\]</span><br />
+$$<br />
+后面不抄了，K3K4一样的，反正意思就是同步更新。</p>
+<h1 id="chap3.-一般化电机模型">Chap3. 一般化电机模型</h1>
+<h2 id="基本概念">基本概念</h2>
+<p>一般化电机的基本假设：</p>
+<ol type="1">
+<li>一对级电机（<span
+class="math inline">\(p=1\)</span>），极对数是可以等效的</li>
+<li>绕组是可以等效的，如三相变为两相</li>
+<li>伪静止线圈：构成线圈的导体是运动的（以<span
+class="math inline">\(\omega\)</span>旋转），但是d、q线圈是由电刷所规定的，因此轴线静止。
+<ol type="1">
+<li>线圈中的电流在空间产生轴线静止的磁场</li>
+<li>导体实际上在旋转，因此还是会有旋转电势</li>
+</ol></li>
+<li>磁路不饱和（可用叠加原理）</li>
+<li>不计剩磁、涡流、磁滞损耗</li>
+<li>气隙磁密按正弦规律分布</li>
+<li>只关心导体分布在哪些槽内，不关心具体的连接方式和整、短距等</li>
+</ol>
+<h2 id="基本方程式">基本方程式</h2>
+<h3 id="正方向的规定">正方向的规定</h3>
+<table>
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 38%" />
+<col style="width: 16%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr>
+<th></th>
+<th>原则</th>
+<th>模型</th>
+<th>方程式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>电动机</strong></td>
+<td>1. 正电流产生正磁链<br />2.
+从外向线圈看，电压与电流正方向相同<br />3. 线圈的输入功率为正值</td>
+<td><img src="\image\电机建模04.png" /></td>
+<td><span
+class="math inline">\(\begin{gather*}\varPsi=Li\\U=Ri+e\\e=\text
+p\varPsi\end{gather*}\)</span></td>
+</tr>
+<tr>
+<td><strong>发电机</strong></td>
+<td>1. 正电流产生负磁链<br />2.
+从线圈向外看，电压与电流正方向相同<br />3. 线圈的输出功率为正值</td>
+<td><img src="\image\电机建模05.png" /></td>
+<td><span
+class="math inline">\(\begin{gather*}\varPsi=-Li\\U=e-Ri\\e=\text
+p\varPsi\end{gather*}\)</span></td>
+</tr>
+</tbody>
+</table>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 52%" />
+<col style="width: 24%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr>
+<th></th>
+<th>原则</th>
+<th>方程式</th>
+<th>功率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>电动机</strong></td>
+<td>1.
+电磁转矩正方向就是旋转方向<br />2.负载、阻尼、惯性转矩正方向与之相反</td>
+<td><span class="math inline">\(T_e=T_L+T_D+J\text p\Omega\)</span></td>
+<td><span class="math inline">\(P_m=-T_L\Omega\)</span></td>
+</tr>
+<tr>
+<td><strong>发电机</strong></td>
+<td>1.
+外施转矩正方向就是旋转方向<br />2.负载、阻尼、惯性转矩正方向与之相反</td>
+<td><span class="math inline">\(T_m=T_e+T_D+J\text p\Omega\)</span></td>
+<td><span class="math inline">\(P_m=T_m\Omega\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="电磁方程式">电磁方程式</h3>
+<blockquote>
+<p>电枢（转子）按发电机原则规定正方向</p>
+<p>励磁（定子）按电动机原则规定正方向</p>
+</blockquote>
+<p><img src="\image\电机建模06.png" /><br />
+<span class="math display">\[
+\begin{gather*}
+\begin{cases}
+u_d=\text p\varPsi_d-R_di_d-K_q\omega\phi_q(旋转电势e_{dr})\\
+u_q=\text p\varPsi_q-R_qi_q+K_d\omega\phi_d(旋转电势e_{qr})\\
+u_{fd}=\text p\varPsi_{fd}+R_{fd}i_{fd}\\
+u_{kq}=\text p\varPsi_{kq}+R_{kq}i_{kq}
+\end{cases}
+\end{gather*}
+\]</span><br />
+根据<a href="#一般化电机旋转电势">对应的推导</a>，旋转电势中：<br />
+<span class="math display">\[
+\begin{gather*}
+\begin{cases}
+e_{dr}=-K_q\omega\phi_q=-\omega\varPsi_q\\
+e_{qr}=K_d\omega\phi_d=\omega\varPsi_d
+\end{cases}
+\end{gather*}
+\]</span><br />
+并带入<span
+class="math inline">\(\varPsi=LI\)</span>，得到电磁方程式为：<br />
+<span class="math display">\[
+\begin{gather*}
+[U]=\text p[L][I]+[R][I]+\omega[G][I]\\
+\text p[I]=[L]^{-1}({[U]-[R][I]-\omega[G][I]})
+\end{gather*}
+\]</span><br />
+其中：<br />
+<span class="math display">\[
+\begin{gather*}
+[L]=\begin{bmatrix}
+-L_d&amp;0&amp;M_{afd}&amp;0\\0&amp;-L_q&amp;0&amp;M_{akq}\\-M_{fad}&amp;0&amp;L_{fd}&amp;0\\0&amp;-M_{kaq}&amp;0&amp;L_q
+\end{bmatrix}&amp;,&amp;[G]=\begin{bmatrix}
+0&amp;L_q&amp;0&amp;-M_{akq}\\-L_d&amp;0&amp;M_{afd}&amp;0\\0&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;0
+\end{bmatrix}
+\end{gather*}
+\]</span></p>
+<h1 id="chap4.-直流电机仿真">Chap4. 直流电机仿真</h1>
+<p>考虑以下他励直流电机：</p>
+<p><img src="\image\电机建模11.jpg" /></p>
+<p>只有直轴励磁和交轴电枢电压，故其方程为：<br />
+<span class="math display">\[
+\begin{gather*}
+u_q=\text p\varPsi_q+\omega\varPsi_d-R_qi_q\\
+u_{fd}=\text p\varPsi_{fd}+R_{fd}i_{fd}
+\end{gather*}
+\]</span><br />
+其中：<br />
+<span class="math display">\[
+\varPsi_d=M_{afd}i_{fd}~;~\varPsi_q=-L_qi_q~;~\varPsi_{fd}=L_{fd}i_{fd}
+\]</span></p>
+<blockquote>
+<p>注：如果认为磁通全部通过磁链，并且定子和转子完全交链，那么有<span
+class="math inline">\(\phi_d=\phi_{fd}\)</span></p>
+<p>于是：<span
+class="math inline">\(\varPsi_d=z\phi_d=z\phi_{fd}=z\frac{L_{fd}i_{fd}}{N_{fd}}=M_{afd}i_{fd}\)</span></p>
+<p>即：<span
+class="math inline">\(M_{afd}=\frac{zL_{fd}}{N_{fd}}\)</span></p>
+</blockquote>
+<h2
+id="他励直流发电机的突然短路r_lrightarrow0">他励直流发电机的突然短路（<span
+class="math inline">\(R_L\rightarrow0\)</span>）</h2>
+<h3 id="稳态">稳态</h3>
+<p><span class="math display">\[
+\begin{gather*}
+u_{q0}=\omega_0M_{afd}i_{fd}-R_qi_q=R_{L}i_{q}\\u_{fd}=R_{fd}i_{fd}\\\Rightarrow
+i_{q0}=\frac{\omega_0M_{afd}u_{fd}}{(R_L+R_q)R_{fd}}
+\end{gather*}
+\]</span></p>
+<h3 id="条件1.-转速瞬时不变">条件1. 转速瞬时不变</h3>
+<p><span class="math display">\[
+\begin{gather*}
+0=-L_q\text pi_q+\omega_0M_{afd}i_{fd}-R_qi_q\\\Rightarrow
+i_q=\frac{\omega_0M_{afd}i_{fd}}{R_q}\frac1{\tau\text
+p+1}~;~(\tau=L_q/R_q)\\
+\Rightarrow i_q=i_{q0}\frac{R_L+R_q}{R_q}(1-e^{-\frac{t+t_0}{t_0}})
+\end{gather*}
+\]</span></p>
+<h3 id="条件2.-短路时停止提供动力">条件2. 短路时停止提供动力</h3>
+<p><span class="math display">\[
+\begin{gather*}
+\begin{cases}\text pi_q=\frac{\omega
+M_{afd}i_{fd}-R_qi_q}{L_q}\\T_m=0=M_{afd}i_{fd}i_q+B\omega+J\text
+p\omega  \end{cases}\Rightarrow \text
+p\omega=\frac{M_{afd}i_{fd}i_q+B\omega}{-J}
+\end{gather*}
+\]</span></p>
+<h3 id="条件3.-停止原动机时停止励磁">条件3. 停止原动机时停止励磁</h3>
+<p>​ 此时<span class="math inline">\(i_{fd}=0\)</span>,机电解耦！<br />
+<span class="math display">\[
+\text pi_q=-R_qi_q/L_q~,~\text p\omega=-B\omega/J
+\]</span></p>
+<h1 id="chap5.-三相交流电机在相坐标系下的模型">Chap5.
+三相交流电机在相坐标系下的模型</h1>
+<p>按照<strong>电动机</strong>原则选取正方向，即：</p>
+<ol type="1">
+<li>绕组轴线的方向是磁链正方向，<u>正电流产生正磁链</u></li>
+<li>从外向绕组看，<u>电压与电流正方向同向</u>，输入功率为正</li>
+<li><u>电磁转矩正方向就是转子旋转的方向</u>，负载<span
+class="math inline">\(T_L\)</span>、阻尼<span
+class="math inline">\(B\Omega\)</span>、惯性<span
+class="math inline">\(Jp\Omega\)</span>转矩相反</li>
+</ol>
+<p><img src="\image\电机建模01.png" /></p>
+<p>考虑D轴与Q轴正交解耦，则其<strong>电压平衡式</strong>为：<br />
+<span class="math display">\[
+\begin{gather*}\begin{cases}U_a=\text
+p\varPsi_a+R_ai_a&amp;（B、C相同理）\\U_f=\text
+p\varPsi_f+R_fi_f\\U_D=U_Q=0&amp;（阻尼短路绕组）  \end{cases}
+\end{gather*}
+\]</span><br />
+即：<br />
+<span class="math display">\[
+\begin{gather*}  \begin{bmatrix}
+u_a\\u_b\\u_c\\u_f\\0\\0
+\end{bmatrix}=\text p\begin{bmatrix}
+\varPsi_a\\\varPsi_b\\\varPsi_c\\\varPsi_f\\\varPsi_D\\\varPsi_Q
+\end{bmatrix}+\begin{bmatrix}
+R_s&amp;0&amp;0&amp;0&amp;0&amp;0\\0&amp;R_s&amp;0&amp;0&amp;0&amp;0\\0&amp;0&amp;R_s&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;R_f&amp;0&amp;0\\0&amp;0&amp;0&amp;0&amp;R_D&amp;0\\0&amp;0&amp;0&amp;0&amp;0&amp;R_Q
+\end{bmatrix}
+\begin{bmatrix}
+i_a\\i_b\\i_c\\i_f\\i_D\\i_Q
+\end{bmatrix}
+\end{gather*}
+\]</span><br />
+​其中磁链矩阵<span
+class="math inline">\([\varPsi]\)</span>可以表示为<span
+class="math inline">\([L][I]\)</span>，由于转子励磁旋转导致DQ轴与定子相轴耦合关系改变，电感矩阵<span
+class="math inline">\([L]\)</span>时变。电感矩阵中各分量结果如下：<a id="三相电感"><a
+href="#三相交流电机电感矩阵">三相交流电机电感矩阵推导</a></a></p>
+<ol type="1">
+<li><p><strong>定子绕组自感系数</strong><br />
+<span class="math display">\[
+\begin{gather*}
+L_{aa}=L_{aal}(漏感)+\frac{L_{aad}+L_{aaq}}2+\frac{L_{aad}-L_{aaq}}2cos2\theta\\
+L_{bb}=L_{aal}(漏感)+\frac{L_{aad}+L_{aaq}}2+\frac{L_{aad}-L_{aaq}}2cos2(\theta-\frac{2\pi}3)\\
+L_{cc}=L_{aal}(漏感)+\frac{L_{aad}+L_{aaq}}2+\frac{L_{aad}-L_{aaq}}2cos2(\theta+\frac{2\pi}3)
+\end{gather*}
+\]</span></p>
+<ol type="1">
+<li>对于隐极同步电机（<span
+class="math inline">\(L_{aad}=L_{aaq}\)</span>），自感系数是常数</li>
+</ol></li>
+<li><p><strong>定子绕组互感系数</strong><br />
+<span class="math display">\[
+\begin{gather*}
+M_{ab}=-(M_{abl}+\frac{L_{aad}+L_{aaq}}4)+\frac{L_{aad}-L_{aaq}}2cos2(\theta+\frac{2\pi}3)
+\end{gather*}
+\]</span></p>
+<ol type="1">
+<li>因为三相轴线相差120°，所以互感是负的，说明推导无误</li>
+<li>AB相的互感用C相的角度，其余同理</li>
+</ol></li>
+<li><p><strong>定子与转子之间的互感</strong><br />
+<span class="math display">\[
+\begin{gather*}M_{af}=M_{fa}=M_{af1}cos\theta\\M_{bf}=M_{fb}=M_{af1}cos(\theta-\frac{2\pi}3)\\M_{cf}=M_{fc}=M_{af1}cos(\theta+\frac{2\pi}3)
+\end{gather*}
+\]</span></p>
+<ol type="1">
+<li>定子绕组自感变化周期是<span
+class="math inline">\(\pi\)</span>，这个是<span
+class="math inline">\(2\pi\)</span>。下同。</li>
+</ol></li>
+<li><p><strong>定子绕组与转子D轴阻尼绕组间互感</strong><br />
+<span class="math display">\[
+M_{aD}=M_{Da}=M_{aD1}cos\theta
+\]</span></p></li>
+<li><p><strong>定子绕组与转子Q轴阻尼绕组间互感</strong><br />
+<span class="math display">\[
+M_{aQ}=M_{Qa}=-M_{aQ1}sin\theta
+\]</span></p></li>
+<li><p><strong>转子绕组自感、互感</strong><br />
+<span class="math display">\[
+\begin{gather*}
+L_f=L_{fl}+L_{f\delta}\\L_D=L_{Dl}+L_{D\delta}\\L_Q=L_{Ql}+L_{Q\delta}\\M_{fD}=M_{Df}=M_{fDl}+M_{fD\delta}
+\end{gather*}
+\]</span></p>
+<ol type="1">
+<li>由于DQ轴正交解耦，故不存在互感</li>
+</ol></li>
+</ol>
+<p>由此得到：<br />
+<span class="math display">\[
+\begin{gather*}
+\begin{bmatrix}
+\varPsi_a\\\varPsi_b\\\varPsi_c\\\varPsi_f\\\varPsi_D\\\varPsi_Q
+\end{bmatrix}=\begin{bmatrix}
+L_{aa}&amp;M_{ab}&amp;M_{ac}&amp;M_{af}&amp;M_{aD}&amp;M_{aQ}\\
+M_{ba}&amp;L_{bb}&amp;M_{bc}&amp;M_{bf}&amp;M_{bD}&amp;M_{bQ}\\
+M_{ca}&amp;M_{cb}&amp;L_{cc}&amp;M_{cf}&amp;M_{cD}&amp;M_{cQ}\\
+M_{fa}&amp;M_{fb}&amp;M_{fc}&amp;L_f&amp;M_{fD}&amp;0\\
+M_{Da}&amp;M_{Db}&amp;M_{Dc}&amp;M_{Df}&amp;L_D&amp;0\\
+M_{Qa}&amp;M_{Qb}&amp;M_{Qc}&amp;0&amp;0&amp;L_Q
+\end{bmatrix}\cdot \begin{bmatrix}
+i_a\\i_b\\i_c\\i_f\\i_D\\i_Q
+\end{bmatrix}
+\end{gather*}
+\]</span><br />
+对应的，其<a id="三相转矩"><strong>转矩平衡式</strong></a>为（<a
+href="#三相交流电机电磁转矩">电磁转矩的推导过程</a>）：<br />
+<span class="math display">\[
+T_e=\frac p2[I]^T\frac{\partial[L]}{\partial\theta}[I]
+\]</span></p>
+<h1 id="chap6.-坐标变换">Chap6. 坐标变换</h1>
+<p>一个电机的建模与求解过程应该是下面这样的：</p>
+<p><img src="\image\电机建模07.png" /></p>
+<p>上一章已经展示了，三相交流电机在相坐标（a-b-c
+Model）下的模型方程是多么复杂，所以要用坐标变换把他等效到更好计算的坐标系（如α-β-0和d-q-0坐标系）下。</p>
+<h2 id="坐标变化基本定义">坐标变化基本定义</h2>
+<ul>
+<li>下面直接不加推导的给出三相坐标系到（二维平面-0）坐标系的<strong>恒相幅值变换</strong>的表达式：
+<ul>
+<li>在三相坐标系中，三个坐标轴为a、b、c，记其方向向量为<span
+class="math inline">\(\vec a,\vec b,\vec
+c\)</span>，在三个方向向量上的某物理量的数值分别为<span
+class="math inline">\(x_a,x_b,x_c\)</span></li>
+<li>定义<strong>综合矢量：</strong><span class="math inline">\(\vec
+x=\frac23(x_a\vec a+x_b\vec b+x_c\vec c)\)</span></li>
+<li>定义<strong>零分量：</strong><span
+class="math inline">\(x_0=\frac{x_a+x_b+x_c}3\)</span></li>
+<li><img src="\image\电机建模08.png" /></li>
+</ul></li>
+<li>电机的模型是二维的，所以按理说两个基足以。但是坐标变换必须满足等变量个数，因此这里从“a、b、c”三个基（变量）换成了“综合矢量+零分量”三个变量（矢量=模长+方向，或正交分解，实际是两个变量）</li>
+<li>但是综合矢量以矢量的形式不好表达，所以可以写成下面这样的形式：
+<ul>
+<li>定义：<span
+class="math inline">\(x_a&#39;=x_a-x_0~,~x_b&#39;=x_b-x_0~,~x_c&#39;=x_c-x_0\)</span></li>
+<li><strong>综合矢量：</strong><span class="math inline">\(\vec
+x\rightarrow\dot x=\frac23(x_a+x_be^{j120}+x_ce^{j240})\triangleq
+xe^{j\alpha}\)</span>
+<ul>
+<li><strong>幅值：</strong><span
+class="math inline">\(|x|=\sqrt{\frac23(x_a&#39;^2+x_b&#39;^2+x_c&#39;^2)}\)</span></li>
+<li><strong>夹角（与a轴）：</strong><span
+class="math inline">\(\alpha=\text{cos}^{-1}(\frac{x_a&#39;}{x_a})\)</span></li>
+</ul></li>
+</ul></li>
+<li>当然，要把（二维平面-0）坐标系变回三相坐标系也是需要的，其表达式为：
+<ul>
+<li>a相：<span
+class="math inline">\(x_a&#39;=x\,\text{cos}\alpha~,~x_a=x_0+x_a&#39;\)</span></li>
+<li>a相：<span
+class="math inline">\(x_b&#39;=x\,\text{cos}(\alpha-\frac{2\pi}3)~,~x_b=x_0+x_b&#39;\)</span></li>
+<li>c相：<span
+class="math inline">\(x_c&#39;=x\,\text{cos}(\alpha+\frac{2\pi}3)~,~x_c=x_0+x_c&#39;\)</span></li>
+</ul></li>
+</ul>
+<h2 id="三相电机中坐标变换的重要结论">三相电机中坐标变换的重要结论</h2>
+<ul>
+<li>在三相对称系统中，三个物理量并非像定义中的<span
+class="math inline">\(x_a,x_b,x_c\)</span>一般毫无关联，而是由如下类似的表达式：
+<ul>
+<li>a相：<span
+class="math inline">\(i_a=I_m\,\text{cos}\theta\)</span></li>
+<li>b相：<span
+class="math inline">\(i_b=I_m\,\text{cos}(\theta-\frac{2\pi}3)\)</span></li>
+<li>c相：<span
+class="math inline">\(i_c=I_m\,\text{cos}(\theta+\frac{2\pi}3)\)</span></li>
+</ul></li>
+<li>把他变换到（二维平面-0）坐标系中是这样的：
+<ul>
+<li>零分量：<span
+class="math inline">\(i_0=\frac{i_a+i_b+i_c}3=0\)</span></li>
+<li>综合矢量幅值：<span
+class="math inline">\(|i|=\sqrt{\frac23(i_a&#39;^2+i_b&#39;^2+i_c&#39;^2)}=\sqrt{\frac23\cdot\frac32I_m^2}=I_m\)</span></li>
+<li>综合矢量夹角：<span
+class="math inline">\(\alpha=\text{cos}^{-1}\frac{i_a&#39;}{|i|}=\text{cos}^{-1}\frac{I_m\,\text{cos}\theta+0}{I_m}=\theta\)</span></li>
+<li>即：<span class="math inline">\(\vec i=\dot
+i=I_me^{j\theta}\)</span></li>
+</ul></li>
+<li>也就是说，对于三相对称系统（电压、电流、磁链等大部分都遵循这个规律），有以下重要结论：
+<ol type="1">
+<li><strong>综合矢量的幅值就是三相坐标系中的幅值</strong></li>
+<li><strong>综合矢量的夹角就是三相坐标系中该矢量与a相的夹角</strong></li>
+<li><strong>零分量为0</strong>（零分量的物理含义是被相互抵消，基本不产生实际作用的分量）</li>
+<li><strong>三相坐标系中的分量（如<span
+class="math inline">\(x_a\)</span>）就是综合矢量在该轴上的投影</strong>（实际上是<span
+class="math inline">\(x_a&#39;\)</span>，如果<span
+class="math inline">\(x_0=0\)</span>的话<span
+class="math inline">\(x_a=x_a&#39;\)</span>）</li>
+</ol></li>
+</ul>
+<h2 id="绕组等效与坐标变换">绕组等效与坐标变换</h2>
+<p><img src="\image\电机建模09.png" /></p>
+<ul>
+<li>最后需要把拿到的（二维平面-0）坐标系下的综合矢量+零分量的形式用特定的分解方式表示出来。<strong>新坐标系各轴上的分量大小就是综合矢量往该轴的投影</strong>。常用的坐标系有以下这几个（他们的零分量都是一样的）：
+<ul>
+<li><span class="math inline">\(\alpha-\beta-0\)</span>坐标系：<span
+class="math inline">\(\alpha\)</span>轴与a相重合，<span
+class="math inline">\(\beta\)</span>轴落后90°</li>
+<li><span
+class="math inline">\(d-q-0\)</span>坐标系：以角速度旋转，跟电枢是重合的。最常用的坐标系。</li>
+<li><span
+class="math inline">\(d_c-q_c-0\)</span>坐标系：以同步速旋转，在未稳定的情况下会比上面那个转的更快一点</li>
+</ul></li>
+<li><strong>正变换</strong>（已知<span
+class="math inline">\(i_a,i_b,i_c\)</span>，定义<strong>d轴与a相的夹角为<span
+class="math inline">\(\theta=\int\omega\text
+dt+\theta_0\)</span>）</strong>：</li>
+</ul>
+<p><span class="math display">\[
+\begin{gather*}
+\begin{pmatrix}
+i_d\\i_q\\i_0
+\end{pmatrix}=\frac23\begin{pmatrix}
+\text{cos}\theta&amp;\text{cos}(\theta-\frac{2\pi}3)&amp;\text{cos}(\theta+\frac{2\pi}3)\\
+-\text{sin}\theta&amp;-\text{sin}(\theta-\frac{2\pi}3)&amp;-\text{sin}(\theta+\frac{2\pi}3)\\
+\frac12&amp;\frac12&amp;\frac12
+\end{pmatrix}\cdot\begin{pmatrix}
+i_a\\i_b\\i_c
+\end{pmatrix}
+\end{gather*}
+\]</span></p>
+<ul>
+<li><strong>逆变换</strong>：</li>
+</ul>
+<p><span class="math display">\[
+\begin{gather*}
+\begin{pmatrix}
+i_a\\i_b\\i_c
+\end{pmatrix}
+=\begin{pmatrix}
+\text{cos}\theta&amp;-\text{sin}\theta&amp;1\\
+\text{cos}(\theta-\frac{2\pi}3)&amp;-\text{sin}(\theta-\frac{2\pi}3)&amp;1\\
+\text{cos}(\theta+\frac{2\pi}3)&amp;-\text{sin}(\theta+\frac{2\pi}3)&amp;1
+\end{pmatrix}\cdot\begin{pmatrix}
+i_d\\i_q\\i_0
+\end{pmatrix}
+\end{gather*}
+\]</span></p>
+<ul>
+<li>显而易见，上面是到<span
+class="math inline">\(d-q-0\)</span>坐标系的变换，到<span
+class="math inline">\(\alpha-\beta-0\)</span>坐标系更简单，因为<span
+class="math inline">\(\theta=0\)</span>，变换矩阵直接变成常数了</li>
+</ul>
+<h1 id="chap7.-d-q-0坐标下凸极同步电机">Chap7.
+d-q-0坐标下凸极同步电机</h1>
+<h2 id="电磁平衡式">电磁平衡式</h2>
+<p>​ 这里不加推导（<a
+href="#d-q-0坐标电压方程式推导">推导看这里</a>）的给出电压方程式，可以看到和一般化电机的电压方程式几乎一模一样！</p>
+<p><img src="\image\电机建模12.jpg" /></p>
+<p>​ 并且不加推导（<a
+href="#d-q-0坐标磁链表达式推导">推导看这里</a>）的给出磁链表达式，可以看到所有电感全部变成了常数！唯一美中不足的就是电感矩阵不是一个对称阵</p>
+<p><img src="\image\电机建模13.jpg" /></p>
+<p>其中各参数如下：<br />
+<span class="math display">\[
+\begin{gather*}
+直轴同步电感L_d=直轴电枢反应电感L_{ad}+漏电感L_l=\frac32L_{aad}+(L_{aal}+M_{abl})\\
+交轴同步电感L_q=交轴电枢反应电感L_{aq}+漏电感L_l=\frac32L_{aaq}+(L_{aal}+M_{abl})\\
+L_0=L_{aal}-2M_{abl}
+\end{gather*}
+\]</span></p>
+<blockquote>
+<ol type="1">
+<li>若不是d-q-0坐标变换而是<span
+class="math inline">\(\alpha-\beta-0\)</span>坐标变换，那么[L]也不是常数</li>
+<li>该模型中必须求解<span
+class="math inline">\(\theta\)</span>，因为要进行坐标反变换回到a-b-c坐标底下</li>
+</ol>
+</blockquote>
+<h2 id="功率变换">功率变换</h2>
+<p>功率表达式：<br />
+<span class="math display">\[
+P_{dq0}=\frac23P_{abc}-u_0i_0~~(P_{abc}=\frac32(P_{dq0+u_0i_0}))
+\]</span><br />
+自然的，其中 <span
+class="math inline">\(P_{dq0}=[I_{dq0}^T][u_{dq0}],~P_{abc}=[I_{abc}]^T[u_{abc}]\)</span></p>
+<p>对机械角度而言，有：<br />
+<span class="math display">\[
+T_e=T_D+T_L+T_J~,~P_m=-T_L\Omega
+\]</span><br />
+不加推导（<a
+href="#d-q-0功率表达式推导">推导看这里</a>）地给出三个功率的表达式：<br />
+<span class="math display">\[
+\begin{gather*}
+储能：&amp;P=\Omega J\text p\Omega=\frac32[\text p\varPsi_d,\text
+p\varPsi_q,2\text p\varPsi_0][I_{dq0}]+[\text p\varPsi_f,\text
+p\varPsi_D,\text p\varPsi_Q][I_{fDQ}]\\
+损耗：&amp;P=B\Omega^2=\frac32R_s(i_d^2+i_q^2+2i_0^2)+[R_{fDQ}]^T[i_f^2;~i_D^2;~i_Q^2]\\电磁：&amp;P=-\Omega
+T_e=\frac32\omega(\varPsi_di_q-\varPsi_qi_d)
+\end{gather*}
+\]</span><br />
+因此得到一个与一般化电机非常相似的电磁转矩表达式（下面这个 p
+代表极对数）：<br />
+<span class="math display">\[
+T_e=\frac32p(\varPsi_di_q-\varPsi_qi_d)
+\]</span></p>
+<h2 id="同步电动机对称稳态运行分析">同步电动机对称稳态运行分析</h2>
+<ul>
+<li>以电动机原则作为正方向</li>
+<li>稳态时电流为常数</li>
+<li>适用于隐极电机（令 <span class="math inline">\(X_d=X_q\)</span>
+即可），但不适用于感应电机（转速不能达到同步速）</li>
+</ul>
+<h3 id="发电机空载开路">发电机空载（开路）</h3>
+<ol type="1">
+<li>首先0绕组分量均为0（三相对称），因此方程式中均不用考虑了</li>
+<li>阻尼绕组短路，即<span class="math inline">\(U_D=U_Q=0\)</span></li>
+<li>空载时电枢绕组开路，即<span
+class="math inline">\(i_a=i_b=i_c=0\)</span>，因此有<span
+class="math inline">\(i_d=i_q=i_0=0\)</span></li>
+</ol>
+<p>此时有：<br />
+<span class="math display">\[
+\begin{gather*}
+\begin{cases}u_d=\text p\varPsi_d-\omega\varPsi_q+R_di_d\\u_q=\text
+p\varPsi_q+\omega\varPsi_d+R_qi_q\\ u_f=\text p\varPsi_f+R_fi_f
+\end{cases}\\
+\begin{bmatrix}
+\varPsi_d\\\varPsi_q\\\varPsi_f  \end{bmatrix}=\begin{bmatrix}
+L_d&amp;0&amp;M_{afd1}\\0&amp;L_q&amp;0\\\frac32M_{afd1}&amp;0&amp;L_{ff}
+\end{bmatrix} \begin{bmatrix} i_d\\i_q\\i_f  \end{bmatrix}
+\end{gather*}
+\]</span></p>
+<ol type="1">
+<li><span class="math inline">\(u_f=R_fi_f\)</span></li>
+<li><span class="math inline">\(u_d=\text
+p~const+\omega\cdot0+0=0\)</span></li>
+<li><span class="math inline">\(u_q=\omega
+M_{af1}i_f=e=E_m\)</span>，这个就是<strong>旋转电势</strong>！</li>
+<li>可以看到旋转电势没有直轴分量（<span
+class="math inline">\(u_d=0\)</span>），因此旋转电势落在交轴上，励磁磁链（<span
+class="math inline">\(\varPsi_f\)</span>）落在直轴上</li>
+</ol>
+<h3 id="负载运行">负载运行</h3>
+<p>参考一下电机学里的这张图，但是交轴直轴不对，详见下方注释。</p>
+<p><img src="\image\电机建模15.png" /></p>
+<p>因此有：<br />
+<span class="math display">\[
+\dot U=\dot E+\dot IR_s+jX_d\dot I_d+jX_q\dot I_q
+\]</span><br />
+此时，由于电流为常数，因此仍然有<span class="math inline">\(\text
+p\varPsi=0\)</span>，故：<br />
+<span class="math display">\[
+\begin{gather*} u_d=-\omega L_qi_q+R_di_d=-U_m\sin\delta\\u_q=\omega
+L_di_d+E_m+R_qi_q=U_m\cos\delta
+\\i_d=-\frac{E_m-U_m\cos\delta}{X_d}\\i_q=\frac{U_m\sin\delta}{X_q}
+\end{gather*}
+\]</span><br />
+&gt; 其中<span class="math inline">\(\delta\)</span>
+为功角，即上图中的<span class="math inline">\(\varPsi
+-\varphi\)</span><br />
+&gt;<br />
+&gt; 电机学里是发电机原则，而这里是电动机原则，因此 <span
+class="math inline">\(I\)</span> 相差一个负号（电压关系式）<br />
+&gt;<br />
+&gt; 发电机中 <span class="math inline">\(E\)</span> 超前 <span
+class="math inline">\(U\)</span>，而电动机相反，因此两者功角的定义也不同（也反过来了）</p>
+<p>参考同步电机有功功率调节那一章节：<br />
+<span class="math display">\[
+\begin{gather*}
+T_e=\frac{3p}{2\omega}(\frac{EU\sin\delta}{X_d}+\frac{U^2}2(\frac1{X_q}-\frac1{X_d})\sin2\delta
+)\\=\frac32p[(L_d-L_q)i_di_q+(M_{af1}i_f)i_q]\\
+P_e=\frac{\omega}pT_e=\frac32(\frac{EU\sin\delta}{X_d}+\frac{U^2}2(\frac1{X_q}-\frac1{X_d})\sin2\delta
+)
+\end{gather*}
+\]</span></p>
+<blockquote>
+<ol type="1">
+<li>调节有功功率就是调节功角 <span
+class="math inline">\(\delta\)</span></li>
+<li>电动机 <span class="math inline">\(\delta&gt;0\)</span>，因此 <span
+class="math inline">\(i_q&gt;0\)</span>，不管 <span
+class="math inline">\(i_d\)</span> 正负，定子电流 <span
+class="math inline">\(i_q\)</span>
+一定超前于转子电流（转子=励磁落在直轴上）</li>
+</ol>
+</blockquote>
+<h2 id="电机坐标变换与电源">电机坐标变换与电源</h2>
+<ul>
+<li>在实际运行中，我们不知道电机的三相电压 <span
+class="math inline">\(u_a,u_b,u_c\)</span>，而我们的模型一直用的是这个。</li>
+</ul>
+<h3 id="三相四线制电源">三相四线制电源</h3>
+<p><img src="\电机建模16.png" /></p>
+<p>​ 在三相四线制电源中，不再满足 <span
+class="math inline">\(i_a+i_b+i_c=0\)</span> 这一条件。设电源电压为
+<span class="math inline">\(u_s\)</span>，取空间中任一点 r
+作为参考点，对电压进行坐标变换以求得到（二维平面-0）坐标系下的电压，则有：<br />
+<span class="math display">\[
+\begin{gather*}
+u_{ar}=u_a+u_{nr}=u_{as}+u_{mr}\\\Rightarrow
+[C]\begin{bmatrix}u_a\\u_b\\u_c\end{bmatrix}=[C]\begin{bmatrix}u_{as}\\u_{bs}\\u_{cs}\end{bmatrix}+[C]\begin{bmatrix}u_{mn}\\u_{mn}\\u_{mn}\end{bmatrix}\\=
+[C]\begin{bmatrix}u_{as}\\u_{bs}\\u_{cs}\end{bmatrix}+\begin{bmatrix}0\\0\\u_{mn}\end{bmatrix}
+\end{gather*}
+\]</span></p>
+<h3 id="三相三线制电源">三相三线制电源</h3>
+<p>​
+在三相三线制电源中，虽然满足电流和为零的条件，但是一般情况下我们只知道线电压
+<span class="math inline">\(u_{ab}\)</span>
+等，这里不加推导地写出：<br />
+<span class="math display">\[
+[C]\begin{bmatrix}u_{a}\\u_{b}\\u_{c}\end{bmatrix}=[C]\begin{bmatrix}u_{ar}\\u_{br}\\u_{cr}\end{bmatrix}-\begin{bmatrix}0\\0\\u_{nr}\end{bmatrix}
+\]</span><br />
+如果将参考点 r 正好取在某相（如 c 相），则：<br />
+<span class="math display">\[
+[C]\begin{bmatrix}u_{a}\\u_{b}\\u_{c}\end{bmatrix}=[C]\begin{bmatrix}u_{ac}\\u_{bc}\\0\end{bmatrix}+\begin{bmatrix}0\\0\\u_{nr}\end{bmatrix}
+\]</span><br />
+这样就知道电压了。</p>
+<blockquote>
+<p>结论：！</p>
+<p>由于在（二维平面-0）坐标系中，零分量不产生作用，因此在计算中可以忽略</p>
+<p>上面两种情况推出的式子都告诉我们，<strong>即便我们不知道电源相电压，也可以通过对“电源电压”或“线电压”进行变换，得到的结果与原来的只有零分量不同。</strong>可零分量错了有什么关系呢？</p>
+</blockquote>
+<h1 id="附录-公式推导">附录-公式推导</h1>
+<h3 id="一般化电机旋转电势">一般化电机旋转电势</h3>
+<p><img src="\image\电机建模10.png" /></p>
+<p><strong><a href="#电磁方程式">Return</a></strong></p>
+<h3 id="三相交流电机电感矩阵">三相交流电机电感矩阵</h3>
+<p>（贴图绝对不是因为我懒得抄了，绝对不是….）</p>
+<p>上过课的人应该看到这两幅图就能想起来大概怎么个证明法</p>
+<p><img src="\image\电机建模02.png" /></p>
+<p><img src="\image\电机建模03.png" /></p>
+<p><strong><a href="#三相电感">Return</a></strong></p>
+<h3 id="三相交流电机电磁转矩">三相交流电机电磁转矩</h3>
+<p><strong>法1 虚功（虚位移）</strong>（下面<span
+class="math inline">\(\Omega\)</span>指机械位移）<br />
+<span class="math display">\[
+\begin{gather*}
+W=\frac 12\varPsi_ai_a\Rightarrow W=\frac12[I]^T[L][I] \\
+T_e=\frac{\partial W}{\partial\Omega}=p\frac{\partial
+W}{\partial\theta}=\frac p2[I]^T\frac{\partial [L]}{\partial\theta}[I]
+\end{gather*}
+\]</span><br />
+<strong>法2 能量守恒</strong>（下面<span
+class="math inline">\(\Omega\)</span>指机械角速度）</p>
+<p>电磁储能功率公式推导：<br />
+<span class="math display">\[
+\begin{gather*}
+P=\frac{dW}{dt}=\frac12\text p[I]^T[L][I]+\frac12[I]^T\text
+p[L][I]+\frac12[I]^T[L]\text p[I]\\=[I]^T[L]\text p[I]+\frac12[I]^T\text
+p[L][I]
+\end{gather*}
+\]</span><br />
+能量守恒：<br />
+<span class="math display">\[
+\begin{gather*}
+P_{abc}=[I]^T[U]=[I]^T\{[R][I]+\text p([L][I]) \}\\
+P_{m}=\Omega T_m=-\Omega T_L=-\Omega(T_e-B\Omega-J\text p\Omega)\\
+电磁、机械损耗~——~电磁、机械储能~——~电磁、机械储能\\\Rightarrow
+T_e=\frac p2[I]^T\frac{\partial [L]}{\partial\theta}[I]
+\end{gather*}
+\]</span><br />
+<strong><a href="#三相转矩">Return</a></strong></p>
+<h3 id="d-q-0坐标电压方程式推导">d-q-0坐标电压方程式推导</h3>
+<p><span class="math display">\[
+\begin{gather*}
+\begin{bmatrix}u_{dq0}\\u_{fDQ}\end{bmatrix}=\begin{bmatrix}C&amp;0\\0&amp;E\end{bmatrix}\begin{bmatrix}u_{abc}\\u_{fDQ}\end{bmatrix}\\
+=\begin{bmatrix}C&amp;0\\0&amp;E\end{bmatrix}\left(\text
+p\begin{bmatrix}\varPsi_{abc}\\\varPsi_{fDQ}\end{bmatrix}+
+\begin{bmatrix}R_s&amp;0\\0&amp;R_{fDQ}\end{bmatrix}\begin{bmatrix}I_{abc}\\I_{fDQ}\end{bmatrix}\right)  
+\end{gather*}
+\]</span></p>
+<p><span class="math display">\[
+\begin{gather*}
+前者=\text
+p\left(\begin{bmatrix}C&amp;0\\0&amp;E\end{bmatrix}\begin{bmatrix}\varPsi_{abc}\\\varPsi_{fDQ}\end{bmatrix}
+\right)-\begin{bmatrix}\varPsi_{abc}\\\varPsi_{fDQ}\end{bmatrix}\text
+p\begin{bmatrix}C&amp;0\\0&amp;E\end{bmatrix}\\
+=\text
+p\begin{bmatrix}\varPsi_{dq0}\\\varPsi_{fDQ}\end{bmatrix}+\begin{bmatrix}-\omega\varPsi_{q}\\\omega\varPsi_{d}\\
+[0]_{4\times1}\end{bmatrix}
+\end{gather*}
+\]</span></p>
+<p><span class="math display">\[
+\begin{gather*}
+后者=\begin{bmatrix}R_s&amp;0\\0&amp;R_{fDQ}\end{bmatrix}\begin{bmatrix}CI_{abc}&amp;0\\0&amp;I_{fDQ}\end{bmatrix}\\=\begin{bmatrix}R_s&amp;0\\0&amp;R_{fDQ}\end{bmatrix}\begin{bmatrix}I_{dq0}&amp;0\\0&amp;I_{fDQ}\end{bmatrix}
+\end{gather*}
+\]</span></p>
+<p><a href="#电磁平衡式">Return</a></p>
+<h3 id="d-q-0坐标磁链表达式推导">d-q-0坐标磁链表达式推导</h3>
+<p><strong>法1 嗯算</strong><br />
+<span class="math display">\[
+\begin{gather*}
+\begin{bmatrix}\varPsi_{dq0}\\\varPsi_{fDQ}\end{bmatrix}=\begin{bmatrix}C&amp;0\\0&amp;E\end{bmatrix}\begin{bmatrix}\varPsi_{abc}\\\varPsi_{fDQ}\end{bmatrix}=\begin{bmatrix}C&amp;0\\0&amp;E\end{bmatrix}\begin{bmatrix}L_{ss}&amp;L_{sr}
+\\L_{rs}
+&amp;L_{rr}\end{bmatrix}\begin{bmatrix}i_{abc}\\i_{fDQ}\end{bmatrix}\\=\begin{bmatrix}CL_{ss}C^{-1}
+&amp;CL_{sr} \\ L_{rs}C^{-1}
+&amp;L_{rr}\end{bmatrix}\begin{bmatrix}i_{dq0}\\i_{fDQ}\end{bmatrix}
+\end{gather*}
+\]</span><br />
+​然后只要硬算前面那个恶心人的矩阵就行了</p>
+<p><strong>法2 物理意义的推导</strong></p>
+<p>我放图绝对不是因为我不想抄了，你听我狡辩，绝对不是…</p>
+<p><img src="\image\电机建模14.jpg" /></p>
+<p><a href="#电磁平衡式">Return</a></p>
+<h3 id="d-q-0功率表达式推导">d-q-0功率表达式推导</h3>
+<h4 id="电损耗">电损耗</h4>
+<ul>
+<li>机械损耗是 <span
+class="math inline">\(B\Omega^2\)</span>，下面着重分析电损耗</li>
+<li>需要证明上文的表达式中 <span
+class="math inline">\(\frac32R_s(i_d^2+i_q^2+2i_0^2)=R_s(i_a^2+i_b^2+i_c^2)\)</span></li>
+</ul>
+<p><span class="math display">\[
+\begin{gather*}
+\frac32R_s(i_d^2+i_q^2+2i_0^2)=\frac32R_s\begin{pmatrix}i_d\\i_q\\i_0\end{pmatrix}^T\begin{pmatrix}i_d\\i_q\\i_0\end{pmatrix}+\frac32R_si_0^2
+\\
+=\frac32R_s\left[[C]\begin{pmatrix}i_a\\i_b\\i_c\end{pmatrix}  \right]^T[C]\begin{pmatrix}i_a\\i_b\\i_c\end{pmatrix}+\frac32R_si_0^2\\=\frac{R_s}6\begin{pmatrix}i_a\\i_b\\i_c\end{pmatrix}^T\begin{pmatrix}5&amp;-1&amp;-1\\-1&amp;5&amp;-1\\-1&amp;-1&amp;5
+\end{pmatrix}\begin{pmatrix}i_a\\i_b\\i_c\end{pmatrix}+\frac32R_s(\frac{i_a+i_b+i_c}3)^2\\=R_s(i_a^2+i_b^2+i_c^2)
+\end{gather*}
+\]</span></p>
+<h4 id="储能">储能</h4>
+<ul>
+<li>机械储能是 <span class="math inline">\(\Omega J\text
+p\Omega\)</span>，下面着重分析电储能</li>
+<li>需要证明上文的表达式中 <span class="math inline">\(\frac32[\text
+p\varPsi_d,\text p\varPsi_q,2\text p\varPsi_0][I_{dq0}]+[\text
+p\varPsi_f,\text p\varPsi_D,\text p\varPsi_Q][I_{fDQ}]=\text
+p(\frac12[I]^T[\varPsi])\)</span></li>
+</ul>
+<p><span class="math display">\[
+\begin{gather*}
+P=\text p(\frac12[I]^T[\varPsi])=\text p(\frac12[I]^T
+\begin{bmatrix}C^{-1}&amp;0\\0&amp;E
+\end{bmatrix}\begin{bmatrix}C&amp;0\\0&amp;E \end{bmatrix}[\varPsi])\\
+=\frac12\text p\left(\{\begin{bmatrix}C^{-1T}&amp;0\\0&amp;E
+\end{bmatrix}[I]\}^T[\varPsi&#39;] \right)\\
+=\frac12\text
+p([\frac32i_d,~\frac32i_q,~3i_0,~[I_r]][\varPsi&#39;])=\frac12\text
+p([I]&#39;^T[\frac32\varPsi_d,~\frac32\varPsi_q,~3\varPsi_0,~[\varPsi_r]]^T)
+\end{gather*}
+\]</span></p>
+<p><a href="#功率变换">Return</a></p>
 ]]></content>
       <categories>
         <category>课程</category>
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>大二</tag>
+        <tag>大三</tag>
         <tag>电气</tag>
-        <tag>课程资料</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>电机工程创新实践（短学期）</title>
-    <url>/2024/12/13/%E7%94%B5%E6%9C%BA%E5%B7%A5%E7%A8%8B%E5%88%9B%E6%96%B0%E5%AE%9E%E8%B7%B5/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="电机工程创新实践">电机工程创新实践</h1>
-<ul>
-<li>这门课本来应该是在寒假一起修的短学期课程，但是hxy老师把它放到冬学期上了。一周一节，一共四节课左右，剩下的时间自己做大作业。但奈何本人最近一直在实习….</li>
-<li>这门课的要求是设计一个小型电机，体验一下设计流程。不过<strong>真正在工程实践中电机的设计流程并不如此</strong>（以至于黄老师自己都不会用ANSYS），本人也没有进行什么优化，反正看上去还行。本篇文章走一下hxy老师的设计流程。</li>
-<li>课不用怎么听，基本靠自学</li>
-<li><strong>本人不会设计电机</strong></li>
-</ul>
-<h2 id="基本电机参数设计">1. 基本电机参数设计</h2>
-<p>​
-这块跟大三下学期学的电机设计区别不太大，不过不需要搞得那么复杂，只需要设计几个基本的参数就行了。黄老师的PPT里有流程示范，基本跟着她那个走就行（顺带一提，黄老师基本不看钉钉但是微信秒回，所以催她发文件最好微信）</p>
-<h3 id="主要尺寸关系式">1.1 主要尺寸关系式</h3>
-<p>先根据设计要求，找到电机的转矩、转速、电压要求。</p>
-<p>根据电机基本尺寸关系式（分子6.1那个，详见电机设计）计算电枢外径<span
-class="math inline">\(D_0\)</span>。其中：</p>
-<ul>
-<li>A可以取值在15~50 × 10<sup>3</sup> A/m</li>
-<li><span class="math inline">\(B_{\delta}\)</span>可以取值在0.6~0.8
-T</li>
-<li><span class="math inline">\(\alpha_p\)</span>可以取值在0.7左右</li>
-<li><span class="math inline">\(K_{nm}\)</span>取值在1.1，<span
-class="math inline">\(K_{dp}\)</span>取值在0.92或0.96</li>
-<li>尺寸比<span
-class="math inline">\(\lambda\)</span>可以取得很小（因为我设计的是机器人关节电机，所以取的0.1左右，D比l大很多）</li>
-</ul>
-<p>​
-然后确定内转子还是外转子。黄老师设计的是外转子，我是内转子。内转子可以参考电机设计这本书的例程，定子内径（即约为转子外径）大概就是外径的0.6~0.8，反正这个要求不是特别大，最终大概设计出来定子轭部跟定子齿的宽度差不多就行（轭部可以细一点）</p>
-<p>​
-这里我的参数大概是80,50（仅供参考）。转子内径要求不大，给转子轭部稍微留点空间。一般设计个30以上吧，这个对电机性能影响很小，尽量让转子轭部薄一点。</p>
-<h3 id="槽极配合">1.2 槽极配合</h3>
-<p>​
-hxy老师的PPT上有两个表格，分别是不同槽极配合下的绕组系数和谐波与噪声（这两个表横纵坐标反了别看岔），谐波选数字稍微大一点（意思就是谐波小），绕组系数大一些。一般都是分数槽集中绕组，一些比较经典的设计比如12s10p，12s9p等等，对这些槽极配合等比例放大（比如我用的24s20p）也是个不错的选择。我看有人说24s20p的波形没有特别好，他用的好像有三十多极，具体我有点记不清了。反正这么大的电机，极数二三十差不多了，电机越大可以把极对数增大。</p>
-<h3 id="材料选型">1.3 材料选型</h3>
-<p>​ 我是不会一点，老师选啥我选啥，抄PPT的</p>
-<h3 id="槽型设计">1.4 槽型设计</h3>
-<p>​
-我是不会一点，《电机设计》选啥我选啥。把他在第十章设计的槽等比缩放一下（按照电枢直径）就是我的槽了！（免责声明：吴立建上课也是这么说的）</p>
-<p>好的，现在你就非常粗略的设计完电机了（没事，没设计的部分ANSYS会帮你设计的）</p>
-<h2 id="rmxprt-建模">2. RMxprt 建模</h2>
-<p>给一个参考链接，可以跟着他做一下建模，数据用自己的就好：https://www.bilibili.com/video/BV1cN411r7Wu</p>
-<p><img src="\image\hxy1.png" /></p>
-<ul>
-<li><p>推荐用参数化建模，如左下角红线所示，这样之后做参数扫描比较方便。</p></li>
-<li><p>如果一些必填的参数你不知道怎么取，可以参考黄老师PPT中的取法（但也不一定对），这里给点参考：永磁体厚度可以在2mm左右，气隙可以在1mm左右（黄老师取的2mm太大了）</p></li>
-<li><p>windings的参数设计慎填，因为你可能会设计的一坨屎（没错我一开始就是这样），把必要的几个填一下，比如并联支路数是1还是2，剩下的丢给他自己设计吧，比如匝数、线径啥的。不合适后面再改。</p></li>
-<li><p><strong>黄老师会发一个电机设计报告的word模板，如果第三四节课后还没发，记得找她要。</strong>对着那个报告做会轻松很多。做完上面这几步，你已经可以填写<strong>表1.1和表1.2</strong>了。</p></li>
-</ul>
-<h2 id="maxwell-建模与仿真">3. Maxwell 建模与仿真</h2>
-<p>​
-使用setup创建Maxwell2D模型，绝大部分仿真都需要在Maxwell里面跑，<strong>原因是RMxprt里面的仿真只能是
-<code>Constant Power</code>，但是我们需要的是用电流源来进行仿真</strong>。</p>
-<p>不要立刻进行仿真。</p>
-<h3 id="磁场磁密云图磁力线分布与气隙磁密">3.1
-磁场：磁密云图、磁力线分布与气隙磁密</h3>
-<p>​ ctrl+A 全选，右键选择<code>plot mesh</code>进行剖分，在左侧的Field
-Overlays里面可以看到剖分图。如果剖分没有出来的话，双击一下电机模型的左下角，有一个Time=0的东西，双击完成就能看到了。然后分别进行A和B的调用。</p>
-<p><img src="\image\hxy4.png" /></p>
-<p><img src="\image\hxy9.png" /></p>
-<p>如下图所示，画一条气隙线，原点在电机圆心，半径刚好穿过气隙。画完后只用保留线，把<code>coverlines</code>删了</p>
-<p><img src="\image\hxy3.png" /></p>
-<p>​ 如下图所示，添加气隙磁密。气隙磁密一共两个，径向<span
-class="math inline">\(B_r\)</span>和切向<span
-class="math inline">\(B_t\)</span>，所以一共添加两次，就是在第二步操作中分别选择切向Target和径向Normal，然后分别命名Bt和Br就行。步骤用蓝色标出。</p>
-<p><img src="\image\hxy5.png" /></p>
-<p>​
-接着进行仿真设置，右键setup1选择properties进行设置，为了少跑几个周期，可以减小一点总时间。时间设多少随你，大概三个周期就够。上面那个100可以减小点，20,50啥的都行，具体含义自己看英文。</p>
-<p><img src="\image\hxy2.png" /></p>
-<p>​
-在仿真之前，非常重要的一部是如下图所示进行设置，从电压源改成电流源。<strong>具体数值要根据设计的电机参数进行更改</strong>。BC相减/加三分之二π就行。一开始I0设置成0模拟空载，n设置成额定转速。</p>
-<p><img src="\image\hxy8.png" /></p>
-<p>开始仿真！</p>
-<p>​
-为了查看气隙磁密，分别进行下面两步操作。其中第二张图的7200是取点的数量，越多越慢，我感觉1440之后区别不大了，尽量设成个360的倍数就行。查看气隙磁密并填入<strong>图4.3</strong>中。</p>
-<p><img src="\image\hxy6.png" /></p>
-<p><img src="\image\hxy7.png" /></p>
-<p>在左侧的Field
-Overlays里面可以看到磁密云图、磁力线分布，填入<strong>图4.1，4.2</strong>中。右键Result选择FFT，如下</p>
-<p><img src="\image\hxy10.png" /></p>
-<p>最后怎么处理的数据自己去查。</p>
-<h3 id="电场感应电势与电流">3.2 电场：感应电势与电流</h3>
-<p>​
-齿槽转矩就是输入电流为0时的点击转矩，可以直接看自带的Torque曲线就行了</p>
-<p>​
-感应电压曲线也是。由于本实验要求输入电压最低30V，因此感应电动势<strong>不能超过这个数值</strong>，否则需要额外的控制。如果超过了，则需要减少线圈匝数cond，其可以在左下角的variable里面找到。此外，如果这个比较<strong>不正弦</strong>的话可能需要调整一下其它参数。如果需要减少匝数的话，那就需要增加绕线截面积了（为了确保电流一样）。为了应付教学，可以直接把原来的线径按比例放大（平方关系），但实际中涉及到选型是不能这么做的。</p>
-<p>​
-磁链、电感和电阻也是一样的，自己去调一下Result里面的数据（低情商：我也是猜的）</p>
-<p>​ 至于怎么调曲线：Result - Create Transient Report - Create
-Rectangular Report</p>
-<h3 id="负载特性">3.3 负载特性</h3>
-<p>首先先进行参数扫描，如下</p>
-<p><img src="\image\hxy11.png" /></p>
-<p><img src="\image\hxy12.png" /></p>
-<p>​
-对新得到的ParameterSetup1进行分析Analyze，由于扫的点数很多，所以可能耗时很久。然后如下图所示进行转矩-电流曲线的扫描。需要注意的是，如果之前更改过cond（匝数），那么他在仿真的时候会把两种cond都仿真一次，所以可以在families里面把cond换成你需要的那个，而不是all</p>
-<p><img src="\image\hxy13.png" /></p>
-<p>​
-其他的转矩波形、感应电动势直接调出来就行。需要注意的是要手动把电流设置成额定电流（额定电流从上面的转矩-电流曲线中读出），具体操作方法为：</p>
-<p>​ 右键Result中相应的图表 - Modify - Families - 电流改成额定电流</p>
-<p>​
-接着，用转矩-电流曲线同样的方法，找到交直轴电感Ld，Lq（记得用Average值）与电流的关系</p>
-<p>​
-左下角Variable把输入电流改成额定电流，跑一遍Setup1，再去看电机磁密云图</p>
-<p>​
-正常情况下，Maxwell仿真是不包含涡流损耗和永磁损耗的，要主动选择。步骤如下，选择Core
-loss和Eddy Current loss之后把所有的都勾上。</p>
-<p><img src="\image\hxy14.png" /></p>
-<p>​
-不同转速、电流下的数据点下，电机的效率MAP图跟上面的扫描也是类似的，设置类似如下（记得把仿真的间隔调一下，不然得跑很久很久）</p>
-<p><img src="\image\hxy15.png" /></p>
-<h3 id="过载">3.4 过载</h3>
-<p>把电机电密调到50，你看下原来的电密，应该会是50的三分之一到二分之一，把电流等比放大就行。然后跑一次。</p>
-<p>电流就是正常的电流</p>
-<p>磁密云图也不用管温度要求了，就是之前的磁密云图</p>
-<p>这个是什么意思呢，就是如果退磁严重的话，需要你把永磁体厚度增厚，也就是说前面重来一遍喵。</p>
-]]></content>
-      <categories>
-        <category>课程</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
-        <tag>电气</tag>
-        <tag>大四</tag>
       </tags>
   </entry>
   <entry>
@@ -7945,8 +8947,41 @@ a，比如转矩控制转速，电流控制转矩，电流控制磁链，电压�
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
+        <tag>电气</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>电气学院大二（春夏）课程笔记汇总</title>
+    <url>/2023/09/26/%E7%94%B5%E6%B0%94%E5%AD%A6%E9%99%A2%E5%A4%A7%E4%BA%8C%E4%B8%8B%E8%AF%BE%E7%A8%8B%E6%B1%87%E6%80%BB/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2
+id="电气学院大二春夏课程笔记汇总">电气学院大二（春夏）课程笔记汇总</h2>
+<p>欢迎关注我的公众号“熬夜波比的电院日常”。</p>
+<hr />
+<h3 id="信号">信号</h3>
+<p><a href="\myfile\信号.pdf" target="_blank">信号笔记（PDF）</a></p>
+<p><a href="\myfile\张健复习PPT.pdf" target="_blank">张健复习PPT</a></p>
+<p><a href="\myfile\公式附录（考试）.pdf" target="_blank">公式附录（考试）</a></p>
+<h3 id="模电">模电</h3>
+<p>大家可以去找一下朵朵菜菜的笔记，这里文件太大传不上来。</p>
+<p><a href="\myfile\电路与电子技术(2)笔记.pdf" target="_blank">电路与电子技术(2)笔记</a></p>
+<p><a href="\myfile\《模拟电子技术基础》童诗白  第四版.pdf" target="_blank">电子书</a></p>
+<p><a href="\myfile\《电路与电子技术II》模电 期末复习.pdf" target="_blank">蔡忠法复习PPT</a></p>
+<h3 id="工磁">工磁</h3>
+<p><a href="\myfile\工程电磁场与波.pdf" target="_blank">工程电磁场与波</a></p>
+<h3 id="人工智能与物联网">人工智能与物联网</h3>
+<p><a href="\myfile\人工智能与物联网CheatSheet.pdf" target="_blank">人工智能与物联网CheatSheet</a></p>
+<h3 id="电工电子实习">电工电子实习</h3>
+<a class="btn-beautify center" href="https://mp.weixin.qq.com/s/Ao07Oi7A92OJ8S7i1vfT6Q" title="Click"><i class="far fa-hand-point-right"></i><span>Click</span></a>
+]]></content>
+      <categories>
+        <category>课程</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>大二</tag>
+        <tag>电气</tag>
+        <tag>课程资料</tag>
       </tags>
   </entry>
   <entry>
@@ -7962,802 +8997,8 @@ a，比如转矩控制转速，电流控制转矩，电流控制磁链，电压�
       </categories>
       <tags>
         <tag>笔记</tag>
-        <tag>电气</tag>
         <tag>大三</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>电机系统建模与分析</title>
-    <url>/2024/04/02/%E7%94%B5%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%BB%BA%E6%A8%A1%E4%B8%8E%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="chap1.-摘要">Chap1. 摘要</h1>
-<blockquote>
-<p>觉得卡的或者遇到公式渲染不出来的情况请开翻墙，ZJU的校网就是依托。</p>
-<p>若无特殊说明，本文中使用斜体的<span
-class="math inline">\(p\)</span>表示电机极对数，用正体的<span
-class="math inline">\(\text p\)</span>表示海氏算子<span
-class="math inline">\(\frac{\text d}{\text dt}\)</span></p>
-<p>期中可能会放PDF版本（<a href="\myfile\电机系统建模与分析.pdf" target="_blank">Click Here</a>）</p>
-</blockquote>
-<p><img src="\image\电机建模17.jpg" /></p>
-<h2 id="补绕组系数">补：绕组系数</h2>
-<p>现在应该是才算是完全搞懂了</p>
-<ul>
-<li>短距系数表征的是“<strong>一个线圈的上下层边</strong>”的电势矢量的合成关系</li>
-<li>分布系数表征的是“<strong>不同线圈之间（只看上层边）</strong>”的电势矢量的合成关系</li>
-</ul>
-<p>求解办法：</p>
-<ol type="1">
-<li>画绕组分布展开图，选其中一相画</li>
-<li>看看一个线圈上下层边跨过了多少电角度（记为<span
-class="math inline">\(\theta_y\)</span>），则短距系数为<span
-class="math inline">\(\sin(\frac{\theta_y}{\pi}\cdot\frac{\pi}2)\)</span></li>
-<li>看看<strong>所有线圈的上层边</strong>，把他们用矢量图画出来。同极下的直接相加，不同极下的添负号。</li>
-</ol>
-<h1 id="chap2.-微分方程数值解法">Chap2. 微分方程数值解法</h1>
-<h2 id="一阶微分方程">一阶微分方程</h2>
-<p>设一阶微分方程的一般形式为：<br />
-<span class="math display">\[
-\frac{\text dx}{\text dt}=\text px=f(t,x)
-\]</span><br />
-倘若已知初始时刻的变量值（如：<span
-class="math inline">\(x(0)\)</span>），想要得到下一时刻的值，基本思路是<span
-class="math inline">\(x_{i+1}=x_i+\text px\cdot \Delta t\)</span></p>
-<p>设等步长，相邻两时刻间的时间差（步长）为<span
-class="math inline">\(h\)</span>，</p>
-<p><strong>四阶龙格-库塔法：</strong><br />
-<span class="math display">\[
-\begin{gather*}
-K_1=f(t_i,x_i)&amp;\Rightarrow&amp; x_{i+\frac12}^{(1)}=x_i+K_1\frac
-h2\\
-K_2=f(t_{i+\frac12},x_{i+\frac12}^{(1)})&amp;\Rightarrow&amp;
-x_{i+\frac12}^{(2)}=x_i+K_2\frac h2\\
-K_3=f(t_{i+\frac12},x_{i+\frac12}^{(2)})&amp;\Rightarrow
-&amp;x_{i+1}^{(1)}=x_i+K_3h\\
-K_4=f(t_{i+1},x_{i+1}^{(1)})&amp;\Rightarrow&amp;K=\frac{K_1+2K_2+2K_3+K_4}6\\
-&amp;x_{i+1}=x_i+Kh
-\end{gather*}
-\]</span></p>
-<h2 id="一阶微分方程组">一阶微分方程组</h2>
-<p>一般采用同步梯度的方式求解多变量方程组，这里以两变量为例：<br />
-$$<br />
-<span class="math display">\[\begin{gather*}
-K_{1x}=f_x(t_i,x_i,y_i)&amp;K_{1y}=f_y(t_i,x_i,y_i)\\\Rightarrow
-x_{i+\frac12}^{(1)}=x_i+K_{1x}\frac
-h2&amp;y_{i+\frac12}^{(1)}=y_i+K_{1y}\frac h2\\
-K_{2x}=f_x(t_{i+\frac12},x_{i+\frac12}^{(1)},y_{i+\frac12}^{(1)})&amp;K_{2y}=f_y(t_{i+\frac12},x_{i+\frac12}^{(1)},y_{i+\frac12}^{(1)})\\\Rightarrow
-x_{i+\frac12}^{(2)}=x_i+K_{2x}\frac
-h2&amp;y_{i+\frac12}^{(2)}=y_i+K_{2y}\frac h2
-
-\end{gather*}\]</span><br />
-$$<br />
-后面不抄了，K3K4一样的，反正意思就是同步更新。</p>
-<h1 id="chap3.-一般化电机模型">Chap3. 一般化电机模型</h1>
-<h2 id="基本概念">基本概念</h2>
-<p>一般化电机的基本假设：</p>
-<ol type="1">
-<li>一对级电机（<span
-class="math inline">\(p=1\)</span>），极对数是可以等效的</li>
-<li>绕组是可以等效的，如三相变为两相</li>
-<li>伪静止线圈：构成线圈的导体是运动的（以<span
-class="math inline">\(\omega\)</span>旋转），但是d、q线圈是由电刷所规定的，因此轴线静止。
-<ol type="1">
-<li>线圈中的电流在空间产生轴线静止的磁场</li>
-<li>导体实际上在旋转，因此还是会有旋转电势</li>
-</ol></li>
-<li>磁路不饱和（可用叠加原理）</li>
-<li>不计剩磁、涡流、磁滞损耗</li>
-<li>气隙磁密按正弦规律分布</li>
-<li>只关心导体分布在哪些槽内，不关心具体的连接方式和整、短距等</li>
-</ol>
-<h2 id="基本方程式">基本方程式</h2>
-<h3 id="正方向的规定">正方向的规定</h3>
-<table>
-<colgroup>
-<col style="width: 6%" />
-<col style="width: 38%" />
-<col style="width: 16%" />
-<col style="width: 38%" />
-</colgroup>
-<thead>
-<tr>
-<th></th>
-<th>原则</th>
-<th>模型</th>
-<th>方程式</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>电动机</strong></td>
-<td>1. 正电流产生正磁链<br />2.
-从外向线圈看，电压与电流正方向相同<br />3. 线圈的输入功率为正值</td>
-<td><img src="\image\电机建模04.png" /></td>
-<td><span
-class="math inline">\(\begin{gather*}\varPsi=Li\\U=Ri+e\\e=\text
-p\varPsi\end{gather*}\)</span></td>
-</tr>
-<tr>
-<td><strong>发电机</strong></td>
-<td>1. 正电流产生负磁链<br />2.
-从线圈向外看，电压与电流正方向相同<br />3. 线圈的输出功率为正值</td>
-<td><img src="\image\电机建模05.png" /></td>
-<td><span
-class="math inline">\(\begin{gather*}\varPsi=-Li\\U=e-Ri\\e=\text
-p\varPsi\end{gather*}\)</span></td>
-</tr>
-</tbody>
-</table>
-<table style="width:100%;">
-<colgroup>
-<col style="width: 8%" />
-<col style="width: 52%" />
-<col style="width: 24%" />
-<col style="width: 14%" />
-</colgroup>
-<thead>
-<tr>
-<th></th>
-<th>原则</th>
-<th>方程式</th>
-<th>功率</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>电动机</strong></td>
-<td>1.
-电磁转矩正方向就是旋转方向<br />2.负载、阻尼、惯性转矩正方向与之相反</td>
-<td><span class="math inline">\(T_e=T_L+T_D+J\text p\Omega\)</span></td>
-<td><span class="math inline">\(P_m=-T_L\Omega\)</span></td>
-</tr>
-<tr>
-<td><strong>发电机</strong></td>
-<td>1.
-外施转矩正方向就是旋转方向<br />2.负载、阻尼、惯性转矩正方向与之相反</td>
-<td><span class="math inline">\(T_m=T_e+T_D+J\text p\Omega\)</span></td>
-<td><span class="math inline">\(P_m=T_m\Omega\)</span></td>
-</tr>
-</tbody>
-</table>
-<h3 id="电磁方程式">电磁方程式</h3>
-<blockquote>
-<p>电枢（转子）按发电机原则规定正方向</p>
-<p>励磁（定子）按电动机原则规定正方向</p>
-</blockquote>
-<p><img src="\image\电机建模06.png" /><br />
-<span class="math display">\[
-\begin{gather*}
-\begin{cases}
-u_d=\text p\varPsi_d-R_di_d-K_q\omega\phi_q(旋转电势e_{dr})\\
-u_q=\text p\varPsi_q-R_qi_q+K_d\omega\phi_d(旋转电势e_{qr})\\
-u_{fd}=\text p\varPsi_{fd}+R_{fd}i_{fd}\\
-u_{kq}=\text p\varPsi_{kq}+R_{kq}i_{kq}
-\end{cases}
-\end{gather*}
-\]</span><br />
-根据<a href="#一般化电机旋转电势">对应的推导</a>，旋转电势中：<br />
-<span class="math display">\[
-\begin{gather*}
-\begin{cases}
-e_{dr}=-K_q\omega\phi_q=-\omega\varPsi_q\\
-e_{qr}=K_d\omega\phi_d=\omega\varPsi_d
-\end{cases}
-\end{gather*}
-\]</span><br />
-并带入<span
-class="math inline">\(\varPsi=LI\)</span>，得到电磁方程式为：<br />
-<span class="math display">\[
-\begin{gather*}
-[U]=\text p[L][I]+[R][I]+\omega[G][I]\\
-\text p[I]=[L]^{-1}({[U]-[R][I]-\omega[G][I]})
-\end{gather*}
-\]</span><br />
-其中：<br />
-<span class="math display">\[
-\begin{gather*}
-[L]=\begin{bmatrix}
--L_d&amp;0&amp;M_{afd}&amp;0\\0&amp;-L_q&amp;0&amp;M_{akq}\\-M_{fad}&amp;0&amp;L_{fd}&amp;0\\0&amp;-M_{kaq}&amp;0&amp;L_q
-\end{bmatrix}&amp;,&amp;[G]=\begin{bmatrix}
-0&amp;L_q&amp;0&amp;-M_{akq}\\-L_d&amp;0&amp;M_{afd}&amp;0\\0&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;0
-\end{bmatrix}
-\end{gather*}
-\]</span></p>
-<h1 id="chap4.-直流电机仿真">Chap4. 直流电机仿真</h1>
-<p>考虑以下他励直流电机：</p>
-<p><img src="\image\电机建模11.jpg" /></p>
-<p>只有直轴励磁和交轴电枢电压，故其方程为：<br />
-<span class="math display">\[
-\begin{gather*}
-u_q=\text p\varPsi_q+\omega\varPsi_d-R_qi_q\\
-u_{fd}=\text p\varPsi_{fd}+R_{fd}i_{fd}
-\end{gather*}
-\]</span><br />
-其中：<br />
-<span class="math display">\[
-\varPsi_d=M_{afd}i_{fd}~;~\varPsi_q=-L_qi_q~;~\varPsi_{fd}=L_{fd}i_{fd}
-\]</span></p>
-<blockquote>
-<p>注：如果认为磁通全部通过磁链，并且定子和转子完全交链，那么有<span
-class="math inline">\(\phi_d=\phi_{fd}\)</span></p>
-<p>于是：<span
-class="math inline">\(\varPsi_d=z\phi_d=z\phi_{fd}=z\frac{L_{fd}i_{fd}}{N_{fd}}=M_{afd}i_{fd}\)</span></p>
-<p>即：<span
-class="math inline">\(M_{afd}=\frac{zL_{fd}}{N_{fd}}\)</span></p>
-</blockquote>
-<h2
-id="他励直流发电机的突然短路r_lrightarrow0">他励直流发电机的突然短路（<span
-class="math inline">\(R_L\rightarrow0\)</span>）</h2>
-<h3 id="稳态">稳态</h3>
-<p><span class="math display">\[
-\begin{gather*}
-u_{q0}=\omega_0M_{afd}i_{fd}-R_qi_q=R_{L}i_{q}\\u_{fd}=R_{fd}i_{fd}\\\Rightarrow
-i_{q0}=\frac{\omega_0M_{afd}u_{fd}}{(R_L+R_q)R_{fd}}
-\end{gather*}
-\]</span></p>
-<h3 id="条件1.-转速瞬时不变">条件1. 转速瞬时不变</h3>
-<p><span class="math display">\[
-\begin{gather*}
-0=-L_q\text pi_q+\omega_0M_{afd}i_{fd}-R_qi_q\\\Rightarrow
-i_q=\frac{\omega_0M_{afd}i_{fd}}{R_q}\frac1{\tau\text
-p+1}~;~(\tau=L_q/R_q)\\
-\Rightarrow i_q=i_{q0}\frac{R_L+R_q}{R_q}(1-e^{-\frac{t+t_0}{t_0}})
-\end{gather*}
-\]</span></p>
-<h3 id="条件2.-短路时停止提供动力">条件2. 短路时停止提供动力</h3>
-<p><span class="math display">\[
-\begin{gather*}
-\begin{cases}\text pi_q=\frac{\omega
-M_{afd}i_{fd}-R_qi_q}{L_q}\\T_m=0=M_{afd}i_{fd}i_q+B\omega+J\text
-p\omega  \end{cases}\Rightarrow \text
-p\omega=\frac{M_{afd}i_{fd}i_q+B\omega}{-J}
-\end{gather*}
-\]</span></p>
-<h3 id="条件3.-停止原动机时停止励磁">条件3. 停止原动机时停止励磁</h3>
-<p>​ 此时<span class="math inline">\(i_{fd}=0\)</span>,机电解耦！<br />
-<span class="math display">\[
-\text pi_q=-R_qi_q/L_q~,~\text p\omega=-B\omega/J
-\]</span></p>
-<h1 id="chap5.-三相交流电机在相坐标系下的模型">Chap5.
-三相交流电机在相坐标系下的模型</h1>
-<p>按照<strong>电动机</strong>原则选取正方向，即：</p>
-<ol type="1">
-<li>绕组轴线的方向是磁链正方向，<u>正电流产生正磁链</u></li>
-<li>从外向绕组看，<u>电压与电流正方向同向</u>，输入功率为正</li>
-<li><u>电磁转矩正方向就是转子旋转的方向</u>，负载<span
-class="math inline">\(T_L\)</span>、阻尼<span
-class="math inline">\(B\Omega\)</span>、惯性<span
-class="math inline">\(Jp\Omega\)</span>转矩相反</li>
-</ol>
-<p><img src="\image\电机建模01.png" /></p>
-<p>考虑D轴与Q轴正交解耦，则其<strong>电压平衡式</strong>为：<br />
-<span class="math display">\[
-\begin{gather*}\begin{cases}U_a=\text
-p\varPsi_a+R_ai_a&amp;（B、C相同理）\\U_f=\text
-p\varPsi_f+R_fi_f\\U_D=U_Q=0&amp;（阻尼短路绕组）  \end{cases}
-\end{gather*}
-\]</span><br />
-即：<br />
-<span class="math display">\[
-\begin{gather*}  \begin{bmatrix}
-u_a\\u_b\\u_c\\u_f\\0\\0
-\end{bmatrix}=\text p\begin{bmatrix}
-\varPsi_a\\\varPsi_b\\\varPsi_c\\\varPsi_f\\\varPsi_D\\\varPsi_Q
-\end{bmatrix}+\begin{bmatrix}
-R_s&amp;0&amp;0&amp;0&amp;0&amp;0\\0&amp;R_s&amp;0&amp;0&amp;0&amp;0\\0&amp;0&amp;R_s&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;R_f&amp;0&amp;0\\0&amp;0&amp;0&amp;0&amp;R_D&amp;0\\0&amp;0&amp;0&amp;0&amp;0&amp;R_Q
-\end{bmatrix}
-\begin{bmatrix}
-i_a\\i_b\\i_c\\i_f\\i_D\\i_Q
-\end{bmatrix}
-\end{gather*}
-\]</span><br />
-​其中磁链矩阵<span
-class="math inline">\([\varPsi]\)</span>可以表示为<span
-class="math inline">\([L][I]\)</span>，由于转子励磁旋转导致DQ轴与定子相轴耦合关系改变，电感矩阵<span
-class="math inline">\([L]\)</span>时变。电感矩阵中各分量结果如下：<a id="三相电感"><a
-href="#三相交流电机电感矩阵">三相交流电机电感矩阵推导</a></a></p>
-<ol type="1">
-<li><p><strong>定子绕组自感系数</strong><br />
-<span class="math display">\[
-\begin{gather*}
-L_{aa}=L_{aal}(漏感)+\frac{L_{aad}+L_{aaq}}2+\frac{L_{aad}-L_{aaq}}2cos2\theta\\
-L_{bb}=L_{aal}(漏感)+\frac{L_{aad}+L_{aaq}}2+\frac{L_{aad}-L_{aaq}}2cos2(\theta-\frac{2\pi}3)\\
-L_{cc}=L_{aal}(漏感)+\frac{L_{aad}+L_{aaq}}2+\frac{L_{aad}-L_{aaq}}2cos2(\theta+\frac{2\pi}3)
-\end{gather*}
-\]</span></p>
-<ol type="1">
-<li>对于隐极同步电机（<span
-class="math inline">\(L_{aad}=L_{aaq}\)</span>），自感系数是常数</li>
-</ol></li>
-<li><p><strong>定子绕组互感系数</strong><br />
-<span class="math display">\[
-\begin{gather*}
-M_{ab}=-(M_{abl}+\frac{L_{aad}+L_{aaq}}4)+\frac{L_{aad}-L_{aaq}}2cos2(\theta+\frac{2\pi}3)
-\end{gather*}
-\]</span></p>
-<ol type="1">
-<li>因为三相轴线相差120°，所以互感是负的，说明推导无误</li>
-<li>AB相的互感用C相的角度，其余同理</li>
-</ol></li>
-<li><p><strong>定子与转子之间的互感</strong><br />
-<span class="math display">\[
-\begin{gather*}M_{af}=M_{fa}=M_{af1}cos\theta\\M_{bf}=M_{fb}=M_{af1}cos(\theta-\frac{2\pi}3)\\M_{cf}=M_{fc}=M_{af1}cos(\theta+\frac{2\pi}3)
-\end{gather*}
-\]</span></p>
-<ol type="1">
-<li>定子绕组自感变化周期是<span
-class="math inline">\(\pi\)</span>，这个是<span
-class="math inline">\(2\pi\)</span>。下同。</li>
-</ol></li>
-<li><p><strong>定子绕组与转子D轴阻尼绕组间互感</strong><br />
-<span class="math display">\[
-M_{aD}=M_{Da}=M_{aD1}cos\theta
-\]</span></p></li>
-<li><p><strong>定子绕组与转子Q轴阻尼绕组间互感</strong><br />
-<span class="math display">\[
-M_{aQ}=M_{Qa}=-M_{aQ1}sin\theta
-\]</span></p></li>
-<li><p><strong>转子绕组自感、互感</strong><br />
-<span class="math display">\[
-\begin{gather*}
-L_f=L_{fl}+L_{f\delta}\\L_D=L_{Dl}+L_{D\delta}\\L_Q=L_{Ql}+L_{Q\delta}\\M_{fD}=M_{Df}=M_{fDl}+M_{fD\delta}
-\end{gather*}
-\]</span></p>
-<ol type="1">
-<li>由于DQ轴正交解耦，故不存在互感</li>
-</ol></li>
-</ol>
-<p>由此得到：<br />
-<span class="math display">\[
-\begin{gather*}
-\begin{bmatrix}
-\varPsi_a\\\varPsi_b\\\varPsi_c\\\varPsi_f\\\varPsi_D\\\varPsi_Q
-\end{bmatrix}=\begin{bmatrix}
-L_{aa}&amp;M_{ab}&amp;M_{ac}&amp;M_{af}&amp;M_{aD}&amp;M_{aQ}\\
-M_{ba}&amp;L_{bb}&amp;M_{bc}&amp;M_{bf}&amp;M_{bD}&amp;M_{bQ}\\
-M_{ca}&amp;M_{cb}&amp;L_{cc}&amp;M_{cf}&amp;M_{cD}&amp;M_{cQ}\\
-M_{fa}&amp;M_{fb}&amp;M_{fc}&amp;L_f&amp;M_{fD}&amp;0\\
-M_{Da}&amp;M_{Db}&amp;M_{Dc}&amp;M_{Df}&amp;L_D&amp;0\\
-M_{Qa}&amp;M_{Qb}&amp;M_{Qc}&amp;0&amp;0&amp;L_Q
-\end{bmatrix}\cdot \begin{bmatrix}
-i_a\\i_b\\i_c\\i_f\\i_D\\i_Q
-\end{bmatrix}
-\end{gather*}
-\]</span><br />
-对应的，其<a id="三相转矩"><strong>转矩平衡式</strong></a>为（<a
-href="#三相交流电机电磁转矩">电磁转矩的推导过程</a>）：<br />
-<span class="math display">\[
-T_e=\frac p2[I]^T\frac{\partial[L]}{\partial\theta}[I]
-\]</span></p>
-<h1 id="chap6.-坐标变换">Chap6. 坐标变换</h1>
-<p>一个电机的建模与求解过程应该是下面这样的：</p>
-<p><img src="\image\电机建模07.png" /></p>
-<p>上一章已经展示了，三相交流电机在相坐标（a-b-c
-Model）下的模型方程是多么复杂，所以要用坐标变换把他等效到更好计算的坐标系（如α-β-0和d-q-0坐标系）下。</p>
-<h2 id="坐标变化基本定义">坐标变化基本定义</h2>
-<ul>
-<li>下面直接不加推导的给出三相坐标系到（二维平面-0）坐标系的<strong>恒相幅值变换</strong>的表达式：
-<ul>
-<li>在三相坐标系中，三个坐标轴为a、b、c，记其方向向量为<span
-class="math inline">\(\vec a,\vec b,\vec
-c\)</span>，在三个方向向量上的某物理量的数值分别为<span
-class="math inline">\(x_a,x_b,x_c\)</span></li>
-<li>定义<strong>综合矢量：</strong><span class="math inline">\(\vec
-x=\frac23(x_a\vec a+x_b\vec b+x_c\vec c)\)</span></li>
-<li>定义<strong>零分量：</strong><span
-class="math inline">\(x_0=\frac{x_a+x_b+x_c}3\)</span></li>
-<li><img src="\image\电机建模08.png" /></li>
-</ul></li>
-<li>电机的模型是二维的，所以按理说两个基足以。但是坐标变换必须满足等变量个数，因此这里从“a、b、c”三个基（变量）换成了“综合矢量+零分量”三个变量（矢量=模长+方向，或正交分解，实际是两个变量）</li>
-<li>但是综合矢量以矢量的形式不好表达，所以可以写成下面这样的形式：
-<ul>
-<li>定义：<span
-class="math inline">\(x_a&#39;=x_a-x_0~,~x_b&#39;=x_b-x_0~,~x_c&#39;=x_c-x_0\)</span></li>
-<li><strong>综合矢量：</strong><span class="math inline">\(\vec
-x\rightarrow\dot x=\frac23(x_a+x_be^{j120}+x_ce^{j240})\triangleq
-xe^{j\alpha}\)</span>
-<ul>
-<li><strong>幅值：</strong><span
-class="math inline">\(|x|=\sqrt{\frac23(x_a&#39;^2+x_b&#39;^2+x_c&#39;^2)}\)</span></li>
-<li><strong>夹角（与a轴）：</strong><span
-class="math inline">\(\alpha=\text{cos}^{-1}(\frac{x_a&#39;}{x_a})\)</span></li>
-</ul></li>
-</ul></li>
-<li>当然，要把（二维平面-0）坐标系变回三相坐标系也是需要的，其表达式为：
-<ul>
-<li>a相：<span
-class="math inline">\(x_a&#39;=x\,\text{cos}\alpha~,~x_a=x_0+x_a&#39;\)</span></li>
-<li>a相：<span
-class="math inline">\(x_b&#39;=x\,\text{cos}(\alpha-\frac{2\pi}3)~,~x_b=x_0+x_b&#39;\)</span></li>
-<li>c相：<span
-class="math inline">\(x_c&#39;=x\,\text{cos}(\alpha+\frac{2\pi}3)~,~x_c=x_0+x_c&#39;\)</span></li>
-</ul></li>
-</ul>
-<h2 id="三相电机中坐标变换的重要结论">三相电机中坐标变换的重要结论</h2>
-<ul>
-<li>在三相对称系统中，三个物理量并非像定义中的<span
-class="math inline">\(x_a,x_b,x_c\)</span>一般毫无关联，而是由如下类似的表达式：
-<ul>
-<li>a相：<span
-class="math inline">\(i_a=I_m\,\text{cos}\theta\)</span></li>
-<li>b相：<span
-class="math inline">\(i_b=I_m\,\text{cos}(\theta-\frac{2\pi}3)\)</span></li>
-<li>c相：<span
-class="math inline">\(i_c=I_m\,\text{cos}(\theta+\frac{2\pi}3)\)</span></li>
-</ul></li>
-<li>把他变换到（二维平面-0）坐标系中是这样的：
-<ul>
-<li>零分量：<span
-class="math inline">\(i_0=\frac{i_a+i_b+i_c}3=0\)</span></li>
-<li>综合矢量幅值：<span
-class="math inline">\(|i|=\sqrt{\frac23(i_a&#39;^2+i_b&#39;^2+i_c&#39;^2)}=\sqrt{\frac23\cdot\frac32I_m^2}=I_m\)</span></li>
-<li>综合矢量夹角：<span
-class="math inline">\(\alpha=\text{cos}^{-1}\frac{i_a&#39;}{|i|}=\text{cos}^{-1}\frac{I_m\,\text{cos}\theta+0}{I_m}=\theta\)</span></li>
-<li>即：<span class="math inline">\(\vec i=\dot
-i=I_me^{j\theta}\)</span></li>
-</ul></li>
-<li>也就是说，对于三相对称系统（电压、电流、磁链等大部分都遵循这个规律），有以下重要结论：
-<ol type="1">
-<li><strong>综合矢量的幅值就是三相坐标系中的幅值</strong></li>
-<li><strong>综合矢量的夹角就是三相坐标系中该矢量与a相的夹角</strong></li>
-<li><strong>零分量为0</strong>（零分量的物理含义是被相互抵消，基本不产生实际作用的分量）</li>
-<li><strong>三相坐标系中的分量（如<span
-class="math inline">\(x_a\)</span>）就是综合矢量在该轴上的投影</strong>（实际上是<span
-class="math inline">\(x_a&#39;\)</span>，如果<span
-class="math inline">\(x_0=0\)</span>的话<span
-class="math inline">\(x_a=x_a&#39;\)</span>）</li>
-</ol></li>
-</ul>
-<h2 id="绕组等效与坐标变换">绕组等效与坐标变换</h2>
-<p><img src="\image\电机建模09.png" /></p>
-<ul>
-<li>最后需要把拿到的（二维平面-0）坐标系下的综合矢量+零分量的形式用特定的分解方式表示出来。<strong>新坐标系各轴上的分量大小就是综合矢量往该轴的投影</strong>。常用的坐标系有以下这几个（他们的零分量都是一样的）：
-<ul>
-<li><span class="math inline">\(\alpha-\beta-0\)</span>坐标系：<span
-class="math inline">\(\alpha\)</span>轴与a相重合，<span
-class="math inline">\(\beta\)</span>轴落后90°</li>
-<li><span
-class="math inline">\(d-q-0\)</span>坐标系：以角速度旋转，跟电枢是重合的。最常用的坐标系。</li>
-<li><span
-class="math inline">\(d_c-q_c-0\)</span>坐标系：以同步速旋转，在未稳定的情况下会比上面那个转的更快一点</li>
-</ul></li>
-<li><strong>正变换</strong>（已知<span
-class="math inline">\(i_a,i_b,i_c\)</span>，定义<strong>d轴与a相的夹角为<span
-class="math inline">\(\theta=\int\omega\text
-dt+\theta_0\)</span>）</strong>：</li>
-</ul>
-<p><span class="math display">\[
-\begin{gather*}
-\begin{pmatrix}
-i_d\\i_q\\i_0
-\end{pmatrix}=\frac23\begin{pmatrix}
-\text{cos}\theta&amp;\text{cos}(\theta-\frac{2\pi}3)&amp;\text{cos}(\theta+\frac{2\pi}3)\\
--\text{sin}\theta&amp;-\text{sin}(\theta-\frac{2\pi}3)&amp;-\text{sin}(\theta+\frac{2\pi}3)\\
-\frac12&amp;\frac12&amp;\frac12
-\end{pmatrix}\cdot\begin{pmatrix}
-i_a\\i_b\\i_c
-\end{pmatrix}
-\end{gather*}
-\]</span></p>
-<ul>
-<li><strong>逆变换</strong>：</li>
-</ul>
-<p><span class="math display">\[
-\begin{gather*}
-\begin{pmatrix}
-i_a\\i_b\\i_c
-\end{pmatrix}
-=\begin{pmatrix}
-\text{cos}\theta&amp;-\text{sin}\theta&amp;1\\
-\text{cos}(\theta-\frac{2\pi}3)&amp;-\text{sin}(\theta-\frac{2\pi}3)&amp;1\\
-\text{cos}(\theta+\frac{2\pi}3)&amp;-\text{sin}(\theta+\frac{2\pi}3)&amp;1
-\end{pmatrix}\cdot\begin{pmatrix}
-i_d\\i_q\\i_0
-\end{pmatrix}
-\end{gather*}
-\]</span></p>
-<ul>
-<li>显而易见，上面是到<span
-class="math inline">\(d-q-0\)</span>坐标系的变换，到<span
-class="math inline">\(\alpha-\beta-0\)</span>坐标系更简单，因为<span
-class="math inline">\(\theta=0\)</span>，变换矩阵直接变成常数了</li>
-</ul>
-<h1 id="chap7.-d-q-0坐标下凸极同步电机">Chap7.
-d-q-0坐标下凸极同步电机</h1>
-<h2 id="电磁平衡式">电磁平衡式</h2>
-<p>​ 这里不加推导（<a
-href="#d-q-0坐标电压方程式推导">推导看这里</a>）的给出电压方程式，可以看到和一般化电机的电压方程式几乎一模一样！</p>
-<p><img src="\image\电机建模12.jpg" /></p>
-<p>​ 并且不加推导（<a
-href="#d-q-0坐标磁链表达式推导">推导看这里</a>）的给出磁链表达式，可以看到所有电感全部变成了常数！唯一美中不足的就是电感矩阵不是一个对称阵</p>
-<p><img src="\image\电机建模13.jpg" /></p>
-<p>其中各参数如下：<br />
-<span class="math display">\[
-\begin{gather*}
-直轴同步电感L_d=直轴电枢反应电感L_{ad}+漏电感L_l=\frac32L_{aad}+(L_{aal}+M_{abl})\\
-交轴同步电感L_q=交轴电枢反应电感L_{aq}+漏电感L_l=\frac32L_{aaq}+(L_{aal}+M_{abl})\\
-L_0=L_{aal}-2M_{abl}
-\end{gather*}
-\]</span></p>
-<blockquote>
-<ol type="1">
-<li>若不是d-q-0坐标变换而是<span
-class="math inline">\(\alpha-\beta-0\)</span>坐标变换，那么[L]也不是常数</li>
-<li>该模型中必须求解<span
-class="math inline">\(\theta\)</span>，因为要进行坐标反变换回到a-b-c坐标底下</li>
-</ol>
-</blockquote>
-<h2 id="功率变换">功率变换</h2>
-<p>功率表达式：<br />
-<span class="math display">\[
-P_{dq0}=\frac23P_{abc}-u_0i_0~~(P_{abc}=\frac32(P_{dq0+u_0i_0}))
-\]</span><br />
-自然的，其中 <span
-class="math inline">\(P_{dq0}=[I_{dq0}^T][u_{dq0}],~P_{abc}=[I_{abc}]^T[u_{abc}]\)</span></p>
-<p>对机械角度而言，有：<br />
-<span class="math display">\[
-T_e=T_D+T_L+T_J~,~P_m=-T_L\Omega
-\]</span><br />
-不加推导（<a
-href="#d-q-0功率表达式推导">推导看这里</a>）地给出三个功率的表达式：<br />
-<span class="math display">\[
-\begin{gather*}
-储能：&amp;P=\Omega J\text p\Omega=\frac32[\text p\varPsi_d,\text
-p\varPsi_q,2\text p\varPsi_0][I_{dq0}]+[\text p\varPsi_f,\text
-p\varPsi_D,\text p\varPsi_Q][I_{fDQ}]\\
-损耗：&amp;P=B\Omega^2=\frac32R_s(i_d^2+i_q^2+2i_0^2)+[R_{fDQ}]^T[i_f^2;~i_D^2;~i_Q^2]\\电磁：&amp;P=-\Omega
-T_e=\frac32\omega(\varPsi_di_q-\varPsi_qi_d)
-\end{gather*}
-\]</span><br />
-因此得到一个与一般化电机非常相似的电磁转矩表达式（下面这个 p
-代表极对数）：<br />
-<span class="math display">\[
-T_e=\frac32p(\varPsi_di_q-\varPsi_qi_d)
-\]</span></p>
-<h2 id="同步电动机对称稳态运行分析">同步电动机对称稳态运行分析</h2>
-<ul>
-<li>以电动机原则作为正方向</li>
-<li>稳态时电流为常数</li>
-<li>适用于隐极电机（令 <span class="math inline">\(X_d=X_q\)</span>
-即可），但不适用于感应电机（转速不能达到同步速）</li>
-</ul>
-<h3 id="发电机空载开路">发电机空载（开路）</h3>
-<ol type="1">
-<li>首先0绕组分量均为0（三相对称），因此方程式中均不用考虑了</li>
-<li>阻尼绕组短路，即<span class="math inline">\(U_D=U_Q=0\)</span></li>
-<li>空载时电枢绕组开路，即<span
-class="math inline">\(i_a=i_b=i_c=0\)</span>，因此有<span
-class="math inline">\(i_d=i_q=i_0=0\)</span></li>
-</ol>
-<p>此时有：<br />
-<span class="math display">\[
-\begin{gather*}
-\begin{cases}u_d=\text p\varPsi_d-\omega\varPsi_q+R_di_d\\u_q=\text
-p\varPsi_q+\omega\varPsi_d+R_qi_q\\ u_f=\text p\varPsi_f+R_fi_f
-\end{cases}\\
-\begin{bmatrix}
-\varPsi_d\\\varPsi_q\\\varPsi_f  \end{bmatrix}=\begin{bmatrix}
-L_d&amp;0&amp;M_{afd1}\\0&amp;L_q&amp;0\\\frac32M_{afd1}&amp;0&amp;L_{ff}
-\end{bmatrix} \begin{bmatrix} i_d\\i_q\\i_f  \end{bmatrix}
-\end{gather*}
-\]</span></p>
-<ol type="1">
-<li><span class="math inline">\(u_f=R_fi_f\)</span></li>
-<li><span class="math inline">\(u_d=\text
-p~const+\omega\cdot0+0=0\)</span></li>
-<li><span class="math inline">\(u_q=\omega
-M_{af1}i_f=e=E_m\)</span>，这个就是<strong>旋转电势</strong>！</li>
-<li>可以看到旋转电势没有直轴分量（<span
-class="math inline">\(u_d=0\)</span>），因此旋转电势落在交轴上，励磁磁链（<span
-class="math inline">\(\varPsi_f\)</span>）落在直轴上</li>
-</ol>
-<h3 id="负载运行">负载运行</h3>
-<p>参考一下电机学里的这张图，但是交轴直轴不对，详见下方注释。</p>
-<p><img src="\image\电机建模15.png" /></p>
-<p>因此有：<br />
-<span class="math display">\[
-\dot U=\dot E+\dot IR_s+jX_d\dot I_d+jX_q\dot I_q
-\]</span><br />
-此时，由于电流为常数，因此仍然有<span class="math inline">\(\text
-p\varPsi=0\)</span>，故：<br />
-<span class="math display">\[
-\begin{gather*} u_d=-\omega L_qi_q+R_di_d=-U_m\sin\delta\\u_q=\omega
-L_di_d+E_m+R_qi_q=U_m\cos\delta
-\\i_d=-\frac{E_m-U_m\cos\delta}{X_d}\\i_q=\frac{U_m\sin\delta}{X_q}
-\end{gather*}
-\]</span><br />
-&gt; 其中<span class="math inline">\(\delta\)</span>
-为功角，即上图中的<span class="math inline">\(\varPsi
--\varphi\)</span><br />
-&gt;<br />
-&gt; 电机学里是发电机原则，而这里是电动机原则，因此 <span
-class="math inline">\(I\)</span> 相差一个负号（电压关系式）<br />
-&gt;<br />
-&gt; 发电机中 <span class="math inline">\(E\)</span> 超前 <span
-class="math inline">\(U\)</span>，而电动机相反，因此两者功角的定义也不同（也反过来了）</p>
-<p>参考同步电机有功功率调节那一章节：<br />
-<span class="math display">\[
-\begin{gather*}
-T_e=\frac{3p}{2\omega}(\frac{EU\sin\delta}{X_d}+\frac{U^2}2(\frac1{X_q}-\frac1{X_d})\sin2\delta
-)\\=\frac32p[(L_d-L_q)i_di_q+(M_{af1}i_f)i_q]\\
-P_e=\frac{\omega}pT_e=\frac32(\frac{EU\sin\delta}{X_d}+\frac{U^2}2(\frac1{X_q}-\frac1{X_d})\sin2\delta
-)
-\end{gather*}
-\]</span></p>
-<blockquote>
-<ol type="1">
-<li>调节有功功率就是调节功角 <span
-class="math inline">\(\delta\)</span></li>
-<li>电动机 <span class="math inline">\(\delta&gt;0\)</span>，因此 <span
-class="math inline">\(i_q&gt;0\)</span>，不管 <span
-class="math inline">\(i_d\)</span> 正负，定子电流 <span
-class="math inline">\(i_q\)</span>
-一定超前于转子电流（转子=励磁落在直轴上）</li>
-</ol>
-</blockquote>
-<h2 id="电机坐标变换与电源">电机坐标变换与电源</h2>
-<ul>
-<li>在实际运行中，我们不知道电机的三相电压 <span
-class="math inline">\(u_a,u_b,u_c\)</span>，而我们的模型一直用的是这个。</li>
-</ul>
-<h3 id="三相四线制电源">三相四线制电源</h3>
-<p><img src="\电机建模16.png" /></p>
-<p>​ 在三相四线制电源中，不再满足 <span
-class="math inline">\(i_a+i_b+i_c=0\)</span> 这一条件。设电源电压为
-<span class="math inline">\(u_s\)</span>，取空间中任一点 r
-作为参考点，对电压进行坐标变换以求得到（二维平面-0）坐标系下的电压，则有：<br />
-<span class="math display">\[
-\begin{gather*}
-u_{ar}=u_a+u_{nr}=u_{as}+u_{mr}\\\Rightarrow
-[C]\begin{bmatrix}u_a\\u_b\\u_c\end{bmatrix}=[C]\begin{bmatrix}u_{as}\\u_{bs}\\u_{cs}\end{bmatrix}+[C]\begin{bmatrix}u_{mn}\\u_{mn}\\u_{mn}\end{bmatrix}\\=
-[C]\begin{bmatrix}u_{as}\\u_{bs}\\u_{cs}\end{bmatrix}+\begin{bmatrix}0\\0\\u_{mn}\end{bmatrix}
-\end{gather*}
-\]</span></p>
-<h3 id="三相三线制电源">三相三线制电源</h3>
-<p>​
-在三相三线制电源中，虽然满足电流和为零的条件，但是一般情况下我们只知道线电压
-<span class="math inline">\(u_{ab}\)</span>
-等，这里不加推导地写出：<br />
-<span class="math display">\[
-[C]\begin{bmatrix}u_{a}\\u_{b}\\u_{c}\end{bmatrix}=[C]\begin{bmatrix}u_{ar}\\u_{br}\\u_{cr}\end{bmatrix}-\begin{bmatrix}0\\0\\u_{nr}\end{bmatrix}
-\]</span><br />
-如果将参考点 r 正好取在某相（如 c 相），则：<br />
-<span class="math display">\[
-[C]\begin{bmatrix}u_{a}\\u_{b}\\u_{c}\end{bmatrix}=[C]\begin{bmatrix}u_{ac}\\u_{bc}\\0\end{bmatrix}+\begin{bmatrix}0\\0\\u_{nr}\end{bmatrix}
-\]</span><br />
-这样就知道电压了。</p>
-<blockquote>
-<p>结论：！</p>
-<p>由于在（二维平面-0）坐标系中，零分量不产生作用，因此在计算中可以忽略</p>
-<p>上面两种情况推出的式子都告诉我们，<strong>即便我们不知道电源相电压，也可以通过对“电源电压”或“线电压”进行变换，得到的结果与原来的只有零分量不同。</strong>可零分量错了有什么关系呢？</p>
-</blockquote>
-<h1 id="附录-公式推导">附录-公式推导</h1>
-<h3 id="一般化电机旋转电势">一般化电机旋转电势</h3>
-<p><img src="\image\电机建模10.png" /></p>
-<p><strong><a href="#电磁方程式">Return</a></strong></p>
-<h3 id="三相交流电机电感矩阵">三相交流电机电感矩阵</h3>
-<p>（贴图绝对不是因为我懒得抄了，绝对不是….）</p>
-<p>上过课的人应该看到这两幅图就能想起来大概怎么个证明法</p>
-<p><img src="\image\电机建模02.png" /></p>
-<p><img src="\image\电机建模03.png" /></p>
-<p><strong><a href="#三相电感">Return</a></strong></p>
-<h3 id="三相交流电机电磁转矩">三相交流电机电磁转矩</h3>
-<p><strong>法1 虚功（虚位移）</strong>（下面<span
-class="math inline">\(\Omega\)</span>指机械位移）<br />
-<span class="math display">\[
-\begin{gather*}
-W=\frac 12\varPsi_ai_a\Rightarrow W=\frac12[I]^T[L][I] \\
-T_e=\frac{\partial W}{\partial\Omega}=p\frac{\partial
-W}{\partial\theta}=\frac p2[I]^T\frac{\partial [L]}{\partial\theta}[I]
-\end{gather*}
-\]</span><br />
-<strong>法2 能量守恒</strong>（下面<span
-class="math inline">\(\Omega\)</span>指机械角速度）</p>
-<p>电磁储能功率公式推导：<br />
-<span class="math display">\[
-\begin{gather*}
-P=\frac{dW}{dt}=\frac12\text p[I]^T[L][I]+\frac12[I]^T\text
-p[L][I]+\frac12[I]^T[L]\text p[I]\\=[I]^T[L]\text p[I]+\frac12[I]^T\text
-p[L][I]
-\end{gather*}
-\]</span><br />
-能量守恒：<br />
-<span class="math display">\[
-\begin{gather*}
-P_{abc}=[I]^T[U]=[I]^T\{[R][I]+\text p([L][I]) \}\\
-P_{m}=\Omega T_m=-\Omega T_L=-\Omega(T_e-B\Omega-J\text p\Omega)\\
-电磁、机械损耗~——~电磁、机械储能~——~电磁、机械储能\\\Rightarrow
-T_e=\frac p2[I]^T\frac{\partial [L]}{\partial\theta}[I]
-\end{gather*}
-\]</span><br />
-<strong><a href="#三相转矩">Return</a></strong></p>
-<h3 id="d-q-0坐标电压方程式推导">d-q-0坐标电压方程式推导</h3>
-<p><span class="math display">\[
-\begin{gather*}
-\begin{bmatrix}u_{dq0}\\u_{fDQ}\end{bmatrix}=\begin{bmatrix}C&amp;0\\0&amp;E\end{bmatrix}\begin{bmatrix}u_{abc}\\u_{fDQ}\end{bmatrix}\\
-=\begin{bmatrix}C&amp;0\\0&amp;E\end{bmatrix}\left(\text
-p\begin{bmatrix}\varPsi_{abc}\\\varPsi_{fDQ}\end{bmatrix}+
-\begin{bmatrix}R_s&amp;0\\0&amp;R_{fDQ}\end{bmatrix}\begin{bmatrix}I_{abc}\\I_{fDQ}\end{bmatrix}\right)  
-\end{gather*}
-\]</span></p>
-<p><span class="math display">\[
-\begin{gather*}
-前者=\text
-p\left(\begin{bmatrix}C&amp;0\\0&amp;E\end{bmatrix}\begin{bmatrix}\varPsi_{abc}\\\varPsi_{fDQ}\end{bmatrix}
-\right)-\begin{bmatrix}\varPsi_{abc}\\\varPsi_{fDQ}\end{bmatrix}\text
-p\begin{bmatrix}C&amp;0\\0&amp;E\end{bmatrix}\\
-=\text
-p\begin{bmatrix}\varPsi_{dq0}\\\varPsi_{fDQ}\end{bmatrix}+\begin{bmatrix}-\omega\varPsi_{q}\\\omega\varPsi_{d}\\
-[0]_{4\times1}\end{bmatrix}
-\end{gather*}
-\]</span></p>
-<p><span class="math display">\[
-\begin{gather*}
-后者=\begin{bmatrix}R_s&amp;0\\0&amp;R_{fDQ}\end{bmatrix}\begin{bmatrix}CI_{abc}&amp;0\\0&amp;I_{fDQ}\end{bmatrix}\\=\begin{bmatrix}R_s&amp;0\\0&amp;R_{fDQ}\end{bmatrix}\begin{bmatrix}I_{dq0}&amp;0\\0&amp;I_{fDQ}\end{bmatrix}
-\end{gather*}
-\]</span></p>
-<p><a href="#电磁平衡式">Return</a></p>
-<h3 id="d-q-0坐标磁链表达式推导">d-q-0坐标磁链表达式推导</h3>
-<p><strong>法1 嗯算</strong><br />
-<span class="math display">\[
-\begin{gather*}
-\begin{bmatrix}\varPsi_{dq0}\\\varPsi_{fDQ}\end{bmatrix}=\begin{bmatrix}C&amp;0\\0&amp;E\end{bmatrix}\begin{bmatrix}\varPsi_{abc}\\\varPsi_{fDQ}\end{bmatrix}=\begin{bmatrix}C&amp;0\\0&amp;E\end{bmatrix}\begin{bmatrix}L_{ss}&amp;L_{sr}
-\\L_{rs}
-&amp;L_{rr}\end{bmatrix}\begin{bmatrix}i_{abc}\\i_{fDQ}\end{bmatrix}\\=\begin{bmatrix}CL_{ss}C^{-1}
-&amp;CL_{sr} \\ L_{rs}C^{-1}
-&amp;L_{rr}\end{bmatrix}\begin{bmatrix}i_{dq0}\\i_{fDQ}\end{bmatrix}
-\end{gather*}
-\]</span><br />
-​然后只要硬算前面那个恶心人的矩阵就行了</p>
-<p><strong>法2 物理意义的推导</strong></p>
-<p>我放图绝对不是因为我不想抄了，你听我狡辩，绝对不是…</p>
-<p><img src="\image\电机建模14.jpg" /></p>
-<p><a href="#电磁平衡式">Return</a></p>
-<h3 id="d-q-0功率表达式推导">d-q-0功率表达式推导</h3>
-<h4 id="电损耗">电损耗</h4>
-<ul>
-<li>机械损耗是 <span
-class="math inline">\(B\Omega^2\)</span>，下面着重分析电损耗</li>
-<li>需要证明上文的表达式中 <span
-class="math inline">\(\frac32R_s(i_d^2+i_q^2+2i_0^2)=R_s(i_a^2+i_b^2+i_c^2)\)</span></li>
-</ul>
-<p><span class="math display">\[
-\begin{gather*}
-\frac32R_s(i_d^2+i_q^2+2i_0^2)=\frac32R_s\begin{pmatrix}i_d\\i_q\\i_0\end{pmatrix}^T\begin{pmatrix}i_d\\i_q\\i_0\end{pmatrix}+\frac32R_si_0^2
-\\
-=\frac32R_s\left[[C]\begin{pmatrix}i_a\\i_b\\i_c\end{pmatrix}  \right]^T[C]\begin{pmatrix}i_a\\i_b\\i_c\end{pmatrix}+\frac32R_si_0^2\\=\frac{R_s}6\begin{pmatrix}i_a\\i_b\\i_c\end{pmatrix}^T\begin{pmatrix}5&amp;-1&amp;-1\\-1&amp;5&amp;-1\\-1&amp;-1&amp;5
-\end{pmatrix}\begin{pmatrix}i_a\\i_b\\i_c\end{pmatrix}+\frac32R_s(\frac{i_a+i_b+i_c}3)^2\\=R_s(i_a^2+i_b^2+i_c^2)
-\end{gather*}
-\]</span></p>
-<h4 id="储能">储能</h4>
-<ul>
-<li>机械储能是 <span class="math inline">\(\Omega J\text
-p\Omega\)</span>，下面着重分析电储能</li>
-<li>需要证明上文的表达式中 <span class="math inline">\(\frac32[\text
-p\varPsi_d,\text p\varPsi_q,2\text p\varPsi_0][I_{dq0}]+[\text
-p\varPsi_f,\text p\varPsi_D,\text p\varPsi_Q][I_{fDQ}]=\text
-p(\frac12[I]^T[\varPsi])\)</span></li>
-</ul>
-<p><span class="math display">\[
-\begin{gather*}
-P=\text p(\frac12[I]^T[\varPsi])=\text p(\frac12[I]^T
-\begin{bmatrix}C^{-1}&amp;0\\0&amp;E
-\end{bmatrix}\begin{bmatrix}C&amp;0\\0&amp;E \end{bmatrix}[\varPsi])\\
-=\frac12\text p\left(\{\begin{bmatrix}C^{-1T}&amp;0\\0&amp;E
-\end{bmatrix}[I]\}^T[\varPsi&#39;] \right)\\
-=\frac12\text
-p([\frac32i_d,~\frac32i_q,~3i_0,~[I_r]][\varPsi&#39;])=\frac12\text
-p([I]&#39;^T[\frac32\varPsi_d,~\frac32\varPsi_q,~3\varPsi_0,~[\varPsi_r]]^T)
-\end{gather*}
-\]</span></p>
-<p><a href="#功率变换">Return</a></p>
-]]></content>
-      <categories>
-        <category>课程</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
         <tag>电气</tag>
-        <tag>大三</tag>
       </tags>
   </entry>
 </search>
