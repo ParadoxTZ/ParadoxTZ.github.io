@@ -155,7 +155,7 @@ social:
 
 # Avatar 头像
 avatar:
-  img: /image/dog.jpg
+  img: /image/qsc.jpg
   effect: false # 头像不会一直转圈
 
 # Cover
@@ -295,7 +295,7 @@ twikoo:
 # Background
 # background: url(/image/back.png)
 background: /image/back.png
-footer_bg: true
+footer_bg: /image/top3.jpg
 # canvas_nest:
 #   enable: true
 #   color: '170,255,180' #color of lines, default: '0,0,0'; RGB values: (R,G,B).(note: use ',' to separate.)
