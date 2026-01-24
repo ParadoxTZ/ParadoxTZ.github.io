@@ -162,196 +162,284 @@
   isToc: true,
   pageType: 'post'
 }</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg" style="background-image: url(/image/back.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/image/qsc.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">28</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/artitalk/"><i class="fa-fw fas fa-pen-to-square"></i><span> 说说</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/image/top3.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Paradox's Website</span></a><a class="nav-page-title" href="/"><span class="site-name">（研）交流电机调速理论-杨家强</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/artitalk/"><i class="fa-fw fas fa-pen-to-square"></i><span> 说说</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">（研）交流电机调速理论-杨家强</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-11-06T13:34:59.548Z" title="发表于 2025-11-06 21:34:59">2025-11-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-11-08T13:38:23.129Z" title="更新于 2025-11-08 21:38:23">2025-11-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AF%BE%E7%A8%8B/">课程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">3.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2025/11/06/%E4%BA%A4%E6%B5%81%E7%94%B5%E6%9C%BA%E8%B0%83%E9%80%9F%E7%90%86%E8%AE%BA/#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>与《现代运动控制策略》和《电机控制》中重合的部分请参考他们各自的网页。</p>
-<h1 id="调压调速与电磁转差离合器调速"><a href="#调压调速与电磁转差离合器调速" class="headerlink" title="调压调速与电磁转差离合器调速"></a>调压调速与电磁转差离合器调速</h1><ul>
-<li>分类：<ul>
-<li>转差功率<strong>消耗型</strong>：<ul>
+<h1 id="调压调速与电磁转差离合器调速">调压调速与电磁转差离合器调速</h1>
+<ul>
+<li>分类：
+<ul>
+<li>转差功率<strong>消耗型</strong>：
+<ul>
 <li>转差功率全部转化成热能而被消耗掉</li>
 <li>特点：系统的效率低，结构简单</li>
 <li>调压调速、绕线式异步 电动机转子串电阻调速、电磁转差离合器调速系</li>
-</ul>
-</li>
-<li>转差功率<strong>回馈型</strong>：<ul>
+</ul></li>
+<li>转差功率<strong>回馈型</strong>：
+<ul>
 <li>转差功率的少部分被消耗掉，大部分通过变流装置回馈给电网或者转化为机械能予以利用</li>
 <li>特点：效率高</li>
 <li>串级调速属</li>
-</ul>
-</li>
-<li>转差功率<strong>不变型</strong>：<ul>
+</ul></li>
+<li>转差功率<strong>不变型</strong>：
+<ul>
 <li>调速过程中，转差功率基本不变</li>
 <li>特点：效率最高</li>
 <li>变极调速、变频调速</li>
+</ul></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="调压调速"><a href="#调压调速" class="headerlink" title="调压调速"></a>调压调速</h2><script type="math/tex; mode=display">
-T_e=\frac{3pU_1^2R_2'/s}{\omega_1[(R_1+R_2'/s)^2+\omega_1(L_1+L_2')^2]}</script><p><img src="/image/电机学16.png" alt=""></p>
-<p>关于三相调压的方式，可以参考<a href="https://zju-paradox.top/2024/04/18/电力电子技术/#调压电路">电力电子技术 | Paradox’s Website</a>，主要看三相调压，大概看看就行。比如需要满足：</p>
-<ol>
+<h2 id="调压调速">调压调速</h2>
+<p><span class="math display">\[
+T_e=\frac{3pU_1^2R_2&#39;/s}{\omega_1[(R_1+R_2&#39;/s)^2+\omega_1(L_1+L_2&#39;)^2]}
+\]</span></p>
+<p><img src="/image/电机学16.png" /></p>
+<p>关于三相调压的方式，可以参考<a
+href="https://zju-paradox.top/2024/04/18/电力电子技术/#调压电路">电力电子技术
+| Paradox's
+Website</a>，主要看三相调压，大概看看就行。比如需要满足：</p>
+<ol type="1">
 <li>三相电路中至少要有一相的正向晶闸管与另一相的反向晶闸管同时导通</li>
 <li>采用宽脉冲或双窄脉冲触发电路</li>
 <li>U、V、W三相电路中正、反向晶闸管的触发信号相位互差120°，同相中反并联的两个正、反向晶闸管的触发脉冲相位互差180°</li>
 </ol>
 <p>对于普通电机，调速范围是很小的。但是对于高转子电阻电机，可以将调速范围扩的很大。但与之对应的，开环特性会很软。</p>
-<p><img src="/image/电机学15.jpg" alt=""></p>
-<p>上面这张图我应该已经拿出来说过非常多次了，真的很好用。由此，电机的效率直接在一定程度上认为是：$\eta\approx 1-s$</p>
+<p><img src="/image/电机学15.jpg" /></p>
+<p>上面这张图我应该已经拿出来说过非常多次了，真的很好用。由此，电机的效率直接在一定程度上认为是：<span
+class="math inline">\(\eta\approx 1-s\)</span></p>
 <ul>
-<li>恒转矩负载：有$T_e=T_L$不变，因$f_1$不变，故电磁功率$P_2$也不变。随着转速的降低，转差功率$sP_2$增大，效率降低。</li>
-<li><strong>恒功率</strong>（风机泵类）负载：有$T_e=T_L=Kn^2$，$T_e、P_2$随转速以平方速率下降，尽管低速时s增大，但总的转差功率$sP_2$下降，损耗变小。</li>
+<li>恒转矩负载：有<span
+class="math inline">\(T_e=T_L\)</span>不变，因<span
+class="math inline">\(f_1\)</span>不变，故电磁功率<span
+class="math inline">\(P_2\)</span>也不变。随着转速的降低，转差功率<span
+class="math inline">\(sP_2\)</span>增大，效率降低。</li>
+<li><strong>恒功率</strong>（风机泵类）负载：有<span
+class="math inline">\(T_e=T_L=Kn^2\)</span>，<span
+class="math inline">\(T_e、P_2\)</span>随转速以平方速率下降，尽管低速时s增大，但总的转差功率<span
+class="math inline">\(sP_2\)</span>下降，损耗变小。</li>
 </ul>
-<h3 id="起动"><a href="#起动" class="headerlink" title="起动"></a>起动</h3><ul>
-<li><p>要求：</p>
+<h3 id="起动">起动</h3>
+<ul>
+<li>要求：
 <ul>
 <li>足够大的、平稳的起动转矩</li>
 <li>尽可能小的起动电流</li>
 <li>起动过程中的损耗要小</li>
-</ul>
-</li>
-<li><p>限流起动：主要是用在轻载起动，起动时难以知道起动压降，时间长</p>
-</li>
+</ul></li>
+<li>限流起动：主要是用在轻载起动，起动时难以知道起动压降，时间长</li>
 <li>斜坡电压起动：电压由小到大斜坡线性上升，是无级降压起动，主要用在重载起动</li>
-<li>用在重载起动：将电动机的起动转矩由小到大线性上升，起动平滑柔性好， 对拖动系统有更好的保护，延长拖动系统的使用寿命，同时降低电机起动时对电网的冲击</li>
+<li>用在重载起动：将电动机的起动转矩由小到大线性上升，起动平滑柔性好，
+对拖动系统有更好的保护，延长拖动系统的使用寿命，同时降低电机起动时对电网的冲击</li>
 </ul>
-<h2 id="电磁转差离合器调速"><a href="#电磁转差离合器调速" class="headerlink" title="电磁转差离合器调速"></a>电磁转差离合器调速</h2><p>电磁转差离合器调速系统是由笼型异步电动机、电磁转差离合器以及控制装置组合而成。它本身并不是一个电动机，它只是一种传递功率的装置。原动机照常转，从动机变转速。</p>
-<p><img src="/image/jldj01.png" alt=""></p>
-<p><u>原动机拖动电枢恒速定向旋转</u>，电枢切割脉动磁场，电枢中感生电动势并产生涡流。产生的电枢反应磁场带动有齿槽的永磁体一同旋转。<strong>从动轴的转速n取决于励磁电流的大小</strong>：</p>
-<script type="math/tex; mode=display">
-n=n_1-K\frac{T_e}{I_f^4}</script><h1 id="绕线异步电机双馈（串级）调速"><a href="#绕线异步电机双馈（串级）调速" class="headerlink" title="绕线异步电机双馈（串级）调速"></a>绕线异步电机双馈（串级）调速</h1><h2 id="异步电机转子附加电动势"><a href="#异步电机转子附加电动势" class="headerlink" title="异步电机转子附加电动势"></a>异步电机转子附加电动势</h2><p>在转子绕组回路中引入一个可控的交流附加电动势$E_{add}$，与转子电动势$E_r$有相同的频率。此时转子相电流：</p>
-<script type="math/tex; mode=display">
-I_r=\frac{sE_{r0}\pm E_{add}}{\sqrt{R_r^2+(sX_{r0}^2)}}</script><p>当附加电动势$E_{add}$与转子电动势$E_r$同向时，电流瞬时增大，达到转速增大的新平衡。反向同理。</p>
-<h2 id="双馈调速的五种工况"><a href="#双馈调速的五种工况" class="headerlink" title="双馈调速的五种工况"></a>双馈调速的五种工况</h2><p>由于转子侧串入附加电动势极性和大小的不同，s和Pm都可正可负，因而可以有多种运行工况。</p>
-<p><img src="/image/jldj02.png" alt=""></p>
+<h2 id="电磁转差离合器调速">电磁转差离合器调速</h2>
+<p>电磁转差离合器调速系统是由笼型异步电动机、电磁转差离合器以及控制装置组合而成。它本身并不是一个电动机，它只是一种传递功率的装置。原动机照常转，从动机变转速。</p>
+<p><img src="/image/jldj01.png" /></p>
+<p><u>原动机拖动电枢恒速定向旋转</u>，电枢切割脉动磁场，电枢中感生电动势并产生涡流。产生的电枢反应磁场带动有齿槽的永磁体一同旋转。<strong>从动轴的转速n取决于励磁电流的大小</strong>：<br />
+<span class="math display">\[
+n=n_1-K\frac{T_e}{I_f^4}
+\]</span></p>
+<h1 id="绕线异步电机双馈串级调速">绕线异步电机双馈（串级）调速</h1>
+<h2 id="异步电机转子附加电动势">异步电机转子附加电动势</h2>
+<p>在转子绕组回路中引入一个可控的交流附加电动势<span
+class="math inline">\(E_{add}\)</span>，与转子电动势<span
+class="math inline">\(E_r\)</span>有相同的频率。此时转子相电流：<br />
+<span class="math display">\[
+I_r=\frac{sE_{r0}\pm E_{add}}{\sqrt{R_r^2+(sX_{r0}^2)}}
+\]</span><br />
+当附加电动势<span
+class="math inline">\(E_{add}\)</span>与转子电动势<span
+class="math inline">\(E_r\)</span>同向时，电流瞬时增大，达到转速增大的新平衡。反向同理。</p>
+<h2 id="双馈调速的五种工况">双馈调速的五种工况</h2>
+<p>由于转子侧串入附加电动势极性和大小的不同，s和Pm都可正可负，因而可以有多种运行工况。</p>
+<p><img src="/image/jldj02.png" /></p>
 <p>其实看懂上面四张图基本就行了，<strong>上面几种工况都是正转情况下的</strong>。</p>
-<p>yjq多的一种工况是<strong>位能性恒转矩负载的反转制动</strong>（重物下放），此时转差频率$s&gt;1$，电机吸收功率和电网输送到电机的功率全都馈送到电网。</p>
+<p>yjq多的一种工况是<strong>位能性恒转矩负载的反转制动</strong>（重物下放），此时转差频率<span
+class="math inline">\(s&gt;1\)</span>，电机吸收功率和电网输送到电机的功率全都馈送到电网。</p>
 <p>md这b写的PPT和讲的课真是依托勾石</p>
-<h2 id="亚同步速电动状态下的串级调速系统"><a href="#亚同步速电动状态下的串级调速系统" class="headerlink" title="亚同步速电动状态下的串级调速系统"></a>亚同步速电动状态下的串级调速系统</h2><p><img src="/image/jldj03.png" alt=""></p>
+<h2
+id="亚同步速电动状态下的串级调速系统">亚同步速电动状态下的串级调速系统</h2>
+<p><img src="/image/jldj03.png" /></p>
 <ul>
-<li>转子侧接入一个三相不控整流器，将交流转差功率$f_2=sf_1$转换为直流形式，由电源侧设置的三相有源逆变桥所提供的直流逆变电动势吸收转差功率，并转化为电网频率$f_1$电流返回电网</li>
-<li>该系统的速度调节是通过改变有源逆变器中移相角β以改变直流回路电压Uβ的大小，从而改变与其相联系的异步电动机转子附加电动势$E_f$，以达到调节电机转速的目的</li>
+<li>转子侧接入一个三相不控整流器，将交流转差功率<span
+class="math inline">\(f_2=sf_1\)</span>转换为直流形式，由电源侧设置的三相有源逆变桥所提供的直流逆变电动势吸收转差功率，并转化为电网频率<span
+class="math inline">\(f_1\)</span>电流返回电网</li>
+<li>该系统的速度调节是通过改变有源逆变器中移相角β以改变直流回路电压Uβ的大小，从而改变与其相联系的异步电动机转子附加电动势<span
+class="math inline">\(E_f\)</span>，以达到调节电机转速的目的</li>
 </ul>
-<script type="math/tex; mode=display">
-sE_{d0}-\Delta U_M=U_{d0}\rightarrow +I_dR_e\rightarrow U_{\beta}=2.34U_s\cos\beta+\Delta U_s</script><h2 id="机械特性"><a href="#机械特性" class="headerlink" title="机械特性"></a>机械特性</h2><p><img src="/image/jldj04.png" alt=""></p>
-<p>串级调速时，异步电动机转子回路虽然不需要串入调速 电阻，但由于其转子回路中接入了串级调速装置，实际上相当于在电动机转子回路中接入了一定数量的等效电阻和电抗。由于转子回路电阻的影响，异步电动机<strong>串级调速时的机械特性比其固有特性要软</strong>。</p>
-<h1 id="变频调速与脉宽调制"><a href="#变频调速与脉宽调制" class="headerlink" title="变频调速与脉宽调制"></a>变频调速与脉宽调制</h1><h2 id="变频调速"><a href="#变频调速" class="headerlink" title="变频调速"></a>变频调速</h2><h3 id="PWM整流-逆变"><a href="#PWM整流-逆变" class="headerlink" title="PWM整流-逆变"></a>PWM整流-逆变</h3><p>没啥好写的</p>
-<h3 id="谐振软开关"><a href="#谐振软开关" class="headerlink" title="谐振软开关"></a>谐振软开关</h3><div class="table-container">
+<p><span class="math display">\[
+sE_{d0}-\Delta U_M=U_{d0}\rightarrow +I_dR_e\rightarrow
+U_{\beta}=2.34U_s\cos\beta+\Delta U_s
+\]</span></p>
+<h2 id="机械特性">机械特性</h2>
+<p><img src="/image/jldj04.png" /></p>
+<p>串级调速时，异步电动机转子回路虽然不需要串入调速
+电阻，但由于其转子回路中接入了串级调速装置，实际上相当于在电动机转子回路中接入了一定数量的等效电阻和电抗。由于转子回路电阻的影响，异步电动机<strong>串级调速时的机械特性比其固有特性要软</strong>。</p>
+<h1 id="变频调速与脉宽调制">变频调速与脉宽调制</h1>
+<h2 id="变频调速">变频调速</h2>
+<h3 id="pwm整流-逆变">PWM整流-逆变</h3>
+<p>没啥好写的</p>
+<h3 id="谐振软开关">谐振软开关</h3>
 <table>
 <thead>
 <tr>
-<th><img src="/image/jldj05.png" alt=""></th>
-<th><img src="/image/jldj06.png" alt=""></th>
+<th><img src="/image/jldj05.png" /></th>
+<th><img src="/image/jldj06.png" /></th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td></td>
-</tr>
 </tbody>
 </table>
-</div>
-<p>逆变器的功率开关器件应安 排在$u_C$过零时刻（$t_4-t_0$）进行 开关状态切换，实现零电压软开关操作</p>
-<h2 id="脉宽调制"><a href="#脉宽调制" class="headerlink" title="脉宽调制"></a>脉宽调制</h2><h3 id="SPWM"><a href="#SPWM" class="headerlink" title="SPWM"></a>SPWM</h3><p>计算<strong>正弦调制波</strong>与高频<strong>三角载波</strong>的”交点“，从而求出相应的<strong>占空比</strong>$D$，生成SPWM波</p>
-<p>设三角载波的幅值为1，则正弦调制波的幅值$U_{rm}=M$，即$sine = M\sin(\omega t)$</p>
-<ol>
-<li>自然采样：计算交点：$D=\frac12(1+\frac M2(\sin\omega t_1+\sin\omega t_2))$</li>
-<li>对称规则采样：在三角载波的峰值或谷值计算一次正弦信号的幅值：$D=\frac12(1+M\sin\omega t_0)$</li>
-<li>不对称规则采样：在三角载波的峰值和谷值分别计算正弦信号的幅值：$D=\frac12(1+\frac M2(\sin\omega t_1+\sin\omega t_2))$</li>
+<p>逆变器的功率开关器件应安 排在<span
+class="math inline">\(u_C\)</span>过零时刻（<span
+class="math inline">\(t_4-t_0\)</span>）进行
+开关状态切换，实现零电压软开关操作</p>
+<h2 id="脉宽调制">脉宽调制</h2>
+<h3 id="spwm">SPWM</h3>
+<p>计算<strong>正弦调制波</strong>与高频<strong>三角载波</strong>的”交点“，从而求出相应的<strong>占空比</strong><span
+class="math inline">\(D\)</span>，生成SPWM波</p>
+<p>设三角载波的幅值为1，则正弦调制波的幅值<span
+class="math inline">\(U_{rm}=M\)</span>，即<span
+class="math inline">\(sine = M\sin(\omega t)\)</span></p>
+<ol type="1">
+<li>自然采样：计算交点：<span class="math inline">\(D=\frac12(1+\frac
+M2(\sin\omega t_1+\sin\omega t_2))\)</span></li>
+<li>对称规则采样：在三角载波的峰值或谷值计算一次正弦信号的幅值：<span
+class="math inline">\(D=\frac12(1+M\sin\omega t_0)\)</span></li>
+<li>不对称规则采样：在三角载波的峰值和谷值分别计算正弦信号的幅值：<span
+class="math inline">\(D=\frac12(1+\frac M2(\sin\omega t_1+\sin\omega
+t_2))\)</span></li>
 </ol>
-<h3 id="制定谐波消去"><a href="#制定谐波消去" class="headerlink" title="制定谐波消去"></a>制定谐波消去</h3><p>令：</p>
-<script type="math/tex; mode=display">
-U_{km}=\frac{2U_s}{k\pi}\left[ 1+2\sum(-1)^i\cos k\alpha_i \right]=0</script><h3 id="双PWM变换器"><a href="#双PWM变换器" class="headerlink" title="双PWM变换器"></a>双PWM变换器</h3><p>其实就是并网逆变器控制。优点：</p>
+<h3 id="制定谐波消去">制定谐波消去</h3>
+<p>令：<br />
+<span class="math display">\[
+U_{km}=\frac{2U_s}{k\pi}\left[ 1+2\sum(-1)^i\cos k\alpha_i \right]=0
+\]</span></p>
+<h3 id="双pwm变换器">双PWM变换器</h3>
+<p>其实就是并网逆变器控制。优点：</p>
 <ul>
 <li>功率可以双向流动</li>
 <li>输入电流正弦而且谐波含量少</li>
 <li>功率因数可调，可运行在单位功率因数下</li>
-<li>在输入电网电压固定的情况下直流母线电压可以调节， 且直流母线电压抗负载扰动的稳定性好</li>
+<li>在输入电网电压固定的情况下直流母线电压可以调节，
+且直流母线电压抗负载扰动的稳定性好</li>
 <li>对PWM整流器的有效控制可以使直流储能用的电解电容容量有所降低。</li>
 </ul>
-<p>控制方式参考<a href="https://zju-paradox.top/2025/11/02/现代运动控制策略/#并网逆变器网侧pwm控制">现代运动控制策略-孙丹 | Paradox’s Website</a></p>
-<h1 id="开关磁阻电机"><a href="#开关磁阻电机" class="headerlink" title="开关磁阻电机"></a>开关磁阻电机</h1><h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>磁通总是沿磁阻最小（磁导最大）的路径闭合</p>
-<p><img src="/image/jldj07.png" alt=""></p>
-<p>一般而言，定子齿数比转子齿数更多，有：$Z_s=2m=Z_r+2$，转速$n=\frac{60f}{N_r}$</p>
-<h2 id="结构设计"><a href="#结构设计" class="headerlink" title="结构设计"></a>结构设计</h2><h3 id="功率变换器-具有最少数量主开关器件的功率变换器"><a href="#功率变换器-具有最少数量主开关器件的功率变换器" class="headerlink" title="功率变换器 - 具有最少数量主开关器件的功率变换器"></a>功率变换器 - 具有最少数量主开关器件的功率变换器</h3><p><img src="/image/jldj08.png" alt=""></p>
-<p>可以接到功率变换器的绕组<strong>最多相数为上、下桥臂主开关数</strong> $n_U\times n_L$</p>
-<p>Va和Vb导通时，A相绕组通电；Va和Vb关断时，绕组通过$V<em>{Da}$、$V</em>{Db}$和$V_{D1}$续流</p>
+<p>控制方式参考<a
+href="https://zju-paradox.top/2025/11/02/现代运动控制策略/#并网逆变器网侧pwm控制">现代运动控制策略-孙丹
+| Paradox's Website</a></p>
+<h1 id="开关磁阻电机">开关磁阻电机</h1>
+<h2 id="基本原理">基本原理</h2>
+<p>磁通总是沿磁阻最小（磁导最大）的路径闭合</p>
+<p><img src="/image/jldj07.png" /></p>
+<p>一般而言，定子齿数比转子齿数更多，有：<span
+class="math inline">\(Z_s=2m=Z_r+2\)</span>，转速<span
+class="math inline">\(n=\frac{60f}{N_r}\)</span></p>
+<h2 id="结构设计">结构设计</h2>
+<h3 id="功率变换器---具有最少数量主开关器件的功率变换器">功率变换器 -
+具有最少数量主开关器件的功率变换器</h3>
+<p><img src="/image/jldj08.png" /></p>
+<p>可以接到功率变换器的绕组<strong>最多相数为上、下桥臂主开关数</strong>
+<span class="math inline">\(n_U\times n_L\)</span></p>
+<p>Va和Vb导通时，A相绕组通电；Va和Vb关断时，绕组通过<span
+class="math inline">\(V_{Da}\)</span>、<span
+class="math inline">\(V_{Db}\)</span>和<span
+class="math inline">\(V_{D1}\)</span>续流</p>
 <ul>
-<li><p>保留了桥式电路的全部优点，但每相主开关器件少于两个；</p>
-</li>
-<li><p><strong>增加电动机相数从而减小转矩脉动</strong>而又<strong>不增加功率变换器成本</strong>。</p>
-</li>
-<li><p>主开关器件额定电压&gt;Us</p>
-</li>
+<li><p>保留了桥式电路的全部优点，但每相主开关器件少于两个；</p></li>
+<li><p><strong>增加电动机相数从而减小转矩脉动</strong>而又<strong>不增加功率变换器成本</strong>。</p></li>
+<li><p>主开关器件额定电压&gt;Us</p></li>
 </ul>
-<p><strong>其他功率变换电路的优缺点比较</strong>（放图片绝对不是因为我懒得抄了，绝对不是…）</p>
-<p><img src="/image/jldj09.png" alt=""></p>
-<h2 id="运行方式"><a href="#运行方式" class="headerlink" title="运行方式"></a>运行方式</h2><p>同样的，开关磁阻电机的电感（互感）也是随转子角度而变化的函数，但不同的是这是梯形波。</p>
-<script type="math/tex; mode=display">
-U=iR+L\frac{\text di}{\text dt}+i\frac{\partial L}{\partial \theta}\omega</script><p>不是，我tm看不懂啊</p>
-<h2 id="控制方式"><a href="#控制方式" class="headerlink" title="控制方式"></a>控制方式</h2><h3 id="角度位置控制APC-高速"><a href="#角度位置控制APC-高速" class="headerlink" title="角度位置控制APC - 高速"></a>角度位置控制APC - 高速</h3><p>加于相绕组两端的电压大小不变的情况下，通过调节SRM电动机的主开关器件的开通角 $\theta<em>{on}$ 和关断角 $\theta</em>{off}$ 的值，来实现转矩和速度的调节。可以简单的理解为，两个角度之间的差值 $\theta<em>{on}-\theta</em>{off}$ ，越大，功率变换器的电压作用时间越长，电机的相电流越大。</p>
+<p><strong>其他功率变换电路的优缺点比较</strong>（放图片绝对不是因为我懒得抄了，绝对不是...）</p>
+<p><img src="/image/jldj09.png" /></p>
+<h2 id="运行方式">运行方式</h2>
+<p>同样的，开关磁阻电机的电感（互感）也是随转子角度而变化的函数，但不同的是这是梯形波。<br />
+<span class="math display">\[
+U=iR+L\frac{\text di}{\text dt}+i\frac{\partial L}{\partial
+\theta}\omega
+\]</span><br />
+不是，我tm看不懂啊</p>
+<h2 id="控制方式">控制方式</h2>
+<h3 id="角度位置控制apc---高速">角度位置控制APC - 高速</h3>
+<p>加于相绕组两端的电压大小不变的情况下，通过调节SRM电动机的主开关器件的开通角
+<span class="math inline">\(\theta_{on}\)</span> 和关断角 <span
+class="math inline">\(\theta_{off}\)</span>
+的值，来实现转矩和速度的调节。可以简单的理解为，两个角度之间的差值 <span
+class="math inline">\(\theta_{on}-\theta_{off}\)</span>
+，越大，功率变换器的电压作用时间越长，电机的相电流越大。</p>
 <p>尤其是当电机<strong>转速较高</strong>，旋转电动势较大，电机绕组电流相对较小时，最宜采用此种控制方式。</p>
-<h3 id="电流斩波控制CCC-低速"><a href="#电流斩波控制CCC-低速" class="headerlink" title="电流斩波控制CCC - 低速"></a>电流斩波控制CCC - 低速</h3><p>在SRM电动机起动、中低速运行时，电压不变，旋转电动势引起的压降小，电感上升期的时间长，而<strong>di/dt的值却相当大</strong>。</p>
-<p> 为避免过大的电流脉冲峰值超过功率开关元件和电机允许的最大电流，通常会采用电流斩波的控制方式来<strong>限制电流大小</strong>。 一 般在低速运行时，将使电机的开通角 $\theta<em>{on}$ 和关断角 $\theta</em>{off}$ 保持不变， 而主要<strong>靠控制斩波电流$T_i$的大小来调节电流的峰值</strong>，从而起到调 节电动机转矩和转速的目的</p>
+<h3 id="电流斩波控制ccc---低速">电流斩波控制CCC - 低速</h3>
+<p>在SRM电动机起动、中低速运行时，电压不变，旋转电动势引起的压降小，电感上升期的时间长，而<strong>di/dt的值却相当大</strong>。</p>
+<p>为避免过大的电流脉冲峰值超过功率开关元件和电机允许的最大电流，通常会采用电流斩波的控制方式来<strong>限制电流大小</strong>。
+一 般在低速运行时，将使电机的开通角 <span
+class="math inline">\(\theta_{on}\)</span> 和关断角 <span
+class="math inline">\(\theta_{off}\)</span> 保持不变，
+而主要<strong>靠控制斩波电流<span
+class="math inline">\(T_i\)</span>的大小来调节电流的峰值</strong>，从而起到调
+节电动机转矩和转速的目的</p>
 <p>斩波电流的波形有一点像电流滞环</p>
-<h3 id="宽范围调速SRD"><a href="#宽范围调速SRD" class="headerlink" title="宽范围调速SRD"></a>宽范围调速SRD</h3><p>混合</p>
-<p><img src="/image/jldj10.png" alt=""></p>
-<h2 id="噪声与振动抑制"><a href="#噪声与振动抑制" class="headerlink" title="噪声与振动抑制"></a>噪声与振动抑制</h2><p>由于开关磁阻电机的定转子双凸极结构及特殊的供电方式，为了提高电机输出功率密度，开关磁阻电机常运行在<strong>深度磁饱和状态</strong>，转矩是转子位置和绕组电流的非线性函数，在采用传统的<u>矩形脉冲供电</u>模式下，电机<strong>转矩脉动明显</strong>，<strong>运行噪声也较大</strong>，这在转轴惯量小、转速低时尤为严重。</p>
+<h3 id="宽范围调速srd">宽范围调速SRD</h3>
+<p>混合</p>
+<p><img src="/image/jldj10.png" /></p>
+<h2 id="噪声与振动抑制">噪声与振动抑制</h2>
+<p>由于开关磁阻电机的定转子双凸极结构及特殊的供电方式，为了提高电机输出功率密度，开关磁阻电机常运行在<strong>深度磁饱和状态</strong>，转矩是转子位置和绕组电流的非线性函数，在采用传统的<u>矩形脉冲供电</u>模式下，电机<strong>转矩脉动明显</strong>，<strong>运行噪声也较大</strong>，这在转轴惯量小、转速低时尤为严重。</p>
 <p>爬爬爬</p>
-<h1 id="大功率交流电机调速"><a href="#大功率交流电机调速" class="headerlink" title="大功率交流电机调速"></a>大功率交流电机调速</h1><h2 id="大容量电机的调速方法"><a href="#大容量电机的调速方法" class="headerlink" title="大容量电机的调速方法"></a>大容量电机的调速方法</h2><p>矛盾点：交流电机调速一般采用<strong>变频</strong>，而大容量、高电压的电机不好变频</p>
-<h3 id="高-低-高结构"><a href="#高-低-高结构" class="headerlink" title="高-低-高结构"></a>高-低-高结构</h3><ul>
+<h1 id="大功率交流电机调速">大功率交流电机调速</h1>
+<h2 id="大容量电机的调速方法">大容量电机的调速方法</h2>
+<p>矛盾点：交流电机调速一般采用<strong>变频</strong>，而大容量、高电压的电机不好变频</p>
+<h3 id="高-低-高结构">高-低-高结构</h3>
+<ul>
 <li>先把高压降下来，在低压段变频，变完再升回去</li>
-<li>降压变压器 - 整流变压器（变频） - 升压变压器（可采用多重化技术）</li>
+<li>降压变压器 - 整流变压器（变频） -
+升压变压器（可采用多重化技术）</li>
 <li>实际上是低压变频器，难度小，变频器成本↓</li>
 <li>2个变压器，体积↑、损耗↑ 、效率↓</li>
 </ul>
-<h3 id="多管串联的两电平变换电路"><a href="#多管串联的两电平变换电路" class="headerlink" title="多管串联的两电平变换电路"></a>多管串联的两电平变换电路</h3><ul>
-<li>可拓展为多电平：<ul>
+<h3 id="多管串联的两电平变换电路">多管串联的两电平变换电路</h3>
+<ul>
+<li>可拓展为多电平：
+<ul>
 <li>传统两电平逆变器的输出电压只有 +Vdc 和 –Vdc 两个电平；</li>
-<li>多电平逆变器通过<strong>增加中间电平（如0、±Vdc/2、±Vdc/3…）</strong>，使输出波形更接近正弦波，从而<strong>降低谐波含量</strong>、<strong>减小dv/dt</strong>、<strong>提高输出质量</strong></li>
-</ul>
-</li>
+<li>多电平逆变器通过<strong>增加中间电平（如0、±Vdc/2、±Vdc/3...）</strong>，使输出波形更接近正弦波，从而<strong>降低谐波含量</strong>、<strong>减小dv/dt</strong>、<strong>提高输出质量</strong></li>
+</ul></li>
 <li>每个功率器件承受的电压减半，但电流不变</li>
 </ul>
-<h3 id="多电平电压型逆变器"><a href="#多电平电压型逆变器" class="headerlink" title="多电平电压型逆变器"></a>多电平电压型逆变器</h3><h3 id="单元串联多电平PWM电压源型逆变器（交直交）"><a href="#单元串联多电平PWM电压源型逆变器（交直交）" class="headerlink" title="单元串联多电平PWM电压源型逆变器（交直交）"></a>单元串联多电平PWM电压源型逆变器（交直交）</h3><p><img src="/image/jldj11.png" alt=""></p>
+<h3 id="多电平电压型逆变器">多电平电压型逆变器</h3>
+<h3
+id="单元串联多电平pwm电压源型逆变器交直交">单元串联多电平PWM电压源型逆变器（交直交）</h3>
+<p><img src="/image/jldj11.png" /></p>
 <ul>
-<li><p><strong>单元串联结构</strong></p>
-<ul>
-<li><p>由<strong>多个H桥逆变单元串联</strong>而成，每个单元有<strong>独立的直流电源（或电容）</strong></p>
-</li>
+<li><p><strong>单元串联结构</strong></p></li>
+<li><p>由<strong>多个H桥逆变单元串联</strong>而成，每个单元有<strong>独立的直流电源（或电容）</strong></p></li>
 <li><p>每个H桥都能输出 +Vdc、0、–Vdc 三种电平。例如：</p>
 <ul>
 <li>串联两个H桥 → 输出电平数 = 2×2+1 = 5电平</li>
 <li>串联三个H桥 → 输出电平数 = 2×3+1 = 7电平</li>
-</ul>
-</li>
-</ul>
-</li>
+</ul></li>
 <li><p><strong>移相变压器</strong></p>
 <ul>
 <li>在工业场合（如6kV、10kV电机驱动）时，不可能准备很多独立的直流电源</li>
 <li>移相变压器可以从<strong>同一输入电网</strong>获取多个<strong>电气隔离且相位错开的低压直流电源</strong>。</li>
-<li>延边三角形 → 次级相位<strong>超前或滞后一定角度</strong>（取决于接线方式）</li>
-</ul>
-</li>
+<li>延边三角形 →
+次级相位<strong>超前或滞后一定角度</strong>（取决于接线方式）</li>
+</ul></li>
 <li><p><strong>为什么要移相</strong></p>
 <ul>
 <li>每一组逆变单元都会产生一个由矩形波拟合成的<strong>“伪正弦信号”</strong>，谐波含量丰富</li>
 <li>如果有多组整流单元，并且各组的输入电压<strong>相位不同</strong>，那么这些整流电流的<strong>谐波会相互抵消</strong></li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">电网（高压交流） </span><br><span class="line">   ↓</span><br><span class="line">移相变压器（多组次级绕组）</span><br><span class="line">   ↓</span><br><span class="line">多个低压整流单元（交→直）</span><br><span class="line">   ↓</span><br><span class="line">多个H桥逆变单元（直→交，PWM控制）</span><br><span class="line">   ↓</span><br><span class="line">多单元输出电压串联叠加</span><br><span class="line">   ↓</span><br><span class="line">电机（高压交流输出）</span><br></pre></td></tr></table></figure>
 <p>移相变压器的二次绕组在绕制时，采用延边三角形，相互间差某一相位角。移相变压器将输入交流电变为低压交流电</p>
-<h2 id="大功率多相变频调速系统"><a href="#大功率多相变频调速系统" class="headerlink" title="大功率多相变频调速系统"></a>大功率多相变频调速系统</h2><ul>
-<li>重点在电机的<strong>多相</strong><ul>
+<h2 id="大功率多相变频调速系统">大功率多相变频调速系统</h2>
+<ul>
+<li>重点在电机的<strong>多相</strong>
+<ul>
 <li>可实现低压大功率，特别适合应用于低压供电场合。</li>
 <li>随着相数增多，电机<strong>转矩脉动幅值减少</strong>，振动和噪声减少，低速性能得到改善。</li>
 <li>由于<strong>冗余特性</strong>，多相驱动系统可在故障情况下实现<strong>容错运行</strong>，显著增加了系统的可靠性。</li>
 <li>多相电机的另一个重要特性是具有多自由度，<strong>提高功率密度和增大转矩输出</strong>。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<p><img src="/image/jldj12.png" alt=""></p>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener" href="https://github.com/ParadoxTZ">Paradox</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://zju-paradox.top/2025/11/06/%E4%BA%A4%E6%B5%81%E7%94%B5%E6%9C%BA%E8%B0%83%E9%80%9F%E7%90%86%E8%AE%BA/">http://zju-paradox.top/2025/11/06/交流电机调速理论/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">此文章版权归Paradox所有，如有转载，请注明出处</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a><a class="post-meta__tags" href="/tags/%E7%94%B5%E6%B0%94/">电气</a><a class="post-meta__tags" href="/tags/%E7%A0%94%E7%A9%B6%E7%94%9F/">研究生</a></div><div class="post-share"><div class="social-share" data-image="/image/Boki.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/11/02/%E7%8E%B0%E4%BB%A3%E8%BF%90%E5%8A%A8%E6%8E%A7%E5%88%B6%E7%AD%96%E7%95%A5/" title="（研）现代运动控制策略-孙丹"><img class="cover" src="/image/%E8%B7%91%E9%A9%AC%E7%9A%84%E4%BB%A3%E4%BB%B7.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">（研）现代运动控制策略-孙丹</div></div><div class="info-2"><div class="info-item-1">关注B站法娜Fyna喵，关注全B站最好的坏小孩@法娜Fyna谢谢喵</div></div></div></a><a class="pagination-related" href="/2025/11/28/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2/" title="普通人应该怎样价值投资？Paradox的投资理财记录帖"><img class="cover" src="/image/FIRE03.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">普通人应该怎样价值投资？Paradox的投资理财记录帖</div></div><div class="info-2"><div class="info-item-1">让时间给出答案，用等待换取回报</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/01/09/%E5%8A%A8%E5%8A%9B%E4%B8%8E%E7%94%B5%E6%B0%94%E5%B7%A5%E7%A8%8B%E5%B7%A5%E4%B8%9A%E5%BA%94%E7%94%A8%E7%BB%BC%E8%BF%B0/" title="（研）动力与电气工程工业应用综述"><img class="cover" src="/image/%E5%9C%A3%E8%AF%9E.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-01-09</div><div class="info-item-2">（研）动力与电气工程工业应用综述</div></div><div class="info-2"><div class="info-item-1">这门课学完不骂人的可以去四川省凌云寺里面，找到一个叫乐山大佛的，把他踹了你自己坐上去</div></div></div></a><a class="pagination-related" href="/2025/11/02/%E7%8E%B0%E4%BB%A3%E8%BF%90%E5%8A%A8%E6%8E%A7%E5%88%B6%E7%AD%96%E7%95%A5/" title="（研）现代运动控制策略-孙丹"><img class="cover" src="/image/%E8%B7%91%E9%A9%AC%E7%9A%84%E4%BB%A3%E4%BB%B7.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-02</div><div class="info-item-2">（研）现代运动控制策略-孙丹</div></div><div class="info-2"><div class="info-item-1">关注B站法娜Fyna喵，关注全B站最好的坏小孩@法娜Fyna谢谢喵</div></div></div></a><a class="pagination-related" href="/2024/12/13/%E7%94%B5%E6%9C%BA%E5%B7%A5%E7%A8%8B%E5%88%9B%E6%96%B0%E5%AE%9E%E8%B7%B5/" title="电机工程创新实践（短学期）"><img class="cover" src="/image/lyy.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-13</div><div class="info-item-2">电机工程创新实践（短学期）</div></div><div class="info-2"><div class="info-item-1">大四了就得是开摆而不是不摆</div></div></div></a><a class="pagination-related" href="/2024/06/11/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/" title="电机控制"><img class="cover" src="/image/%E6%B1%82%E6%98%AF%E5%A4%A7%E8%AE%B2%E5%A0%82.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-11</div><div class="info-item-2">电机控制</div></div><div class="info-2"><div class="info-item-1">请速速购入FPX标配！（这门课没作业反倒让我不知道考什么了）</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/image/qsc.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Paradox</div><div class="author-info-description">未知苦处，不信神佛</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">28</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ParadoxTZ"><i class="fab fa-github"></i><span>个人主页(Github)</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/ParadoxTZ" target="_blank" title="Github"><i class="fab fa-github" style="color: #000000;"></i></a><a class="social-icon" href="mailto:420907574@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #000000;"></i></a><a class="social-icon" href="https://mp.weixin.qq.com/mp/profile_ext?action=home&amp;__biz=Mzg3MDk3NzYwOQ==" target="_blank" title="Wechat"><i class="fab fa-weixin" style="color: #000000;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">未知苦处，不信神佛。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B0%83%E5%8E%8B%E8%B0%83%E9%80%9F%E4%B8%8E%E7%94%B5%E7%A3%81%E8%BD%AC%E5%B7%AE%E7%A6%BB%E5%90%88%E5%99%A8%E8%B0%83%E9%80%9F"><span class="toc-number">1.</span> <span class="toc-text">调压调速与电磁转差离合器调速</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E5%8E%8B%E8%B0%83%E9%80%9F"><span class="toc-number">1.1.</span> <span class="toc-text">调压调速</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%B7%E5%8A%A8"><span class="toc-number">1.1.1.</span> <span class="toc-text">起动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%B5%E7%A3%81%E8%BD%AC%E5%B7%AE%E7%A6%BB%E5%90%88%E5%99%A8%E8%B0%83%E9%80%9F"><span class="toc-number">1.2.</span> <span class="toc-text">电磁转差离合器调速</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%95%E7%BA%BF%E5%BC%82%E6%AD%A5%E7%94%B5%E6%9C%BA%E5%8F%8C%E9%A6%88%EF%BC%88%E4%B8%B2%E7%BA%A7%EF%BC%89%E8%B0%83%E9%80%9F"><span class="toc-number">2.</span> <span class="toc-text">绕线异步电机双馈（串级）调速</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E6%AD%A5%E7%94%B5%E6%9C%BA%E8%BD%AC%E5%AD%90%E9%99%84%E5%8A%A0%E7%94%B5%E5%8A%A8%E5%8A%BF"><span class="toc-number">2.1.</span> <span class="toc-text">异步电机转子附加电动势</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8C%E9%A6%88%E8%B0%83%E9%80%9F%E7%9A%84%E4%BA%94%E7%A7%8D%E5%B7%A5%E5%86%B5"><span class="toc-number">2.2.</span> <span class="toc-text">双馈调速的五种工况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%9A%E5%90%8C%E6%AD%A5%E9%80%9F%E7%94%B5%E5%8A%A8%E7%8A%B6%E6%80%81%E4%B8%8B%E7%9A%84%E4%B8%B2%E7%BA%A7%E8%B0%83%E9%80%9F%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.3.</span> <span class="toc-text">亚同步速电动状态下的串级调速系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%BA%E6%A2%B0%E7%89%B9%E6%80%A7"><span class="toc-number">2.4.</span> <span class="toc-text">机械特性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%98%E9%A2%91%E8%B0%83%E9%80%9F%E4%B8%8E%E8%84%89%E5%AE%BD%E8%B0%83%E5%88%B6"><span class="toc-number">3.</span> <span class="toc-text">变频调速与脉宽调制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E9%A2%91%E8%B0%83%E9%80%9F"><span class="toc-number">3.1.</span> <span class="toc-text">变频调速</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PWM%E6%95%B4%E6%B5%81-%E9%80%86%E5%8F%98"><span class="toc-number">3.1.1.</span> <span class="toc-text">PWM整流-逆变</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%90%E6%8C%AF%E8%BD%AF%E5%BC%80%E5%85%B3"><span class="toc-number">3.1.2.</span> <span class="toc-text">谐振软开关</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%84%89%E5%AE%BD%E8%B0%83%E5%88%B6"><span class="toc-number">3.2.</span> <span class="toc-text">脉宽调制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SPWM"><span class="toc-number">3.2.1.</span> <span class="toc-text">SPWM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%B6%E5%AE%9A%E8%B0%90%E6%B3%A2%E6%B6%88%E5%8E%BB"><span class="toc-number">3.2.2.</span> <span class="toc-text">制定谐波消去</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8CPWM%E5%8F%98%E6%8D%A2%E5%99%A8"><span class="toc-number">3.2.3.</span> <span class="toc-text">双PWM变换器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%85%B3%E7%A3%81%E9%98%BB%E7%94%B5%E6%9C%BA"><span class="toc-number">4.</span> <span class="toc-text">开关磁阻电机</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-number">4.1.</span> <span class="toc-text">基本原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">4.2.</span> <span class="toc-text">结构设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9F%E7%8E%87%E5%8F%98%E6%8D%A2%E5%99%A8-%E5%85%B7%E6%9C%89%E6%9C%80%E5%B0%91%E6%95%B0%E9%87%8F%E4%B8%BB%E5%BC%80%E5%85%B3%E5%99%A8%E4%BB%B6%E7%9A%84%E5%8A%9F%E7%8E%87%E5%8F%98%E6%8D%A2%E5%99%A8"><span class="toc-number">4.2.1.</span> <span class="toc-text">功率变换器 - 具有最少数量主开关器件的功率变换器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%96%B9%E5%BC%8F"><span class="toc-number">4.3.</span> <span class="toc-text">运行方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E6%96%B9%E5%BC%8F"><span class="toc-number">4.4.</span> <span class="toc-text">控制方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%92%E5%BA%A6%E4%BD%8D%E7%BD%AE%E6%8E%A7%E5%88%B6APC-%E9%AB%98%E9%80%9F"><span class="toc-number">4.4.1.</span> <span class="toc-text">角度位置控制APC - 高速</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B5%E6%B5%81%E6%96%A9%E6%B3%A2%E6%8E%A7%E5%88%B6CCC-%E4%BD%8E%E9%80%9F"><span class="toc-number">4.4.2.</span> <span class="toc-text">电流斩波控制CCC - 低速</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%BD%E8%8C%83%E5%9B%B4%E8%B0%83%E9%80%9FSRD"><span class="toc-number">4.4.3.</span> <span class="toc-text">宽范围调速SRD</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%99%AA%E5%A3%B0%E4%B8%8E%E6%8C%AF%E5%8A%A8%E6%8A%91%E5%88%B6"><span class="toc-number">4.5.</span> <span class="toc-text">噪声与振动抑制</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%A7%E5%8A%9F%E7%8E%87%E4%BA%A4%E6%B5%81%E7%94%B5%E6%9C%BA%E8%B0%83%E9%80%9F"><span class="toc-number">5.</span> <span class="toc-text">大功率交流电机调速</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%A7%E5%AE%B9%E9%87%8F%E7%94%B5%E6%9C%BA%E7%9A%84%E8%B0%83%E9%80%9F%E6%96%B9%E6%B3%95"><span class="toc-number">5.1.</span> <span class="toc-text">大容量电机的调速方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98-%E4%BD%8E-%E9%AB%98%E7%BB%93%E6%9E%84"><span class="toc-number">5.1.1.</span> <span class="toc-text">高-低-高结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%AE%A1%E4%B8%B2%E8%81%94%E7%9A%84%E4%B8%A4%E7%94%B5%E5%B9%B3%E5%8F%98%E6%8D%A2%E7%94%B5%E8%B7%AF"><span class="toc-number">5.1.2.</span> <span class="toc-text">多管串联的两电平变换电路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%94%B5%E5%B9%B3%E7%94%B5%E5%8E%8B%E5%9E%8B%E9%80%86%E5%8F%98%E5%99%A8"><span class="toc-number">5.1.3.</span> <span class="toc-text">多电平电压型逆变器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E5%85%83%E4%B8%B2%E8%81%94%E5%A4%9A%E7%94%B5%E5%B9%B3PWM%E7%94%B5%E5%8E%8B%E6%BA%90%E5%9E%8B%E9%80%86%E5%8F%98%E5%99%A8%EF%BC%88%E4%BA%A4%E7%9B%B4%E4%BA%A4%EF%BC%89"><span class="toc-number">5.1.4.</span> <span class="toc-text">单元串联多电平PWM电压源型逆变器（交直交）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%A7%E5%8A%9F%E7%8E%87%E5%A4%9A%E7%9B%B8%E5%8F%98%E9%A2%91%E8%B0%83%E9%80%9F%E7%B3%BB%E7%BB%9F"><span class="toc-number">5.2.</span> <span class="toc-text">大功率多相变频调速系统</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/01/09/%E5%8A%A8%E5%8A%9B%E4%B8%8E%E7%94%B5%E6%B0%94%E5%B7%A5%E7%A8%8B%E5%B7%A5%E4%B8%9A%E5%BA%94%E7%94%A8%E7%BB%BC%E8%BF%B0/" title="（研）动力与电气工程工业应用综述"><img src="/image/%E5%9C%A3%E8%AF%9E.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="（研）动力与电气工程工业应用综述"/></a><div class="content"><a class="title" href="/2026/01/09/%E5%8A%A8%E5%8A%9B%E4%B8%8E%E7%94%B5%E6%B0%94%E5%B7%A5%E7%A8%8B%E5%B7%A5%E4%B8%9A%E5%BA%94%E7%94%A8%E7%BB%BC%E8%BF%B0/" title="（研）动力与电气工程工业应用综述">（研）动力与电气工程工业应用综述</a><time datetime="2026-01-09T05:12:21.888Z" title="发表于 2026-01-09 13:12:21">2026-01-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/28/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2/" title="普通人应该怎样价值投资？Paradox的投资理财记录帖"><img src="/image/FIRE03.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="普通人应该怎样价值投资？Paradox的投资理财记录帖"/></a><div class="content"><a class="title" href="/2025/11/28/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2/" title="普通人应该怎样价值投资？Paradox的投资理财记录帖">普通人应该怎样价值投资？Paradox的投资理财记录帖</a><time datetime="2025-11-27T16:00:00.000Z" title="发表于 2025-11-28 00:00:00">2025-11-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/06/%E4%BA%A4%E6%B5%81%E7%94%B5%E6%9C%BA%E8%B0%83%E9%80%9F%E7%90%86%E8%AE%BA/" title="（研）交流电机调速理论-杨家强"><img src="/image/Boki.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="（研）交流电机调速理论-杨家强"/></a><div class="content"><a class="title" href="/2025/11/06/%E4%BA%A4%E6%B5%81%E7%94%B5%E6%9C%BA%E8%B0%83%E9%80%9F%E7%90%86%E8%AE%BA/" title="（研）交流电机调速理论-杨家强">（研）交流电机调速理论-杨家强</a><time datetime="2025-11-06T13:34:59.548Z" title="发表于 2025-11-06 21:34:59">2025-11-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/02/%E7%8E%B0%E4%BB%A3%E8%BF%90%E5%8A%A8%E6%8E%A7%E5%88%B6%E7%AD%96%E7%95%A5/" title="（研）现代运动控制策略-孙丹"><img src="/image/%E8%B7%91%E9%A9%AC%E7%9A%84%E4%BB%A3%E4%BB%B7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="（研）现代运动控制策略-孙丹"/></a><div class="content"><a class="title" href="/2025/11/02/%E7%8E%B0%E4%BB%A3%E8%BF%90%E5%8A%A8%E6%8E%A7%E5%88%B6%E7%AD%96%E7%95%A5/" title="（研）现代运动控制策略-孙丹">（研）现代运动控制策略-孙丹</a><time datetime="2025-11-02T04:51:49.951Z" title="发表于 2025-11-02 12:51:49">2025-11-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/06/26/latex%E6%95%99%E7%A8%8B/" title="从Word、MarkDown到Latex，打造最优雅的写作方式"><img src="/image/tanlang.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="从Word、MarkDown到Latex，打造最优雅的写作方式"/></a><div class="content"><a class="title" href="/2025/06/26/latex%E6%95%99%E7%A8%8B/" title="从Word、MarkDown到Latex，打造最优雅的写作方式">从Word、MarkDown到Latex，打造最优雅的写作方式</a><time datetime="2025-06-25T16:00:00.000Z" title="发表于 2025-06-26 00:00:00">2025-06-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2026 By Paradox</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 6.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+<p><img src="/image/jldj12.png" /></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener" href="https://github.com/ParadoxTZ">Paradox</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://zju-paradox.top/2025/11/06/%E4%BA%A4%E6%B5%81%E7%94%B5%E6%9C%BA%E8%B0%83%E9%80%9F%E7%90%86%E8%AE%BA/">http://zju-paradox.top/2025/11/06/交流电机调速理论/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">此文章版权归Paradox所有，如有转载，请注明出处</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a><a class="post-meta__tags" href="/tags/%E7%94%B5%E6%B0%94/">电气</a><a class="post-meta__tags" href="/tags/%E7%A0%94%E7%A9%B6%E7%94%9F/">研究生</a></div><div class="post-share"><div class="social-share" data-image="/image/Boki.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/11/02/%E7%8E%B0%E4%BB%A3%E8%BF%90%E5%8A%A8%E6%8E%A7%E5%88%B6%E7%AD%96%E7%95%A5/" title="（研）现代运动控制策略-孙丹"><img class="cover" src="/image/%E8%B7%91%E9%A9%AC%E7%9A%84%E4%BB%A3%E4%BB%B7.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">（研）现代运动控制策略-孙丹</div></div><div class="info-2"><div class="info-item-1">关注B站法娜Fyna喵，关注全B站最好的坏小孩@法娜Fyna谢谢喵</div></div></div></a><a class="pagination-related" href="/2025/11/28/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2/" title="普通人应该怎样价值投资？Paradox的投资理财记录帖"><img class="cover" src="/image/FIRE03.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">普通人应该怎样价值投资？Paradox的投资理财记录帖</div></div><div class="info-2"><div class="info-item-1">你讲太复杂了，直接告诉我梭哈哪个</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/01/09/%E5%8A%A8%E5%8A%9B%E4%B8%8E%E7%94%B5%E6%B0%94%E5%B7%A5%E7%A8%8B%E5%B7%A5%E4%B8%9A%E5%BA%94%E7%94%A8%E7%BB%BC%E8%BF%B0/" title="（研）动力与电气工程工业应用综述"><img class="cover" src="/image/%E5%9C%A3%E8%AF%9E.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-01-09</div><div class="info-item-2">（研）动力与电气工程工业应用综述</div></div><div class="info-2"><div class="info-item-1">这门课学完不骂人的可以去四川省凌云寺里面，找到一个叫乐山大佛的，把他踹了你自己坐上去</div></div></div></a><a class="pagination-related" href="/2025/11/02/%E7%8E%B0%E4%BB%A3%E8%BF%90%E5%8A%A8%E6%8E%A7%E5%88%B6%E7%AD%96%E7%95%A5/" title="（研）现代运动控制策略-孙丹"><img class="cover" src="/image/%E8%B7%91%E9%A9%AC%E7%9A%84%E4%BB%A3%E4%BB%B7.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-02</div><div class="info-item-2">（研）现代运动控制策略-孙丹</div></div><div class="info-2"><div class="info-item-1">关注B站法娜Fyna喵，关注全B站最好的坏小孩@法娜Fyna谢谢喵</div></div></div></a><a class="pagination-related" href="/2024/12/13/%E7%94%B5%E6%9C%BA%E5%B7%A5%E7%A8%8B%E5%88%9B%E6%96%B0%E5%AE%9E%E8%B7%B5/" title="电机工程创新实践（短学期）"><img class="cover" src="/image/lyy.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-13</div><div class="info-item-2">电机工程创新实践（短学期）</div></div><div class="info-2"><div class="info-item-1">大四了就得是开摆而不是不摆</div></div></div></a><a class="pagination-related" href="/2024/06/11/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/" title="电机控制"><img class="cover" src="/image/%E6%B1%82%E6%98%AF%E5%A4%A7%E8%AE%B2%E5%A0%82.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-11</div><div class="info-item-2">电机控制</div></div><div class="info-2"><div class="info-item-1">请速速购入FPX标配！（这门课没作业反倒让我不知道考什么了）</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/image/qsc.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Paradox</div><div class="author-info-description">未知苦处，不信神佛</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">28</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ParadoxTZ"><i class="fab fa-github"></i><span>个人主页(Github)</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/ParadoxTZ" target="_blank" title="Github"><i class="fab fa-github" style="color: #000000;"></i></a><a class="social-icon" href="mailto:420907574@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #000000;"></i></a><a class="social-icon" href="https://mp.weixin.qq.com/mp/profile_ext?action=home&amp;__biz=Mzg3MDk3NzYwOQ==" target="_blank" title="Wechat"><i class="fab fa-weixin" style="color: #000000;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">未知苦处，不信神佛。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B0%83%E5%8E%8B%E8%B0%83%E9%80%9F%E4%B8%8E%E7%94%B5%E7%A3%81%E8%BD%AC%E5%B7%AE%E7%A6%BB%E5%90%88%E5%99%A8%E8%B0%83%E9%80%9F"><span class="toc-number">1.</span> <span class="toc-text">调压调速与电磁转差离合器调速</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E5%8E%8B%E8%B0%83%E9%80%9F"><span class="toc-number">1.1.</span> <span class="toc-text">调压调速</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%B7%E5%8A%A8"><span class="toc-number">1.1.1.</span> <span class="toc-text">起动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%B5%E7%A3%81%E8%BD%AC%E5%B7%AE%E7%A6%BB%E5%90%88%E5%99%A8%E8%B0%83%E9%80%9F"><span class="toc-number">1.2.</span> <span class="toc-text">电磁转差离合器调速</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%95%E7%BA%BF%E5%BC%82%E6%AD%A5%E7%94%B5%E6%9C%BA%E5%8F%8C%E9%A6%88%E4%B8%B2%E7%BA%A7%E8%B0%83%E9%80%9F"><span class="toc-number">2.</span> <span class="toc-text">绕线异步电机双馈（串级）调速</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E6%AD%A5%E7%94%B5%E6%9C%BA%E8%BD%AC%E5%AD%90%E9%99%84%E5%8A%A0%E7%94%B5%E5%8A%A8%E5%8A%BF"><span class="toc-number">2.1.</span> <span class="toc-text">异步电机转子附加电动势</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8C%E9%A6%88%E8%B0%83%E9%80%9F%E7%9A%84%E4%BA%94%E7%A7%8D%E5%B7%A5%E5%86%B5"><span class="toc-number">2.2.</span> <span class="toc-text">双馈调速的五种工况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%9A%E5%90%8C%E6%AD%A5%E9%80%9F%E7%94%B5%E5%8A%A8%E7%8A%B6%E6%80%81%E4%B8%8B%E7%9A%84%E4%B8%B2%E7%BA%A7%E8%B0%83%E9%80%9F%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.3.</span> <span class="toc-text">亚同步速电动状态下的串级调速系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%BA%E6%A2%B0%E7%89%B9%E6%80%A7"><span class="toc-number">2.4.</span> <span class="toc-text">机械特性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%98%E9%A2%91%E8%B0%83%E9%80%9F%E4%B8%8E%E8%84%89%E5%AE%BD%E8%B0%83%E5%88%B6"><span class="toc-number">3.</span> <span class="toc-text">变频调速与脉宽调制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E9%A2%91%E8%B0%83%E9%80%9F"><span class="toc-number">3.1.</span> <span class="toc-text">变频调速</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pwm%E6%95%B4%E6%B5%81-%E9%80%86%E5%8F%98"><span class="toc-number">3.1.1.</span> <span class="toc-text">PWM整流-逆变</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%90%E6%8C%AF%E8%BD%AF%E5%BC%80%E5%85%B3"><span class="toc-number">3.1.2.</span> <span class="toc-text">谐振软开关</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%84%89%E5%AE%BD%E8%B0%83%E5%88%B6"><span class="toc-number">3.2.</span> <span class="toc-text">脉宽调制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#spwm"><span class="toc-number">3.2.1.</span> <span class="toc-text">SPWM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%B6%E5%AE%9A%E8%B0%90%E6%B3%A2%E6%B6%88%E5%8E%BB"><span class="toc-number">3.2.2.</span> <span class="toc-text">制定谐波消去</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8Cpwm%E5%8F%98%E6%8D%A2%E5%99%A8"><span class="toc-number">3.2.3.</span> <span class="toc-text">双PWM变换器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%85%B3%E7%A3%81%E9%98%BB%E7%94%B5%E6%9C%BA"><span class="toc-number">4.</span> <span class="toc-text">开关磁阻电机</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-number">4.1.</span> <span class="toc-text">基本原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">4.2.</span> <span class="toc-text">结构设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9F%E7%8E%87%E5%8F%98%E6%8D%A2%E5%99%A8---%E5%85%B7%E6%9C%89%E6%9C%80%E5%B0%91%E6%95%B0%E9%87%8F%E4%B8%BB%E5%BC%80%E5%85%B3%E5%99%A8%E4%BB%B6%E7%9A%84%E5%8A%9F%E7%8E%87%E5%8F%98%E6%8D%A2%E5%99%A8"><span class="toc-number">4.2.1.</span> <span class="toc-text">功率变换器 -
+具有最少数量主开关器件的功率变换器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%96%B9%E5%BC%8F"><span class="toc-number">4.3.</span> <span class="toc-text">运行方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E6%96%B9%E5%BC%8F"><span class="toc-number">4.4.</span> <span class="toc-text">控制方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%92%E5%BA%A6%E4%BD%8D%E7%BD%AE%E6%8E%A7%E5%88%B6apc---%E9%AB%98%E9%80%9F"><span class="toc-number">4.4.1.</span> <span class="toc-text">角度位置控制APC - 高速</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B5%E6%B5%81%E6%96%A9%E6%B3%A2%E6%8E%A7%E5%88%B6ccc---%E4%BD%8E%E9%80%9F"><span class="toc-number">4.4.2.</span> <span class="toc-text">电流斩波控制CCC - 低速</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%BD%E8%8C%83%E5%9B%B4%E8%B0%83%E9%80%9Fsrd"><span class="toc-number">4.4.3.</span> <span class="toc-text">宽范围调速SRD</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%99%AA%E5%A3%B0%E4%B8%8E%E6%8C%AF%E5%8A%A8%E6%8A%91%E5%88%B6"><span class="toc-number">4.5.</span> <span class="toc-text">噪声与振动抑制</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%A7%E5%8A%9F%E7%8E%87%E4%BA%A4%E6%B5%81%E7%94%B5%E6%9C%BA%E8%B0%83%E9%80%9F"><span class="toc-number">5.</span> <span class="toc-text">大功率交流电机调速</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%A7%E5%AE%B9%E9%87%8F%E7%94%B5%E6%9C%BA%E7%9A%84%E8%B0%83%E9%80%9F%E6%96%B9%E6%B3%95"><span class="toc-number">5.1.</span> <span class="toc-text">大容量电机的调速方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98-%E4%BD%8E-%E9%AB%98%E7%BB%93%E6%9E%84"><span class="toc-number">5.1.1.</span> <span class="toc-text">高-低-高结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%AE%A1%E4%B8%B2%E8%81%94%E7%9A%84%E4%B8%A4%E7%94%B5%E5%B9%B3%E5%8F%98%E6%8D%A2%E7%94%B5%E8%B7%AF"><span class="toc-number">5.1.2.</span> <span class="toc-text">多管串联的两电平变换电路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%94%B5%E5%B9%B3%E7%94%B5%E5%8E%8B%E5%9E%8B%E9%80%86%E5%8F%98%E5%99%A8"><span class="toc-number">5.1.3.</span> <span class="toc-text">多电平电压型逆变器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E5%85%83%E4%B8%B2%E8%81%94%E5%A4%9A%E7%94%B5%E5%B9%B3pwm%E7%94%B5%E5%8E%8B%E6%BA%90%E5%9E%8B%E9%80%86%E5%8F%98%E5%99%A8%E4%BA%A4%E7%9B%B4%E4%BA%A4"><span class="toc-number">5.1.4.</span> <span class="toc-text">单元串联多电平PWM电压源型逆变器（交直交）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%A7%E5%8A%9F%E7%8E%87%E5%A4%9A%E7%9B%B8%E5%8F%98%E9%A2%91%E8%B0%83%E9%80%9F%E7%B3%BB%E7%BB%9F"><span class="toc-number">5.2.</span> <span class="toc-text">大功率多相变频调速系统</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/01/09/%E5%8A%A8%E5%8A%9B%E4%B8%8E%E7%94%B5%E6%B0%94%E5%B7%A5%E7%A8%8B%E5%B7%A5%E4%B8%9A%E5%BA%94%E7%94%A8%E7%BB%BC%E8%BF%B0/" title="（研）动力与电气工程工业应用综述"><img src="/image/%E5%9C%A3%E8%AF%9E.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="（研）动力与电气工程工业应用综述"/></a><div class="content"><a class="title" href="/2026/01/09/%E5%8A%A8%E5%8A%9B%E4%B8%8E%E7%94%B5%E6%B0%94%E5%B7%A5%E7%A8%8B%E5%B7%A5%E4%B8%9A%E5%BA%94%E7%94%A8%E7%BB%BC%E8%BF%B0/" title="（研）动力与电气工程工业应用综述">（研）动力与电气工程工业应用综述</a><time datetime="2026-01-09T05:12:21.888Z" title="发表于 2026-01-09 13:12:21">2026-01-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/28/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2/" title="普通人应该怎样价值投资？Paradox的投资理财记录帖"><img src="/image/FIRE03.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="普通人应该怎样价值投资？Paradox的投资理财记录帖"/></a><div class="content"><a class="title" href="/2025/11/28/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2/" title="普通人应该怎样价值投资？Paradox的投资理财记录帖">普通人应该怎样价值投资？Paradox的投资理财记录帖</a><time datetime="2025-11-27T16:00:00.000Z" title="发表于 2025-11-28 00:00:00">2025-11-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/06/%E4%BA%A4%E6%B5%81%E7%94%B5%E6%9C%BA%E8%B0%83%E9%80%9F%E7%90%86%E8%AE%BA/" title="（研）交流电机调速理论-杨家强"><img src="/image/Boki.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="（研）交流电机调速理论-杨家强"/></a><div class="content"><a class="title" href="/2025/11/06/%E4%BA%A4%E6%B5%81%E7%94%B5%E6%9C%BA%E8%B0%83%E9%80%9F%E7%90%86%E8%AE%BA/" title="（研）交流电机调速理论-杨家强">（研）交流电机调速理论-杨家强</a><time datetime="2025-11-06T13:34:59.548Z" title="发表于 2025-11-06 21:34:59">2025-11-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/02/%E7%8E%B0%E4%BB%A3%E8%BF%90%E5%8A%A8%E6%8E%A7%E5%88%B6%E7%AD%96%E7%95%A5/" title="（研）现代运动控制策略-孙丹"><img src="/image/%E8%B7%91%E9%A9%AC%E7%9A%84%E4%BB%A3%E4%BB%B7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="（研）现代运动控制策略-孙丹"/></a><div class="content"><a class="title" href="/2025/11/02/%E7%8E%B0%E4%BB%A3%E8%BF%90%E5%8A%A8%E6%8E%A7%E5%88%B6%E7%AD%96%E7%95%A5/" title="（研）现代运动控制策略-孙丹">（研）现代运动控制策略-孙丹</a><time datetime="2025-11-02T04:51:49.951Z" title="发表于 2025-11-02 12:51:49">2025-11-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/06/26/latex%E6%95%99%E7%A8%8B/" title="从Word、MarkDown到Latex，打造最优雅的写作方式"><img src="/image/tanlang.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="从Word、MarkDown到Latex，打造最优雅的写作方式"/></a><div class="content"><a class="title" href="/2025/06/26/latex%E6%95%99%E7%A8%8B/" title="从Word、MarkDown到Latex，打造最优雅的写作方式">从Word、MarkDown到Latex，打造最优雅的写作方式</a><time datetime="2025-06-25T16:00:00.000Z" title="发表于 2025-06-26 00:00:00">2025-06-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2026 By Paradox</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 6.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
   const loadMathjax = () => {
     if (!window.MathJax) {
       window.MathJax = {
