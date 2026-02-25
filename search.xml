@@ -53,9 +53,9 @@
       
         <tags>
             
-            <tag> 编程 </tag>
-            
             <tag> 笔记 </tag>
+            
+            <tag> 编程 </tag>
             
         </tags>
       
@@ -169,9 +169,9 @@
       
         <tags>
             
-            <tag> 编程 </tag>
-            
             <tag> 笔记 </tag>
+            
+            <tag> 编程 </tag>
             
         </tags>
       
@@ -198,9 +198,9 @@
             
             <tag> 笔记 </tag>
             
-            <tag> 电气 </tag>
-            
             <tag> 大三 </tag>
+            
+            <tag> 电气 </tag>
             
         </tags>
       
@@ -287,9 +287,9 @@
             
             <tag> 笔记 </tag>
             
-            <tag> 电气 </tag>
-            
             <tag> 大三 </tag>
+            
+            <tag> 电气 </tag>
             
             <tag> 微机 </tag>
             
@@ -318,9 +318,9 @@
             
             <tag> 笔记 </tag>
             
-            <tag> 电气 </tag>
-            
             <tag> 大三 </tag>
+            
+            <tag> 电气 </tag>
             
             <tag> 微机 </tag>
             
@@ -349,9 +349,9 @@
             
             <tag> 笔记 </tag>
             
-            <tag> 电气 </tag>
-            
             <tag> 大三 </tag>
+            
+            <tag> 电气 </tag>
             
         </tags>
       
@@ -407,9 +407,9 @@
             
             <tag> 笔记 </tag>
             
-            <tag> 电气 </tag>
-            
             <tag> 大三 </tag>
+            
+            <tag> 电气 </tag>
             
         </tags>
       
@@ -436,9 +436,9 @@
             
             <tag> 笔记 </tag>
             
-            <tag> 电气 </tag>
-            
             <tag> 大三 </tag>
+            
+            <tag> 电气 </tag>
             
         </tags>
       
@@ -465,9 +465,9 @@
             
             <tag> 笔记 </tag>
             
-            <tag> 电气 </tag>
-            
             <tag> 大三 </tag>
+            
+            <tag> 电气 </tag>
             
         </tags>
       
@@ -523,9 +523,9 @@
             
             <tag> 笔记 </tag>
             
-            <tag> 电气 </tag>
-            
             <tag> 大三 </tag>
+            
+            <tag> 电气 </tag>
             
         </tags>
       
@@ -552,9 +552,9 @@
             
             <tag> 笔记 </tag>
             
-            <tag> 电气 </tag>
-            
             <tag> 大三 </tag>
+            
+            <tag> 电气 </tag>
             
         </tags>
       
@@ -612,9 +612,38 @@
             
             <tag> 笔记 </tag>
             
+            <tag> 大三 </tag>
+            
             <tag> 电气 </tag>
             
-            <tag> 大三 </tag>
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>纯小白也能变大画师？AI绘画第二弹！更智能、更高级</title>
+      <link href="/2026/02/24/AI%E7%BB%98%E7%94%BB2/"/>
+      <url>/2026/02/24/AI%E7%BB%98%E7%94%BB2/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>我在之前写过一篇使用<code>Stable Diffusion</code>来进行AI绘画的教程，如今两年多过去了，SD革新换代了很多版本，原先的教程已经不再具有指导意义，但是想学习SD的同学仍然可以去关注一下我里面提到的几个博主。即使是在今日，SD仍然具有很高的创作自由度和可操控性，是“老一代AI画师”的首选。</p><h1 id="Gemini-系列"><a href="#Gemini-系列" class="headerlink" title="Gemini 系列"></a>Gemini 系列</h1><h2 id="Nano-Banana-Pro"><a href="#Nano-Banana-Pro" class="headerlink" title="Nano Banana (Pro)"></a>Nano Banana (Pro)</h2><p>Nano Banana Pro是目前基于Gemini 3 Pro推出的原生多模态绘图模型，因此Nano Banana (Pro)有以下几个特色：</p><ol><li>强搜索和推理能力，能够根据你的文字和需求智能推理生图结果，即使你表述的比较隐晦</li><li>很强的<strong>写字能力</strong>，因此使用Nano Banana (Pro)来做<strong>简图和PPT</strong>是其非常常用的一项功能</li><li>多模态能力。所谓多模态就是指AI能同时调用好几个工具（生图、搜索、各种专用MCP工具等）</li></ol><p>值得注意的是，<strong>AI在一次对话中的总“脑容量”是有限度的</strong>，而当你一次把一个巨大的任务丢给他时，分配到每个任务的token就变少了，导致其处理效果变差、幻觉增加。因此一个有效的方案是<strong>主动做步骤拆解（分多次对话输入）并进行输入的预处理</strong>，比如：</p><ul><li>当你要AI搜索某个东西生成介绍图/名片/大纲等内容时，可以先让AI搜索该内容并整理成一份生图指南，然后第二次对话再让AI根据这份生图指南来生成图片。这对于直接架构在Gemini上面的Nano Banana尤其好用。</li><li>当你给AI输入大片内容时，优先使用Markdown或Latex格式文档，其次是Word和Excel，最次才是图片和PDF。如果可行，先使用工具把PDF的内容提取出来转换成其他格式。</li></ul><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>太简单了，直接在Gemini里面用就行</p><h3 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h3><p><strong>Step 1</strong></p><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">根据这篇论文，提取其关键信息（主要工作和关键结论），给出一份markdown格式的Nano Banana Pro生图指导，用于生成一篇介绍该论文主要工作的海报。</span><br><span class="line">(Input: 我的毕设)</span><br><span class="line">(这一步可以参考下文的“方法2：JSON格式的图片指南”来做，生成的更具体)</span><br></pre></td></tr></table></figure><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Nano Banana Pro 海报生图指导</span><br><span class="line">Prompt:</span><br><span class="line">A professional academic infographic poster for a university thesis presentation.</span><br><span class="line">Title: &quot;Magnetic Levitation Gravity Compensator for Precision Positioning Platforms&quot;.</span><br><span class="line">……(略)</span><br></pre></td></tr></table></figure><p><strong>Step 2</strong></p><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">根据下文```中的论文生图总结和指南，生成一份海报，作者署名为Paradox，增加学院院徽（input）和浙江大学校徽</span><br><span class="line">```</span><br><span class="line">Prompt</span><br><span class="line">```</span><br></pre></td></tr></table></figure><p><img src="https://zju-paradox.top/image/nano01.jpg" width="60%" /></p><p><strong>Step 3</strong></p><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">对图做如下修改：</span><br><span class="line">1. 更正浙大电气工程学院院徽图形为输入图形</span><br><span class="line">2. 采用更直观（能展现内部）的拓扑图，并稍微减小图片比例</span><br><span class="line">3. 文字多一点，介绍一下原理</span><br><span class="line">(Input: 院徽)</span><br></pre></td></tr></table></figure><p><img src="https://zju-paradox.top/image/nano02.jpg" width="60%" /></p><blockquote><p>好像还是有点不太智能，可以看到还是有两个不足：<strong>在文字太多时还是会产生一定乱码</strong>（但是基本形状还在，能看出是什么字，比老一代AI直接全部乱造字好太多）；以及<strong>局部修改无法奏效</strong>。</p></blockquote><h3 id="升级与微调"><a href="#升级与微调" class="headerlink" title="升级与微调"></a>升级与微调</h3><p>在上文的“实战”中可以看到，即使我希望他修改院徽（把右上角的院徽图案换成浙大电院，并且我给出了院徽的图片），他还是没能很好的做到。这是由于<strong>自然语言化的Prompt无法很好地让AI理解这幅图以及局部修改要求</strong>。</p><h4 id="方法1：Gemini-输入编辑器"><a href="#方法1：Gemini-输入编辑器" class="headerlink" title="方法1：Gemini 输入编辑器"></a>方法1：Gemini 输入编辑器</h4><p>把所需修改的图片喂给Gemini时，点击该图片即可弹出图片编辑器。<strong>用画笔直接圈出你想要修改的内容</strong>，然后用<strong>同种颜色</strong>的文字在附近写上修改方案。一次性可以修改多处地方，但<strong>建议不要多于3处</strong>。</p><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">（圈出右上角错误院徽，并标注“替换为&#x27;电院院徽.jpg&#x27;”）</span><br><span class="line">按照要求修改图片&quot;NanoBanana02.jpg&quot;</span><br></pre></td></tr></table></figure><p><img src="https://zju-paradox.top/image/nano03.jpg" width="60%" /></p><blockquote><p>可以看到图标被正确替换了</p></blockquote><h4 id="方法2：JSON格式的图片指南"><a href="#方法2：JSON格式的图片指南" class="headerlink" title="方法2：JSON格式的图片指南"></a>方法2：JSON格式的图片指南</h4><p>详情参见<a href="#JSON格式的图片指南">JSON格式的图片指南</a></p><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">（这一步不打开生图功能）</span><br><span class="line">将图片转换成JSON格式，包括图片尺寸、文字、结构、内容和详细信息，把JSON里面的英文转换成中文</span><br></pre></td></tr></table></figure><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">AI返回：</span><br><span class="line">&#123;</span><br><span class="line">  &quot;图片元数据&quot;: &#123;</span><br><span class="line">    &quot;类型&quot;: &quot;学术海报 / 毕业设计展示&quot;,</span><br><span class="line">    &quot;预估尺寸&quot;: &quot;1024x585 &quot;,</span><br><span class="line">    &quot;主色调&quot;: &quot;科技蓝, 灰色, 白色&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;海报头部信息&quot;: &#123;</span><br><span class="line">    &quot;标题&quot;: &quot;精密定位平台磁悬浮重力补偿器研究&quot;,</span><br><span class="line">    &quot;副标题&quot;: &quot;浙江大学电气工程学院 本科生毕业设计&quot;,</span><br><span class="line">    &quot;作者&quot;: &quot;Paradox&quot;,</span><br><span class="line">    &quot;机构Logo&quot;: [&quot;浙江大学 (左上)&quot;, &quot;ISEE (右上)&quot;]</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;核心内容结构&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;区块位置&quot;: &quot;左侧&quot;,</span><br><span class="line">      &quot;区块标题&quot;: &quot;混合优化策略与结构设计&quot;,</span><br><span class="line">      &quot;详细内容&quot;: &#123;</span><br><span class="line">        &quot;方法一&quot;: &#123;</span><br><span class="line">          &quot;名称&quot;: &quot;田口正交试验法&quot;,</span><br><span class="line">          …………(略)</span><br></pre></td></tr></table></figure><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">（把JSON修改后复制给AI，然后丢入原图。这里我修改了部分文字，并把尺寸改为4k）</span><br><span class="line">按照要求修改图片&quot;NanoBanana03.jpg&quot;</span><br></pre></td></tr></table></figure><p><img src="https://zju-paradox.top/image/nano05.png" width="60%" /></p><blockquote><p>可以看到海报中的文字已经全部如我所预期的那样进行了更改（具体文字我没放出来，你们可以对比一下前后两张图的内容，是有不同的</p></blockquote><h2 id="NotebookLM"><a href="#NotebookLM" class="headerlink" title="NotebookLM"></a>NotebookLM</h2><h1 id="图片微调与升级方案"><a href="#图片微调与升级方案" class="headerlink" title="图片微调与升级方案"></a>图片微调与升级方案</h1><h2 id="文字修复"><a href="#文字修复" class="headerlink" title="文字修复"></a>文字修复</h2><h3 id="文字清晰度提升Prompt"><a href="#文字清晰度提升Prompt" class="headerlink" title="文字清晰度提升Prompt"></a>文字清晰度提升Prompt</h3><p>如果你的内容是强文字性的，比如海报、时间轴、PPT等，可以考虑在输入时加入这个Prompt：</p><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">基于文档内容，生成一张中文信息图，要求xxx分辨率，文字和背景保持高对比度，中文字体采用xxx，确保中文笔画清晰易读，文字清晰</span><br></pre></td></tr></table></figure><blockquote><p>记得把其中的xxx替换掉</p><p><strong>使用高分辨率（4k或8k）并下载原图，可以显著提高文字清晰度</strong></p></blockquote><h3 id="文字修复技术"><a href="#文字修复技术" class="headerlink" title="文字修复技术"></a>文字修复技术</h3><h2 id="图片信息提取与重构"><a href="#图片信息提取与重构" class="headerlink" title="图片信息提取与重构"></a>图片信息提取与重构</h2><h3 id="JSON格式的图片指南"><a href="#JSON格式的图片指南" class="headerlink" title="JSON格式的图片指南"></a>JSON格式的图片指南</h3><p>JSON是一种格式化、结构化的语言指令，<strong>兼具代码的可复现性和自然语言的可读性</strong>，因此使用JSON格式的生图指南可以有效指导AI进行图片修改。</p><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">（这一步不打开生图功能）</span><br><span class="line">将图片转换成JSON格式，包括图片尺寸、文字、结构、内容和详细信息，把JSON里面的英文转换成中文</span><br></pre></td></tr></table></figure><p>这种JSON格式的代码可以让你精确地针对内容进行修改和删除，比如你拍照时不想要后面的某个游客，你就可以用这种方式删除；或者你觉得后面这把椅子是银色的太丑了，你可以在图片的JSON描述中把<code>一把银色的椅子</code>替换成<code>一把棕色的木质椅子</code>。</p><p>此外，他充分地提取出了文字，也就是说你可以对具体内容（比如PPT）进行微调。同时<strong>他直接告诉AI你在生图的时候需要写哪些文字</strong>，而不是让AI先自己梳理大纲然后再提取文字（使分析功能占用了生图的token）</p><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">把JSON修改后复制给AI，然后丢入原图</span><br></pre></td></tr></table></figure><h3 id="Gem风格提取指南"><a href="#Gem风格提取指南" class="headerlink" title="Gem风格提取指南"></a>Gem风格提取指南</h3><p>如果你阅读过我的文章<a href="https://zju-paradox.top/2026/02/08/AI入门/">从手动、半自动到全自动，当一个2G网的鼠鼠决定学习如何使用AI | Paradox’s Website</a>，那么你一定知道有Gem这个东西。相较于每次提取图片信息就要写一段JSON并且你不能知道他的产出方法，那么为什么不写一个Gem呢？</p><p>Gem的生成方法请参照我的上述那篇文章。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 软件教程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 教程 </tag>
+            
+            <tag> 有趣的东西 </tag>
+            
+            <tag> AI绘画 </tag>
             
         </tags>
       
