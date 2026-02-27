@@ -3702,6 +3702,756 @@ Q_{i}}\frac1{1-\frac{\partial Q_L}{\partial Q_{i}}}=\lambda
       </tags>
   </entry>
   <entry>
+    <title>电机系统建模与分析</title>
+    <url>//MotorModeling/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="chap1.-摘要">Chap1. 摘要</h1>
+<blockquote>
+<p>觉得卡的或者遇到公式渲染不出来的情况请开翻墙，ZJU的校网就是依托。</p>
+<p>若无特殊说明，本文中使用斜体的<span
+class="math inline">\(p\)</span>表示电机极对数，用正体的<span
+class="math inline">\(\text p\)</span>表示海氏算子<span
+class="math inline">\(\frac{\text d}{\text dt}\)</span></p>
+<p>期中可能会放PDF版本（<a href="\myfile\电机系统建模与分析.pdf" target="_blank">Click Here</a>）</p>
+</blockquote>
+<p><img src="\image\电机建模17.jpg" /></p>
+<h2 id="补绕组系数">补：绕组系数</h2>
+<p>现在应该是才算是完全搞懂了</p>
+<ul>
+<li>短距系数表征的是“<strong>一个线圈的上下层边</strong>”的电势矢量的合成关系</li>
+<li>分布系数表征的是“<strong>不同线圈之间（只看上层边）</strong>”的电势矢量的合成关系</li>
+</ul>
+<p>求解办法：</p>
+<ol type="1">
+<li>画绕组分布展开图，选其中一相画</li>
+<li>看看一个线圈上下层边跨过了多少电角度（记为<span
+class="math inline">\(\theta_y\)</span>），则短距系数为<span
+class="math inline">\(\sin(\frac{\theta_y}{\pi}\cdot\frac{\pi}2)\)</span></li>
+<li>看看<strong>所有线圈的上层边</strong>，把他们用矢量图画出来。同极下的直接相加，不同极下的添负号。</li>
+</ol>
+<h1 id="chap2.-微分方程数值解法">Chap2. 微分方程数值解法</h1>
+<h2 id="一阶微分方程">一阶微分方程</h2>
+<p>设一阶微分方程的一般形式为： <span class="math display">\[
+\frac{\text dx}{\text dt}=\text px=f(t,x)
+\]</span> 倘若已知初始时刻的变量值（如：<span
+class="math inline">\(x(0)\)</span>），想要得到下一时刻的值，基本思路是<span
+class="math inline">\(x_{i+1}=x_i+\text px\cdot \Delta t\)</span></p>
+<p>设等步长，相邻两时刻间的时间差（步长）为<span
+class="math inline">\(h\)</span>，</p>
+<p><strong>四阶龙格-库塔法：</strong> <span class="math display">\[
+\begin{gather*}
+K_1=f(t_i,x_i)&amp;\Rightarrow&amp; x_{i+\frac12}^{(1)}=x_i+K_1\frac
+h2\\
+K_2=f(t_{i+\frac12},x_{i+\frac12}^{(1)})&amp;\Rightarrow&amp;
+x_{i+\frac12}^{(2)}=x_i+K_2\frac h2\\
+K_3=f(t_{i+\frac12},x_{i+\frac12}^{(2)})&amp;\Rightarrow
+&amp;x_{i+1}^{(1)}=x_i+K_3h\\
+K_4=f(t_{i+1},x_{i+1}^{(1)})&amp;\Rightarrow&amp;K=\frac{K_1+2K_2+2K_3+K_4}6\\
+&amp;x_{i+1}=x_i+Kh
+\end{gather*}
+\]</span></p>
+<h2 id="一阶微分方程组">一阶微分方程组</h2>
+<p>一般采用同步梯度的方式求解多变量方程组，这里以两变量为例： $$ <span
+class="math display">\[\begin{gather*}
+K_{1x}=f_x(t_i,x_i,y_i)&amp;K_{1y}=f_y(t_i,x_i,y_i)\\\Rightarrow
+x_{i+\frac12}^{(1)}=x_i+K_{1x}\frac
+h2&amp;y_{i+\frac12}^{(1)}=y_i+K_{1y}\frac h2\\
+K_{2x}=f_x(t_{i+\frac12},x_{i+\frac12}^{(1)},y_{i+\frac12}^{(1)})&amp;K_{2y}=f_y(t_{i+\frac12},x_{i+\frac12}^{(1)},y_{i+\frac12}^{(1)})\\\Rightarrow
+x_{i+\frac12}^{(2)}=x_i+K_{2x}\frac
+h2&amp;y_{i+\frac12}^{(2)}=y_i+K_{2y}\frac h2
+
+\end{gather*}\]</span> $$
+后面不抄了，K3K4一样的，反正意思就是同步更新。</p>
+<h1 id="chap3.-一般化电机模型">Chap3. 一般化电机模型</h1>
+<h2 id="基本概念">基本概念</h2>
+<p>一般化电机的基本假设：</p>
+<ol type="1">
+<li>一对级电机（<span
+class="math inline">\(p=1\)</span>），极对数是可以等效的</li>
+<li>绕组是可以等效的，如三相变为两相</li>
+<li>伪静止线圈：构成线圈的导体是运动的（以<span
+class="math inline">\(\omega\)</span>旋转），但是d、q线圈是由电刷所规定的，因此轴线静止。
+<ol type="1">
+<li>线圈中的电流在空间产生轴线静止的磁场</li>
+<li>导体实际上在旋转，因此还是会有旋转电势</li>
+</ol></li>
+<li>磁路不饱和（可用叠加原理）</li>
+<li>不计剩磁、涡流、磁滞损耗</li>
+<li>气隙磁密按正弦规律分布</li>
+<li>只关心导体分布在哪些槽内，不关心具体的连接方式和整、短距等</li>
+</ol>
+<h2 id="基本方程式">基本方程式</h2>
+<h3 id="正方向的规定">正方向的规定</h3>
+<table>
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 38%" />
+<col style="width: 16%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr>
+<th></th>
+<th>原则</th>
+<th>模型</th>
+<th>方程式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>电动机</strong></td>
+<td>1. 正电流产生正磁链<br />2.
+从外向线圈看，电压与电流正方向相同<br />3. 线圈的输入功率为正值</td>
+<td><img src="\image\电机建模04.png" /></td>
+<td><span
+class="math inline">\(\begin{gather*}\varPsi=Li\\U=Ri+e\\e=\text
+p\varPsi\end{gather*}\)</span></td>
+</tr>
+<tr>
+<td><strong>发电机</strong></td>
+<td>1. 正电流产生负磁链<br />2.
+从线圈向外看，电压与电流正方向相同<br />3. 线圈的输出功率为正值</td>
+<td><img src="\image\电机建模05.png" /></td>
+<td><span
+class="math inline">\(\begin{gather*}\varPsi=-Li\\U=e-Ri\\e=\text
+p\varPsi\end{gather*}\)</span></td>
+</tr>
+</tbody>
+</table>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 52%" />
+<col style="width: 24%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr>
+<th></th>
+<th>原则</th>
+<th>方程式</th>
+<th>功率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>电动机</strong></td>
+<td>1.
+电磁转矩正方向就是旋转方向<br />2.负载、阻尼、惯性转矩正方向与之相反</td>
+<td><span class="math inline">\(T_e=T_L+T_D+J\text p\Omega\)</span></td>
+<td><span class="math inline">\(P_m=-T_L\Omega\)</span></td>
+</tr>
+<tr>
+<td><strong>发电机</strong></td>
+<td>1.
+外施转矩正方向就是旋转方向<br />2.负载、阻尼、惯性转矩正方向与之相反</td>
+<td><span class="math inline">\(T_m=T_e+T_D+J\text p\Omega\)</span></td>
+<td><span class="math inline">\(P_m=T_m\Omega\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="电磁方程式">电磁方程式</h3>
+<blockquote>
+<p>电枢（转子）按发电机原则规定正方向</p>
+<p>励磁（定子）按电动机原则规定正方向</p>
+</blockquote>
+<p><img src="\image\电机建模06.png" /> <span class="math display">\[
+\begin{gather*}
+\begin{cases}
+u_d=\text p\varPsi_d-R_di_d-K_q\omega\phi_q(旋转电势e_{dr})\\
+u_q=\text p\varPsi_q-R_qi_q+K_d\omega\phi_d(旋转电势e_{qr})\\
+u_{fd}=\text p\varPsi_{fd}+R_{fd}i_{fd}\\
+u_{kq}=\text p\varPsi_{kq}+R_{kq}i_{kq}
+\end{cases}
+\end{gather*}
+\]</span> 根据<a href="#一般化电机旋转电势">对应的推导</a>，旋转电势中：
+<span class="math display">\[
+\begin{gather*}
+\begin{cases}
+e_{dr}=-K_q\omega\phi_q=-\omega\varPsi_q\\
+e_{qr}=K_d\omega\phi_d=\omega\varPsi_d
+\end{cases}
+\end{gather*}
+\]</span> 并带入<span
+class="math inline">\(\varPsi=LI\)</span>，得到电磁方程式为： <span
+class="math display">\[
+\begin{gather*}
+[U]=\text p[L][I]+[R][I]+\omega[G][I]\\
+\text p[I]=[L]^{-1}({[U]-[R][I]-\omega[G][I]})
+\end{gather*}
+\]</span> 其中： <span class="math display">\[
+\begin{gather*}
+[L]=\begin{bmatrix}
+-L_d&amp;0&amp;M_{afd}&amp;0\\0&amp;-L_q&amp;0&amp;M_{akq}\\-M_{fad}&amp;0&amp;L_{fd}&amp;0\\0&amp;-M_{kaq}&amp;0&amp;L_q
+\end{bmatrix}&amp;,&amp;[G]=\begin{bmatrix}
+0&amp;L_q&amp;0&amp;-M_{akq}\\-L_d&amp;0&amp;M_{afd}&amp;0\\0&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;0
+\end{bmatrix}
+\end{gather*}
+\]</span></p>
+<h1 id="chap4.-直流电机仿真">Chap4. 直流电机仿真</h1>
+<p>考虑以下他励直流电机：</p>
+<p><img src="\image\电机建模11.jpg" /></p>
+<p>只有直轴励磁和交轴电枢电压，故其方程为： <span
+class="math display">\[
+\begin{gather*}
+u_q=\text p\varPsi_q+\omega\varPsi_d-R_qi_q\\
+u_{fd}=\text p\varPsi_{fd}+R_{fd}i_{fd}
+\end{gather*}
+\]</span> 其中： <span class="math display">\[
+\varPsi_d=M_{afd}i_{fd}~;~\varPsi_q=-L_qi_q~;~\varPsi_{fd}=L_{fd}i_{fd}
+\]</span></p>
+<blockquote>
+<p>注：如果认为磁通全部通过磁链，并且定子和转子完全交链，那么有<span
+class="math inline">\(\phi_d=\phi_{fd}\)</span></p>
+<p>于是：<span
+class="math inline">\(\varPsi_d=z\phi_d=z\phi_{fd}=z\frac{L_{fd}i_{fd}}{N_{fd}}=M_{afd}i_{fd}\)</span></p>
+<p>即：<span
+class="math inline">\(M_{afd}=\frac{zL_{fd}}{N_{fd}}\)</span></p>
+</blockquote>
+<h2
+id="他励直流发电机的突然短路r_lrightarrow0">他励直流发电机的突然短路（<span
+class="math inline">\(R_L\rightarrow0\)</span>）</h2>
+<h3 id="稳态">稳态</h3>
+<p><span class="math display">\[
+\begin{gather*}
+u_{q0}=\omega_0M_{afd}i_{fd}-R_qi_q=R_{L}i_{q}\\u_{fd}=R_{fd}i_{fd}\\\Rightarrow
+i_{q0}=\frac{\omega_0M_{afd}u_{fd}}{(R_L+R_q)R_{fd}}
+\end{gather*}
+\]</span></p>
+<h3 id="条件1.-转速瞬时不变">条件1. 转速瞬时不变</h3>
+<p><span class="math display">\[
+\begin{gather*}
+0=-L_q\text pi_q+\omega_0M_{afd}i_{fd}-R_qi_q\\\Rightarrow
+i_q=\frac{\omega_0M_{afd}i_{fd}}{R_q}\frac1{\tau\text
+p+1}~;~(\tau=L_q/R_q)\\
+\Rightarrow i_q=i_{q0}\frac{R_L+R_q}{R_q}(1-e^{-\frac{t+t_0}{t_0}})
+\end{gather*}
+\]</span></p>
+<h3 id="条件2.-短路时停止提供动力">条件2. 短路时停止提供动力</h3>
+<p><span class="math display">\[
+\begin{gather*}
+\begin{cases}\text pi_q=\frac{\omega
+M_{afd}i_{fd}-R_qi_q}{L_q}\\T_m=0=M_{afd}i_{fd}i_q+B\omega+J\text
+p\omega  \end{cases}\Rightarrow \text
+p\omega=\frac{M_{afd}i_{fd}i_q+B\omega}{-J}
+\end{gather*}
+\]</span></p>
+<h3 id="条件3.-停止原动机时停止励磁">条件3. 停止原动机时停止励磁</h3>
+<p>​ 此时<span class="math inline">\(i_{fd}=0\)</span>,机电解耦！ <span
+class="math display">\[
+\text pi_q=-R_qi_q/L_q~,~\text p\omega=-B\omega/J
+\]</span></p>
+<h1 id="chap5.-三相交流电机在相坐标系下的模型">Chap5.
+三相交流电机在相坐标系下的模型</h1>
+<p>按照<strong>电动机</strong>原则选取正方向，即：</p>
+<ol type="1">
+<li>绕组轴线的方向是磁链正方向，<u>正电流产生正磁链</u></li>
+<li>从外向绕组看，<u>电压与电流正方向同向</u>，输入功率为正</li>
+<li><u>电磁转矩正方向就是转子旋转的方向</u>，负载<span
+class="math inline">\(T_L\)</span>、阻尼<span
+class="math inline">\(B\Omega\)</span>、惯性<span
+class="math inline">\(Jp\Omega\)</span>转矩相反</li>
+</ol>
+<p><img src="\image\电机建模01.png" /></p>
+<p>考虑D轴与Q轴正交解耦，则其<strong>电压平衡式</strong>为： <span
+class="math display">\[
+\begin{gather*}\begin{cases}U_a=\text
+p\varPsi_a+R_ai_a&amp;（B、C相同理）\\U_f=\text
+p\varPsi_f+R_fi_f\\U_D=U_Q=0&amp;（阻尼短路绕组）  \end{cases}
+\end{gather*}
+\]</span> 即： <span class="math display">\[
+\begin{gather*}  \begin{bmatrix}
+u_a\\u_b\\u_c\\u_f\\0\\0
+\end{bmatrix}=\text p\begin{bmatrix}
+\varPsi_a\\\varPsi_b\\\varPsi_c\\\varPsi_f\\\varPsi_D\\\varPsi_Q
+\end{bmatrix}+\begin{bmatrix}
+R_s&amp;0&amp;0&amp;0&amp;0&amp;0\\0&amp;R_s&amp;0&amp;0&amp;0&amp;0\\0&amp;0&amp;R_s&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;R_f&amp;0&amp;0\\0&amp;0&amp;0&amp;0&amp;R_D&amp;0\\0&amp;0&amp;0&amp;0&amp;0&amp;R_Q
+\end{bmatrix}
+\begin{bmatrix}
+i_a\\i_b\\i_c\\i_f\\i_D\\i_Q
+\end{bmatrix}
+\end{gather*}
+\]</span> ​ 其中磁链矩阵<span
+class="math inline">\([\varPsi]\)</span>可以表示为<span
+class="math inline">\([L][I]\)</span>，由于转子励磁旋转导致DQ轴与定子相轴耦合关系改变，电感矩阵<span
+class="math inline">\([L]\)</span>时变。电感矩阵中各分量结果如下：<a id="三相电感"><a
+href="#三相交流电机电感矩阵">三相交流电机电感矩阵推导</a></a></p>
+<ol type="1">
+<li><p><strong>定子绕组自感系数</strong> <span class="math display">\[
+\begin{gather*}
+L_{aa}=L_{aal}(漏感)+\frac{L_{aad}+L_{aaq}}2+\frac{L_{aad}-L_{aaq}}2cos2\theta\\
+L_{bb}=L_{aal}(漏感)+\frac{L_{aad}+L_{aaq}}2+\frac{L_{aad}-L_{aaq}}2cos2(\theta-\frac{2\pi}3)\\
+L_{cc}=L_{aal}(漏感)+\frac{L_{aad}+L_{aaq}}2+\frac{L_{aad}-L_{aaq}}2cos2(\theta+\frac{2\pi}3)
+\end{gather*}
+\]</span></p>
+<ol type="1">
+<li>对于隐极同步电机（<span
+class="math inline">\(L_{aad}=L_{aaq}\)</span>），自感系数是常数</li>
+</ol></li>
+<li><p><strong>定子绕组互感系数</strong> <span class="math display">\[
+\begin{gather*}
+M_{ab}=-(M_{abl}+\frac{L_{aad}+L_{aaq}}4)+\frac{L_{aad}-L_{aaq}}2cos2(\theta+\frac{2\pi}3)
+\end{gather*}
+\]</span></p>
+<ol type="1">
+<li>因为三相轴线相差120°，所以互感是负的，说明推导无误</li>
+<li>AB相的互感用C相的角度，其余同理</li>
+</ol></li>
+<li><p><strong>定子与转子之间的互感</strong> <span
+class="math display">\[
+\begin{gather*}M_{af}=M_{fa}=M_{af1}cos\theta\\M_{bf}=M_{fb}=M_{af1}cos(\theta-\frac{2\pi}3)\\M_{cf}=M_{fc}=M_{af1}cos(\theta+\frac{2\pi}3)
+\end{gather*}
+\]</span></p>
+<ol type="1">
+<li>定子绕组自感变化周期是<span
+class="math inline">\(\pi\)</span>，这个是<span
+class="math inline">\(2\pi\)</span>。下同。</li>
+</ol></li>
+<li><p><strong>定子绕组与转子D轴阻尼绕组间互感</strong> <span
+class="math display">\[
+M_{aD}=M_{Da}=M_{aD1}cos\theta
+\]</span></p></li>
+<li><p><strong>定子绕组与转子Q轴阻尼绕组间互感</strong> <span
+class="math display">\[
+M_{aQ}=M_{Qa}=-M_{aQ1}sin\theta
+\]</span></p></li>
+<li><p><strong>转子绕组自感、互感</strong> <span class="math display">\[
+\begin{gather*}
+L_f=L_{fl}+L_{f\delta}\\L_D=L_{Dl}+L_{D\delta}\\L_Q=L_{Ql}+L_{Q\delta}\\M_{fD}=M_{Df}=M_{fDl}+M_{fD\delta}
+\end{gather*}
+\]</span></p>
+<ol type="1">
+<li>由于DQ轴正交解耦，故不存在互感</li>
+</ol></li>
+</ol>
+<p>由此得到： <span class="math display">\[
+\begin{gather*}
+\begin{bmatrix}
+\varPsi_a\\\varPsi_b\\\varPsi_c\\\varPsi_f\\\varPsi_D\\\varPsi_Q
+\end{bmatrix}=\begin{bmatrix}
+L_{aa}&amp;M_{ab}&amp;M_{ac}&amp;M_{af}&amp;M_{aD}&amp;M_{aQ}\\
+M_{ba}&amp;L_{bb}&amp;M_{bc}&amp;M_{bf}&amp;M_{bD}&amp;M_{bQ}\\
+M_{ca}&amp;M_{cb}&amp;L_{cc}&amp;M_{cf}&amp;M_{cD}&amp;M_{cQ}\\
+M_{fa}&amp;M_{fb}&amp;M_{fc}&amp;L_f&amp;M_{fD}&amp;0\\
+M_{Da}&amp;M_{Db}&amp;M_{Dc}&amp;M_{Df}&amp;L_D&amp;0\\
+M_{Qa}&amp;M_{Qb}&amp;M_{Qc}&amp;0&amp;0&amp;L_Q
+\end{bmatrix}\cdot \begin{bmatrix}
+i_a\\i_b\\i_c\\i_f\\i_D\\i_Q
+\end{bmatrix}
+\end{gather*}
+\]</span>
+对应的，其<a id="三相转矩"><strong>转矩平衡式</strong></a>为（<a
+href="#三相交流电机电磁转矩">电磁转矩的推导过程</a>）： <span
+class="math display">\[
+T_e=\frac p2[I]^T\frac{\partial[L]}{\partial\theta}[I]
+\]</span></p>
+<h1 id="chap6.-坐标变换">Chap6. 坐标变换</h1>
+<p>一个电机的建模与求解过程应该是下面这样的：</p>
+<p><img src="\image\电机建模07.png" /></p>
+<p>上一章已经展示了，三相交流电机在相坐标（a-b-c
+Model）下的模型方程是多么复杂，所以要用坐标变换把他等效到更好计算的坐标系（如α-β-0和d-q-0坐标系）下。</p>
+<h2 id="坐标变化基本定义">坐标变化基本定义</h2>
+<ul>
+<li>下面直接不加推导的给出三相坐标系到（二维平面-0）坐标系的<strong>恒相幅值变换</strong>的表达式：
+<ul>
+<li>在三相坐标系中，三个坐标轴为a、b、c，记其方向向量为<span
+class="math inline">\(\vec a,\vec b,\vec
+c\)</span>，在三个方向向量上的某物理量的数值分别为<span
+class="math inline">\(x_a,x_b,x_c\)</span></li>
+<li>定义<strong>综合矢量：</strong><span class="math inline">\(\vec
+x=\frac23(x_a\vec a+x_b\vec b+x_c\vec c)\)</span></li>
+<li>定义<strong>零分量：</strong><span
+class="math inline">\(x_0=\frac{x_a+x_b+x_c}3\)</span></li>
+<li><img src="\image\电机建模08.png" /></li>
+</ul></li>
+<li>电机的模型是二维的，所以按理说两个基足以。但是坐标变换必须满足等变量个数，因此这里从“a、b、c”三个基（变量）换成了“综合矢量+零分量”三个变量（矢量=模长+方向，或正交分解，实际是两个变量）</li>
+<li>但是综合矢量以矢量的形式不好表达，所以可以写成下面这样的形式：
+<ul>
+<li>定义：<span
+class="math inline">\(x_a&#39;=x_a-x_0~,~x_b&#39;=x_b-x_0~,~x_c&#39;=x_c-x_0\)</span></li>
+<li><strong>综合矢量：</strong><span class="math inline">\(\vec
+x\rightarrow\dot x=\frac23(x_a+x_be^{j120}+x_ce^{j240})\triangleq
+xe^{j\alpha}\)</span>
+<ul>
+<li><strong>幅值：</strong><span
+class="math inline">\(|x|=\sqrt{\frac23(x_a&#39;^2+x_b&#39;^2+x_c&#39;^2)}\)</span></li>
+<li><strong>夹角（与a轴）：</strong><span
+class="math inline">\(\alpha=\text{cos}^{-1}(\frac{x_a&#39;}{x_a})\)</span></li>
+</ul></li>
+</ul></li>
+<li>当然，要把（二维平面-0）坐标系变回三相坐标系也是需要的，其表达式为：
+<ul>
+<li>a相：<span
+class="math inline">\(x_a&#39;=x\,\text{cos}\alpha~,~x_a=x_0+x_a&#39;\)</span></li>
+<li>a相：<span
+class="math inline">\(x_b&#39;=x\,\text{cos}(\alpha-\frac{2\pi}3)~,~x_b=x_0+x_b&#39;\)</span></li>
+<li>c相：<span
+class="math inline">\(x_c&#39;=x\,\text{cos}(\alpha+\frac{2\pi}3)~,~x_c=x_0+x_c&#39;\)</span></li>
+</ul></li>
+</ul>
+<h2 id="三相电机中坐标变换的重要结论">三相电机中坐标变换的重要结论</h2>
+<ul>
+<li>在三相对称系统中，三个物理量并非像定义中的<span
+class="math inline">\(x_a,x_b,x_c\)</span>一般毫无关联，而是由如下类似的表达式：
+<ul>
+<li>a相：<span
+class="math inline">\(i_a=I_m\,\text{cos}\theta\)</span></li>
+<li>b相：<span
+class="math inline">\(i_b=I_m\,\text{cos}(\theta-\frac{2\pi}3)\)</span></li>
+<li>c相：<span
+class="math inline">\(i_c=I_m\,\text{cos}(\theta+\frac{2\pi}3)\)</span></li>
+</ul></li>
+<li>把他变换到（二维平面-0）坐标系中是这样的：
+<ul>
+<li>零分量：<span
+class="math inline">\(i_0=\frac{i_a+i_b+i_c}3=0\)</span></li>
+<li>综合矢量幅值：<span
+class="math inline">\(|i|=\sqrt{\frac23(i_a&#39;^2+i_b&#39;^2+i_c&#39;^2)}=\sqrt{\frac23\cdot\frac32I_m^2}=I_m\)</span></li>
+<li>综合矢量夹角：<span
+class="math inline">\(\alpha=\text{cos}^{-1}\frac{i_a&#39;}{|i|}=\text{cos}^{-1}\frac{I_m\,\text{cos}\theta+0}{I_m}=\theta\)</span></li>
+<li>即：<span class="math inline">\(\vec i=\dot
+i=I_me^{j\theta}\)</span></li>
+</ul></li>
+<li>也就是说，对于三相对称系统（电压、电流、磁链等大部分都遵循这个规律），有以下重要结论：
+<ol type="1">
+<li><strong>综合矢量的幅值就是三相坐标系中的幅值</strong></li>
+<li><strong>综合矢量的夹角就是三相坐标系中该矢量与a相的夹角</strong></li>
+<li><strong>零分量为0</strong>（零分量的物理含义是被相互抵消，基本不产生实际作用的分量）</li>
+<li><strong>三相坐标系中的分量（如<span
+class="math inline">\(x_a\)</span>）就是综合矢量在该轴上的投影</strong>（实际上是<span
+class="math inline">\(x_a&#39;\)</span>，如果<span
+class="math inline">\(x_0=0\)</span>的话<span
+class="math inline">\(x_a=x_a&#39;\)</span>）</li>
+</ol></li>
+</ul>
+<h2 id="绕组等效与坐标变换">绕组等效与坐标变换</h2>
+<p><img src="\image\电机建模09.png" /></p>
+<ul>
+<li>最后需要把拿到的（二维平面-0）坐标系下的综合矢量+零分量的形式用特定的分解方式表示出来。<strong>新坐标系各轴上的分量大小就是综合矢量往该轴的投影</strong>。常用的坐标系有以下这几个（他们的零分量都是一样的）：
+<ul>
+<li><span class="math inline">\(\alpha-\beta-0\)</span>坐标系：<span
+class="math inline">\(\alpha\)</span>轴与a相重合，<span
+class="math inline">\(\beta\)</span>轴落后90°</li>
+<li><span
+class="math inline">\(d-q-0\)</span>坐标系：以角速度旋转，跟电枢是重合的。最常用的坐标系。</li>
+<li><span
+class="math inline">\(d_c-q_c-0\)</span>坐标系：以同步速旋转，在未稳定的情况下会比上面那个转的更快一点</li>
+</ul></li>
+<li><strong>正变换</strong>（已知<span
+class="math inline">\(i_a,i_b,i_c\)</span>，定义<strong>d轴与a相的夹角为<span
+class="math inline">\(\theta=\int\omega\text
+dt+\theta_0\)</span>）</strong>：</li>
+</ul>
+<p><span class="math display">\[
+\begin{gather*}
+\begin{pmatrix}
+i_d\\i_q\\i_0
+\end{pmatrix}=\frac23\begin{pmatrix}
+\text{cos}\theta&amp;\text{cos}(\theta-\frac{2\pi}3)&amp;\text{cos}(\theta+\frac{2\pi}3)\\
+-\text{sin}\theta&amp;-\text{sin}(\theta-\frac{2\pi}3)&amp;-\text{sin}(\theta+\frac{2\pi}3)\\
+\frac12&amp;\frac12&amp;\frac12
+\end{pmatrix}\cdot\begin{pmatrix}
+i_a\\i_b\\i_c
+\end{pmatrix}
+\end{gather*}
+\]</span></p>
+<ul>
+<li><strong>逆变换</strong>：</li>
+</ul>
+<p><span class="math display">\[
+\begin{gather*}
+\begin{pmatrix}
+i_a\\i_b\\i_c
+\end{pmatrix}
+=\begin{pmatrix}
+\text{cos}\theta&amp;-\text{sin}\theta&amp;1\\
+\text{cos}(\theta-\frac{2\pi}3)&amp;-\text{sin}(\theta-\frac{2\pi}3)&amp;1\\
+\text{cos}(\theta+\frac{2\pi}3)&amp;-\text{sin}(\theta+\frac{2\pi}3)&amp;1
+\end{pmatrix}\cdot\begin{pmatrix}
+i_d\\i_q\\i_0
+\end{pmatrix}
+\end{gather*}
+\]</span></p>
+<ul>
+<li>显而易见，上面是到<span
+class="math inline">\(d-q-0\)</span>坐标系的变换，到<span
+class="math inline">\(\alpha-\beta-0\)</span>坐标系更简单，因为<span
+class="math inline">\(\theta=0\)</span>，变换矩阵直接变成常数了</li>
+</ul>
+<h1 id="chap7.-d-q-0坐标下凸极同步电机">Chap7.
+d-q-0坐标下凸极同步电机</h1>
+<h2 id="电磁平衡式">电磁平衡式</h2>
+<p>​ 这里不加推导（<a
+href="#d-q-0坐标电压方程式推导">推导看这里</a>）的给出电压方程式，可以看到和一般化电机的电压方程式几乎一模一样！</p>
+<p><img src="\image\电机建模12.jpg" /></p>
+<p>​ 并且不加推导（<a
+href="#d-q-0坐标磁链表达式推导">推导看这里</a>）的给出磁链表达式，可以看到所有电感全部变成了常数！唯一美中不足的就是电感矩阵不是一个对称阵</p>
+<p><img src="\image\电机建模13.jpg" /></p>
+<p>其中各参数如下： <span class="math display">\[
+\begin{gather*}
+直轴同步电感L_d=直轴电枢反应电感L_{ad}+漏电感L_l=\frac32L_{aad}+(L_{aal}+M_{abl})\\
+交轴同步电感L_q=交轴电枢反应电感L_{aq}+漏电感L_l=\frac32L_{aaq}+(L_{aal}+M_{abl})\\
+L_0=L_{aal}-2M_{abl}
+\end{gather*}
+\]</span></p>
+<blockquote>
+<ol type="1">
+<li>若不是d-q-0坐标变换而是<span
+class="math inline">\(\alpha-\beta-0\)</span>坐标变换，那么[L]也不是常数</li>
+<li>该模型中必须求解<span
+class="math inline">\(\theta\)</span>，因为要进行坐标反变换回到a-b-c坐标底下</li>
+</ol>
+</blockquote>
+<h2 id="功率变换">功率变换</h2>
+<p>功率表达式： <span class="math display">\[
+P_{dq0}=\frac23P_{abc}-u_0i_0~~(P_{abc}=\frac32(P_{dq0+u_0i_0}))
+\]</span> 自然的，其中 <span
+class="math inline">\(P_{dq0}=[I_{dq0}^T][u_{dq0}],~P_{abc}=[I_{abc}]^T[u_{abc}]\)</span></p>
+<p>对机械角度而言，有： <span class="math display">\[
+T_e=T_D+T_L+T_J~,~P_m=-T_L\Omega
+\]</span> 不加推导（<a
+href="#d-q-0功率表达式推导">推导看这里</a>）地给出三个功率的表达式：
+<span class="math display">\[
+\begin{gather*}
+储能：&amp;P=\Omega J\text p\Omega=\frac32[\text p\varPsi_d,\text
+p\varPsi_q,2\text p\varPsi_0][I_{dq0}]+[\text p\varPsi_f,\text
+p\varPsi_D,\text p\varPsi_Q][I_{fDQ}]\\
+损耗：&amp;P=B\Omega^2=\frac32R_s(i_d^2+i_q^2+2i_0^2)+[R_{fDQ}]^T[i_f^2;~i_D^2;~i_Q^2]\\电磁：&amp;P=-\Omega
+T_e=\frac32\omega(\varPsi_di_q-\varPsi_qi_d)
+\end{gather*}
+\]</span> 因此得到一个与一般化电机非常相似的电磁转矩表达式（下面这个 p
+代表极对数）： <span class="math display">\[
+T_e=\frac32p(\varPsi_di_q-\varPsi_qi_d)
+\]</span></p>
+<h2 id="同步电动机对称稳态运行分析">同步电动机对称稳态运行分析</h2>
+<ul>
+<li>以电动机原则作为正方向</li>
+<li>稳态时电流为常数</li>
+<li>适用于隐极电机（令 <span class="math inline">\(X_d=X_q\)</span>
+即可），但不适用于感应电机（转速不能达到同步速）</li>
+</ul>
+<h3 id="发电机空载开路">发电机空载（开路）</h3>
+<ol type="1">
+<li>首先0绕组分量均为0（三相对称），因此方程式中均不用考虑了</li>
+<li>阻尼绕组短路，即<span class="math inline">\(U_D=U_Q=0\)</span></li>
+<li>空载时电枢绕组开路，即<span
+class="math inline">\(i_a=i_b=i_c=0\)</span>，因此有<span
+class="math inline">\(i_d=i_q=i_0=0\)</span></li>
+</ol>
+<p>此时有： <span class="math display">\[
+\begin{gather*}
+\begin{cases}u_d=\text p\varPsi_d-\omega\varPsi_q+R_di_d\\u_q=\text
+p\varPsi_q+\omega\varPsi_d+R_qi_q\\ u_f=\text p\varPsi_f+R_fi_f
+\end{cases}\\
+\begin{bmatrix}
+\varPsi_d\\\varPsi_q\\\varPsi_f  \end{bmatrix}=\begin{bmatrix}
+L_d&amp;0&amp;M_{afd1}\\0&amp;L_q&amp;0\\\frac32M_{afd1}&amp;0&amp;L_{ff}
+\end{bmatrix} \begin{bmatrix} i_d\\i_q\\i_f  \end{bmatrix}
+\end{gather*}
+\]</span></p>
+<ol type="1">
+<li><span class="math inline">\(u_f=R_fi_f\)</span></li>
+<li><span class="math inline">\(u_d=\text
+p~const+\omega\cdot0+0=0\)</span></li>
+<li><span class="math inline">\(u_q=\omega
+M_{af1}i_f=e=E_m\)</span>，这个就是<strong>旋转电势</strong>！</li>
+<li>可以看到旋转电势没有直轴分量（<span
+class="math inline">\(u_d=0\)</span>），因此旋转电势落在交轴上，励磁磁链（<span
+class="math inline">\(\varPsi_f\)</span>）落在直轴上</li>
+</ol>
+<h3 id="负载运行">负载运行</h3>
+<p>参考一下电机学里的这张图，但是交轴直轴不对，详见下方注释。</p>
+<p><img src="\image\电机建模15.png" /></p>
+<p>因此有： <span class="math display">\[
+\dot U=\dot E+\dot IR_s+jX_d\dot I_d+jX_q\dot I_q
+\]</span> 此时，由于电流为常数，因此仍然有<span
+class="math inline">\(\text p\varPsi=0\)</span>，故： <span
+class="math display">\[
+\begin{gather*} u_d=-\omega L_qi_q+R_di_d=-U_m\sin\delta\\u_q=\omega
+L_di_d+E_m+R_qi_q=U_m\cos\delta
+\\i_d=-\frac{E_m-U_m\cos\delta}{X_d}\\i_q=\frac{U_m\sin\delta}{X_q}
+\end{gather*}
+\]</span> &gt; 其中<span class="math inline">\(\delta\)</span>
+为功角，即上图中的<span class="math inline">\(\varPsi -\varphi\)</span>
+&gt; &gt; 电机学里是发电机原则，而这里是电动机原则，因此 <span
+class="math inline">\(I\)</span> 相差一个负号（电压关系式） &gt; &gt;
+发电机中 <span class="math inline">\(E\)</span> 超前 <span
+class="math inline">\(U\)</span>，而电动机相反，因此两者功角的定义也不同（也反过来了）</p>
+<p>参考同步电机有功功率调节那一章节： <span class="math display">\[
+\begin{gather*}
+T_e=\frac{3p}{2\omega}(\frac{EU\sin\delta}{X_d}+\frac{U^2}2(\frac1{X_q}-\frac1{X_d})\sin2\delta
+)\\=\frac32p[(L_d-L_q)i_di_q+(M_{af1}i_f)i_q]\\
+P_e=\frac{\omega}pT_e=\frac32(\frac{EU\sin\delta}{X_d}+\frac{U^2}2(\frac1{X_q}-\frac1{X_d})\sin2\delta
+)
+\end{gather*}
+\]</span></p>
+<blockquote>
+<ol type="1">
+<li>调节有功功率就是调节功角 <span
+class="math inline">\(\delta\)</span></li>
+<li>电动机 <span class="math inline">\(\delta&gt;0\)</span>，因此 <span
+class="math inline">\(i_q&gt;0\)</span>，不管 <span
+class="math inline">\(i_d\)</span> 正负，定子电流 <span
+class="math inline">\(i_q\)</span>
+一定超前于转子电流（转子=励磁落在直轴上）</li>
+</ol>
+</blockquote>
+<h2 id="电机坐标变换与电源">电机坐标变换与电源</h2>
+<ul>
+<li>在实际运行中，我们不知道电机的三相电压 <span
+class="math inline">\(u_a,u_b,u_c\)</span>，而我们的模型一直用的是这个。</li>
+</ul>
+<h3 id="三相四线制电源">三相四线制电源</h3>
+<p><img src="\电机建模16.png" /></p>
+<p>​ 在三相四线制电源中，不再满足 <span
+class="math inline">\(i_a+i_b+i_c=0\)</span> 这一条件。设电源电压为
+<span class="math inline">\(u_s\)</span>，取空间中任一点 r
+作为参考点，对电压进行坐标变换以求得到（二维平面-0）坐标系下的电压，则有：
+<span class="math display">\[
+\begin{gather*}
+u_{ar}=u_a+u_{nr}=u_{as}+u_{mr}\\\Rightarrow
+[C]\begin{bmatrix}u_a\\u_b\\u_c\end{bmatrix}=[C]\begin{bmatrix}u_{as}\\u_{bs}\\u_{cs}\end{bmatrix}+[C]\begin{bmatrix}u_{mn}\\u_{mn}\\u_{mn}\end{bmatrix}\\=
+[C]\begin{bmatrix}u_{as}\\u_{bs}\\u_{cs}\end{bmatrix}+\begin{bmatrix}0\\0\\u_{mn}\end{bmatrix}
+\end{gather*}
+\]</span></p>
+<h3 id="三相三线制电源">三相三线制电源</h3>
+<p>​
+在三相三线制电源中，虽然满足电流和为零的条件，但是一般情况下我们只知道线电压
+<span class="math inline">\(u_{ab}\)</span> 等，这里不加推导地写出：
+<span class="math display">\[
+[C]\begin{bmatrix}u_{a}\\u_{b}\\u_{c}\end{bmatrix}=[C]\begin{bmatrix}u_{ar}\\u_{br}\\u_{cr}\end{bmatrix}-\begin{bmatrix}0\\0\\u_{nr}\end{bmatrix}
+\]</span> 如果将参考点 r 正好取在某相（如 c 相），则： <span
+class="math display">\[
+[C]\begin{bmatrix}u_{a}\\u_{b}\\u_{c}\end{bmatrix}=[C]\begin{bmatrix}u_{ac}\\u_{bc}\\0\end{bmatrix}+\begin{bmatrix}0\\0\\u_{nr}\end{bmatrix}
+\]</span> 这样就知道电压了。</p>
+<blockquote>
+<p>结论：！</p>
+<p>由于在（二维平面-0）坐标系中，零分量不产生作用，因此在计算中可以忽略</p>
+<p>上面两种情况推出的式子都告诉我们，<strong>即便我们不知道电源相电压，也可以通过对“电源电压”或“线电压”进行变换，得到的结果与原来的只有零分量不同。</strong>可零分量错了有什么关系呢？</p>
+</blockquote>
+<h1 id="附录-公式推导">附录-公式推导</h1>
+<h3 id="一般化电机旋转电势">一般化电机旋转电势</h3>
+<p><img src="\image\电机建模10.png" /></p>
+<p><strong><a href="#电磁方程式">Return</a></strong></p>
+<h3 id="三相交流电机电感矩阵">三相交流电机电感矩阵</h3>
+<p>（贴图绝对不是因为我懒得抄了，绝对不是….）</p>
+<p>上过课的人应该看到这两幅图就能想起来大概怎么个证明法</p>
+<p><img src="\image\电机建模02.png" /></p>
+<p><img src="\image\电机建模03.png" /></p>
+<p><strong><a href="#三相电感">Return</a></strong></p>
+<h3 id="三相交流电机电磁转矩">三相交流电机电磁转矩</h3>
+<p><strong>法1 虚功（虚位移）</strong>（下面<span
+class="math inline">\(\Omega\)</span>指机械位移） <span
+class="math display">\[
+\begin{gather*}
+W=\frac 12\varPsi_ai_a\Rightarrow W=\frac12[I]^T[L][I] \\
+T_e=\frac{\partial W}{\partial\Omega}=p\frac{\partial
+W}{\partial\theta}=\frac p2[I]^T\frac{\partial [L]}{\partial\theta}[I]
+\end{gather*}
+\]</span> <strong>法2 能量守恒</strong>（下面<span
+class="math inline">\(\Omega\)</span>指机械角速度）</p>
+<p>电磁储能功率公式推导： <span class="math display">\[
+\begin{gather*}
+P=\frac{dW}{dt}=\frac12\text p[I]^T[L][I]+\frac12[I]^T\text
+p[L][I]+\frac12[I]^T[L]\text p[I]\\=[I]^T[L]\text p[I]+\frac12[I]^T\text
+p[L][I]
+\end{gather*}
+\]</span> 能量守恒： <span class="math display">\[
+\begin{gather*}
+P_{abc}=[I]^T[U]=[I]^T\{[R][I]+\text p([L][I]) \}\\
+P_{m}=\Omega T_m=-\Omega T_L=-\Omega(T_e-B\Omega-J\text p\Omega)\\
+电磁、机械损耗~——~电磁、机械储能~——~电磁、机械储能\\\Rightarrow
+T_e=\frac p2[I]^T\frac{\partial [L]}{\partial\theta}[I]
+\end{gather*}
+\]</span> <strong><a href="#三相转矩">Return</a></strong></p>
+<h3 id="d-q-0坐标电压方程式推导">d-q-0坐标电压方程式推导</h3>
+<p><span class="math display">\[
+\begin{gather*}
+\begin{bmatrix}u_{dq0}\\u_{fDQ}\end{bmatrix}=\begin{bmatrix}C&amp;0\\0&amp;E\end{bmatrix}\begin{bmatrix}u_{abc}\\u_{fDQ}\end{bmatrix}\\
+=\begin{bmatrix}C&amp;0\\0&amp;E\end{bmatrix}\left(\text
+p\begin{bmatrix}\varPsi_{abc}\\\varPsi_{fDQ}\end{bmatrix}+
+\begin{bmatrix}R_s&amp;0\\0&amp;R_{fDQ}\end{bmatrix}\begin{bmatrix}I_{abc}\\I_{fDQ}\end{bmatrix}\right)  
+\end{gather*}
+\]</span></p>
+<p><span class="math display">\[
+\begin{gather*}
+前者=\text
+p\left(\begin{bmatrix}C&amp;0\\0&amp;E\end{bmatrix}\begin{bmatrix}\varPsi_{abc}\\\varPsi_{fDQ}\end{bmatrix}
+\right)-\begin{bmatrix}\varPsi_{abc}\\\varPsi_{fDQ}\end{bmatrix}\text
+p\begin{bmatrix}C&amp;0\\0&amp;E\end{bmatrix}\\
+=\text
+p\begin{bmatrix}\varPsi_{dq0}\\\varPsi_{fDQ}\end{bmatrix}+\begin{bmatrix}-\omega\varPsi_{q}\\\omega\varPsi_{d}\\
+[0]_{4\times1}\end{bmatrix}
+\end{gather*}
+\]</span></p>
+<p><span class="math display">\[
+\begin{gather*}
+后者=\begin{bmatrix}R_s&amp;0\\0&amp;R_{fDQ}\end{bmatrix}\begin{bmatrix}CI_{abc}&amp;0\\0&amp;I_{fDQ}\end{bmatrix}\\=\begin{bmatrix}R_s&amp;0\\0&amp;R_{fDQ}\end{bmatrix}\begin{bmatrix}I_{dq0}&amp;0\\0&amp;I_{fDQ}\end{bmatrix}
+\end{gather*}
+\]</span></p>
+<p><a href="#电磁平衡式">Return</a></p>
+<h3 id="d-q-0坐标磁链表达式推导">d-q-0坐标磁链表达式推导</h3>
+<p><strong>法1 嗯算</strong> <span class="math display">\[
+\begin{gather*}
+\begin{bmatrix}\varPsi_{dq0}\\\varPsi_{fDQ}\end{bmatrix}=\begin{bmatrix}C&amp;0\\0&amp;E\end{bmatrix}\begin{bmatrix}\varPsi_{abc}\\\varPsi_{fDQ}\end{bmatrix}=\begin{bmatrix}C&amp;0\\0&amp;E\end{bmatrix}\begin{bmatrix}L_{ss}&amp;L_{sr}
+\\L_{rs}
+&amp;L_{rr}\end{bmatrix}\begin{bmatrix}i_{abc}\\i_{fDQ}\end{bmatrix}\\=\begin{bmatrix}CL_{ss}C^{-1}
+&amp;CL_{sr} \\ L_{rs}C^{-1}
+&amp;L_{rr}\end{bmatrix}\begin{bmatrix}i_{dq0}\\i_{fDQ}\end{bmatrix}
+\end{gather*}
+\]</span> ​ 然后只要硬算前面那个恶心人的矩阵就行了</p>
+<p><strong>法2 物理意义的推导</strong></p>
+<p>我放图绝对不是因为我不想抄了，你听我狡辩，绝对不是…</p>
+<p><img src="\image\电机建模14.jpg" /></p>
+<p><a href="#电磁平衡式">Return</a></p>
+<h3 id="d-q-0功率表达式推导">d-q-0功率表达式推导</h3>
+<h4 id="电损耗">电损耗</h4>
+<ul>
+<li>机械损耗是 <span
+class="math inline">\(B\Omega^2\)</span>，下面着重分析电损耗</li>
+<li>需要证明上文的表达式中 <span
+class="math inline">\(\frac32R_s(i_d^2+i_q^2+2i_0^2)=R_s(i_a^2+i_b^2+i_c^2)\)</span></li>
+</ul>
+<p><span class="math display">\[
+\begin{gather*}
+\frac32R_s(i_d^2+i_q^2+2i_0^2)=\frac32R_s\begin{pmatrix}i_d\\i_q\\i_0\end{pmatrix}^T\begin{pmatrix}i_d\\i_q\\i_0\end{pmatrix}+\frac32R_si_0^2
+\\
+=\frac32R_s\left[[C]\begin{pmatrix}i_a\\i_b\\i_c\end{pmatrix}  \right]^T[C]\begin{pmatrix}i_a\\i_b\\i_c\end{pmatrix}+\frac32R_si_0^2\\=\frac{R_s}6\begin{pmatrix}i_a\\i_b\\i_c\end{pmatrix}^T\begin{pmatrix}5&amp;-1&amp;-1\\-1&amp;5&amp;-1\\-1&amp;-1&amp;5
+\end{pmatrix}\begin{pmatrix}i_a\\i_b\\i_c\end{pmatrix}+\frac32R_s(\frac{i_a+i_b+i_c}3)^2\\=R_s(i_a^2+i_b^2+i_c^2)
+\end{gather*}
+\]</span></p>
+<h4 id="储能">储能</h4>
+<ul>
+<li>机械储能是 <span class="math inline">\(\Omega J\text
+p\Omega\)</span>，下面着重分析电储能</li>
+<li>需要证明上文的表达式中 <span class="math inline">\(\frac32[\text
+p\varPsi_d,\text p\varPsi_q,2\text p\varPsi_0][I_{dq0}]+[\text
+p\varPsi_f,\text p\varPsi_D,\text p\varPsi_Q][I_{fDQ}]=\text
+p(\frac12[I]^T[\varPsi])\)</span></li>
+</ul>
+<p><span class="math display">\[
+\begin{gather*}
+P=\text p(\frac12[I]^T[\varPsi])=\text p(\frac12[I]^T
+\begin{bmatrix}C^{-1}&amp;0\\0&amp;E
+\end{bmatrix}\begin{bmatrix}C&amp;0\\0&amp;E \end{bmatrix}[\varPsi])\\
+=\frac12\text p\left(\{\begin{bmatrix}C^{-1T}&amp;0\\0&amp;E
+\end{bmatrix}[I]\}^T[\varPsi&#39;] \right)\\
+=\frac12\text
+p([\frac32i_d,~\frac32i_q,~3i_0,~[I_r]][\varPsi&#39;])=\frac12\text
+p([I]&#39;^T[\frac32\varPsi_d,~\frac32\varPsi_q,~3\varPsi_0,~[\varPsi_r]]^T)
+\end{gather*}
+\]</span></p>
+<p><a href="#功率变换">Return</a></p>
+]]></content>
+      <categories>
+        <category>课程</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>电气</tag>
+        <tag>大三</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>电机控制</title>
     <url>//MotorControl/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>PDF看这个：<a href="\myfile\电机控制笔记.pdf" target="_blank">电机控制笔记PDF版本</a></p>
@@ -4625,756 +5375,6 @@ a，比如转矩控制转速，电流控制转矩，电流控制磁链，电压�
 <li><img src="/image/djkz33.jpg" /></li>
 </ul></li>
 </ul>
-]]></content>
-      <categories>
-        <category>课程</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
-        <tag>电气</tag>
-        <tag>大三</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>电机系统建模与分析</title>
-    <url>//MotorModeling/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="chap1.-摘要">Chap1. 摘要</h1>
-<blockquote>
-<p>觉得卡的或者遇到公式渲染不出来的情况请开翻墙，ZJU的校网就是依托。</p>
-<p>若无特殊说明，本文中使用斜体的<span
-class="math inline">\(p\)</span>表示电机极对数，用正体的<span
-class="math inline">\(\text p\)</span>表示海氏算子<span
-class="math inline">\(\frac{\text d}{\text dt}\)</span></p>
-<p>期中可能会放PDF版本（<a href="\myfile\电机系统建模与分析.pdf" target="_blank">Click Here</a>）</p>
-</blockquote>
-<p><img src="\image\电机建模17.jpg" /></p>
-<h2 id="补绕组系数">补：绕组系数</h2>
-<p>现在应该是才算是完全搞懂了</p>
-<ul>
-<li>短距系数表征的是“<strong>一个线圈的上下层边</strong>”的电势矢量的合成关系</li>
-<li>分布系数表征的是“<strong>不同线圈之间（只看上层边）</strong>”的电势矢量的合成关系</li>
-</ul>
-<p>求解办法：</p>
-<ol type="1">
-<li>画绕组分布展开图，选其中一相画</li>
-<li>看看一个线圈上下层边跨过了多少电角度（记为<span
-class="math inline">\(\theta_y\)</span>），则短距系数为<span
-class="math inline">\(\sin(\frac{\theta_y}{\pi}\cdot\frac{\pi}2)\)</span></li>
-<li>看看<strong>所有线圈的上层边</strong>，把他们用矢量图画出来。同极下的直接相加，不同极下的添负号。</li>
-</ol>
-<h1 id="chap2.-微分方程数值解法">Chap2. 微分方程数值解法</h1>
-<h2 id="一阶微分方程">一阶微分方程</h2>
-<p>设一阶微分方程的一般形式为： <span class="math display">\[
-\frac{\text dx}{\text dt}=\text px=f(t,x)
-\]</span> 倘若已知初始时刻的变量值（如：<span
-class="math inline">\(x(0)\)</span>），想要得到下一时刻的值，基本思路是<span
-class="math inline">\(x_{i+1}=x_i+\text px\cdot \Delta t\)</span></p>
-<p>设等步长，相邻两时刻间的时间差（步长）为<span
-class="math inline">\(h\)</span>，</p>
-<p><strong>四阶龙格-库塔法：</strong> <span class="math display">\[
-\begin{gather*}
-K_1=f(t_i,x_i)&amp;\Rightarrow&amp; x_{i+\frac12}^{(1)}=x_i+K_1\frac
-h2\\
-K_2=f(t_{i+\frac12},x_{i+\frac12}^{(1)})&amp;\Rightarrow&amp;
-x_{i+\frac12}^{(2)}=x_i+K_2\frac h2\\
-K_3=f(t_{i+\frac12},x_{i+\frac12}^{(2)})&amp;\Rightarrow
-&amp;x_{i+1}^{(1)}=x_i+K_3h\\
-K_4=f(t_{i+1},x_{i+1}^{(1)})&amp;\Rightarrow&amp;K=\frac{K_1+2K_2+2K_3+K_4}6\\
-&amp;x_{i+1}=x_i+Kh
-\end{gather*}
-\]</span></p>
-<h2 id="一阶微分方程组">一阶微分方程组</h2>
-<p>一般采用同步梯度的方式求解多变量方程组，这里以两变量为例： $$ <span
-class="math display">\[\begin{gather*}
-K_{1x}=f_x(t_i,x_i,y_i)&amp;K_{1y}=f_y(t_i,x_i,y_i)\\\Rightarrow
-x_{i+\frac12}^{(1)}=x_i+K_{1x}\frac
-h2&amp;y_{i+\frac12}^{(1)}=y_i+K_{1y}\frac h2\\
-K_{2x}=f_x(t_{i+\frac12},x_{i+\frac12}^{(1)},y_{i+\frac12}^{(1)})&amp;K_{2y}=f_y(t_{i+\frac12},x_{i+\frac12}^{(1)},y_{i+\frac12}^{(1)})\\\Rightarrow
-x_{i+\frac12}^{(2)}=x_i+K_{2x}\frac
-h2&amp;y_{i+\frac12}^{(2)}=y_i+K_{2y}\frac h2
-
-\end{gather*}\]</span> $$
-后面不抄了，K3K4一样的，反正意思就是同步更新。</p>
-<h1 id="chap3.-一般化电机模型">Chap3. 一般化电机模型</h1>
-<h2 id="基本概念">基本概念</h2>
-<p>一般化电机的基本假设：</p>
-<ol type="1">
-<li>一对级电机（<span
-class="math inline">\(p=1\)</span>），极对数是可以等效的</li>
-<li>绕组是可以等效的，如三相变为两相</li>
-<li>伪静止线圈：构成线圈的导体是运动的（以<span
-class="math inline">\(\omega\)</span>旋转），但是d、q线圈是由电刷所规定的，因此轴线静止。
-<ol type="1">
-<li>线圈中的电流在空间产生轴线静止的磁场</li>
-<li>导体实际上在旋转，因此还是会有旋转电势</li>
-</ol></li>
-<li>磁路不饱和（可用叠加原理）</li>
-<li>不计剩磁、涡流、磁滞损耗</li>
-<li>气隙磁密按正弦规律分布</li>
-<li>只关心导体分布在哪些槽内，不关心具体的连接方式和整、短距等</li>
-</ol>
-<h2 id="基本方程式">基本方程式</h2>
-<h3 id="正方向的规定">正方向的规定</h3>
-<table>
-<colgroup>
-<col style="width: 6%" />
-<col style="width: 38%" />
-<col style="width: 16%" />
-<col style="width: 38%" />
-</colgroup>
-<thead>
-<tr>
-<th></th>
-<th>原则</th>
-<th>模型</th>
-<th>方程式</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>电动机</strong></td>
-<td>1. 正电流产生正磁链<br />2.
-从外向线圈看，电压与电流正方向相同<br />3. 线圈的输入功率为正值</td>
-<td><img src="\image\电机建模04.png" /></td>
-<td><span
-class="math inline">\(\begin{gather*}\varPsi=Li\\U=Ri+e\\e=\text
-p\varPsi\end{gather*}\)</span></td>
-</tr>
-<tr>
-<td><strong>发电机</strong></td>
-<td>1. 正电流产生负磁链<br />2.
-从线圈向外看，电压与电流正方向相同<br />3. 线圈的输出功率为正值</td>
-<td><img src="\image\电机建模05.png" /></td>
-<td><span
-class="math inline">\(\begin{gather*}\varPsi=-Li\\U=e-Ri\\e=\text
-p\varPsi\end{gather*}\)</span></td>
-</tr>
-</tbody>
-</table>
-<table style="width:100%;">
-<colgroup>
-<col style="width: 8%" />
-<col style="width: 52%" />
-<col style="width: 24%" />
-<col style="width: 14%" />
-</colgroup>
-<thead>
-<tr>
-<th></th>
-<th>原则</th>
-<th>方程式</th>
-<th>功率</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>电动机</strong></td>
-<td>1.
-电磁转矩正方向就是旋转方向<br />2.负载、阻尼、惯性转矩正方向与之相反</td>
-<td><span class="math inline">\(T_e=T_L+T_D+J\text p\Omega\)</span></td>
-<td><span class="math inline">\(P_m=-T_L\Omega\)</span></td>
-</tr>
-<tr>
-<td><strong>发电机</strong></td>
-<td>1.
-外施转矩正方向就是旋转方向<br />2.负载、阻尼、惯性转矩正方向与之相反</td>
-<td><span class="math inline">\(T_m=T_e+T_D+J\text p\Omega\)</span></td>
-<td><span class="math inline">\(P_m=T_m\Omega\)</span></td>
-</tr>
-</tbody>
-</table>
-<h3 id="电磁方程式">电磁方程式</h3>
-<blockquote>
-<p>电枢（转子）按发电机原则规定正方向</p>
-<p>励磁（定子）按电动机原则规定正方向</p>
-</blockquote>
-<p><img src="\image\电机建模06.png" /> <span class="math display">\[
-\begin{gather*}
-\begin{cases}
-u_d=\text p\varPsi_d-R_di_d-K_q\omega\phi_q(旋转电势e_{dr})\\
-u_q=\text p\varPsi_q-R_qi_q+K_d\omega\phi_d(旋转电势e_{qr})\\
-u_{fd}=\text p\varPsi_{fd}+R_{fd}i_{fd}\\
-u_{kq}=\text p\varPsi_{kq}+R_{kq}i_{kq}
-\end{cases}
-\end{gather*}
-\]</span> 根据<a href="#一般化电机旋转电势">对应的推导</a>，旋转电势中：
-<span class="math display">\[
-\begin{gather*}
-\begin{cases}
-e_{dr}=-K_q\omega\phi_q=-\omega\varPsi_q\\
-e_{qr}=K_d\omega\phi_d=\omega\varPsi_d
-\end{cases}
-\end{gather*}
-\]</span> 并带入<span
-class="math inline">\(\varPsi=LI\)</span>，得到电磁方程式为： <span
-class="math display">\[
-\begin{gather*}
-[U]=\text p[L][I]+[R][I]+\omega[G][I]\\
-\text p[I]=[L]^{-1}({[U]-[R][I]-\omega[G][I]})
-\end{gather*}
-\]</span> 其中： <span class="math display">\[
-\begin{gather*}
-[L]=\begin{bmatrix}
--L_d&amp;0&amp;M_{afd}&amp;0\\0&amp;-L_q&amp;0&amp;M_{akq}\\-M_{fad}&amp;0&amp;L_{fd}&amp;0\\0&amp;-M_{kaq}&amp;0&amp;L_q
-\end{bmatrix}&amp;,&amp;[G]=\begin{bmatrix}
-0&amp;L_q&amp;0&amp;-M_{akq}\\-L_d&amp;0&amp;M_{afd}&amp;0\\0&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;0
-\end{bmatrix}
-\end{gather*}
-\]</span></p>
-<h1 id="chap4.-直流电机仿真">Chap4. 直流电机仿真</h1>
-<p>考虑以下他励直流电机：</p>
-<p><img src="\image\电机建模11.jpg" /></p>
-<p>只有直轴励磁和交轴电枢电压，故其方程为： <span
-class="math display">\[
-\begin{gather*}
-u_q=\text p\varPsi_q+\omega\varPsi_d-R_qi_q\\
-u_{fd}=\text p\varPsi_{fd}+R_{fd}i_{fd}
-\end{gather*}
-\]</span> 其中： <span class="math display">\[
-\varPsi_d=M_{afd}i_{fd}~;~\varPsi_q=-L_qi_q~;~\varPsi_{fd}=L_{fd}i_{fd}
-\]</span></p>
-<blockquote>
-<p>注：如果认为磁通全部通过磁链，并且定子和转子完全交链，那么有<span
-class="math inline">\(\phi_d=\phi_{fd}\)</span></p>
-<p>于是：<span
-class="math inline">\(\varPsi_d=z\phi_d=z\phi_{fd}=z\frac{L_{fd}i_{fd}}{N_{fd}}=M_{afd}i_{fd}\)</span></p>
-<p>即：<span
-class="math inline">\(M_{afd}=\frac{zL_{fd}}{N_{fd}}\)</span></p>
-</blockquote>
-<h2
-id="他励直流发电机的突然短路r_lrightarrow0">他励直流发电机的突然短路（<span
-class="math inline">\(R_L\rightarrow0\)</span>）</h2>
-<h3 id="稳态">稳态</h3>
-<p><span class="math display">\[
-\begin{gather*}
-u_{q0}=\omega_0M_{afd}i_{fd}-R_qi_q=R_{L}i_{q}\\u_{fd}=R_{fd}i_{fd}\\\Rightarrow
-i_{q0}=\frac{\omega_0M_{afd}u_{fd}}{(R_L+R_q)R_{fd}}
-\end{gather*}
-\]</span></p>
-<h3 id="条件1.-转速瞬时不变">条件1. 转速瞬时不变</h3>
-<p><span class="math display">\[
-\begin{gather*}
-0=-L_q\text pi_q+\omega_0M_{afd}i_{fd}-R_qi_q\\\Rightarrow
-i_q=\frac{\omega_0M_{afd}i_{fd}}{R_q}\frac1{\tau\text
-p+1}~;~(\tau=L_q/R_q)\\
-\Rightarrow i_q=i_{q0}\frac{R_L+R_q}{R_q}(1-e^{-\frac{t+t_0}{t_0}})
-\end{gather*}
-\]</span></p>
-<h3 id="条件2.-短路时停止提供动力">条件2. 短路时停止提供动力</h3>
-<p><span class="math display">\[
-\begin{gather*}
-\begin{cases}\text pi_q=\frac{\omega
-M_{afd}i_{fd}-R_qi_q}{L_q}\\T_m=0=M_{afd}i_{fd}i_q+B\omega+J\text
-p\omega  \end{cases}\Rightarrow \text
-p\omega=\frac{M_{afd}i_{fd}i_q+B\omega}{-J}
-\end{gather*}
-\]</span></p>
-<h3 id="条件3.-停止原动机时停止励磁">条件3. 停止原动机时停止励磁</h3>
-<p>​ 此时<span class="math inline">\(i_{fd}=0\)</span>,机电解耦！ <span
-class="math display">\[
-\text pi_q=-R_qi_q/L_q~,~\text p\omega=-B\omega/J
-\]</span></p>
-<h1 id="chap5.-三相交流电机在相坐标系下的模型">Chap5.
-三相交流电机在相坐标系下的模型</h1>
-<p>按照<strong>电动机</strong>原则选取正方向，即：</p>
-<ol type="1">
-<li>绕组轴线的方向是磁链正方向，<u>正电流产生正磁链</u></li>
-<li>从外向绕组看，<u>电压与电流正方向同向</u>，输入功率为正</li>
-<li><u>电磁转矩正方向就是转子旋转的方向</u>，负载<span
-class="math inline">\(T_L\)</span>、阻尼<span
-class="math inline">\(B\Omega\)</span>、惯性<span
-class="math inline">\(Jp\Omega\)</span>转矩相反</li>
-</ol>
-<p><img src="\image\电机建模01.png" /></p>
-<p>考虑D轴与Q轴正交解耦，则其<strong>电压平衡式</strong>为： <span
-class="math display">\[
-\begin{gather*}\begin{cases}U_a=\text
-p\varPsi_a+R_ai_a&amp;（B、C相同理）\\U_f=\text
-p\varPsi_f+R_fi_f\\U_D=U_Q=0&amp;（阻尼短路绕组）  \end{cases}
-\end{gather*}
-\]</span> 即： <span class="math display">\[
-\begin{gather*}  \begin{bmatrix}
-u_a\\u_b\\u_c\\u_f\\0\\0
-\end{bmatrix}=\text p\begin{bmatrix}
-\varPsi_a\\\varPsi_b\\\varPsi_c\\\varPsi_f\\\varPsi_D\\\varPsi_Q
-\end{bmatrix}+\begin{bmatrix}
-R_s&amp;0&amp;0&amp;0&amp;0&amp;0\\0&amp;R_s&amp;0&amp;0&amp;0&amp;0\\0&amp;0&amp;R_s&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;R_f&amp;0&amp;0\\0&amp;0&amp;0&amp;0&amp;R_D&amp;0\\0&amp;0&amp;0&amp;0&amp;0&amp;R_Q
-\end{bmatrix}
-\begin{bmatrix}
-i_a\\i_b\\i_c\\i_f\\i_D\\i_Q
-\end{bmatrix}
-\end{gather*}
-\]</span> ​ 其中磁链矩阵<span
-class="math inline">\([\varPsi]\)</span>可以表示为<span
-class="math inline">\([L][I]\)</span>，由于转子励磁旋转导致DQ轴与定子相轴耦合关系改变，电感矩阵<span
-class="math inline">\([L]\)</span>时变。电感矩阵中各分量结果如下：<a id="三相电感"><a
-href="#三相交流电机电感矩阵">三相交流电机电感矩阵推导</a></a></p>
-<ol type="1">
-<li><p><strong>定子绕组自感系数</strong> <span class="math display">\[
-\begin{gather*}
-L_{aa}=L_{aal}(漏感)+\frac{L_{aad}+L_{aaq}}2+\frac{L_{aad}-L_{aaq}}2cos2\theta\\
-L_{bb}=L_{aal}(漏感)+\frac{L_{aad}+L_{aaq}}2+\frac{L_{aad}-L_{aaq}}2cos2(\theta-\frac{2\pi}3)\\
-L_{cc}=L_{aal}(漏感)+\frac{L_{aad}+L_{aaq}}2+\frac{L_{aad}-L_{aaq}}2cos2(\theta+\frac{2\pi}3)
-\end{gather*}
-\]</span></p>
-<ol type="1">
-<li>对于隐极同步电机（<span
-class="math inline">\(L_{aad}=L_{aaq}\)</span>），自感系数是常数</li>
-</ol></li>
-<li><p><strong>定子绕组互感系数</strong> <span class="math display">\[
-\begin{gather*}
-M_{ab}=-(M_{abl}+\frac{L_{aad}+L_{aaq}}4)+\frac{L_{aad}-L_{aaq}}2cos2(\theta+\frac{2\pi}3)
-\end{gather*}
-\]</span></p>
-<ol type="1">
-<li>因为三相轴线相差120°，所以互感是负的，说明推导无误</li>
-<li>AB相的互感用C相的角度，其余同理</li>
-</ol></li>
-<li><p><strong>定子与转子之间的互感</strong> <span
-class="math display">\[
-\begin{gather*}M_{af}=M_{fa}=M_{af1}cos\theta\\M_{bf}=M_{fb}=M_{af1}cos(\theta-\frac{2\pi}3)\\M_{cf}=M_{fc}=M_{af1}cos(\theta+\frac{2\pi}3)
-\end{gather*}
-\]</span></p>
-<ol type="1">
-<li>定子绕组自感变化周期是<span
-class="math inline">\(\pi\)</span>，这个是<span
-class="math inline">\(2\pi\)</span>。下同。</li>
-</ol></li>
-<li><p><strong>定子绕组与转子D轴阻尼绕组间互感</strong> <span
-class="math display">\[
-M_{aD}=M_{Da}=M_{aD1}cos\theta
-\]</span></p></li>
-<li><p><strong>定子绕组与转子Q轴阻尼绕组间互感</strong> <span
-class="math display">\[
-M_{aQ}=M_{Qa}=-M_{aQ1}sin\theta
-\]</span></p></li>
-<li><p><strong>转子绕组自感、互感</strong> <span class="math display">\[
-\begin{gather*}
-L_f=L_{fl}+L_{f\delta}\\L_D=L_{Dl}+L_{D\delta}\\L_Q=L_{Ql}+L_{Q\delta}\\M_{fD}=M_{Df}=M_{fDl}+M_{fD\delta}
-\end{gather*}
-\]</span></p>
-<ol type="1">
-<li>由于DQ轴正交解耦，故不存在互感</li>
-</ol></li>
-</ol>
-<p>由此得到： <span class="math display">\[
-\begin{gather*}
-\begin{bmatrix}
-\varPsi_a\\\varPsi_b\\\varPsi_c\\\varPsi_f\\\varPsi_D\\\varPsi_Q
-\end{bmatrix}=\begin{bmatrix}
-L_{aa}&amp;M_{ab}&amp;M_{ac}&amp;M_{af}&amp;M_{aD}&amp;M_{aQ}\\
-M_{ba}&amp;L_{bb}&amp;M_{bc}&amp;M_{bf}&amp;M_{bD}&amp;M_{bQ}\\
-M_{ca}&amp;M_{cb}&amp;L_{cc}&amp;M_{cf}&amp;M_{cD}&amp;M_{cQ}\\
-M_{fa}&amp;M_{fb}&amp;M_{fc}&amp;L_f&amp;M_{fD}&amp;0\\
-M_{Da}&amp;M_{Db}&amp;M_{Dc}&amp;M_{Df}&amp;L_D&amp;0\\
-M_{Qa}&amp;M_{Qb}&amp;M_{Qc}&amp;0&amp;0&amp;L_Q
-\end{bmatrix}\cdot \begin{bmatrix}
-i_a\\i_b\\i_c\\i_f\\i_D\\i_Q
-\end{bmatrix}
-\end{gather*}
-\]</span>
-对应的，其<a id="三相转矩"><strong>转矩平衡式</strong></a>为（<a
-href="#三相交流电机电磁转矩">电磁转矩的推导过程</a>）： <span
-class="math display">\[
-T_e=\frac p2[I]^T\frac{\partial[L]}{\partial\theta}[I]
-\]</span></p>
-<h1 id="chap6.-坐标变换">Chap6. 坐标变换</h1>
-<p>一个电机的建模与求解过程应该是下面这样的：</p>
-<p><img src="\image\电机建模07.png" /></p>
-<p>上一章已经展示了，三相交流电机在相坐标（a-b-c
-Model）下的模型方程是多么复杂，所以要用坐标变换把他等效到更好计算的坐标系（如α-β-0和d-q-0坐标系）下。</p>
-<h2 id="坐标变化基本定义">坐标变化基本定义</h2>
-<ul>
-<li>下面直接不加推导的给出三相坐标系到（二维平面-0）坐标系的<strong>恒相幅值变换</strong>的表达式：
-<ul>
-<li>在三相坐标系中，三个坐标轴为a、b、c，记其方向向量为<span
-class="math inline">\(\vec a,\vec b,\vec
-c\)</span>，在三个方向向量上的某物理量的数值分别为<span
-class="math inline">\(x_a,x_b,x_c\)</span></li>
-<li>定义<strong>综合矢量：</strong><span class="math inline">\(\vec
-x=\frac23(x_a\vec a+x_b\vec b+x_c\vec c)\)</span></li>
-<li>定义<strong>零分量：</strong><span
-class="math inline">\(x_0=\frac{x_a+x_b+x_c}3\)</span></li>
-<li><img src="\image\电机建模08.png" /></li>
-</ul></li>
-<li>电机的模型是二维的，所以按理说两个基足以。但是坐标变换必须满足等变量个数，因此这里从“a、b、c”三个基（变量）换成了“综合矢量+零分量”三个变量（矢量=模长+方向，或正交分解，实际是两个变量）</li>
-<li>但是综合矢量以矢量的形式不好表达，所以可以写成下面这样的形式：
-<ul>
-<li>定义：<span
-class="math inline">\(x_a&#39;=x_a-x_0~,~x_b&#39;=x_b-x_0~,~x_c&#39;=x_c-x_0\)</span></li>
-<li><strong>综合矢量：</strong><span class="math inline">\(\vec
-x\rightarrow\dot x=\frac23(x_a+x_be^{j120}+x_ce^{j240})\triangleq
-xe^{j\alpha}\)</span>
-<ul>
-<li><strong>幅值：</strong><span
-class="math inline">\(|x|=\sqrt{\frac23(x_a&#39;^2+x_b&#39;^2+x_c&#39;^2)}\)</span></li>
-<li><strong>夹角（与a轴）：</strong><span
-class="math inline">\(\alpha=\text{cos}^{-1}(\frac{x_a&#39;}{x_a})\)</span></li>
-</ul></li>
-</ul></li>
-<li>当然，要把（二维平面-0）坐标系变回三相坐标系也是需要的，其表达式为：
-<ul>
-<li>a相：<span
-class="math inline">\(x_a&#39;=x\,\text{cos}\alpha~,~x_a=x_0+x_a&#39;\)</span></li>
-<li>a相：<span
-class="math inline">\(x_b&#39;=x\,\text{cos}(\alpha-\frac{2\pi}3)~,~x_b=x_0+x_b&#39;\)</span></li>
-<li>c相：<span
-class="math inline">\(x_c&#39;=x\,\text{cos}(\alpha+\frac{2\pi}3)~,~x_c=x_0+x_c&#39;\)</span></li>
-</ul></li>
-</ul>
-<h2 id="三相电机中坐标变换的重要结论">三相电机中坐标变换的重要结论</h2>
-<ul>
-<li>在三相对称系统中，三个物理量并非像定义中的<span
-class="math inline">\(x_a,x_b,x_c\)</span>一般毫无关联，而是由如下类似的表达式：
-<ul>
-<li>a相：<span
-class="math inline">\(i_a=I_m\,\text{cos}\theta\)</span></li>
-<li>b相：<span
-class="math inline">\(i_b=I_m\,\text{cos}(\theta-\frac{2\pi}3)\)</span></li>
-<li>c相：<span
-class="math inline">\(i_c=I_m\,\text{cos}(\theta+\frac{2\pi}3)\)</span></li>
-</ul></li>
-<li>把他变换到（二维平面-0）坐标系中是这样的：
-<ul>
-<li>零分量：<span
-class="math inline">\(i_0=\frac{i_a+i_b+i_c}3=0\)</span></li>
-<li>综合矢量幅值：<span
-class="math inline">\(|i|=\sqrt{\frac23(i_a&#39;^2+i_b&#39;^2+i_c&#39;^2)}=\sqrt{\frac23\cdot\frac32I_m^2}=I_m\)</span></li>
-<li>综合矢量夹角：<span
-class="math inline">\(\alpha=\text{cos}^{-1}\frac{i_a&#39;}{|i|}=\text{cos}^{-1}\frac{I_m\,\text{cos}\theta+0}{I_m}=\theta\)</span></li>
-<li>即：<span class="math inline">\(\vec i=\dot
-i=I_me^{j\theta}\)</span></li>
-</ul></li>
-<li>也就是说，对于三相对称系统（电压、电流、磁链等大部分都遵循这个规律），有以下重要结论：
-<ol type="1">
-<li><strong>综合矢量的幅值就是三相坐标系中的幅值</strong></li>
-<li><strong>综合矢量的夹角就是三相坐标系中该矢量与a相的夹角</strong></li>
-<li><strong>零分量为0</strong>（零分量的物理含义是被相互抵消，基本不产生实际作用的分量）</li>
-<li><strong>三相坐标系中的分量（如<span
-class="math inline">\(x_a\)</span>）就是综合矢量在该轴上的投影</strong>（实际上是<span
-class="math inline">\(x_a&#39;\)</span>，如果<span
-class="math inline">\(x_0=0\)</span>的话<span
-class="math inline">\(x_a=x_a&#39;\)</span>）</li>
-</ol></li>
-</ul>
-<h2 id="绕组等效与坐标变换">绕组等效与坐标变换</h2>
-<p><img src="\image\电机建模09.png" /></p>
-<ul>
-<li>最后需要把拿到的（二维平面-0）坐标系下的综合矢量+零分量的形式用特定的分解方式表示出来。<strong>新坐标系各轴上的分量大小就是综合矢量往该轴的投影</strong>。常用的坐标系有以下这几个（他们的零分量都是一样的）：
-<ul>
-<li><span class="math inline">\(\alpha-\beta-0\)</span>坐标系：<span
-class="math inline">\(\alpha\)</span>轴与a相重合，<span
-class="math inline">\(\beta\)</span>轴落后90°</li>
-<li><span
-class="math inline">\(d-q-0\)</span>坐标系：以角速度旋转，跟电枢是重合的。最常用的坐标系。</li>
-<li><span
-class="math inline">\(d_c-q_c-0\)</span>坐标系：以同步速旋转，在未稳定的情况下会比上面那个转的更快一点</li>
-</ul></li>
-<li><strong>正变换</strong>（已知<span
-class="math inline">\(i_a,i_b,i_c\)</span>，定义<strong>d轴与a相的夹角为<span
-class="math inline">\(\theta=\int\omega\text
-dt+\theta_0\)</span>）</strong>：</li>
-</ul>
-<p><span class="math display">\[
-\begin{gather*}
-\begin{pmatrix}
-i_d\\i_q\\i_0
-\end{pmatrix}=\frac23\begin{pmatrix}
-\text{cos}\theta&amp;\text{cos}(\theta-\frac{2\pi}3)&amp;\text{cos}(\theta+\frac{2\pi}3)\\
--\text{sin}\theta&amp;-\text{sin}(\theta-\frac{2\pi}3)&amp;-\text{sin}(\theta+\frac{2\pi}3)\\
-\frac12&amp;\frac12&amp;\frac12
-\end{pmatrix}\cdot\begin{pmatrix}
-i_a\\i_b\\i_c
-\end{pmatrix}
-\end{gather*}
-\]</span></p>
-<ul>
-<li><strong>逆变换</strong>：</li>
-</ul>
-<p><span class="math display">\[
-\begin{gather*}
-\begin{pmatrix}
-i_a\\i_b\\i_c
-\end{pmatrix}
-=\begin{pmatrix}
-\text{cos}\theta&amp;-\text{sin}\theta&amp;1\\
-\text{cos}(\theta-\frac{2\pi}3)&amp;-\text{sin}(\theta-\frac{2\pi}3)&amp;1\\
-\text{cos}(\theta+\frac{2\pi}3)&amp;-\text{sin}(\theta+\frac{2\pi}3)&amp;1
-\end{pmatrix}\cdot\begin{pmatrix}
-i_d\\i_q\\i_0
-\end{pmatrix}
-\end{gather*}
-\]</span></p>
-<ul>
-<li>显而易见，上面是到<span
-class="math inline">\(d-q-0\)</span>坐标系的变换，到<span
-class="math inline">\(\alpha-\beta-0\)</span>坐标系更简单，因为<span
-class="math inline">\(\theta=0\)</span>，变换矩阵直接变成常数了</li>
-</ul>
-<h1 id="chap7.-d-q-0坐标下凸极同步电机">Chap7.
-d-q-0坐标下凸极同步电机</h1>
-<h2 id="电磁平衡式">电磁平衡式</h2>
-<p>​ 这里不加推导（<a
-href="#d-q-0坐标电压方程式推导">推导看这里</a>）的给出电压方程式，可以看到和一般化电机的电压方程式几乎一模一样！</p>
-<p><img src="\image\电机建模12.jpg" /></p>
-<p>​ 并且不加推导（<a
-href="#d-q-0坐标磁链表达式推导">推导看这里</a>）的给出磁链表达式，可以看到所有电感全部变成了常数！唯一美中不足的就是电感矩阵不是一个对称阵</p>
-<p><img src="\image\电机建模13.jpg" /></p>
-<p>其中各参数如下： <span class="math display">\[
-\begin{gather*}
-直轴同步电感L_d=直轴电枢反应电感L_{ad}+漏电感L_l=\frac32L_{aad}+(L_{aal}+M_{abl})\\
-交轴同步电感L_q=交轴电枢反应电感L_{aq}+漏电感L_l=\frac32L_{aaq}+(L_{aal}+M_{abl})\\
-L_0=L_{aal}-2M_{abl}
-\end{gather*}
-\]</span></p>
-<blockquote>
-<ol type="1">
-<li>若不是d-q-0坐标变换而是<span
-class="math inline">\(\alpha-\beta-0\)</span>坐标变换，那么[L]也不是常数</li>
-<li>该模型中必须求解<span
-class="math inline">\(\theta\)</span>，因为要进行坐标反变换回到a-b-c坐标底下</li>
-</ol>
-</blockquote>
-<h2 id="功率变换">功率变换</h2>
-<p>功率表达式： <span class="math display">\[
-P_{dq0}=\frac23P_{abc}-u_0i_0~~(P_{abc}=\frac32(P_{dq0+u_0i_0}))
-\]</span> 自然的，其中 <span
-class="math inline">\(P_{dq0}=[I_{dq0}^T][u_{dq0}],~P_{abc}=[I_{abc}]^T[u_{abc}]\)</span></p>
-<p>对机械角度而言，有： <span class="math display">\[
-T_e=T_D+T_L+T_J~,~P_m=-T_L\Omega
-\]</span> 不加推导（<a
-href="#d-q-0功率表达式推导">推导看这里</a>）地给出三个功率的表达式：
-<span class="math display">\[
-\begin{gather*}
-储能：&amp;P=\Omega J\text p\Omega=\frac32[\text p\varPsi_d,\text
-p\varPsi_q,2\text p\varPsi_0][I_{dq0}]+[\text p\varPsi_f,\text
-p\varPsi_D,\text p\varPsi_Q][I_{fDQ}]\\
-损耗：&amp;P=B\Omega^2=\frac32R_s(i_d^2+i_q^2+2i_0^2)+[R_{fDQ}]^T[i_f^2;~i_D^2;~i_Q^2]\\电磁：&amp;P=-\Omega
-T_e=\frac32\omega(\varPsi_di_q-\varPsi_qi_d)
-\end{gather*}
-\]</span> 因此得到一个与一般化电机非常相似的电磁转矩表达式（下面这个 p
-代表极对数）： <span class="math display">\[
-T_e=\frac32p(\varPsi_di_q-\varPsi_qi_d)
-\]</span></p>
-<h2 id="同步电动机对称稳态运行分析">同步电动机对称稳态运行分析</h2>
-<ul>
-<li>以电动机原则作为正方向</li>
-<li>稳态时电流为常数</li>
-<li>适用于隐极电机（令 <span class="math inline">\(X_d=X_q\)</span>
-即可），但不适用于感应电机（转速不能达到同步速）</li>
-</ul>
-<h3 id="发电机空载开路">发电机空载（开路）</h3>
-<ol type="1">
-<li>首先0绕组分量均为0（三相对称），因此方程式中均不用考虑了</li>
-<li>阻尼绕组短路，即<span class="math inline">\(U_D=U_Q=0\)</span></li>
-<li>空载时电枢绕组开路，即<span
-class="math inline">\(i_a=i_b=i_c=0\)</span>，因此有<span
-class="math inline">\(i_d=i_q=i_0=0\)</span></li>
-</ol>
-<p>此时有： <span class="math display">\[
-\begin{gather*}
-\begin{cases}u_d=\text p\varPsi_d-\omega\varPsi_q+R_di_d\\u_q=\text
-p\varPsi_q+\omega\varPsi_d+R_qi_q\\ u_f=\text p\varPsi_f+R_fi_f
-\end{cases}\\
-\begin{bmatrix}
-\varPsi_d\\\varPsi_q\\\varPsi_f  \end{bmatrix}=\begin{bmatrix}
-L_d&amp;0&amp;M_{afd1}\\0&amp;L_q&amp;0\\\frac32M_{afd1}&amp;0&amp;L_{ff}
-\end{bmatrix} \begin{bmatrix} i_d\\i_q\\i_f  \end{bmatrix}
-\end{gather*}
-\]</span></p>
-<ol type="1">
-<li><span class="math inline">\(u_f=R_fi_f\)</span></li>
-<li><span class="math inline">\(u_d=\text
-p~const+\omega\cdot0+0=0\)</span></li>
-<li><span class="math inline">\(u_q=\omega
-M_{af1}i_f=e=E_m\)</span>，这个就是<strong>旋转电势</strong>！</li>
-<li>可以看到旋转电势没有直轴分量（<span
-class="math inline">\(u_d=0\)</span>），因此旋转电势落在交轴上，励磁磁链（<span
-class="math inline">\(\varPsi_f\)</span>）落在直轴上</li>
-</ol>
-<h3 id="负载运行">负载运行</h3>
-<p>参考一下电机学里的这张图，但是交轴直轴不对，详见下方注释。</p>
-<p><img src="\image\电机建模15.png" /></p>
-<p>因此有： <span class="math display">\[
-\dot U=\dot E+\dot IR_s+jX_d\dot I_d+jX_q\dot I_q
-\]</span> 此时，由于电流为常数，因此仍然有<span
-class="math inline">\(\text p\varPsi=0\)</span>，故： <span
-class="math display">\[
-\begin{gather*} u_d=-\omega L_qi_q+R_di_d=-U_m\sin\delta\\u_q=\omega
-L_di_d+E_m+R_qi_q=U_m\cos\delta
-\\i_d=-\frac{E_m-U_m\cos\delta}{X_d}\\i_q=\frac{U_m\sin\delta}{X_q}
-\end{gather*}
-\]</span> &gt; 其中<span class="math inline">\(\delta\)</span>
-为功角，即上图中的<span class="math inline">\(\varPsi -\varphi\)</span>
-&gt; &gt; 电机学里是发电机原则，而这里是电动机原则，因此 <span
-class="math inline">\(I\)</span> 相差一个负号（电压关系式） &gt; &gt;
-发电机中 <span class="math inline">\(E\)</span> 超前 <span
-class="math inline">\(U\)</span>，而电动机相反，因此两者功角的定义也不同（也反过来了）</p>
-<p>参考同步电机有功功率调节那一章节： <span class="math display">\[
-\begin{gather*}
-T_e=\frac{3p}{2\omega}(\frac{EU\sin\delta}{X_d}+\frac{U^2}2(\frac1{X_q}-\frac1{X_d})\sin2\delta
-)\\=\frac32p[(L_d-L_q)i_di_q+(M_{af1}i_f)i_q]\\
-P_e=\frac{\omega}pT_e=\frac32(\frac{EU\sin\delta}{X_d}+\frac{U^2}2(\frac1{X_q}-\frac1{X_d})\sin2\delta
-)
-\end{gather*}
-\]</span></p>
-<blockquote>
-<ol type="1">
-<li>调节有功功率就是调节功角 <span
-class="math inline">\(\delta\)</span></li>
-<li>电动机 <span class="math inline">\(\delta&gt;0\)</span>，因此 <span
-class="math inline">\(i_q&gt;0\)</span>，不管 <span
-class="math inline">\(i_d\)</span> 正负，定子电流 <span
-class="math inline">\(i_q\)</span>
-一定超前于转子电流（转子=励磁落在直轴上）</li>
-</ol>
-</blockquote>
-<h2 id="电机坐标变换与电源">电机坐标变换与电源</h2>
-<ul>
-<li>在实际运行中，我们不知道电机的三相电压 <span
-class="math inline">\(u_a,u_b,u_c\)</span>，而我们的模型一直用的是这个。</li>
-</ul>
-<h3 id="三相四线制电源">三相四线制电源</h3>
-<p><img src="\电机建模16.png" /></p>
-<p>​ 在三相四线制电源中，不再满足 <span
-class="math inline">\(i_a+i_b+i_c=0\)</span> 这一条件。设电源电压为
-<span class="math inline">\(u_s\)</span>，取空间中任一点 r
-作为参考点，对电压进行坐标变换以求得到（二维平面-0）坐标系下的电压，则有：
-<span class="math display">\[
-\begin{gather*}
-u_{ar}=u_a+u_{nr}=u_{as}+u_{mr}\\\Rightarrow
-[C]\begin{bmatrix}u_a\\u_b\\u_c\end{bmatrix}=[C]\begin{bmatrix}u_{as}\\u_{bs}\\u_{cs}\end{bmatrix}+[C]\begin{bmatrix}u_{mn}\\u_{mn}\\u_{mn}\end{bmatrix}\\=
-[C]\begin{bmatrix}u_{as}\\u_{bs}\\u_{cs}\end{bmatrix}+\begin{bmatrix}0\\0\\u_{mn}\end{bmatrix}
-\end{gather*}
-\]</span></p>
-<h3 id="三相三线制电源">三相三线制电源</h3>
-<p>​
-在三相三线制电源中，虽然满足电流和为零的条件，但是一般情况下我们只知道线电压
-<span class="math inline">\(u_{ab}\)</span> 等，这里不加推导地写出：
-<span class="math display">\[
-[C]\begin{bmatrix}u_{a}\\u_{b}\\u_{c}\end{bmatrix}=[C]\begin{bmatrix}u_{ar}\\u_{br}\\u_{cr}\end{bmatrix}-\begin{bmatrix}0\\0\\u_{nr}\end{bmatrix}
-\]</span> 如果将参考点 r 正好取在某相（如 c 相），则： <span
-class="math display">\[
-[C]\begin{bmatrix}u_{a}\\u_{b}\\u_{c}\end{bmatrix}=[C]\begin{bmatrix}u_{ac}\\u_{bc}\\0\end{bmatrix}+\begin{bmatrix}0\\0\\u_{nr}\end{bmatrix}
-\]</span> 这样就知道电压了。</p>
-<blockquote>
-<p>结论：！</p>
-<p>由于在（二维平面-0）坐标系中，零分量不产生作用，因此在计算中可以忽略</p>
-<p>上面两种情况推出的式子都告诉我们，<strong>即便我们不知道电源相电压，也可以通过对“电源电压”或“线电压”进行变换，得到的结果与原来的只有零分量不同。</strong>可零分量错了有什么关系呢？</p>
-</blockquote>
-<h1 id="附录-公式推导">附录-公式推导</h1>
-<h3 id="一般化电机旋转电势">一般化电机旋转电势</h3>
-<p><img src="\image\电机建模10.png" /></p>
-<p><strong><a href="#电磁方程式">Return</a></strong></p>
-<h3 id="三相交流电机电感矩阵">三相交流电机电感矩阵</h3>
-<p>（贴图绝对不是因为我懒得抄了，绝对不是….）</p>
-<p>上过课的人应该看到这两幅图就能想起来大概怎么个证明法</p>
-<p><img src="\image\电机建模02.png" /></p>
-<p><img src="\image\电机建模03.png" /></p>
-<p><strong><a href="#三相电感">Return</a></strong></p>
-<h3 id="三相交流电机电磁转矩">三相交流电机电磁转矩</h3>
-<p><strong>法1 虚功（虚位移）</strong>（下面<span
-class="math inline">\(\Omega\)</span>指机械位移） <span
-class="math display">\[
-\begin{gather*}
-W=\frac 12\varPsi_ai_a\Rightarrow W=\frac12[I]^T[L][I] \\
-T_e=\frac{\partial W}{\partial\Omega}=p\frac{\partial
-W}{\partial\theta}=\frac p2[I]^T\frac{\partial [L]}{\partial\theta}[I]
-\end{gather*}
-\]</span> <strong>法2 能量守恒</strong>（下面<span
-class="math inline">\(\Omega\)</span>指机械角速度）</p>
-<p>电磁储能功率公式推导： <span class="math display">\[
-\begin{gather*}
-P=\frac{dW}{dt}=\frac12\text p[I]^T[L][I]+\frac12[I]^T\text
-p[L][I]+\frac12[I]^T[L]\text p[I]\\=[I]^T[L]\text p[I]+\frac12[I]^T\text
-p[L][I]
-\end{gather*}
-\]</span> 能量守恒： <span class="math display">\[
-\begin{gather*}
-P_{abc}=[I]^T[U]=[I]^T\{[R][I]+\text p([L][I]) \}\\
-P_{m}=\Omega T_m=-\Omega T_L=-\Omega(T_e-B\Omega-J\text p\Omega)\\
-电磁、机械损耗~——~电磁、机械储能~——~电磁、机械储能\\\Rightarrow
-T_e=\frac p2[I]^T\frac{\partial [L]}{\partial\theta}[I]
-\end{gather*}
-\]</span> <strong><a href="#三相转矩">Return</a></strong></p>
-<h3 id="d-q-0坐标电压方程式推导">d-q-0坐标电压方程式推导</h3>
-<p><span class="math display">\[
-\begin{gather*}
-\begin{bmatrix}u_{dq0}\\u_{fDQ}\end{bmatrix}=\begin{bmatrix}C&amp;0\\0&amp;E\end{bmatrix}\begin{bmatrix}u_{abc}\\u_{fDQ}\end{bmatrix}\\
-=\begin{bmatrix}C&amp;0\\0&amp;E\end{bmatrix}\left(\text
-p\begin{bmatrix}\varPsi_{abc}\\\varPsi_{fDQ}\end{bmatrix}+
-\begin{bmatrix}R_s&amp;0\\0&amp;R_{fDQ}\end{bmatrix}\begin{bmatrix}I_{abc}\\I_{fDQ}\end{bmatrix}\right)  
-\end{gather*}
-\]</span></p>
-<p><span class="math display">\[
-\begin{gather*}
-前者=\text
-p\left(\begin{bmatrix}C&amp;0\\0&amp;E\end{bmatrix}\begin{bmatrix}\varPsi_{abc}\\\varPsi_{fDQ}\end{bmatrix}
-\right)-\begin{bmatrix}\varPsi_{abc}\\\varPsi_{fDQ}\end{bmatrix}\text
-p\begin{bmatrix}C&amp;0\\0&amp;E\end{bmatrix}\\
-=\text
-p\begin{bmatrix}\varPsi_{dq0}\\\varPsi_{fDQ}\end{bmatrix}+\begin{bmatrix}-\omega\varPsi_{q}\\\omega\varPsi_{d}\\
-[0]_{4\times1}\end{bmatrix}
-\end{gather*}
-\]</span></p>
-<p><span class="math display">\[
-\begin{gather*}
-后者=\begin{bmatrix}R_s&amp;0\\0&amp;R_{fDQ}\end{bmatrix}\begin{bmatrix}CI_{abc}&amp;0\\0&amp;I_{fDQ}\end{bmatrix}\\=\begin{bmatrix}R_s&amp;0\\0&amp;R_{fDQ}\end{bmatrix}\begin{bmatrix}I_{dq0}&amp;0\\0&amp;I_{fDQ}\end{bmatrix}
-\end{gather*}
-\]</span></p>
-<p><a href="#电磁平衡式">Return</a></p>
-<h3 id="d-q-0坐标磁链表达式推导">d-q-0坐标磁链表达式推导</h3>
-<p><strong>法1 嗯算</strong> <span class="math display">\[
-\begin{gather*}
-\begin{bmatrix}\varPsi_{dq0}\\\varPsi_{fDQ}\end{bmatrix}=\begin{bmatrix}C&amp;0\\0&amp;E\end{bmatrix}\begin{bmatrix}\varPsi_{abc}\\\varPsi_{fDQ}\end{bmatrix}=\begin{bmatrix}C&amp;0\\0&amp;E\end{bmatrix}\begin{bmatrix}L_{ss}&amp;L_{sr}
-\\L_{rs}
-&amp;L_{rr}\end{bmatrix}\begin{bmatrix}i_{abc}\\i_{fDQ}\end{bmatrix}\\=\begin{bmatrix}CL_{ss}C^{-1}
-&amp;CL_{sr} \\ L_{rs}C^{-1}
-&amp;L_{rr}\end{bmatrix}\begin{bmatrix}i_{dq0}\\i_{fDQ}\end{bmatrix}
-\end{gather*}
-\]</span> ​ 然后只要硬算前面那个恶心人的矩阵就行了</p>
-<p><strong>法2 物理意义的推导</strong></p>
-<p>我放图绝对不是因为我不想抄了，你听我狡辩，绝对不是…</p>
-<p><img src="\image\电机建模14.jpg" /></p>
-<p><a href="#电磁平衡式">Return</a></p>
-<h3 id="d-q-0功率表达式推导">d-q-0功率表达式推导</h3>
-<h4 id="电损耗">电损耗</h4>
-<ul>
-<li>机械损耗是 <span
-class="math inline">\(B\Omega^2\)</span>，下面着重分析电损耗</li>
-<li>需要证明上文的表达式中 <span
-class="math inline">\(\frac32R_s(i_d^2+i_q^2+2i_0^2)=R_s(i_a^2+i_b^2+i_c^2)\)</span></li>
-</ul>
-<p><span class="math display">\[
-\begin{gather*}
-\frac32R_s(i_d^2+i_q^2+2i_0^2)=\frac32R_s\begin{pmatrix}i_d\\i_q\\i_0\end{pmatrix}^T\begin{pmatrix}i_d\\i_q\\i_0\end{pmatrix}+\frac32R_si_0^2
-\\
-=\frac32R_s\left[[C]\begin{pmatrix}i_a\\i_b\\i_c\end{pmatrix}  \right]^T[C]\begin{pmatrix}i_a\\i_b\\i_c\end{pmatrix}+\frac32R_si_0^2\\=\frac{R_s}6\begin{pmatrix}i_a\\i_b\\i_c\end{pmatrix}^T\begin{pmatrix}5&amp;-1&amp;-1\\-1&amp;5&amp;-1\\-1&amp;-1&amp;5
-\end{pmatrix}\begin{pmatrix}i_a\\i_b\\i_c\end{pmatrix}+\frac32R_s(\frac{i_a+i_b+i_c}3)^2\\=R_s(i_a^2+i_b^2+i_c^2)
-\end{gather*}
-\]</span></p>
-<h4 id="储能">储能</h4>
-<ul>
-<li>机械储能是 <span class="math inline">\(\Omega J\text
-p\Omega\)</span>，下面着重分析电储能</li>
-<li>需要证明上文的表达式中 <span class="math inline">\(\frac32[\text
-p\varPsi_d,\text p\varPsi_q,2\text p\varPsi_0][I_{dq0}]+[\text
-p\varPsi_f,\text p\varPsi_D,\text p\varPsi_Q][I_{fDQ}]=\text
-p(\frac12[I]^T[\varPsi])\)</span></li>
-</ul>
-<p><span class="math display">\[
-\begin{gather*}
-P=\text p(\frac12[I]^T[\varPsi])=\text p(\frac12[I]^T
-\begin{bmatrix}C^{-1}&amp;0\\0&amp;E
-\end{bmatrix}\begin{bmatrix}C&amp;0\\0&amp;E \end{bmatrix}[\varPsi])\\
-=\frac12\text p\left(\{\begin{bmatrix}C^{-1T}&amp;0\\0&amp;E
-\end{bmatrix}[I]\}^T[\varPsi&#39;] \right)\\
-=\frac12\text
-p([\frac32i_d,~\frac32i_q,~3i_0,~[I_r]][\varPsi&#39;])=\frac12\text
-p([I]&#39;^T[\frac32\varPsi_d,~\frac32\varPsi_q,~3\varPsi_0,~[\varPsi_r]]^T)
-\end{gather*}
-\]</span></p>
-<p><a href="#功率变换">Return</a></p>
 ]]></content>
       <categories>
         <category>课程</category>
@@ -10977,8 +10977,8 @@ A}+\frac1{h_2A}}\)</span></p>
         <category>软件教程</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
         <tag>随笔</tag>
+        <tag>Hexo</tag>
       </tags>
   </entry>
 </search>
