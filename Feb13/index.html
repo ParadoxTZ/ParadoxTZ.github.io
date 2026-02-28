@@ -331,4 +331,72 @@
 
   btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
   window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
-})()</script></div><script src='/js/code-fold.js'></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><!-- 代码块按行数折叠--><script>(function() {
+  var SHOW_LINES = 5;
+  function getLineCount(block) {
+    // 通过代码文本计算换行符数量（更准确）
+    var code = block.querySelector('code');
+    if (code) {
+      var text = code.textContent;
+      // 过滤空行后计算
+      var lines = text.split('\n').filter(function(line) {
+        return line.trim() !== '';
+      });
+      return lines.length;
+    }
+    // 回退方法
+    var lines = block.querySelectorAll('.line');
+    return Math.ceil(lines.length / 2); // 估算
+  }
+  function initCodeFold() {
+    var codeBlocks = document.querySelectorAll('figure.highlight');
+    codeBlocks.forEach(function(block) {
+      var lineCount = getLineCount(block);
+      if (lineCount <= SHOW_LINES) return;
+      var table = block.querySelector('table');
+      if (!table) return;
+      if (block.dataset.folded === 'true') return;
+      block.dataset.folded = 'true';
+      var wrapper = document.createElement('div');
+      wrapper.className = 'code-block-fold';
+      wrapper.style.position = 'relative';
+      var mask = document.createElement('div');
+      mask.className = 'code-mask';
+      mask.style.cssText = 'position:absolute;bottom:0;left:0;right:0;height:' + (SHOW_LINES * 1.8) + 'em;background:linear-gradient(transparent,#fff);pointer-events:none;z-index:1;';
+      var btn = document.createElement('div');
+      btn.className = 'fold-btn';
+      btn.innerHTML = '<i class="fas fa-angle-double-down"></i> 展开';
+      btn.style.cssText = 'position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(155,155,155,0.25));cursor:pointer;text-align:center;padding:10px;color:#666;font-size:13px;z-index:2;';
+      table.style.maxHeight = (SHOW_LINES * 1.8) + 'em';
+      table.style.overflow = 'hidden';
+      table.style.position = 'relative';
+      var expanded = false;
+      btn.onclick = function(e) {
+        e.stopPropagation();
+        expanded = !expanded;
+        if (expanded) {
+          table.style.maxHeight = 'none';
+          btn.innerHTML = '<i class="fas fa-angle-double-up"></i> 收起';
+          mask.style.display = 'none';
+        } else {
+          table.style.maxHeight = (SHOW_LINES * 1.8) + 'em';
+          btn.innerHTML = '<i class="fas fa-angle-double-down"></i> 展开';
+          mask.style.display = 'block';
+        }
+      };
+      wrapper.appendChild(mask);
+      wrapper.appendChild(btn);
+      block.parentNode.insertBefore(wrapper, block);
+      wrapper.appendChild(block);
+    });
+  }
+  function executeWhenReady() {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function() { setTimeout(initCodeFold, 100); });
+    } else {
+      setTimeout(initCodeFold, 100);
+    }
+  }
+  executeWhenReady();
+  window.addEventListener('pjax:complete', function() { setTimeout(initCodeFold, 100); });
+})();</script></div><script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
